@@ -1,0 +1,189 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum DisputaStatus {
+  AGUARDANDO
+  ABERTA
+  SUSPENSA
+  ENCERRADA
+}
+
+enum TipoEmpresa {
+  ME
+  EPP
+  OUTRA
+}
+
+enum TipoDocumento {
+  PROPOSTA
+  HABILITACAO
+  OUTROS
+}
+
+enum PerfilUsuario {
+  ADMIN
+  PREGOEIRO
+  LICITANTE
+  VISUALIZADOR
+}
+
+enum TipoAutorChat {
+  PREGOEIRO
+  LICITANTE
+}
+
+model Usuario {
+  id           String         @id @default(uuid())
+  nome         String
+  email        String         @unique
+  senha        String
+  perfil       PerfilUsuario
+  LogAtividade LogAtividade[]
+}
+
+model Edital {
+  id                     String                 @id @default(uuid())
+  numero                 String
+  objeto                 String
+  modalidade             String
+  status                 String
+  dataAbertura           DateTime
+  arquivoPdf             String?
+  disputas               Disputa[]
+  documentosObrigatorios DocumentoObrigatorio[]
+}
+
+model Disputa {
+  id            String        @id @default(uuid())
+  editalId      String
+  status        DisputaStatus
+  inicio        DateTime?
+  fimPrevisto   DateTime?
+  encerramento  DateTime?
+  tempoRestante Int?
+
+  edital        Edital               @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  propostas     Proposta[]
+  lances        Lance[]
+  documentos    DocumentoLicitante[]
+  mensagensChat MensagemChat[]
+  logs          LogAtividade[]
+  Sessao        Sessao[]
+}
+
+model Licitante {
+  id          String      @id @default(uuid())
+  razaoSocial String
+  cnpj        String      @unique
+  tipoEmpresa TipoEmpresa
+
+  propostas     Proposta[]
+  lances        Lance[]
+  documentos    DocumentoLicitante[]
+  sessoes       Sessao[]
+  mensagensChat MensagemChat[]
+}
+
+model Proposta {
+  id            String   @id @default(uuid())
+  disputaId     String
+  licitanteId   String
+  valorCentavos Int // valor em centavos
+  dataEnvio     DateTime
+  arquivo       String?
+
+  disputa   Disputa   @relation(fields: [disputaId], references: [id], onDelete: Cascade)
+  licitante Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
+}
+
+model Lance {
+  id            String   @id @default(uuid())
+  disputaId     String
+  licitanteId   String
+  valorCentavos Int // valor em centavos
+  horario       DateTime
+  ip            String?
+  userAgent     String?
+
+  disputa   Disputa   @relation(fields: [disputaId], references: [id], onDelete: Cascade)
+  licitante Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
+}
+
+model DocumentoLicitante {
+  id               String        @id @default(uuid())
+  disputaId        String
+  licitanteId      String
+  tipoDocumento    TipoDocumento
+  nomeOriginal     String
+  descricao        String?
+  arquivoPath      String
+  dataEnvio        DateTime
+  versao           Int           @default(1)
+  valido           Boolean       @default(true)
+  hashDocumento    String?
+  assinaturaBase64 String?
+  assinadoPor      String?
+
+  disputa   Disputa   @relation(fields: [disputaId], references: [id], onDelete: Cascade)
+  licitante Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
+}
+
+model DocumentoObrigatorio {
+  id            String        @id @default(uuid())
+  editalId      String
+  tipoDocumento TipoDocumento
+  descricao     String
+
+  edital Edital @relation(fields: [editalId], references: [id], onDelete: Cascade)
+}
+
+model MensagemChat {
+  id          String        @id @default(uuid())
+  disputaId   String
+  licitanteId String?
+  autor       String
+  mensagem    String
+  horario     DateTime
+  tipoAutor   TipoAutorChat
+
+  disputa   Disputa    @relation(fields: [disputaId], references: [id])
+  licitante Licitante? @relation(fields: [licitanteId], references: [id])
+}
+
+model Sessao {
+  id          String    @id @default(uuid())
+  licitanteId String
+  disputaId   String
+  inicio      DateTime
+  fim         DateTime?
+  ip          String
+  hash        String
+
+  licitante Licitante @relation(fields: [licitanteId], references: [id])
+  disputa   Disputa   @relation(fields: [disputaId], references: [id])
+}
+
+model LogAtividade {
+  id        String   @id @default(uuid())
+  disputaId String
+  usuarioId String?
+  acao      String
+  detalhes  String?
+  data      DateTime @default(now())
+
+  disputa Disputa  @relation(fields: [disputaId], references: [id])
+  usuario Usuario? @relation(fields: [usuarioId], references: [id])
+}
