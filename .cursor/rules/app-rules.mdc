@@ -1,0 +1,146 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 📘 Regras e Diretrizes do Sistema de Licitação Pública — Fase de Disputa
+
+Este documento define as regras obrigatórias para o desenvolvimento do sistema de **licitações públicas**, com foco na **fase de disputa eletrônica**, conforme os princípios da **Lei nº 14.133/21** (Nova Lei de Licitações).
+
+---
+
+## ⚖️ Princípios Legais Fundamentais
+
+- **Transparência**
+- **Isonomia**
+- **Rastreabilidade**
+- **Segurança jurídica**
+- **Publicidade**
+- **Competitividade**
+
+---
+
+## 🧱 Estrutura Geral do Sistema
+
+- Backend: **NestJS + Prisma ORM**
+- Banco de dados: **PostgreSQL**
+- Frontend: **React ou Next.js**
+- Comunicação em tempo real: **WebSocket (socket.io)**
+- Uploads: **Multer** (armazenamento local ou S3)
+- Autenticação: **JWT**
+- É obrigatório sempre seguir as diretrizes de Clean Code
+- É obrigatório sempre seguir o S.O.L.I.D.
+
+---
+
+## 📂 Estrutura do Banco de Dados
+
+### Armazenamento de valores monetários
+- Todos os valores financeiros devem ser armazenados como **inteiros (`Int`) em centavos**.
+- Conversão para reais deve ser feita apenas no frontend com `valor / 100`.
+
+### Estrutura documental
+- Licitantes devem enviar documentos vinculados à disputa:
+  - **Propostas**
+  - **Documentos de habilitação**
+  - **Outros documentos técnicos**
+- Documentos devem ter:
+  - Versão
+  - Indicação de validade
+  - Nome original
+  - Descrição opcional
+  - Assinatura (manual ou digital, se aplicável)
+  - Hash do arquivo para verificação de integridade
+
+### Documentos obrigatórios
+- Cada edital pode configurar os **tipos de documentos exigidos** para protocolação por parte dos licitantes.
+
+---
+
+## 💬 Comunicação (Chat Público)
+
+- A fase de disputa deve conter um **chat público** em tempo real.
+- Participantes autorizados:
+  - **Pregoeiro** (ou comissão)
+  - **Licitantes autenticados**
+- Todas as mensagens devem:
+  - Ser armazenadas no banco
+  - Exibir tipo de autor (`PREGOEIRO` ou `LICITANTE`)
+  - Ser visíveis para todos os participantes da disputa
+  - Registrar horário de envio
+
+---
+
+## ⏳ Controle de Tempo da Disputa
+
+- O **tempo oficial da disputa é controlado exclusivamente pelo servidor**.
+- O cliente nunca é fonte de verdade sobre tempo.
+- Eventos de controle:
+  - `INICIAR`, `PAUSAR`, `RETOMAR`, `ENCERRAR`
+- Sincronização por WebSocket:
+  - Enviar `tempoRestante` e `timestampServidor`
+  - Os clientes ajustam o relógio com base nisso
+- Os participantes devem visualizar o mesmo cronômetro, com variação máxima de 1 segundo.
+
+---
+
+## 🔐 Autenticação e Perfis
+
+- O sistema deve prever os seguintes perfis:
+  - `ADMIN`: acesso total ao sistema
+  - `PREGOEIRO`: controle da disputa
+  - `LICITANTE`: envio de documentos, participação em lances e chat
+  - `VISUALIZADOR`: acesso apenas para acompanhamento
+- Toda ação sensível deve ser rastreada com `usuarioId`, IP, timestamp e hash de sessão.
+
+---
+
+## 📜 Logs e Rastreabilidade
+
+- Deve existir a tabela `LogAtividade` para registrar eventos críticos:
+  - Abertura e encerramento de disputa
+  - Envio de proposta ou documentos
+  - Controle de tempo
+  - Entradas e saídas de usuários no sistema
+
+---
+
+## 🔍 Validação de Documentos e QR Code
+
+- Todo documento relevante (proposta, ata, contrato) deve ter opção de:
+  - **Validação pública** via rota `/validar/:id`
+  - Inclusão de **QR Code** no PDF gerado, apontando para a validação pública
+
+---
+
+## 📈 Regras de Lances
+
+- Lances devem ser:
+  - Válidos somente durante o tempo da disputa
+  - **Decrescentes**
+  - De valor inferior ao lance anterior
+- Todos os lances devem registrar:
+  - IP, user-agent, horário
+  - `sessaoId` para rastreabilidade
+- A lógica de empate ficto deve considerar ME/EPP com diferença de até 5%
+
+---
+
+
+## 📌 Regras Técnicas de Upload
+
+- Os documentos enviados devem ser organizados em: /uploads/{disputaId}/{licitanteId}/{tipoDocumento}/{versao}.pdf
+
+- Os uploads devem ser protegidos por autenticação e autorizados conforme o papel do usuário.
+
+---
+
+## 🚧 Considerações Finais
+
+- O sistema deve estar preparado para múltiplas prefeituras ou órgãos licitantes.
+- Cada disputa deve ser independente e isolada em termos de:
+- Documentos
+- Participantes
+- Chat
+- Tempo
+- O código deve ser limpo, versionado em Git, com testes automatizados para os serviços críticos.
