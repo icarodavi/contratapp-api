@@ -1,19 +1,24 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { CreatePropostaDto } from './dto/create-proposta.dto';
+import { StatusProposta, DisputaStatus } from 'generated/prisma';
 
 @Injectable()
 export class PropostaService {
     constructor(private prisma: PrismaService) {}
 
     async create(createPropostaDto: CreatePropostaDto) {
-        // Verifica se a disputa existe
+        // Verifica se a disputa existe e está ativa
         const disputa = await this.prisma.disputa.findUnique({
             where: { id: createPropostaDto.disputaId },
         });
 
         if (!disputa) {
             throw new NotFoundException('Disputa não encontrada');
+        }
+
+        if (disputa.status !== DisputaStatus.ABERTA) {
+            throw new BadRequestException('Disputa não está aberta');
         }
 
         // Verifica se o licitante existe
@@ -25,10 +30,41 @@ export class PropostaService {
             throw new NotFoundException('Licitante não encontrado');
         }
 
+        // Verifica se o item existe e está ativo
+        const item = await this.prisma.item.findUnique({
+            where: { id: createPropostaDto.itemId },
+        });
+
+        if (!item) {
+            throw new NotFoundException('Item não encontrado');
+        }
+
+        if (item.status !== 'ATIVO') {
+            throw new BadRequestException('Item não está ativo');
+        }
+
+        // Verifica se já existe proposta para este item/licitante
+        const propostaExistente = await this.prisma.proposta.findFirst({
+            where: {
+                itemId: createPropostaDto.itemId,
+                licitanteId: createPropostaDto.licitanteId,
+                deletedAt: null,
+            },
+            orderBy: {
+                versao: 'desc',
+            },
+        });
+
+        if (propostaExistente) {
+            throw new BadRequestException('Já existe uma proposta para este item');
+        }
+
         return this.prisma.proposta.create({
             data: {
                 ...createPropostaDto,
                 dataEnvio: new Date(),
+                status: StatusProposta.PENDENTE,
+                versao: 1,
             },
         });
     }

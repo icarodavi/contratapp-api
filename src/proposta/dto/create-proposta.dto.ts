@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsUUID, IsUrl, Min, IsOptional } from 'class-validator';
 
 export class CreatePropostaDto {
     @IsUUID()
@@ -9,10 +9,24 @@ export class CreatePropostaDto {
     @IsNotEmpty()
     licitanteId: string;
 
+    @IsUUID()
+    @IsNotEmpty()
+    itemId: string;
+
     @IsNumber()
+    @Min(0)
     @IsNotEmpty()
     valorCentavos: number;
 
-    @IsString()
+    @IsUrl()
+    @IsOptional()
     arquivo?: string;
+
+    @IsString()
+    @IsOptional()
+    observacao?: string;
+
+    @IsUUID()
+    @IsNotEmpty()
+    createdBy: string;
 }

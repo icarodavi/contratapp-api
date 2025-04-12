@@ -68,6 +68,16 @@ export type Sessao = $Result.DefaultSelection<Prisma.$SessaoPayload>
  * 
  */
 export type LogAtividade = $Result.DefaultSelection<Prisma.$LogAtividadePayload>
+/**
+ * Model Lote
+ * 
+ */
+export type Lote = $Result.DefaultSelection<Prisma.$LotePayload>
+/**
+ * Model Item
+ * 
+ */
+export type Item = $Result.DefaultSelection<Prisma.$ItemPayload>
 
 /**
  * Enums
@@ -118,6 +128,24 @@ export const TipoAutorChat: {
 
 export type TipoAutorChat = (typeof TipoAutorChat)[keyof typeof TipoAutorChat]
 
+
+export const StatusProposta: {
+  PENDENTE: 'PENDENTE',
+  ACEITA: 'ACEITA',
+  REJEITADA: 'REJEITADA',
+  CANCELADA: 'CANCELADA'
+};
+
+export type StatusProposta = (typeof StatusProposta)[keyof typeof StatusProposta]
+
+
+export const TipoAutorMensagem: {
+  PREGOEIRO: 'PREGOEIRO',
+  LICITANTE: 'LICITANTE'
+};
+
+export type TipoAutorMensagem = (typeof TipoAutorMensagem)[keyof typeof TipoAutorMensagem]
+
 }
 
 export type DisputaStatus = $Enums.DisputaStatus
@@ -139,6 +167,14 @@ export const PerfilUsuario: typeof $Enums.PerfilUsuario
 export type TipoAutorChat = $Enums.TipoAutorChat
 
 export const TipoAutorChat: typeof $Enums.TipoAutorChat
+
+export type StatusProposta = $Enums.StatusProposta
+
+export const StatusProposta: typeof $Enums.StatusProposta
+
+export type TipoAutorMensagem = $Enums.TipoAutorMensagem
+
+export const TipoAutorMensagem: typeof $Enums.TipoAutorMensagem
 
 /**
  * ##  Prisma Client ʲˢ
@@ -374,6 +410,26 @@ export class PrismaClient<
     * ```
     */
   get logAtividade(): Prisma.LogAtividadeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.lote`: Exposes CRUD operations for the **Lote** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Lotes
+    * const lotes = await prisma.lote.findMany()
+    * ```
+    */
+  get lote(): Prisma.LoteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.item`: Exposes CRUD operations for the **Item** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Items
+    * const items = await prisma.item.findMany()
+    * ```
+    */
+  get item(): Prisma.ItemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -824,7 +880,9 @@ export namespace Prisma {
     DocumentoObrigatorio: 'DocumentoObrigatorio',
     MensagemChat: 'MensagemChat',
     Sessao: 'Sessao',
-    LogAtividade: 'LogAtividade'
+    LogAtividade: 'LogAtividade',
+    Lote: 'Lote',
+    Item: 'Item'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -843,7 +901,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "usuario" | "edital" | "disputa" | "licitante" | "proposta" | "lance" | "documentoLicitante" | "documentoObrigatorio" | "mensagemChat" | "sessao" | "logAtividade"
+      modelProps: "usuario" | "edital" | "disputa" | "licitante" | "proposta" | "lance" | "documentoLicitante" | "documentoObrigatorio" | "mensagemChat" | "sessao" | "logAtividade" | "lote" | "item"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1661,6 +1719,154 @@ export namespace Prisma {
           }
         }
       }
+      Lote: {
+        payload: Prisma.$LotePayload<ExtArgs>
+        fields: Prisma.LoteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LoteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LoteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload>
+          }
+          findFirst: {
+            args: Prisma.LoteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LoteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload>
+          }
+          findMany: {
+            args: Prisma.LoteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload>[]
+          }
+          create: {
+            args: Prisma.LoteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload>
+          }
+          createMany: {
+            args: Prisma.LoteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LoteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload>[]
+          }
+          delete: {
+            args: Prisma.LoteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload>
+          }
+          update: {
+            args: Prisma.LoteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload>
+          }
+          deleteMany: {
+            args: Prisma.LoteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LoteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LoteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload>[]
+          }
+          upsert: {
+            args: Prisma.LoteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LotePayload>
+          }
+          aggregate: {
+            args: Prisma.LoteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLote>
+          }
+          groupBy: {
+            args: Prisma.LoteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LoteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LoteCountArgs<ExtArgs>
+            result: $Utils.Optional<LoteCountAggregateOutputType> | number
+          }
+        }
+      }
+      Item: {
+        payload: Prisma.$ItemPayload<ExtArgs>
+        fields: Prisma.ItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          findFirst: {
+            args: Prisma.ItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          findMany: {
+            args: Prisma.ItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
+          }
+          create: {
+            args: Prisma.ItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          createMany: {
+            args: Prisma.ItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
+          }
+          delete: {
+            args: Prisma.ItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          update: {
+            args: Prisma.ItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.ItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.ItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          aggregate: {
+            args: Prisma.ItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateItem>
+          }
+          groupBy: {
+            args: Prisma.ItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ItemCountArgs<ExtArgs>
+            result: $Utils.Optional<ItemCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1756,6 +1962,8 @@ export namespace Prisma {
     mensagemChat?: MensagemChatOmit
     sessao?: SessaoOmit
     logAtividade?: LogAtividadeOmit
+    lote?: LoteOmit
+    item?: ItemOmit
   }
 
   /* Types for Logging */
@@ -1851,10 +2059,12 @@ export namespace Prisma {
 
   export type UsuarioCountOutputType = {
     LogAtividade: number
+    MensagemChat: number
   }
 
   export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     LogAtividade?: boolean | UsuarioCountOutputTypeCountLogAtividadeArgs
+    MensagemChat?: boolean | UsuarioCountOutputTypeCountMensagemChatArgs
   }
 
   // Custom InputTypes
@@ -1875,6 +2085,13 @@ export namespace Prisma {
     where?: LogAtividadeWhereInput
   }
 
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountMensagemChatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MensagemChatWhereInput
+  }
+
 
   /**
    * Count Type EditalCountOutputType
@@ -1883,11 +2100,15 @@ export namespace Prisma {
   export type EditalCountOutputType = {
     disputas: number
     documentosObrigatorios: number
+    lotes: number
+    mensagensChat: number
   }
 
   export type EditalCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     disputas?: boolean | EditalCountOutputTypeCountDisputasArgs
     documentosObrigatorios?: boolean | EditalCountOutputTypeCountDocumentosObrigatoriosArgs
+    lotes?: boolean | EditalCountOutputTypeCountLotesArgs
+    mensagensChat?: boolean | EditalCountOutputTypeCountMensagensChatArgs
   }
 
   // Custom InputTypes
@@ -1913,6 +2134,20 @@ export namespace Prisma {
    */
   export type EditalCountOutputTypeCountDocumentosObrigatoriosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DocumentoObrigatorioWhereInput
+  }
+
+  /**
+   * EditalCountOutputType without action
+   */
+  export type EditalCountOutputTypeCountLotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LoteWhereInput
+  }
+
+  /**
+   * EditalCountOutputType without action
+   */
+  export type EditalCountOutputTypeCountMensagensChatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MensagemChatWhereInput
   }
 
 
@@ -2060,6 +2295,68 @@ export namespace Prisma {
 
 
   /**
+   * Count Type LoteCountOutputType
+   */
+
+  export type LoteCountOutputType = {
+    itens: number
+  }
+
+  export type LoteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    itens?: boolean | LoteCountOutputTypeCountItensArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LoteCountOutputType without action
+   */
+  export type LoteCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoteCountOutputType
+     */
+    select?: LoteCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LoteCountOutputType without action
+   */
+  export type LoteCountOutputTypeCountItensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
+  }
+
+
+  /**
+   * Count Type ItemCountOutputType
+   */
+
+  export type ItemCountOutputType = {
+    propostas: number
+  }
+
+  export type ItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    propostas?: boolean | ItemCountOutputTypeCountPropostasArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemCountOutputType
+     */
+    select?: ItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountPropostasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PropostaWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2079,6 +2376,7 @@ export namespace Prisma {
     email: string | null
     senha: string | null
     perfil: $Enums.PerfilUsuario | null
+    licitanteId: string | null
   }
 
   export type UsuarioMaxAggregateOutputType = {
@@ -2087,6 +2385,7 @@ export namespace Prisma {
     email: string | null
     senha: string | null
     perfil: $Enums.PerfilUsuario | null
+    licitanteId: string | null
   }
 
   export type UsuarioCountAggregateOutputType = {
@@ -2095,6 +2394,7 @@ export namespace Prisma {
     email: number
     senha: number
     perfil: number
+    licitanteId: number
     _all: number
   }
 
@@ -2105,6 +2405,7 @@ export namespace Prisma {
     email?: true
     senha?: true
     perfil?: true
+    licitanteId?: true
   }
 
   export type UsuarioMaxAggregateInputType = {
@@ -2113,6 +2414,7 @@ export namespace Prisma {
     email?: true
     senha?: true
     perfil?: true
+    licitanteId?: true
   }
 
   export type UsuarioCountAggregateInputType = {
@@ -2121,6 +2423,7 @@ export namespace Prisma {
     email?: true
     senha?: true
     perfil?: true
+    licitanteId?: true
     _all?: true
   }
 
@@ -2202,6 +2505,7 @@ export namespace Prisma {
     email: string
     senha: string
     perfil: $Enums.PerfilUsuario
+    licitanteId: string | null
     _count: UsuarioCountAggregateOutputType | null
     _min: UsuarioMinAggregateOutputType | null
     _max: UsuarioMaxAggregateOutputType | null
@@ -2227,7 +2531,10 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     perfil?: boolean
+    licitanteId?: boolean
     LogAtividade?: boolean | Usuario$LogAtividadeArgs<ExtArgs>
+    MensagemChat?: boolean | Usuario$MensagemChatArgs<ExtArgs>
+    licitante?: boolean | Usuario$licitanteArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
@@ -2237,6 +2544,8 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     perfil?: boolean
+    licitanteId?: boolean
+    licitante?: boolean | Usuario$licitanteArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
   export type UsuarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2245,6 +2554,8 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     perfil?: boolean
+    licitanteId?: boolean
+    licitante?: boolean | Usuario$licitanteArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
   export type UsuarioSelectScalar = {
@@ -2253,20 +2564,29 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     perfil?: boolean
+    licitanteId?: boolean
   }
 
-  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "perfil", ExtArgs["result"]["usuario"]>
+  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "perfil" | "licitanteId", ExtArgs["result"]["usuario"]>
   export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     LogAtividade?: boolean | Usuario$LogAtividadeArgs<ExtArgs>
+    MensagemChat?: boolean | Usuario$MensagemChatArgs<ExtArgs>
+    licitante?: boolean | Usuario$licitanteArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UsuarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    licitante?: boolean | Usuario$licitanteArgs<ExtArgs>
+  }
+  export type UsuarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    licitante?: boolean | Usuario$licitanteArgs<ExtArgs>
+  }
 
   export type $UsuarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Usuario"
     objects: {
       LogAtividade: Prisma.$LogAtividadePayload<ExtArgs>[]
+      MensagemChat: Prisma.$MensagemChatPayload<ExtArgs>[]
+      licitante: Prisma.$LicitantePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2274,6 +2594,7 @@ export namespace Prisma {
       email: string
       senha: string
       perfil: $Enums.PerfilUsuario
+      licitanteId: string | null
     }, ExtArgs["result"]["usuario"]>
     composites: {}
   }
@@ -2669,6 +2990,8 @@ export namespace Prisma {
   export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     LogAtividade<T extends Usuario$LogAtividadeArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$LogAtividadeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LogAtividadePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    MensagemChat<T extends Usuario$MensagemChatArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$MensagemChatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    licitante<T extends Usuario$licitanteArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$licitanteArgs<ExtArgs>>): Prisma__LicitanteClient<$Result.GetResult<Prisma.$LicitantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2703,6 +3026,7 @@ export namespace Prisma {
     readonly email: FieldRef<"Usuario", 'String'>
     readonly senha: FieldRef<"Usuario", 'String'>
     readonly perfil: FieldRef<"Usuario", 'PerfilUsuario'>
+    readonly licitanteId: FieldRef<"Usuario", 'String'>
   }
     
 
@@ -2952,6 +3276,10 @@ export namespace Prisma {
      */
     data: UsuarioCreateManyInput | UsuarioCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3022,6 +3350,10 @@ export namespace Prisma {
      * Limit how many Usuarios to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3115,6 +3447,49 @@ export namespace Prisma {
   }
 
   /**
+   * Usuario.MensagemChat
+   */
+  export type Usuario$MensagemChatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MensagemChat
+     */
+    select?: MensagemChatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MensagemChat
+     */
+    omit?: MensagemChatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MensagemChatInclude<ExtArgs> | null
+    where?: MensagemChatWhereInput
+    orderBy?: MensagemChatOrderByWithRelationInput | MensagemChatOrderByWithRelationInput[]
+    cursor?: MensagemChatWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MensagemChatScalarFieldEnum | MensagemChatScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario.licitante
+   */
+  export type Usuario$licitanteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Licitante
+     */
+    select?: LicitanteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Licitante
+     */
+    omit?: LicitanteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LicitanteInclude<ExtArgs> | null
+    where?: LicitanteWhereInput
+  }
+
+  /**
    * Usuario without action
    */
   export type UsuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3151,6 +3526,8 @@ export namespace Prisma {
     status: string | null
     dataAbertura: Date | null
     arquivoPdf: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EditalMaxAggregateOutputType = {
@@ -3161,6 +3538,8 @@ export namespace Prisma {
     status: string | null
     dataAbertura: Date | null
     arquivoPdf: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EditalCountAggregateOutputType = {
@@ -3171,6 +3550,8 @@ export namespace Prisma {
     status: number
     dataAbertura: number
     arquivoPdf: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -3183,6 +3564,8 @@ export namespace Prisma {
     status?: true
     dataAbertura?: true
     arquivoPdf?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type EditalMaxAggregateInputType = {
@@ -3193,6 +3576,8 @@ export namespace Prisma {
     status?: true
     dataAbertura?: true
     arquivoPdf?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type EditalCountAggregateInputType = {
@@ -3203,6 +3588,8 @@ export namespace Prisma {
     status?: true
     dataAbertura?: true
     arquivoPdf?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -3286,6 +3673,8 @@ export namespace Prisma {
     status: string
     dataAbertura: Date
     arquivoPdf: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: EditalCountAggregateOutputType | null
     _min: EditalMinAggregateOutputType | null
     _max: EditalMaxAggregateOutputType | null
@@ -3313,8 +3702,12 @@ export namespace Prisma {
     status?: boolean
     dataAbertura?: boolean
     arquivoPdf?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     disputas?: boolean | Edital$disputasArgs<ExtArgs>
     documentosObrigatorios?: boolean | Edital$documentosObrigatoriosArgs<ExtArgs>
+    lotes?: boolean | Edital$lotesArgs<ExtArgs>
+    mensagensChat?: boolean | Edital$mensagensChatArgs<ExtArgs>
     _count?: boolean | EditalCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["edital"]>
 
@@ -3326,6 +3719,8 @@ export namespace Prisma {
     status?: boolean
     dataAbertura?: boolean
     arquivoPdf?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["edital"]>
 
   export type EditalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3336,6 +3731,8 @@ export namespace Prisma {
     status?: boolean
     dataAbertura?: boolean
     arquivoPdf?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["edital"]>
 
   export type EditalSelectScalar = {
@@ -3346,12 +3743,16 @@ export namespace Prisma {
     status?: boolean
     dataAbertura?: boolean
     arquivoPdf?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type EditalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "numero" | "objeto" | "modalidade" | "status" | "dataAbertura" | "arquivoPdf", ExtArgs["result"]["edital"]>
+  export type EditalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "numero" | "objeto" | "modalidade" | "status" | "dataAbertura" | "arquivoPdf" | "createdAt" | "updatedAt", ExtArgs["result"]["edital"]>
   export type EditalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     disputas?: boolean | Edital$disputasArgs<ExtArgs>
     documentosObrigatorios?: boolean | Edital$documentosObrigatoriosArgs<ExtArgs>
+    lotes?: boolean | Edital$lotesArgs<ExtArgs>
+    mensagensChat?: boolean | Edital$mensagensChatArgs<ExtArgs>
     _count?: boolean | EditalCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EditalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3362,6 +3763,8 @@ export namespace Prisma {
     objects: {
       disputas: Prisma.$DisputaPayload<ExtArgs>[]
       documentosObrigatorios: Prisma.$DocumentoObrigatorioPayload<ExtArgs>[]
+      lotes: Prisma.$LotePayload<ExtArgs>[]
+      mensagensChat: Prisma.$MensagemChatPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3371,6 +3774,8 @@ export namespace Prisma {
       status: string
       dataAbertura: Date
       arquivoPdf: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["edital"]>
     composites: {}
   }
@@ -3767,6 +4172,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     disputas<T extends Edital$disputasArgs<ExtArgs> = {}>(args?: Subset<T, Edital$disputasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     documentosObrigatorios<T extends Edital$documentosObrigatoriosArgs<ExtArgs> = {}>(args?: Subset<T, Edital$documentosObrigatoriosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoObrigatorioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    lotes<T extends Edital$lotesArgs<ExtArgs> = {}>(args?: Subset<T, Edital$lotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mensagensChat<T extends Edital$mensagensChatArgs<ExtArgs> = {}>(args?: Subset<T, Edital$mensagensChatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3803,6 +4210,8 @@ export namespace Prisma {
     readonly status: FieldRef<"Edital", 'String'>
     readonly dataAbertura: FieldRef<"Edital", 'DateTime'>
     readonly arquivoPdf: FieldRef<"Edital", 'String'>
+    readonly createdAt: FieldRef<"Edital", 'DateTime'>
+    readonly updatedAt: FieldRef<"Edital", 'DateTime'>
   }
     
 
@@ -4236,6 +4645,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DocumentoObrigatorioScalarFieldEnum | DocumentoObrigatorioScalarFieldEnum[]
+  }
+
+  /**
+   * Edital.lotes
+   */
+  export type Edital$lotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    where?: LoteWhereInput
+    orderBy?: LoteOrderByWithRelationInput | LoteOrderByWithRelationInput[]
+    cursor?: LoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LoteScalarFieldEnum | LoteScalarFieldEnum[]
+  }
+
+  /**
+   * Edital.mensagensChat
+   */
+  export type Edital$mensagensChatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MensagemChat
+     */
+    select?: MensagemChatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MensagemChat
+     */
+    omit?: MensagemChatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MensagemChatInclude<ExtArgs> | null
+    where?: MensagemChatWhereInput
+    orderBy?: MensagemChatOrderByWithRelationInput | MensagemChatOrderByWithRelationInput[]
+    cursor?: MensagemChatWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MensagemChatScalarFieldEnum | MensagemChatScalarFieldEnum[]
   }
 
   /**
@@ -5701,6 +6158,7 @@ export namespace Prisma {
     razaoSocial?: boolean
     cnpj?: boolean
     tipoEmpresa?: boolean
+    usuario?: boolean | Licitante$usuarioArgs<ExtArgs>
     propostas?: boolean | Licitante$propostasArgs<ExtArgs>
     lances?: boolean | Licitante$lancesArgs<ExtArgs>
     documentos?: boolean | Licitante$documentosArgs<ExtArgs>
@@ -5732,6 +6190,7 @@ export namespace Prisma {
 
   export type LicitanteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "razaoSocial" | "cnpj" | "tipoEmpresa", ExtArgs["result"]["licitante"]>
   export type LicitanteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | Licitante$usuarioArgs<ExtArgs>
     propostas?: boolean | Licitante$propostasArgs<ExtArgs>
     lances?: boolean | Licitante$lancesArgs<ExtArgs>
     documentos?: boolean | Licitante$documentosArgs<ExtArgs>
@@ -5745,6 +6204,7 @@ export namespace Prisma {
   export type $LicitantePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Licitante"
     objects: {
+      usuario: Prisma.$UsuarioPayload<ExtArgs> | null
       propostas: Prisma.$PropostaPayload<ExtArgs>[]
       lances: Prisma.$LancePayload<ExtArgs>[]
       documentos: Prisma.$DocumentoLicitantePayload<ExtArgs>[]
@@ -6150,6 +6610,7 @@ export namespace Prisma {
    */
   export interface Prisma__LicitanteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario<T extends Licitante$usuarioArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$usuarioArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     propostas<T extends Licitante$propostasArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$propostasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PropostaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     lances<T extends Licitante$lancesArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$lancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     documentos<T extends Licitante$documentosArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$documentosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoLicitantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6576,6 +7037,25 @@ export namespace Prisma {
   }
 
   /**
+   * Licitante.usuario
+   */
+  export type Licitante$usuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    where?: UsuarioWhereInput
+  }
+
+  /**
    * Licitante.propostas
    */
   export type Licitante$propostasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6728,74 +7208,132 @@ export namespace Prisma {
 
   export type PropostaAvgAggregateOutputType = {
     valorCentavos: number | null
+    versao: number | null
   }
 
   export type PropostaSumAggregateOutputType = {
     valorCentavos: number | null
+    versao: number | null
   }
 
   export type PropostaMinAggregateOutputType = {
     id: string | null
     disputaId: string | null
     licitanteId: string | null
+    itemId: string | null
     valorCentavos: number | null
     dataEnvio: Date | null
     arquivo: string | null
+    status: $Enums.StatusProposta | null
+    observacao: string | null
+    versao: number | null
+    createdBy: string | null
+    updatedBy: string | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PropostaMaxAggregateOutputType = {
     id: string | null
     disputaId: string | null
     licitanteId: string | null
+    itemId: string | null
     valorCentavos: number | null
     dataEnvio: Date | null
     arquivo: string | null
+    status: $Enums.StatusProposta | null
+    observacao: string | null
+    versao: number | null
+    createdBy: string | null
+    updatedBy: string | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PropostaCountAggregateOutputType = {
     id: number
     disputaId: number
     licitanteId: number
+    itemId: number
     valorCentavos: number
     dataEnvio: number
     arquivo: number
+    status: number
+    observacao: number
+    versao: number
+    createdBy: number
+    updatedBy: number
+    deletedAt: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
   export type PropostaAvgAggregateInputType = {
     valorCentavos?: true
+    versao?: true
   }
 
   export type PropostaSumAggregateInputType = {
     valorCentavos?: true
+    versao?: true
   }
 
   export type PropostaMinAggregateInputType = {
     id?: true
     disputaId?: true
     licitanteId?: true
+    itemId?: true
     valorCentavos?: true
     dataEnvio?: true
     arquivo?: true
+    status?: true
+    observacao?: true
+    versao?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PropostaMaxAggregateInputType = {
     id?: true
     disputaId?: true
     licitanteId?: true
+    itemId?: true
     valorCentavos?: true
     dataEnvio?: true
     arquivo?: true
+    status?: true
+    observacao?: true
+    versao?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PropostaCountAggregateInputType = {
     id?: true
     disputaId?: true
     licitanteId?: true
+    itemId?: true
     valorCentavos?: true
     dataEnvio?: true
     arquivo?: true
+    status?: true
+    observacao?: true
+    versao?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -6889,9 +7427,18 @@ export namespace Prisma {
     id: string
     disputaId: string
     licitanteId: string
+    itemId: string
     valorCentavos: number
     dataEnvio: Date
     arquivo: string | null
+    status: $Enums.StatusProposta
+    observacao: string | null
+    versao: number
+    createdBy: string
+    updatedBy: string | null
+    deletedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
     _count: PropostaCountAggregateOutputType | null
     _avg: PropostaAvgAggregateOutputType | null
     _sum: PropostaSumAggregateOutputType | null
@@ -6917,56 +7464,98 @@ export namespace Prisma {
     id?: boolean
     disputaId?: boolean
     licitanteId?: boolean
+    itemId?: boolean
     valorCentavos?: boolean
     dataEnvio?: boolean
     arquivo?: boolean
+    status?: boolean
+    observacao?: boolean
+    versao?: boolean
+    createdBy?: boolean
+    updatedBy?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["proposta"]>
 
   export type PropostaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     disputaId?: boolean
     licitanteId?: boolean
+    itemId?: boolean
     valorCentavos?: boolean
     dataEnvio?: boolean
     arquivo?: boolean
+    status?: boolean
+    observacao?: boolean
+    versao?: boolean
+    createdBy?: boolean
+    updatedBy?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["proposta"]>
 
   export type PropostaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     disputaId?: boolean
     licitanteId?: boolean
+    itemId?: boolean
     valorCentavos?: boolean
     dataEnvio?: boolean
     arquivo?: boolean
+    status?: boolean
+    observacao?: boolean
+    versao?: boolean
+    createdBy?: boolean
+    updatedBy?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["proposta"]>
 
   export type PropostaSelectScalar = {
     id?: boolean
     disputaId?: boolean
     licitanteId?: boolean
+    itemId?: boolean
     valorCentavos?: boolean
     dataEnvio?: boolean
     arquivo?: boolean
+    status?: boolean
+    observacao?: boolean
+    versao?: boolean
+    createdBy?: boolean
+    updatedBy?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type PropostaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "disputaId" | "licitanteId" | "valorCentavos" | "dataEnvio" | "arquivo", ExtArgs["result"]["proposta"]>
+  export type PropostaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "disputaId" | "licitanteId" | "itemId" | "valorCentavos" | "dataEnvio" | "arquivo" | "status" | "observacao" | "versao" | "createdBy" | "updatedBy" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["proposta"]>
   export type PropostaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
   }
   export type PropostaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
   }
   export type PropostaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
   }
 
   export type $PropostaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6974,14 +7563,24 @@ export namespace Prisma {
     objects: {
       disputa: Prisma.$DisputaPayload<ExtArgs>
       licitante: Prisma.$LicitantePayload<ExtArgs>
+      item: Prisma.$ItemPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       disputaId: string
       licitanteId: string
+      itemId: string
       valorCentavos: number
       dataEnvio: Date
       arquivo: string | null
+      status: $Enums.StatusProposta
+      observacao: string | null
+      versao: number
+      createdBy: string
+      updatedBy: string | null
+      deletedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["proposta"]>
     composites: {}
   }
@@ -7378,6 +7977,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     disputa<T extends DisputaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DisputaDefaultArgs<ExtArgs>>): Prisma__DisputaClient<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     licitante<T extends LicitanteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LicitanteDefaultArgs<ExtArgs>>): Prisma__LicitanteClient<$Result.GetResult<Prisma.$LicitantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7410,9 +8010,18 @@ export namespace Prisma {
     readonly id: FieldRef<"Proposta", 'String'>
     readonly disputaId: FieldRef<"Proposta", 'String'>
     readonly licitanteId: FieldRef<"Proposta", 'String'>
+    readonly itemId: FieldRef<"Proposta", 'String'>
     readonly valorCentavos: FieldRef<"Proposta", 'Int'>
     readonly dataEnvio: FieldRef<"Proposta", 'DateTime'>
     readonly arquivo: FieldRef<"Proposta", 'String'>
+    readonly status: FieldRef<"Proposta", 'StatusProposta'>
+    readonly observacao: FieldRef<"Proposta", 'String'>
+    readonly versao: FieldRef<"Proposta", 'Int'>
+    readonly createdBy: FieldRef<"Proposta", 'String'>
+    readonly updatedBy: FieldRef<"Proposta", 'String'>
+    readonly deletedAt: FieldRef<"Proposta", 'DateTime'>
+    readonly createdAt: FieldRef<"Proposta", 'DateTime'>
+    readonly updatedAt: FieldRef<"Proposta", 'DateTime'>
   }
     
 
@@ -11214,64 +11823,76 @@ export namespace Prisma {
 
   export type MensagemChatMinAggregateOutputType = {
     id: string | null
+    editalId: string | null
+    autorId: string | null
+    tipoAutor: $Enums.TipoAutorMensagem | null
+    conteudo: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     disputaId: string | null
     licitanteId: string | null
-    autor: string | null
-    mensagem: string | null
-    horario: Date | null
-    tipoAutor: $Enums.TipoAutorChat | null
   }
 
   export type MensagemChatMaxAggregateOutputType = {
     id: string | null
+    editalId: string | null
+    autorId: string | null
+    tipoAutor: $Enums.TipoAutorMensagem | null
+    conteudo: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     disputaId: string | null
     licitanteId: string | null
-    autor: string | null
-    mensagem: string | null
-    horario: Date | null
-    tipoAutor: $Enums.TipoAutorChat | null
   }
 
   export type MensagemChatCountAggregateOutputType = {
     id: number
+    editalId: number
+    autorId: number
+    tipoAutor: number
+    conteudo: number
+    createdAt: number
+    updatedAt: number
     disputaId: number
     licitanteId: number
-    autor: number
-    mensagem: number
-    horario: number
-    tipoAutor: number
     _all: number
   }
 
 
   export type MensagemChatMinAggregateInputType = {
     id?: true
+    editalId?: true
+    autorId?: true
+    tipoAutor?: true
+    conteudo?: true
+    createdAt?: true
+    updatedAt?: true
     disputaId?: true
     licitanteId?: true
-    autor?: true
-    mensagem?: true
-    horario?: true
-    tipoAutor?: true
   }
 
   export type MensagemChatMaxAggregateInputType = {
     id?: true
+    editalId?: true
+    autorId?: true
+    tipoAutor?: true
+    conteudo?: true
+    createdAt?: true
+    updatedAt?: true
     disputaId?: true
     licitanteId?: true
-    autor?: true
-    mensagem?: true
-    horario?: true
-    tipoAutor?: true
   }
 
   export type MensagemChatCountAggregateInputType = {
     id?: true
+    editalId?: true
+    autorId?: true
+    tipoAutor?: true
+    conteudo?: true
+    createdAt?: true
+    updatedAt?: true
     disputaId?: true
     licitanteId?: true
-    autor?: true
-    mensagem?: true
-    horario?: true
-    tipoAutor?: true
     _all?: true
   }
 
@@ -11349,12 +11970,14 @@ export namespace Prisma {
 
   export type MensagemChatGroupByOutputType = {
     id: string
-    disputaId: string
+    editalId: string
+    autorId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt: Date
+    updatedAt: Date
+    disputaId: string | null
     licitanteId: string | null
-    autor: string
-    mensagem: string
-    horario: Date
-    tipoAutor: $Enums.TipoAutorChat
     _count: MensagemChatCountAggregateOutputType | null
     _min: MensagemChatMinAggregateOutputType | null
     _max: MensagemChatMaxAggregateOutputType | null
@@ -11376,78 +11999,102 @@ export namespace Prisma {
 
   export type MensagemChatSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    editalId?: boolean
+    autorId?: boolean
+    tipoAutor?: boolean
+    conteudo?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     disputaId?: boolean
     licitanteId?: boolean
-    autor?: boolean
-    mensagem?: boolean
-    horario?: boolean
-    tipoAutor?: boolean
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
-    licitante?: boolean | MensagemChat$licitanteArgs<ExtArgs>
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    autor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    Disputa?: boolean | MensagemChat$DisputaArgs<ExtArgs>
+    Licitante?: boolean | MensagemChat$LicitanteArgs<ExtArgs>
   }, ExtArgs["result"]["mensagemChat"]>
 
   export type MensagemChatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    editalId?: boolean
+    autorId?: boolean
+    tipoAutor?: boolean
+    conteudo?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     disputaId?: boolean
     licitanteId?: boolean
-    autor?: boolean
-    mensagem?: boolean
-    horario?: boolean
-    tipoAutor?: boolean
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
-    licitante?: boolean | MensagemChat$licitanteArgs<ExtArgs>
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    autor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    Disputa?: boolean | MensagemChat$DisputaArgs<ExtArgs>
+    Licitante?: boolean | MensagemChat$LicitanteArgs<ExtArgs>
   }, ExtArgs["result"]["mensagemChat"]>
 
   export type MensagemChatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    editalId?: boolean
+    autorId?: boolean
+    tipoAutor?: boolean
+    conteudo?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     disputaId?: boolean
     licitanteId?: boolean
-    autor?: boolean
-    mensagem?: boolean
-    horario?: boolean
-    tipoAutor?: boolean
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
-    licitante?: boolean | MensagemChat$licitanteArgs<ExtArgs>
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    autor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    Disputa?: boolean | MensagemChat$DisputaArgs<ExtArgs>
+    Licitante?: boolean | MensagemChat$LicitanteArgs<ExtArgs>
   }, ExtArgs["result"]["mensagemChat"]>
 
   export type MensagemChatSelectScalar = {
     id?: boolean
+    editalId?: boolean
+    autorId?: boolean
+    tipoAutor?: boolean
+    conteudo?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     disputaId?: boolean
     licitanteId?: boolean
-    autor?: boolean
-    mensagem?: boolean
-    horario?: boolean
-    tipoAutor?: boolean
   }
 
-  export type MensagemChatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "disputaId" | "licitanteId" | "autor" | "mensagem" | "horario" | "tipoAutor", ExtArgs["result"]["mensagemChat"]>
+  export type MensagemChatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "editalId" | "autorId" | "tipoAutor" | "conteudo" | "createdAt" | "updatedAt" | "disputaId" | "licitanteId", ExtArgs["result"]["mensagemChat"]>
   export type MensagemChatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
-    licitante?: boolean | MensagemChat$licitanteArgs<ExtArgs>
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    autor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    Disputa?: boolean | MensagemChat$DisputaArgs<ExtArgs>
+    Licitante?: boolean | MensagemChat$LicitanteArgs<ExtArgs>
   }
   export type MensagemChatIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
-    licitante?: boolean | MensagemChat$licitanteArgs<ExtArgs>
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    autor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    Disputa?: boolean | MensagemChat$DisputaArgs<ExtArgs>
+    Licitante?: boolean | MensagemChat$LicitanteArgs<ExtArgs>
   }
   export type MensagemChatIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
-    licitante?: boolean | MensagemChat$licitanteArgs<ExtArgs>
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    autor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    Disputa?: boolean | MensagemChat$DisputaArgs<ExtArgs>
+    Licitante?: boolean | MensagemChat$LicitanteArgs<ExtArgs>
   }
 
   export type $MensagemChatPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MensagemChat"
     objects: {
-      disputa: Prisma.$DisputaPayload<ExtArgs>
-      licitante: Prisma.$LicitantePayload<ExtArgs> | null
+      edital: Prisma.$EditalPayload<ExtArgs>
+      autor: Prisma.$UsuarioPayload<ExtArgs>
+      Disputa: Prisma.$DisputaPayload<ExtArgs> | null
+      Licitante: Prisma.$LicitantePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      disputaId: string
+      editalId: string
+      autorId: string
+      tipoAutor: $Enums.TipoAutorMensagem
+      conteudo: string
+      createdAt: Date
+      updatedAt: Date
+      disputaId: string | null
       licitanteId: string | null
-      autor: string
-      mensagem: string
-      horario: Date
-      tipoAutor: $Enums.TipoAutorChat
     }, ExtArgs["result"]["mensagemChat"]>
     composites: {}
   }
@@ -11842,8 +12489,10 @@ export namespace Prisma {
    */
   export interface Prisma__MensagemChatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    disputa<T extends DisputaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DisputaDefaultArgs<ExtArgs>>): Prisma__DisputaClient<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    licitante<T extends MensagemChat$licitanteArgs<ExtArgs> = {}>(args?: Subset<T, MensagemChat$licitanteArgs<ExtArgs>>): Prisma__LicitanteClient<$Result.GetResult<Prisma.$LicitantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    edital<T extends EditalDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EditalDefaultArgs<ExtArgs>>): Prisma__EditalClient<$Result.GetResult<Prisma.$EditalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    autor<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Disputa<T extends MensagemChat$DisputaArgs<ExtArgs> = {}>(args?: Subset<T, MensagemChat$DisputaArgs<ExtArgs>>): Prisma__DisputaClient<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Licitante<T extends MensagemChat$LicitanteArgs<ExtArgs> = {}>(args?: Subset<T, MensagemChat$LicitanteArgs<ExtArgs>>): Prisma__LicitanteClient<$Result.GetResult<Prisma.$LicitantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11874,12 +12523,14 @@ export namespace Prisma {
    */
   interface MensagemChatFieldRefs {
     readonly id: FieldRef<"MensagemChat", 'String'>
+    readonly editalId: FieldRef<"MensagemChat", 'String'>
+    readonly autorId: FieldRef<"MensagemChat", 'String'>
+    readonly tipoAutor: FieldRef<"MensagemChat", 'TipoAutorMensagem'>
+    readonly conteudo: FieldRef<"MensagemChat", 'String'>
+    readonly createdAt: FieldRef<"MensagemChat", 'DateTime'>
+    readonly updatedAt: FieldRef<"MensagemChat", 'DateTime'>
     readonly disputaId: FieldRef<"MensagemChat", 'String'>
     readonly licitanteId: FieldRef<"MensagemChat", 'String'>
-    readonly autor: FieldRef<"MensagemChat", 'String'>
-    readonly mensagem: FieldRef<"MensagemChat", 'String'>
-    readonly horario: FieldRef<"MensagemChat", 'DateTime'>
-    readonly tipoAutor: FieldRef<"MensagemChat", 'TipoAutorChat'>
   }
     
 
@@ -12276,9 +12927,28 @@ export namespace Prisma {
   }
 
   /**
-   * MensagemChat.licitante
+   * MensagemChat.Disputa
    */
-  export type MensagemChat$licitanteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MensagemChat$DisputaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disputa
+     */
+    select?: DisputaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disputa
+     */
+    omit?: DisputaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputaInclude<ExtArgs> | null
+    where?: DisputaWhereInput
+  }
+
+  /**
+   * MensagemChat.Licitante
+   */
+  export type MensagemChat$LicitanteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Licitante
      */
@@ -14504,6 +15174,2311 @@ export namespace Prisma {
 
 
   /**
+   * Model Lote
+   */
+
+  export type AggregateLote = {
+    _count: LoteCountAggregateOutputType | null
+    _min: LoteMinAggregateOutputType | null
+    _max: LoteMaxAggregateOutputType | null
+  }
+
+  export type LoteMinAggregateOutputType = {
+    id: string | null
+    numero: string | null
+    descricao: string | null
+    editalId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LoteMaxAggregateOutputType = {
+    id: string | null
+    numero: string | null
+    descricao: string | null
+    editalId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LoteCountAggregateOutputType = {
+    id: number
+    numero: number
+    descricao: number
+    editalId: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type LoteMinAggregateInputType = {
+    id?: true
+    numero?: true
+    descricao?: true
+    editalId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LoteMaxAggregateInputType = {
+    id?: true
+    numero?: true
+    descricao?: true
+    editalId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LoteCountAggregateInputType = {
+    id?: true
+    numero?: true
+    descricao?: true
+    editalId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type LoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Lote to aggregate.
+     */
+    where?: LoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Lotes to fetch.
+     */
+    orderBy?: LoteOrderByWithRelationInput | LoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Lotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Lotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Lotes
+    **/
+    _count?: true | LoteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LoteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LoteMaxAggregateInputType
+  }
+
+  export type GetLoteAggregateType<T extends LoteAggregateArgs> = {
+        [P in keyof T & keyof AggregateLote]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLote[P]>
+      : GetScalarType<T[P], AggregateLote[P]>
+  }
+
+
+
+
+  export type LoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LoteWhereInput
+    orderBy?: LoteOrderByWithAggregationInput | LoteOrderByWithAggregationInput[]
+    by: LoteScalarFieldEnum[] | LoteScalarFieldEnum
+    having?: LoteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LoteCountAggregateInputType | true
+    _min?: LoteMinAggregateInputType
+    _max?: LoteMaxAggregateInputType
+  }
+
+  export type LoteGroupByOutputType = {
+    id: string
+    numero: string
+    descricao: string
+    editalId: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: LoteCountAggregateOutputType | null
+    _min: LoteMinAggregateOutputType | null
+    _max: LoteMaxAggregateOutputType | null
+  }
+
+  type GetLoteGroupByPayload<T extends LoteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LoteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LoteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LoteGroupByOutputType[P]>
+            : GetScalarType<T[P], LoteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    numero?: boolean
+    descricao?: boolean
+    editalId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    itens?: boolean | Lote$itensArgs<ExtArgs>
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    _count?: boolean | LoteCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lote"]>
+
+  export type LoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    numero?: boolean
+    descricao?: boolean
+    editalId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lote"]>
+
+  export type LoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    numero?: boolean
+    descricao?: boolean
+    editalId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lote"]>
+
+  export type LoteSelectScalar = {
+    id?: boolean
+    numero?: boolean
+    descricao?: boolean
+    editalId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type LoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "numero" | "descricao" | "editalId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["lote"]>
+  export type LoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    itens?: boolean | Lote$itensArgs<ExtArgs>
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    _count?: boolean | LoteCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }
+  export type LoteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }
+
+  export type $LotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Lote"
+    objects: {
+      itens: Prisma.$ItemPayload<ExtArgs>[]
+      edital: Prisma.$EditalPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      numero: string
+      descricao: string
+      editalId: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["lote"]>
+    composites: {}
+  }
+
+  type LoteGetPayload<S extends boolean | null | undefined | LoteDefaultArgs> = $Result.GetResult<Prisma.$LotePayload, S>
+
+  type LoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LoteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LoteCountAggregateInputType | true
+    }
+
+  export interface LoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Lote'], meta: { name: 'Lote' } }
+    /**
+     * Find zero or one Lote that matches the filter.
+     * @param {LoteFindUniqueArgs} args - Arguments to find a Lote
+     * @example
+     * // Get one Lote
+     * const lote = await prisma.lote.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LoteFindUniqueArgs>(args: SelectSubset<T, LoteFindUniqueArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Lote that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LoteFindUniqueOrThrowArgs} args - Arguments to find a Lote
+     * @example
+     * // Get one Lote
+     * const lote = await prisma.lote.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LoteFindUniqueOrThrowArgs>(args: SelectSubset<T, LoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Lote that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoteFindFirstArgs} args - Arguments to find a Lote
+     * @example
+     * // Get one Lote
+     * const lote = await prisma.lote.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LoteFindFirstArgs>(args?: SelectSubset<T, LoteFindFirstArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Lote that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoteFindFirstOrThrowArgs} args - Arguments to find a Lote
+     * @example
+     * // Get one Lote
+     * const lote = await prisma.lote.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LoteFindFirstOrThrowArgs>(args?: SelectSubset<T, LoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Lotes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Lotes
+     * const lotes = await prisma.lote.findMany()
+     * 
+     * // Get first 10 Lotes
+     * const lotes = await prisma.lote.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const loteWithIdOnly = await prisma.lote.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LoteFindManyArgs>(args?: SelectSubset<T, LoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Lote.
+     * @param {LoteCreateArgs} args - Arguments to create a Lote.
+     * @example
+     * // Create one Lote
+     * const Lote = await prisma.lote.create({
+     *   data: {
+     *     // ... data to create a Lote
+     *   }
+     * })
+     * 
+     */
+    create<T extends LoteCreateArgs>(args: SelectSubset<T, LoteCreateArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Lotes.
+     * @param {LoteCreateManyArgs} args - Arguments to create many Lotes.
+     * @example
+     * // Create many Lotes
+     * const lote = await prisma.lote.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LoteCreateManyArgs>(args?: SelectSubset<T, LoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Lotes and returns the data saved in the database.
+     * @param {LoteCreateManyAndReturnArgs} args - Arguments to create many Lotes.
+     * @example
+     * // Create many Lotes
+     * const lote = await prisma.lote.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Lotes and only return the `id`
+     * const loteWithIdOnly = await prisma.lote.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LoteCreateManyAndReturnArgs>(args?: SelectSubset<T, LoteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Lote.
+     * @param {LoteDeleteArgs} args - Arguments to delete one Lote.
+     * @example
+     * // Delete one Lote
+     * const Lote = await prisma.lote.delete({
+     *   where: {
+     *     // ... filter to delete one Lote
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LoteDeleteArgs>(args: SelectSubset<T, LoteDeleteArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Lote.
+     * @param {LoteUpdateArgs} args - Arguments to update one Lote.
+     * @example
+     * // Update one Lote
+     * const lote = await prisma.lote.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LoteUpdateArgs>(args: SelectSubset<T, LoteUpdateArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Lotes.
+     * @param {LoteDeleteManyArgs} args - Arguments to filter Lotes to delete.
+     * @example
+     * // Delete a few Lotes
+     * const { count } = await prisma.lote.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LoteDeleteManyArgs>(args?: SelectSubset<T, LoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Lotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Lotes
+     * const lote = await prisma.lote.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LoteUpdateManyArgs>(args: SelectSubset<T, LoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Lotes and returns the data updated in the database.
+     * @param {LoteUpdateManyAndReturnArgs} args - Arguments to update many Lotes.
+     * @example
+     * // Update many Lotes
+     * const lote = await prisma.lote.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Lotes and only return the `id`
+     * const loteWithIdOnly = await prisma.lote.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LoteUpdateManyAndReturnArgs>(args: SelectSubset<T, LoteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Lote.
+     * @param {LoteUpsertArgs} args - Arguments to update or create a Lote.
+     * @example
+     * // Update or create a Lote
+     * const lote = await prisma.lote.upsert({
+     *   create: {
+     *     // ... data to create a Lote
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Lote we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LoteUpsertArgs>(args: SelectSubset<T, LoteUpsertArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Lotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoteCountArgs} args - Arguments to filter Lotes to count.
+     * @example
+     * // Count the number of Lotes
+     * const count = await prisma.lote.count({
+     *   where: {
+     *     // ... the filter for the Lotes we want to count
+     *   }
+     * })
+    **/
+    count<T extends LoteCountArgs>(
+      args?: Subset<T, LoteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LoteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Lote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LoteAggregateArgs>(args: Subset<T, LoteAggregateArgs>): Prisma.PrismaPromise<GetLoteAggregateType<T>>
+
+    /**
+     * Group by Lote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LoteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LoteGroupByArgs['orderBy'] }
+        : { orderBy?: LoteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Lote model
+   */
+  readonly fields: LoteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Lote.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    itens<T extends Lote$itensArgs<ExtArgs> = {}>(args?: Subset<T, Lote$itensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    edital<T extends EditalDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EditalDefaultArgs<ExtArgs>>): Prisma__EditalClient<$Result.GetResult<Prisma.$EditalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Lote model
+   */
+  interface LoteFieldRefs {
+    readonly id: FieldRef<"Lote", 'String'>
+    readonly numero: FieldRef<"Lote", 'String'>
+    readonly descricao: FieldRef<"Lote", 'String'>
+    readonly editalId: FieldRef<"Lote", 'String'>
+    readonly status: FieldRef<"Lote", 'String'>
+    readonly createdAt: FieldRef<"Lote", 'DateTime'>
+    readonly updatedAt: FieldRef<"Lote", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Lote findUnique
+   */
+  export type LoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Lote to fetch.
+     */
+    where: LoteWhereUniqueInput
+  }
+
+  /**
+   * Lote findUniqueOrThrow
+   */
+  export type LoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Lote to fetch.
+     */
+    where: LoteWhereUniqueInput
+  }
+
+  /**
+   * Lote findFirst
+   */
+  export type LoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Lote to fetch.
+     */
+    where?: LoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Lotes to fetch.
+     */
+    orderBy?: LoteOrderByWithRelationInput | LoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Lotes.
+     */
+    cursor?: LoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Lotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Lotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Lotes.
+     */
+    distinct?: LoteScalarFieldEnum | LoteScalarFieldEnum[]
+  }
+
+  /**
+   * Lote findFirstOrThrow
+   */
+  export type LoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Lote to fetch.
+     */
+    where?: LoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Lotes to fetch.
+     */
+    orderBy?: LoteOrderByWithRelationInput | LoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Lotes.
+     */
+    cursor?: LoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Lotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Lotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Lotes.
+     */
+    distinct?: LoteScalarFieldEnum | LoteScalarFieldEnum[]
+  }
+
+  /**
+   * Lote findMany
+   */
+  export type LoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Lotes to fetch.
+     */
+    where?: LoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Lotes to fetch.
+     */
+    orderBy?: LoteOrderByWithRelationInput | LoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Lotes.
+     */
+    cursor?: LoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Lotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Lotes.
+     */
+    skip?: number
+    distinct?: LoteScalarFieldEnum | LoteScalarFieldEnum[]
+  }
+
+  /**
+   * Lote create
+   */
+  export type LoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Lote.
+     */
+    data: XOR<LoteCreateInput, LoteUncheckedCreateInput>
+  }
+
+  /**
+   * Lote createMany
+   */
+  export type LoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Lotes.
+     */
+    data: LoteCreateManyInput | LoteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Lote createManyAndReturn
+   */
+  export type LoteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * The data used to create many Lotes.
+     */
+    data: LoteCreateManyInput | LoteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Lote update
+   */
+  export type LoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Lote.
+     */
+    data: XOR<LoteUpdateInput, LoteUncheckedUpdateInput>
+    /**
+     * Choose, which Lote to update.
+     */
+    where: LoteWhereUniqueInput
+  }
+
+  /**
+   * Lote updateMany
+   */
+  export type LoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Lotes.
+     */
+    data: XOR<LoteUpdateManyMutationInput, LoteUncheckedUpdateManyInput>
+    /**
+     * Filter which Lotes to update
+     */
+    where?: LoteWhereInput
+    /**
+     * Limit how many Lotes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Lote updateManyAndReturn
+   */
+  export type LoteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * The data used to update Lotes.
+     */
+    data: XOR<LoteUpdateManyMutationInput, LoteUncheckedUpdateManyInput>
+    /**
+     * Filter which Lotes to update
+     */
+    where?: LoteWhereInput
+    /**
+     * Limit how many Lotes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Lote upsert
+   */
+  export type LoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Lote to update in case it exists.
+     */
+    where: LoteWhereUniqueInput
+    /**
+     * In case the Lote found by the `where` argument doesn't exist, create a new Lote with this data.
+     */
+    create: XOR<LoteCreateInput, LoteUncheckedCreateInput>
+    /**
+     * In case the Lote was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LoteUpdateInput, LoteUncheckedUpdateInput>
+  }
+
+  /**
+   * Lote delete
+   */
+  export type LoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+    /**
+     * Filter which Lote to delete.
+     */
+    where: LoteWhereUniqueInput
+  }
+
+  /**
+   * Lote deleteMany
+   */
+  export type LoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Lotes to delete
+     */
+    where?: LoteWhereInput
+    /**
+     * Limit how many Lotes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Lote.itens
+   */
+  export type Lote$itensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    cursor?: ItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * Lote without action
+   */
+  export type LoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: LoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: LoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoteInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Item
+   */
+
+  export type AggregateItem = {
+    _count: ItemCountAggregateOutputType | null
+    _avg: ItemAvgAggregateOutputType | null
+    _sum: ItemSumAggregateOutputType | null
+    _min: ItemMinAggregateOutputType | null
+    _max: ItemMaxAggregateOutputType | null
+  }
+
+  export type ItemAvgAggregateOutputType = {
+    quantidade: number | null
+    valorEstimado: number | null
+  }
+
+  export type ItemSumAggregateOutputType = {
+    quantidade: number | null
+    valorEstimado: number | null
+  }
+
+  export type ItemMinAggregateOutputType = {
+    id: string | null
+    numero: string | null
+    descricao: string | null
+    quantidade: number | null
+    unidade: string | null
+    valorEstimado: number | null
+    loteId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ItemMaxAggregateOutputType = {
+    id: string | null
+    numero: string | null
+    descricao: string | null
+    quantidade: number | null
+    unidade: string | null
+    valorEstimado: number | null
+    loteId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ItemCountAggregateOutputType = {
+    id: number
+    numero: number
+    descricao: number
+    quantidade: number
+    unidade: number
+    valorEstimado: number
+    loteId: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ItemAvgAggregateInputType = {
+    quantidade?: true
+    valorEstimado?: true
+  }
+
+  export type ItemSumAggregateInputType = {
+    quantidade?: true
+    valorEstimado?: true
+  }
+
+  export type ItemMinAggregateInputType = {
+    id?: true
+    numero?: true
+    descricao?: true
+    quantidade?: true
+    unidade?: true
+    valorEstimado?: true
+    loteId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ItemMaxAggregateInputType = {
+    id?: true
+    numero?: true
+    descricao?: true
+    quantidade?: true
+    unidade?: true
+    valorEstimado?: true
+    loteId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ItemCountAggregateInputType = {
+    id?: true
+    numero?: true
+    descricao?: true
+    quantidade?: true
+    unidade?: true
+    valorEstimado?: true
+    loteId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Item to aggregate.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Items
+    **/
+    _count?: true | ItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ItemMaxAggregateInputType
+  }
+
+  export type GetItemAggregateType<T extends ItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateItem[P]>
+      : GetScalarType<T[P], AggregateItem[P]>
+  }
+
+
+
+
+  export type ItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithAggregationInput | ItemOrderByWithAggregationInput[]
+    by: ItemScalarFieldEnum[] | ItemScalarFieldEnum
+    having?: ItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ItemCountAggregateInputType | true
+    _avg?: ItemAvgAggregateInputType
+    _sum?: ItemSumAggregateInputType
+    _min?: ItemMinAggregateInputType
+    _max?: ItemMaxAggregateInputType
+  }
+
+  export type ItemGroupByOutputType = {
+    id: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado: number | null
+    loteId: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ItemCountAggregateOutputType | null
+    _avg: ItemAvgAggregateOutputType | null
+    _sum: ItemSumAggregateOutputType | null
+    _min: ItemMinAggregateOutputType | null
+    _max: ItemMaxAggregateOutputType | null
+  }
+
+  type GetItemGroupByPayload<T extends ItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ItemGroupByOutputType[P]>
+            : GetScalarType<T[P], ItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    numero?: boolean
+    descricao?: boolean
+    quantidade?: boolean
+    unidade?: boolean
+    valorEstimado?: boolean
+    loteId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+    propostas?: boolean | Item$propostasArgs<ExtArgs>
+    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["item"]>
+
+  export type ItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    numero?: boolean
+    descricao?: boolean
+    quantidade?: boolean
+    unidade?: boolean
+    valorEstimado?: boolean
+    loteId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["item"]>
+
+  export type ItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    numero?: boolean
+    descricao?: boolean
+    quantidade?: boolean
+    unidade?: boolean
+    valorEstimado?: boolean
+    loteId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["item"]>
+
+  export type ItemSelectScalar = {
+    id?: boolean
+    numero?: boolean
+    descricao?: boolean
+    quantidade?: boolean
+    unidade?: boolean
+    valorEstimado?: boolean
+    loteId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "numero" | "descricao" | "quantidade" | "unidade" | "valorEstimado" | "loteId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
+  export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+    propostas?: boolean | Item$propostasArgs<ExtArgs>
+    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+  }
+  export type ItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+  }
+
+  export type $ItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Item"
+    objects: {
+      lote: Prisma.$LotePayload<ExtArgs>
+      propostas: Prisma.$PropostaPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      numero: string
+      descricao: string
+      quantidade: number
+      unidade: string
+      valorEstimado: number | null
+      loteId: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["item"]>
+    composites: {}
+  }
+
+  type ItemGetPayload<S extends boolean | null | undefined | ItemDefaultArgs> = $Result.GetResult<Prisma.$ItemPayload, S>
+
+  type ItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ItemCountAggregateInputType | true
+    }
+
+  export interface ItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Item'], meta: { name: 'Item' } }
+    /**
+     * Find zero or one Item that matches the filter.
+     * @param {ItemFindUniqueArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ItemFindUniqueArgs>(args: SelectSubset<T, ItemFindUniqueArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Item that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ItemFindUniqueOrThrowArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ItemFindUniqueOrThrowArgs>(args: SelectSubset<T, ItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Item that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemFindFirstArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ItemFindFirstArgs>(args?: SelectSubset<T, ItemFindFirstArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Item that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemFindFirstOrThrowArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ItemFindFirstOrThrowArgs>(args?: SelectSubset<T, ItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Items that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Items
+     * const items = await prisma.item.findMany()
+     * 
+     * // Get first 10 Items
+     * const items = await prisma.item.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const itemWithIdOnly = await prisma.item.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ItemFindManyArgs>(args?: SelectSubset<T, ItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Item.
+     * @param {ItemCreateArgs} args - Arguments to create a Item.
+     * @example
+     * // Create one Item
+     * const Item = await prisma.item.create({
+     *   data: {
+     *     // ... data to create a Item
+     *   }
+     * })
+     * 
+     */
+    create<T extends ItemCreateArgs>(args: SelectSubset<T, ItemCreateArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Items.
+     * @param {ItemCreateManyArgs} args - Arguments to create many Items.
+     * @example
+     * // Create many Items
+     * const item = await prisma.item.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ItemCreateManyArgs>(args?: SelectSubset<T, ItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Items and returns the data saved in the database.
+     * @param {ItemCreateManyAndReturnArgs} args - Arguments to create many Items.
+     * @example
+     * // Create many Items
+     * const item = await prisma.item.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Items and only return the `id`
+     * const itemWithIdOnly = await prisma.item.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ItemCreateManyAndReturnArgs>(args?: SelectSubset<T, ItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Item.
+     * @param {ItemDeleteArgs} args - Arguments to delete one Item.
+     * @example
+     * // Delete one Item
+     * const Item = await prisma.item.delete({
+     *   where: {
+     *     // ... filter to delete one Item
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ItemDeleteArgs>(args: SelectSubset<T, ItemDeleteArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Item.
+     * @param {ItemUpdateArgs} args - Arguments to update one Item.
+     * @example
+     * // Update one Item
+     * const item = await prisma.item.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ItemUpdateArgs>(args: SelectSubset<T, ItemUpdateArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Items.
+     * @param {ItemDeleteManyArgs} args - Arguments to filter Items to delete.
+     * @example
+     * // Delete a few Items
+     * const { count } = await prisma.item.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ItemDeleteManyArgs>(args?: SelectSubset<T, ItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Items.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Items
+     * const item = await prisma.item.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ItemUpdateManyArgs>(args: SelectSubset<T, ItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Items and returns the data updated in the database.
+     * @param {ItemUpdateManyAndReturnArgs} args - Arguments to update many Items.
+     * @example
+     * // Update many Items
+     * const item = await prisma.item.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Items and only return the `id`
+     * const itemWithIdOnly = await prisma.item.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ItemUpdateManyAndReturnArgs>(args: SelectSubset<T, ItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Item.
+     * @param {ItemUpsertArgs} args - Arguments to update or create a Item.
+     * @example
+     * // Update or create a Item
+     * const item = await prisma.item.upsert({
+     *   create: {
+     *     // ... data to create a Item
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Item we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ItemUpsertArgs>(args: SelectSubset<T, ItemUpsertArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Items.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemCountArgs} args - Arguments to filter Items to count.
+     * @example
+     * // Count the number of Items
+     * const count = await prisma.item.count({
+     *   where: {
+     *     // ... the filter for the Items we want to count
+     *   }
+     * })
+    **/
+    count<T extends ItemCountArgs>(
+      args?: Subset<T, ItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Item.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ItemAggregateArgs>(args: Subset<T, ItemAggregateArgs>): Prisma.PrismaPromise<GetItemAggregateType<T>>
+
+    /**
+     * Group by Item.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ItemGroupByArgs['orderBy'] }
+        : { orderBy?: ItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Item model
+   */
+  readonly fields: ItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Item.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    lote<T extends LoteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LoteDefaultArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    propostas<T extends Item$propostasArgs<ExtArgs> = {}>(args?: Subset<T, Item$propostasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PropostaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Item model
+   */
+  interface ItemFieldRefs {
+    readonly id: FieldRef<"Item", 'String'>
+    readonly numero: FieldRef<"Item", 'String'>
+    readonly descricao: FieldRef<"Item", 'String'>
+    readonly quantidade: FieldRef<"Item", 'Int'>
+    readonly unidade: FieldRef<"Item", 'String'>
+    readonly valorEstimado: FieldRef<"Item", 'Int'>
+    readonly loteId: FieldRef<"Item", 'String'>
+    readonly status: FieldRef<"Item", 'String'>
+    readonly createdAt: FieldRef<"Item", 'DateTime'>
+    readonly updatedAt: FieldRef<"Item", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Item findUnique
+   */
+  export type ItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+  /**
+   * Item findUniqueOrThrow
+   */
+  export type ItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+  /**
+   * Item findFirst
+   */
+  export type ItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Items.
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Items.
+     */
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * Item findFirstOrThrow
+   */
+  export type ItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Items.
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Items.
+     */
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * Item findMany
+   */
+  export type ItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Items to fetch.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Items.
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * Item create
+   */
+  export type ItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Item.
+     */
+    data: XOR<ItemCreateInput, ItemUncheckedCreateInput>
+  }
+
+  /**
+   * Item createMany
+   */
+  export type ItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Items.
+     */
+    data: ItemCreateManyInput | ItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Item createManyAndReturn
+   */
+  export type ItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many Items.
+     */
+    data: ItemCreateManyInput | ItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Item update
+   */
+  export type ItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Item.
+     */
+    data: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
+    /**
+     * Choose, which Item to update.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+  /**
+   * Item updateMany
+   */
+  export type ItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Items.
+     */
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyInput>
+    /**
+     * Filter which Items to update
+     */
+    where?: ItemWhereInput
+    /**
+     * Limit how many Items to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Item updateManyAndReturn
+   */
+  export type ItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * The data used to update Items.
+     */
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyInput>
+    /**
+     * Filter which Items to update
+     */
+    where?: ItemWhereInput
+    /**
+     * Limit how many Items to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Item upsert
+   */
+  export type ItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Item to update in case it exists.
+     */
+    where: ItemWhereUniqueInput
+    /**
+     * In case the Item found by the `where` argument doesn't exist, create a new Item with this data.
+     */
+    create: XOR<ItemCreateInput, ItemUncheckedCreateInput>
+    /**
+     * In case the Item was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
+  }
+
+  /**
+   * Item delete
+   */
+  export type ItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter which Item to delete.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+  /**
+   * Item deleteMany
+   */
+  export type ItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Items to delete
+     */
+    where?: ItemWhereInput
+    /**
+     * Limit how many Items to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Item.propostas
+   */
+  export type Item$propostasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proposta
+     */
+    select?: PropostaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proposta
+     */
+    omit?: PropostaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PropostaInclude<ExtArgs> | null
+    where?: PropostaWhereInput
+    orderBy?: PropostaOrderByWithRelationInput | PropostaOrderByWithRelationInput[]
+    cursor?: PropostaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PropostaScalarFieldEnum | PropostaScalarFieldEnum[]
+  }
+
+  /**
+   * Item without action
+   */
+  export type ItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -14522,7 +17497,8 @@ export namespace Prisma {
     nome: 'nome',
     email: 'email',
     senha: 'senha',
-    perfil: 'perfil'
+    perfil: 'perfil',
+    licitanteId: 'licitanteId'
   };
 
   export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
@@ -14535,7 +17511,9 @@ export namespace Prisma {
     modalidade: 'modalidade',
     status: 'status',
     dataAbertura: 'dataAbertura',
-    arquivoPdf: 'arquivoPdf'
+    arquivoPdf: 'arquivoPdf',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type EditalScalarFieldEnum = (typeof EditalScalarFieldEnum)[keyof typeof EditalScalarFieldEnum]
@@ -14568,9 +17546,18 @@ export namespace Prisma {
     id: 'id',
     disputaId: 'disputaId',
     licitanteId: 'licitanteId',
+    itemId: 'itemId',
     valorCentavos: 'valorCentavos',
     dataEnvio: 'dataEnvio',
-    arquivo: 'arquivo'
+    arquivo: 'arquivo',
+    status: 'status',
+    observacao: 'observacao',
+    versao: 'versao',
+    createdBy: 'createdBy',
+    updatedBy: 'updatedBy',
+    deletedAt: 'deletedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type PropostaScalarFieldEnum = (typeof PropostaScalarFieldEnum)[keyof typeof PropostaScalarFieldEnum]
@@ -14620,12 +17607,14 @@ export namespace Prisma {
 
   export const MensagemChatScalarFieldEnum: {
     id: 'id',
+    editalId: 'editalId',
+    autorId: 'autorId',
+    tipoAutor: 'tipoAutor',
+    conteudo: 'conteudo',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     disputaId: 'disputaId',
-    licitanteId: 'licitanteId',
-    autor: 'autor',
-    mensagem: 'mensagem',
-    horario: 'horario',
-    tipoAutor: 'tipoAutor'
+    licitanteId: 'licitanteId'
   };
 
   export type MensagemChatScalarFieldEnum = (typeof MensagemChatScalarFieldEnum)[keyof typeof MensagemChatScalarFieldEnum]
@@ -14654,6 +17643,35 @@ export namespace Prisma {
   };
 
   export type LogAtividadeScalarFieldEnum = (typeof LogAtividadeScalarFieldEnum)[keyof typeof LogAtividadeScalarFieldEnum]
+
+
+  export const LoteScalarFieldEnum: {
+    id: 'id',
+    numero: 'numero',
+    descricao: 'descricao',
+    editalId: 'editalId',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type LoteScalarFieldEnum = (typeof LoteScalarFieldEnum)[keyof typeof LoteScalarFieldEnum]
+
+
+  export const ItemScalarFieldEnum: {
+    id: 'id',
+    numero: 'numero',
+    descricao: 'descricao',
+    quantidade: 'quantidade',
+    unidade: 'unidade',
+    valorEstimado: 'valorEstimado',
+    loteId: 'loteId',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -14770,6 +17788,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'StatusProposta'
+   */
+  export type EnumStatusPropostaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusProposta'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusProposta[]'
+   */
+  export type ListEnumStatusPropostaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusProposta[]'>
+    
+
+
+  /**
    * Reference to a field of type 'TipoDocumento'
    */
   export type EnumTipoDocumentoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoDocumento'>
@@ -14791,16 +17823,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'TipoAutorChat'
+   * Reference to a field of type 'TipoAutorMensagem'
    */
-  export type EnumTipoAutorChatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoAutorChat'>
+  export type EnumTipoAutorMensagemFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoAutorMensagem'>
     
 
 
   /**
-   * Reference to a field of type 'TipoAutorChat[]'
+   * Reference to a field of type 'TipoAutorMensagem[]'
    */
-  export type ListEnumTipoAutorChatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoAutorChat[]'>
+  export type ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoAutorMensagem[]'>
     
 
 
@@ -14830,7 +17862,10 @@ export namespace Prisma {
     email?: StringFilter<"Usuario"> | string
     senha?: StringFilter<"Usuario"> | string
     perfil?: EnumPerfilUsuarioFilter<"Usuario"> | $Enums.PerfilUsuario
+    licitanteId?: StringNullableFilter<"Usuario"> | string | null
     LogAtividade?: LogAtividadeListRelationFilter
+    MensagemChat?: MensagemChatListRelationFilter
+    licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
   }
 
   export type UsuarioOrderByWithRelationInput = {
@@ -14839,12 +17874,16 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     perfil?: SortOrder
+    licitanteId?: SortOrderInput | SortOrder
     LogAtividade?: LogAtividadeOrderByRelationAggregateInput
+    MensagemChat?: MensagemChatOrderByRelationAggregateInput
+    licitante?: LicitanteOrderByWithRelationInput
   }
 
   export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    licitanteId?: string
     AND?: UsuarioWhereInput | UsuarioWhereInput[]
     OR?: UsuarioWhereInput[]
     NOT?: UsuarioWhereInput | UsuarioWhereInput[]
@@ -14852,7 +17891,9 @@ export namespace Prisma {
     senha?: StringFilter<"Usuario"> | string
     perfil?: EnumPerfilUsuarioFilter<"Usuario"> | $Enums.PerfilUsuario
     LogAtividade?: LogAtividadeListRelationFilter
-  }, "id" | "email">
+    MensagemChat?: MensagemChatListRelationFilter
+    licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
+  }, "id" | "email" | "licitanteId">
 
   export type UsuarioOrderByWithAggregationInput = {
     id?: SortOrder
@@ -14860,6 +17901,7 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     perfil?: SortOrder
+    licitanteId?: SortOrderInput | SortOrder
     _count?: UsuarioCountOrderByAggregateInput
     _max?: UsuarioMaxOrderByAggregateInput
     _min?: UsuarioMinOrderByAggregateInput
@@ -14874,6 +17916,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Usuario"> | string
     senha?: StringWithAggregatesFilter<"Usuario"> | string
     perfil?: EnumPerfilUsuarioWithAggregatesFilter<"Usuario"> | $Enums.PerfilUsuario
+    licitanteId?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
   }
 
   export type EditalWhereInput = {
@@ -14887,8 +17930,12 @@ export namespace Prisma {
     status?: StringFilter<"Edital"> | string
     dataAbertura?: DateTimeFilter<"Edital"> | Date | string
     arquivoPdf?: StringNullableFilter<"Edital"> | string | null
+    createdAt?: DateTimeFilter<"Edital"> | Date | string
+    updatedAt?: DateTimeFilter<"Edital"> | Date | string
     disputas?: DisputaListRelationFilter
     documentosObrigatorios?: DocumentoObrigatorioListRelationFilter
+    lotes?: LoteListRelationFilter
+    mensagensChat?: MensagemChatListRelationFilter
   }
 
   export type EditalOrderByWithRelationInput = {
@@ -14899,24 +17946,32 @@ export namespace Prisma {
     status?: SortOrder
     dataAbertura?: SortOrder
     arquivoPdf?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     disputas?: DisputaOrderByRelationAggregateInput
     documentosObrigatorios?: DocumentoObrigatorioOrderByRelationAggregateInput
+    lotes?: LoteOrderByRelationAggregateInput
+    mensagensChat?: MensagemChatOrderByRelationAggregateInput
   }
 
   export type EditalWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    numero?: string
     AND?: EditalWhereInput | EditalWhereInput[]
     OR?: EditalWhereInput[]
     NOT?: EditalWhereInput | EditalWhereInput[]
-    numero?: StringFilter<"Edital"> | string
     objeto?: StringFilter<"Edital"> | string
     modalidade?: StringFilter<"Edital"> | string
     status?: StringFilter<"Edital"> | string
     dataAbertura?: DateTimeFilter<"Edital"> | Date | string
     arquivoPdf?: StringNullableFilter<"Edital"> | string | null
+    createdAt?: DateTimeFilter<"Edital"> | Date | string
+    updatedAt?: DateTimeFilter<"Edital"> | Date | string
     disputas?: DisputaListRelationFilter
     documentosObrigatorios?: DocumentoObrigatorioListRelationFilter
-  }, "id">
+    lotes?: LoteListRelationFilter
+    mensagensChat?: MensagemChatListRelationFilter
+  }, "id" | "numero">
 
   export type EditalOrderByWithAggregationInput = {
     id?: SortOrder
@@ -14926,6 +17981,8 @@ export namespace Prisma {
     status?: SortOrder
     dataAbertura?: SortOrder
     arquivoPdf?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: EditalCountOrderByAggregateInput
     _max?: EditalMaxOrderByAggregateInput
     _min?: EditalMinOrderByAggregateInput
@@ -14942,6 +17999,8 @@ export namespace Prisma {
     status?: StringWithAggregatesFilter<"Edital"> | string
     dataAbertura?: DateTimeWithAggregatesFilter<"Edital"> | Date | string
     arquivoPdf?: StringNullableWithAggregatesFilter<"Edital"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Edital"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Edital"> | Date | string
   }
 
   export type DisputaWhereInput = {
@@ -15037,6 +18096,7 @@ export namespace Prisma {
     razaoSocial?: StringFilter<"Licitante"> | string
     cnpj?: StringFilter<"Licitante"> | string
     tipoEmpresa?: EnumTipoEmpresaFilter<"Licitante"> | $Enums.TipoEmpresa
+    usuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
     propostas?: PropostaListRelationFilter
     lances?: LanceListRelationFilter
     documentos?: DocumentoLicitanteListRelationFilter
@@ -15049,6 +18109,7 @@ export namespace Prisma {
     razaoSocial?: SortOrder
     cnpj?: SortOrder
     tipoEmpresa?: SortOrder
+    usuario?: UsuarioOrderByWithRelationInput
     propostas?: PropostaOrderByRelationAggregateInput
     lances?: LanceOrderByRelationAggregateInput
     documentos?: DocumentoLicitanteOrderByRelationAggregateInput
@@ -15064,6 +18125,7 @@ export namespace Prisma {
     NOT?: LicitanteWhereInput | LicitanteWhereInput[]
     razaoSocial?: StringFilter<"Licitante"> | string
     tipoEmpresa?: EnumTipoEmpresaFilter<"Licitante"> | $Enums.TipoEmpresa
+    usuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
     propostas?: PropostaListRelationFilter
     lances?: LanceListRelationFilter
     documentos?: DocumentoLicitanteListRelationFilter
@@ -15098,45 +18160,85 @@ export namespace Prisma {
     id?: StringFilter<"Proposta"> | string
     disputaId?: StringFilter<"Proposta"> | string
     licitanteId?: StringFilter<"Proposta"> | string
+    itemId?: StringFilter<"Proposta"> | string
     valorCentavos?: IntFilter<"Proposta"> | number
     dataEnvio?: DateTimeFilter<"Proposta"> | Date | string
     arquivo?: StringNullableFilter<"Proposta"> | string | null
+    status?: EnumStatusPropostaFilter<"Proposta"> | $Enums.StatusProposta
+    observacao?: StringNullableFilter<"Proposta"> | string | null
+    versao?: IntFilter<"Proposta"> | number
+    createdBy?: StringFilter<"Proposta"> | string
+    updatedBy?: StringNullableFilter<"Proposta"> | string | null
+    deletedAt?: DateTimeNullableFilter<"Proposta"> | Date | string | null
+    createdAt?: DateTimeFilter<"Proposta"> | Date | string
+    updatedAt?: DateTimeFilter<"Proposta"> | Date | string
     disputa?: XOR<DisputaScalarRelationFilter, DisputaWhereInput>
     licitante?: XOR<LicitanteScalarRelationFilter, LicitanteWhereInput>
+    item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
   }
 
   export type PropostaOrderByWithRelationInput = {
     id?: SortOrder
     disputaId?: SortOrder
     licitanteId?: SortOrder
+    itemId?: SortOrder
     valorCentavos?: SortOrder
     dataEnvio?: SortOrder
     arquivo?: SortOrderInput | SortOrder
+    status?: SortOrder
+    observacao?: SortOrderInput | SortOrder
+    versao?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     disputa?: DisputaOrderByWithRelationInput
     licitante?: LicitanteOrderByWithRelationInput
+    item?: ItemOrderByWithRelationInput
   }
 
   export type PropostaWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    itemId_licitanteId_versao?: PropostaItemIdLicitanteIdVersaoCompoundUniqueInput
     AND?: PropostaWhereInput | PropostaWhereInput[]
     OR?: PropostaWhereInput[]
     NOT?: PropostaWhereInput | PropostaWhereInput[]
     disputaId?: StringFilter<"Proposta"> | string
     licitanteId?: StringFilter<"Proposta"> | string
+    itemId?: StringFilter<"Proposta"> | string
     valorCentavos?: IntFilter<"Proposta"> | number
     dataEnvio?: DateTimeFilter<"Proposta"> | Date | string
     arquivo?: StringNullableFilter<"Proposta"> | string | null
+    status?: EnumStatusPropostaFilter<"Proposta"> | $Enums.StatusProposta
+    observacao?: StringNullableFilter<"Proposta"> | string | null
+    versao?: IntFilter<"Proposta"> | number
+    createdBy?: StringFilter<"Proposta"> | string
+    updatedBy?: StringNullableFilter<"Proposta"> | string | null
+    deletedAt?: DateTimeNullableFilter<"Proposta"> | Date | string | null
+    createdAt?: DateTimeFilter<"Proposta"> | Date | string
+    updatedAt?: DateTimeFilter<"Proposta"> | Date | string
     disputa?: XOR<DisputaScalarRelationFilter, DisputaWhereInput>
     licitante?: XOR<LicitanteScalarRelationFilter, LicitanteWhereInput>
-  }, "id">
+    item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
+  }, "id" | "itemId_licitanteId_versao">
 
   export type PropostaOrderByWithAggregationInput = {
     id?: SortOrder
     disputaId?: SortOrder
     licitanteId?: SortOrder
+    itemId?: SortOrder
     valorCentavos?: SortOrder
     dataEnvio?: SortOrder
     arquivo?: SortOrderInput | SortOrder
+    status?: SortOrder
+    observacao?: SortOrderInput | SortOrder
+    versao?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: PropostaCountOrderByAggregateInput
     _avg?: PropostaAvgOrderByAggregateInput
     _max?: PropostaMaxOrderByAggregateInput
@@ -15151,9 +18253,18 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Proposta"> | string
     disputaId?: StringWithAggregatesFilter<"Proposta"> | string
     licitanteId?: StringWithAggregatesFilter<"Proposta"> | string
+    itemId?: StringWithAggregatesFilter<"Proposta"> | string
     valorCentavos?: IntWithAggregatesFilter<"Proposta"> | number
     dataEnvio?: DateTimeWithAggregatesFilter<"Proposta"> | Date | string
     arquivo?: StringNullableWithAggregatesFilter<"Proposta"> | string | null
+    status?: EnumStatusPropostaWithAggregatesFilter<"Proposta"> | $Enums.StatusProposta
+    observacao?: StringNullableWithAggregatesFilter<"Proposta"> | string | null
+    versao?: IntWithAggregatesFilter<"Proposta"> | number
+    createdBy?: StringWithAggregatesFilter<"Proposta"> | string
+    updatedBy?: StringNullableWithAggregatesFilter<"Proposta"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Proposta"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Proposta"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Proposta"> | Date | string
   }
 
   export type LanceWhereInput = {
@@ -15381,26 +18492,34 @@ export namespace Prisma {
     OR?: MensagemChatWhereInput[]
     NOT?: MensagemChatWhereInput | MensagemChatWhereInput[]
     id?: StringFilter<"MensagemChat"> | string
-    disputaId?: StringFilter<"MensagemChat"> | string
+    editalId?: StringFilter<"MensagemChat"> | string
+    autorId?: StringFilter<"MensagemChat"> | string
+    tipoAutor?: EnumTipoAutorMensagemFilter<"MensagemChat"> | $Enums.TipoAutorMensagem
+    conteudo?: StringFilter<"MensagemChat"> | string
+    createdAt?: DateTimeFilter<"MensagemChat"> | Date | string
+    updatedAt?: DateTimeFilter<"MensagemChat"> | Date | string
+    disputaId?: StringNullableFilter<"MensagemChat"> | string | null
     licitanteId?: StringNullableFilter<"MensagemChat"> | string | null
-    autor?: StringFilter<"MensagemChat"> | string
-    mensagem?: StringFilter<"MensagemChat"> | string
-    horario?: DateTimeFilter<"MensagemChat"> | Date | string
-    tipoAutor?: EnumTipoAutorChatFilter<"MensagemChat"> | $Enums.TipoAutorChat
-    disputa?: XOR<DisputaScalarRelationFilter, DisputaWhereInput>
-    licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+    autor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    Disputa?: XOR<DisputaNullableScalarRelationFilter, DisputaWhereInput> | null
+    Licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
   }
 
   export type MensagemChatOrderByWithRelationInput = {
     id?: SortOrder
-    disputaId?: SortOrder
-    licitanteId?: SortOrderInput | SortOrder
-    autor?: SortOrder
-    mensagem?: SortOrder
-    horario?: SortOrder
+    editalId?: SortOrder
+    autorId?: SortOrder
     tipoAutor?: SortOrder
-    disputa?: DisputaOrderByWithRelationInput
-    licitante?: LicitanteOrderByWithRelationInput
+    conteudo?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    disputaId?: SortOrderInput | SortOrder
+    licitanteId?: SortOrderInput | SortOrder
+    edital?: EditalOrderByWithRelationInput
+    autor?: UsuarioOrderByWithRelationInput
+    Disputa?: DisputaOrderByWithRelationInput
+    Licitante?: LicitanteOrderByWithRelationInput
   }
 
   export type MensagemChatWhereUniqueInput = Prisma.AtLeast<{
@@ -15408,24 +18527,30 @@ export namespace Prisma {
     AND?: MensagemChatWhereInput | MensagemChatWhereInput[]
     OR?: MensagemChatWhereInput[]
     NOT?: MensagemChatWhereInput | MensagemChatWhereInput[]
-    disputaId?: StringFilter<"MensagemChat"> | string
+    editalId?: StringFilter<"MensagemChat"> | string
+    autorId?: StringFilter<"MensagemChat"> | string
+    tipoAutor?: EnumTipoAutorMensagemFilter<"MensagemChat"> | $Enums.TipoAutorMensagem
+    conteudo?: StringFilter<"MensagemChat"> | string
+    createdAt?: DateTimeFilter<"MensagemChat"> | Date | string
+    updatedAt?: DateTimeFilter<"MensagemChat"> | Date | string
+    disputaId?: StringNullableFilter<"MensagemChat"> | string | null
     licitanteId?: StringNullableFilter<"MensagemChat"> | string | null
-    autor?: StringFilter<"MensagemChat"> | string
-    mensagem?: StringFilter<"MensagemChat"> | string
-    horario?: DateTimeFilter<"MensagemChat"> | Date | string
-    tipoAutor?: EnumTipoAutorChatFilter<"MensagemChat"> | $Enums.TipoAutorChat
-    disputa?: XOR<DisputaScalarRelationFilter, DisputaWhereInput>
-    licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+    autor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    Disputa?: XOR<DisputaNullableScalarRelationFilter, DisputaWhereInput> | null
+    Licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
   }, "id">
 
   export type MensagemChatOrderByWithAggregationInput = {
     id?: SortOrder
-    disputaId?: SortOrder
-    licitanteId?: SortOrderInput | SortOrder
-    autor?: SortOrder
-    mensagem?: SortOrder
-    horario?: SortOrder
+    editalId?: SortOrder
+    autorId?: SortOrder
     tipoAutor?: SortOrder
+    conteudo?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    disputaId?: SortOrderInput | SortOrder
+    licitanteId?: SortOrderInput | SortOrder
     _count?: MensagemChatCountOrderByAggregateInput
     _max?: MensagemChatMaxOrderByAggregateInput
     _min?: MensagemChatMinOrderByAggregateInput
@@ -15436,12 +18561,14 @@ export namespace Prisma {
     OR?: MensagemChatScalarWhereWithAggregatesInput[]
     NOT?: MensagemChatScalarWhereWithAggregatesInput | MensagemChatScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MensagemChat"> | string
-    disputaId?: StringWithAggregatesFilter<"MensagemChat"> | string
+    editalId?: StringWithAggregatesFilter<"MensagemChat"> | string
+    autorId?: StringWithAggregatesFilter<"MensagemChat"> | string
+    tipoAutor?: EnumTipoAutorMensagemWithAggregatesFilter<"MensagemChat"> | $Enums.TipoAutorMensagem
+    conteudo?: StringWithAggregatesFilter<"MensagemChat"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MensagemChat"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MensagemChat"> | Date | string
+    disputaId?: StringNullableWithAggregatesFilter<"MensagemChat"> | string | null
     licitanteId?: StringNullableWithAggregatesFilter<"MensagemChat"> | string | null
-    autor?: StringWithAggregatesFilter<"MensagemChat"> | string
-    mensagem?: StringWithAggregatesFilter<"MensagemChat"> | string
-    horario?: DateTimeWithAggregatesFilter<"MensagemChat"> | Date | string
-    tipoAutor?: EnumTipoAutorChatWithAggregatesFilter<"MensagemChat"> | $Enums.TipoAutorChat
   }
 
   export type SessaoWhereInput = {
@@ -15575,6 +18702,161 @@ export namespace Prisma {
     data?: DateTimeWithAggregatesFilter<"LogAtividade"> | Date | string
   }
 
+  export type LoteWhereInput = {
+    AND?: LoteWhereInput | LoteWhereInput[]
+    OR?: LoteWhereInput[]
+    NOT?: LoteWhereInput | LoteWhereInput[]
+    id?: StringFilter<"Lote"> | string
+    numero?: StringFilter<"Lote"> | string
+    descricao?: StringFilter<"Lote"> | string
+    editalId?: StringFilter<"Lote"> | string
+    status?: StringFilter<"Lote"> | string
+    createdAt?: DateTimeFilter<"Lote"> | Date | string
+    updatedAt?: DateTimeFilter<"Lote"> | Date | string
+    itens?: ItemListRelationFilter
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+  }
+
+  export type LoteOrderByWithRelationInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    editalId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    itens?: ItemOrderByRelationAggregateInput
+    edital?: EditalOrderByWithRelationInput
+  }
+
+  export type LoteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    numero_editalId?: LoteNumeroEditalIdCompoundUniqueInput
+    AND?: LoteWhereInput | LoteWhereInput[]
+    OR?: LoteWhereInput[]
+    NOT?: LoteWhereInput | LoteWhereInput[]
+    numero?: StringFilter<"Lote"> | string
+    descricao?: StringFilter<"Lote"> | string
+    editalId?: StringFilter<"Lote"> | string
+    status?: StringFilter<"Lote"> | string
+    createdAt?: DateTimeFilter<"Lote"> | Date | string
+    updatedAt?: DateTimeFilter<"Lote"> | Date | string
+    itens?: ItemListRelationFilter
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+  }, "id" | "numero_editalId">
+
+  export type LoteOrderByWithAggregationInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    editalId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: LoteCountOrderByAggregateInput
+    _max?: LoteMaxOrderByAggregateInput
+    _min?: LoteMinOrderByAggregateInput
+  }
+
+  export type LoteScalarWhereWithAggregatesInput = {
+    AND?: LoteScalarWhereWithAggregatesInput | LoteScalarWhereWithAggregatesInput[]
+    OR?: LoteScalarWhereWithAggregatesInput[]
+    NOT?: LoteScalarWhereWithAggregatesInput | LoteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Lote"> | string
+    numero?: StringWithAggregatesFilter<"Lote"> | string
+    descricao?: StringWithAggregatesFilter<"Lote"> | string
+    editalId?: StringWithAggregatesFilter<"Lote"> | string
+    status?: StringWithAggregatesFilter<"Lote"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Lote"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Lote"> | Date | string
+  }
+
+  export type ItemWhereInput = {
+    AND?: ItemWhereInput | ItemWhereInput[]
+    OR?: ItemWhereInput[]
+    NOT?: ItemWhereInput | ItemWhereInput[]
+    id?: StringFilter<"Item"> | string
+    numero?: StringFilter<"Item"> | string
+    descricao?: StringFilter<"Item"> | string
+    quantidade?: IntFilter<"Item"> | number
+    unidade?: StringFilter<"Item"> | string
+    valorEstimado?: IntNullableFilter<"Item"> | number | null
+    loteId?: StringFilter<"Item"> | string
+    status?: StringFilter<"Item"> | string
+    createdAt?: DateTimeFilter<"Item"> | Date | string
+    updatedAt?: DateTimeFilter<"Item"> | Date | string
+    lote?: XOR<LoteScalarRelationFilter, LoteWhereInput>
+    propostas?: PropostaListRelationFilter
+  }
+
+  export type ItemOrderByWithRelationInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    quantidade?: SortOrder
+    unidade?: SortOrder
+    valorEstimado?: SortOrderInput | SortOrder
+    loteId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    lote?: LoteOrderByWithRelationInput
+    propostas?: PropostaOrderByRelationAggregateInput
+  }
+
+  export type ItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    numero_loteId?: ItemNumeroLoteIdCompoundUniqueInput
+    AND?: ItemWhereInput | ItemWhereInput[]
+    OR?: ItemWhereInput[]
+    NOT?: ItemWhereInput | ItemWhereInput[]
+    numero?: StringFilter<"Item"> | string
+    descricao?: StringFilter<"Item"> | string
+    quantidade?: IntFilter<"Item"> | number
+    unidade?: StringFilter<"Item"> | string
+    valorEstimado?: IntNullableFilter<"Item"> | number | null
+    loteId?: StringFilter<"Item"> | string
+    status?: StringFilter<"Item"> | string
+    createdAt?: DateTimeFilter<"Item"> | Date | string
+    updatedAt?: DateTimeFilter<"Item"> | Date | string
+    lote?: XOR<LoteScalarRelationFilter, LoteWhereInput>
+    propostas?: PropostaListRelationFilter
+  }, "id" | "numero_loteId">
+
+  export type ItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    quantidade?: SortOrder
+    unidade?: SortOrder
+    valorEstimado?: SortOrderInput | SortOrder
+    loteId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ItemCountOrderByAggregateInput
+    _avg?: ItemAvgOrderByAggregateInput
+    _max?: ItemMaxOrderByAggregateInput
+    _min?: ItemMinOrderByAggregateInput
+    _sum?: ItemSumOrderByAggregateInput
+  }
+
+  export type ItemScalarWhereWithAggregatesInput = {
+    AND?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
+    OR?: ItemScalarWhereWithAggregatesInput[]
+    NOT?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Item"> | string
+    numero?: StringWithAggregatesFilter<"Item"> | string
+    descricao?: StringWithAggregatesFilter<"Item"> | string
+    quantidade?: IntWithAggregatesFilter<"Item"> | number
+    unidade?: StringWithAggregatesFilter<"Item"> | string
+    valorEstimado?: IntNullableWithAggregatesFilter<"Item"> | number | null
+    loteId?: StringWithAggregatesFilter<"Item"> | string
+    status?: StringWithAggregatesFilter<"Item"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
+  }
+
   export type UsuarioCreateInput = {
     id?: string
     nome: string
@@ -15582,6 +18864,8 @@ export namespace Prisma {
     senha: string
     perfil: $Enums.PerfilUsuario
     LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+    licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateInput = {
@@ -15590,7 +18874,9 @@ export namespace Prisma {
     email: string
     senha: string
     perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
     LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
   }
 
   export type UsuarioUpdateInput = {
@@ -15600,6 +18886,8 @@ export namespace Prisma {
     senha?: StringFieldUpdateOperationsInput | string
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
     LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+    licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateInput = {
@@ -15608,7 +18896,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
     LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
   }
 
   export type UsuarioCreateManyInput = {
@@ -15617,6 +18907,7 @@ export namespace Prisma {
     email: string
     senha: string
     perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
   }
 
   export type UsuarioUpdateManyMutationInput = {
@@ -15633,6 +18924,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EditalCreateInput = {
@@ -15643,8 +18935,12 @@ export namespace Prisma {
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     disputas?: DisputaCreateNestedManyWithoutEditalInput
     documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    lotes?: LoteCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateInput = {
@@ -15655,8 +18951,12 @@ export namespace Prisma {
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
     documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUpdateInput = {
@@ -15667,8 +18967,12 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUpdateManyWithoutEditalNestedInput
     documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateInput = {
@@ -15679,8 +18983,12 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
     documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalCreateManyInput = {
@@ -15691,6 +18999,8 @@ export namespace Prisma {
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EditalUpdateManyMutationInput = {
@@ -15701,6 +19011,8 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EditalUncheckedUpdateManyInput = {
@@ -15711,6 +19023,8 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DisputaCreateInput = {
@@ -15811,6 +19125,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaCreateNestedManyWithoutLicitanteInput
     lances?: LanceCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
@@ -15823,6 +19138,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
     lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
@@ -15835,6 +19151,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
     lances?: LanceUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
@@ -15847,6 +19164,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
     lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
@@ -15880,17 +19198,35 @@ export namespace Prisma {
     valorCentavos: number
     dataEnvio: Date | string
     arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     disputa: DisputaCreateNestedOneWithoutPropostasInput
     licitante: LicitanteCreateNestedOneWithoutPropostasInput
+    item: ItemCreateNestedOneWithoutPropostasInput
   }
 
   export type PropostaUncheckedCreateInput = {
     id?: string
     disputaId: string
     licitanteId: string
+    itemId: string
     valorCentavos: number
     dataEnvio: Date | string
     arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PropostaUpdateInput = {
@@ -15898,26 +19234,53 @@ export namespace Prisma {
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputa?: DisputaUpdateOneRequiredWithoutPropostasNestedInput
     licitante?: LicitanteUpdateOneRequiredWithoutPropostasNestedInput
+    item?: ItemUpdateOneRequiredWithoutPropostasNestedInput
   }
 
   export type PropostaUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     disputaId?: StringFieldUpdateOperationsInput | string
     licitanteId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PropostaCreateManyInput = {
     id?: string
     disputaId: string
     licitanteId: string
+    itemId: string
     valorCentavos: number
     dataEnvio: Date | string
     arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PropostaUpdateManyMutationInput = {
@@ -15925,15 +19288,32 @@ export namespace Prisma {
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PropostaUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     disputaId?: StringFieldUpdateOperationsInput | string
     licitanteId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LanceCreateInput = {
@@ -16164,70 +19544,82 @@ export namespace Prisma {
 
   export type MensagemChatCreateInput = {
     id?: string
-    autor: string
-    mensagem: string
-    horario: Date | string
-    tipoAutor: $Enums.TipoAutorChat
-    disputa: DisputaCreateNestedOneWithoutMensagensChatInput
-    licitante?: LicitanteCreateNestedOneWithoutMensagensChatInput
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutMensagensChatInput
+    autor: UsuarioCreateNestedOneWithoutMensagemChatInput
+    Disputa?: DisputaCreateNestedOneWithoutMensagensChatInput
+    Licitante?: LicitanteCreateNestedOneWithoutMensagensChatInput
   }
 
   export type MensagemChatUncheckedCreateInput = {
     id?: string
-    disputaId: string
+    editalId: string
+    autorId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputaId?: string | null
     licitanteId?: string | null
-    autor: string
-    mensagem: string
-    horario: Date | string
-    tipoAutor: $Enums.TipoAutorChat
   }
 
   export type MensagemChatUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
-    disputa?: DisputaUpdateOneRequiredWithoutMensagensChatNestedInput
-    licitante?: LicitanteUpdateOneWithoutMensagensChatNestedInput
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutMensagensChatNestedInput
+    autor?: UsuarioUpdateOneRequiredWithoutMensagemChatNestedInput
+    Disputa?: DisputaUpdateOneWithoutMensagensChatNestedInput
+    Licitante?: LicitanteUpdateOneWithoutMensagensChatNestedInput
   }
 
   export type MensagemChatUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    disputaId?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    autorId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
     licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
   }
 
   export type MensagemChatCreateManyInput = {
     id?: string
-    disputaId: string
+    editalId: string
+    autorId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputaId?: string | null
     licitanteId?: string | null
-    autor: string
-    mensagem: string
-    horario: Date | string
-    tipoAutor: $Enums.TipoAutorChat
   }
 
   export type MensagemChatUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MensagemChatUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    disputaId?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    autorId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
     licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
   }
 
   export type SessaoCreateInput = {
@@ -16359,6 +19751,173 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LoteCreateInput = {
+    id?: string
+    numero: string
+    descricao: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itens?: ItemCreateNestedManyWithoutLoteInput
+    edital: EditalCreateNestedOneWithoutLotesInput
+  }
+
+  export type LoteUncheckedCreateInput = {
+    id?: string
+    numero: string
+    descricao: string
+    editalId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itens?: ItemUncheckedCreateNestedManyWithoutLoteInput
+  }
+
+  export type LoteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itens?: ItemUpdateManyWithoutLoteNestedInput
+    edital?: EditalUpdateOneRequiredWithoutLotesNestedInput
+  }
+
+  export type LoteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itens?: ItemUncheckedUpdateManyWithoutLoteNestedInput
+  }
+
+  export type LoteCreateManyInput = {
+    id?: string
+    numero: string
+    descricao: string
+    editalId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LoteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LoteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ItemCreateInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lote: LoteCreateNestedOneWithoutItensInput
+    propostas?: PropostaCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    loteId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    propostas?: PropostaUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lote?: LoteUpdateOneRequiredWithoutItensNestedInput
+    propostas?: PropostaUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    loteId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    propostas?: PropostaUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemCreateManyInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    loteId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    loteId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -16381,13 +19940,48 @@ export namespace Prisma {
     not?: NestedEnumPerfilUsuarioFilter<$PrismaModel> | $Enums.PerfilUsuario
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type LogAtividadeListRelationFilter = {
     every?: LogAtividadeWhereInput
     some?: LogAtividadeWhereInput
     none?: LogAtividadeWhereInput
   }
 
+  export type MensagemChatListRelationFilter = {
+    every?: MensagemChatWhereInput
+    some?: MensagemChatWhereInput
+    none?: MensagemChatWhereInput
+  }
+
+  export type LicitanteNullableScalarRelationFilter = {
+    is?: LicitanteWhereInput | null
+    isNot?: LicitanteWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type LogAtividadeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MensagemChatOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16397,6 +19991,7 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     perfil?: SortOrder
+    licitanteId?: SortOrder
   }
 
   export type UsuarioMaxOrderByAggregateInput = {
@@ -16405,6 +20000,7 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     perfil?: SortOrder
+    licitanteId?: SortOrder
   }
 
   export type UsuarioMinOrderByAggregateInput = {
@@ -16413,6 +20009,7 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     perfil?: SortOrder
+    licitanteId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -16443,101 +20040,6 @@ export namespace Prisma {
     _max?: NestedEnumPerfilUsuarioFilter<$PrismaModel>
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type DisputaListRelationFilter = {
-    every?: DisputaWhereInput
-    some?: DisputaWhereInput
-    none?: DisputaWhereInput
-  }
-
-  export type DocumentoObrigatorioListRelationFilter = {
-    every?: DocumentoObrigatorioWhereInput
-    some?: DocumentoObrigatorioWhereInput
-    none?: DocumentoObrigatorioWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type DisputaOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type DocumentoObrigatorioOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type EditalCountOrderByAggregateInput = {
-    id?: SortOrder
-    numero?: SortOrder
-    objeto?: SortOrder
-    modalidade?: SortOrder
-    status?: SortOrder
-    dataAbertura?: SortOrder
-    arquivoPdf?: SortOrder
-  }
-
-  export type EditalMaxOrderByAggregateInput = {
-    id?: SortOrder
-    numero?: SortOrder
-    objeto?: SortOrder
-    modalidade?: SortOrder
-    status?: SortOrder
-    dataAbertura?: SortOrder
-    arquivoPdf?: SortOrder
-  }
-
-  export type EditalMinOrderByAggregateInput = {
-    id?: SortOrder
-    numero?: SortOrder
-    objeto?: SortOrder
-    modalidade?: SortOrder
-    status?: SortOrder
-    dataAbertura?: SortOrder
-    arquivoPdf?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -16554,6 +20056,97 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type DisputaListRelationFilter = {
+    every?: DisputaWhereInput
+    some?: DisputaWhereInput
+    none?: DisputaWhereInput
+  }
+
+  export type DocumentoObrigatorioListRelationFilter = {
+    every?: DocumentoObrigatorioWhereInput
+    some?: DocumentoObrigatorioWhereInput
+    none?: DocumentoObrigatorioWhereInput
+  }
+
+  export type LoteListRelationFilter = {
+    every?: LoteWhereInput
+    some?: LoteWhereInput
+    none?: LoteWhereInput
+  }
+
+  export type DisputaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DocumentoObrigatorioOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LoteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EditalCountOrderByAggregateInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    objeto?: SortOrder
+    modalidade?: SortOrder
+    status?: SortOrder
+    dataAbertura?: SortOrder
+    arquivoPdf?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EditalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    objeto?: SortOrder
+    modalidade?: SortOrder
+    status?: SortOrder
+    dataAbertura?: SortOrder
+    arquivoPdf?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EditalMinOrderByAggregateInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    objeto?: SortOrder
+    modalidade?: SortOrder
+    status?: SortOrder
+    dataAbertura?: SortOrder
+    arquivoPdf?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type EnumDisputaStatusFilter<$PrismaModel = never> = {
@@ -16608,12 +20201,6 @@ export namespace Prisma {
     none?: DocumentoLicitanteWhereInput
   }
 
-  export type MensagemChatListRelationFilter = {
-    every?: MensagemChatWhereInput
-    some?: MensagemChatWhereInput
-    none?: MensagemChatWhereInput
-  }
-
   export type SessaoListRelationFilter = {
     every?: SessaoWhereInput
     some?: SessaoWhereInput
@@ -16629,10 +20216,6 @@ export namespace Prisma {
   }
 
   export type DocumentoLicitanteOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type MensagemChatOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16725,6 +20308,11 @@ export namespace Prisma {
     not?: NestedEnumTipoEmpresaFilter<$PrismaModel> | $Enums.TipoEmpresa
   }
 
+  export type UsuarioNullableScalarRelationFilter = {
+    is?: UsuarioWhereInput | null
+    isNot?: UsuarioWhereInput | null
+  }
+
   export type LicitanteCountOrderByAggregateInput = {
     id?: SortOrder
     razaoSocial?: SortOrder
@@ -16767,6 +20355,13 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type EnumStatusPropostaFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusProposta | EnumStatusPropostaFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusProposta[] | ListEnumStatusPropostaFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusProposta[] | ListEnumStatusPropostaFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPropostaFilter<$PrismaModel> | $Enums.StatusProposta
+  }
+
   export type DisputaScalarRelationFilter = {
     is?: DisputaWhereInput
     isNot?: DisputaWhereInput
@@ -16777,39 +20372,79 @@ export namespace Prisma {
     isNot?: LicitanteWhereInput
   }
 
+  export type ItemScalarRelationFilter = {
+    is?: ItemWhereInput
+    isNot?: ItemWhereInput
+  }
+
+  export type PropostaItemIdLicitanteIdVersaoCompoundUniqueInput = {
+    itemId: string
+    licitanteId: string
+    versao: number
+  }
+
   export type PropostaCountOrderByAggregateInput = {
     id?: SortOrder
     disputaId?: SortOrder
     licitanteId?: SortOrder
+    itemId?: SortOrder
     valorCentavos?: SortOrder
     dataEnvio?: SortOrder
     arquivo?: SortOrder
+    status?: SortOrder
+    observacao?: SortOrder
+    versao?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PropostaAvgOrderByAggregateInput = {
     valorCentavos?: SortOrder
+    versao?: SortOrder
   }
 
   export type PropostaMaxOrderByAggregateInput = {
     id?: SortOrder
     disputaId?: SortOrder
     licitanteId?: SortOrder
+    itemId?: SortOrder
     valorCentavos?: SortOrder
     dataEnvio?: SortOrder
     arquivo?: SortOrder
+    status?: SortOrder
+    observacao?: SortOrder
+    versao?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PropostaMinOrderByAggregateInput = {
     id?: SortOrder
     disputaId?: SortOrder
     licitanteId?: SortOrder
+    itemId?: SortOrder
     valorCentavos?: SortOrder
     dataEnvio?: SortOrder
     arquivo?: SortOrder
+    status?: SortOrder
+    observacao?: SortOrder
+    versao?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PropostaSumOrderByAggregateInput = {
     valorCentavos?: SortOrder
+    versao?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -16826,6 +20461,16 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumStatusPropostaWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusProposta | EnumStatusPropostaFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusProposta[] | ListEnumStatusPropostaFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusProposta[] | ListEnumStatusPropostaFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPropostaWithAggregatesFilter<$PrismaModel> | $Enums.StatusProposta
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusPropostaFilter<$PrismaModel>
+    _max?: NestedEnumStatusPropostaFilter<$PrismaModel>
   }
 
   export type LanceCountOrderByAggregateInput = {
@@ -16973,56 +20618,67 @@ export namespace Prisma {
     descricao?: SortOrder
   }
 
-  export type EnumTipoAutorChatFilter<$PrismaModel = never> = {
-    equals?: $Enums.TipoAutorChat | EnumTipoAutorChatFieldRefInput<$PrismaModel>
-    in?: $Enums.TipoAutorChat[] | ListEnumTipoAutorChatFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TipoAutorChat[] | ListEnumTipoAutorChatFieldRefInput<$PrismaModel>
-    not?: NestedEnumTipoAutorChatFilter<$PrismaModel> | $Enums.TipoAutorChat
+  export type EnumTipoAutorMensagemFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoAutorMensagem | EnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoAutorMensagem[] | ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoAutorMensagem[] | ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoAutorMensagemFilter<$PrismaModel> | $Enums.TipoAutorMensagem
   }
 
-  export type LicitanteNullableScalarRelationFilter = {
-    is?: LicitanteWhereInput | null
-    isNot?: LicitanteWhereInput | null
+  export type UsuarioScalarRelationFilter = {
+    is?: UsuarioWhereInput
+    isNot?: UsuarioWhereInput
+  }
+
+  export type DisputaNullableScalarRelationFilter = {
+    is?: DisputaWhereInput | null
+    isNot?: DisputaWhereInput | null
   }
 
   export type MensagemChatCountOrderByAggregateInput = {
     id?: SortOrder
+    editalId?: SortOrder
+    autorId?: SortOrder
+    tipoAutor?: SortOrder
+    conteudo?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     disputaId?: SortOrder
     licitanteId?: SortOrder
-    autor?: SortOrder
-    mensagem?: SortOrder
-    horario?: SortOrder
-    tipoAutor?: SortOrder
   }
 
   export type MensagemChatMaxOrderByAggregateInput = {
     id?: SortOrder
+    editalId?: SortOrder
+    autorId?: SortOrder
+    tipoAutor?: SortOrder
+    conteudo?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     disputaId?: SortOrder
     licitanteId?: SortOrder
-    autor?: SortOrder
-    mensagem?: SortOrder
-    horario?: SortOrder
-    tipoAutor?: SortOrder
   }
 
   export type MensagemChatMinOrderByAggregateInput = {
     id?: SortOrder
+    editalId?: SortOrder
+    autorId?: SortOrder
+    tipoAutor?: SortOrder
+    conteudo?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     disputaId?: SortOrder
     licitanteId?: SortOrder
-    autor?: SortOrder
-    mensagem?: SortOrder
-    horario?: SortOrder
-    tipoAutor?: SortOrder
   }
 
-  export type EnumTipoAutorChatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TipoAutorChat | EnumTipoAutorChatFieldRefInput<$PrismaModel>
-    in?: $Enums.TipoAutorChat[] | ListEnumTipoAutorChatFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TipoAutorChat[] | ListEnumTipoAutorChatFieldRefInput<$PrismaModel>
-    not?: NestedEnumTipoAutorChatWithAggregatesFilter<$PrismaModel> | $Enums.TipoAutorChat
+  export type EnumTipoAutorMensagemWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoAutorMensagem | EnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoAutorMensagem[] | ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoAutorMensagem[] | ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoAutorMensagemWithAggregatesFilter<$PrismaModel> | $Enums.TipoAutorMensagem
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTipoAutorChatFilter<$PrismaModel>
-    _max?: NestedEnumTipoAutorChatFilter<$PrismaModel>
+    _min?: NestedEnumTipoAutorMensagemFilter<$PrismaModel>
+    _max?: NestedEnumTipoAutorMensagemFilter<$PrismaModel>
   }
 
   export type SessaoCountOrderByAggregateInput = {
@@ -17055,11 +20711,6 @@ export namespace Prisma {
     hash?: SortOrder
   }
 
-  export type UsuarioNullableScalarRelationFilter = {
-    is?: UsuarioWhereInput | null
-    isNot?: UsuarioWhereInput | null
-  }
-
   export type LogAtividadeCountOrderByAggregateInput = {
     id?: SortOrder
     disputaId?: SortOrder
@@ -17087,6 +20738,110 @@ export namespace Prisma {
     data?: SortOrder
   }
 
+  export type ItemListRelationFilter = {
+    every?: ItemWhereInput
+    some?: ItemWhereInput
+    none?: ItemWhereInput
+  }
+
+  export type ItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LoteNumeroEditalIdCompoundUniqueInput = {
+    numero: string
+    editalId: string
+  }
+
+  export type LoteCountOrderByAggregateInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    editalId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LoteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    editalId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LoteMinOrderByAggregateInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    editalId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LoteScalarRelationFilter = {
+    is?: LoteWhereInput
+    isNot?: LoteWhereInput
+  }
+
+  export type ItemNumeroLoteIdCompoundUniqueInput = {
+    numero: string
+    loteId: string
+  }
+
+  export type ItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    quantidade?: SortOrder
+    unidade?: SortOrder
+    valorEstimado?: SortOrder
+    loteId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ItemAvgOrderByAggregateInput = {
+    quantidade?: SortOrder
+    valorEstimado?: SortOrder
+  }
+
+  export type ItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    quantidade?: SortOrder
+    unidade?: SortOrder
+    valorEstimado?: SortOrder
+    loteId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    numero?: SortOrder
+    descricao?: SortOrder
+    quantidade?: SortOrder
+    unidade?: SortOrder
+    valorEstimado?: SortOrder
+    loteId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ItemSumOrderByAggregateInput = {
+    quantidade?: SortOrder
+    valorEstimado?: SortOrder
+  }
+
   export type LogAtividadeCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<LogAtividadeCreateWithoutUsuarioInput, LogAtividadeUncheckedCreateWithoutUsuarioInput> | LogAtividadeCreateWithoutUsuarioInput[] | LogAtividadeUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: LogAtividadeCreateOrConnectWithoutUsuarioInput | LogAtividadeCreateOrConnectWithoutUsuarioInput[]
@@ -17094,11 +20849,31 @@ export namespace Prisma {
     connect?: LogAtividadeWhereUniqueInput | LogAtividadeWhereUniqueInput[]
   }
 
+  export type MensagemChatCreateNestedManyWithoutAutorInput = {
+    create?: XOR<MensagemChatCreateWithoutAutorInput, MensagemChatUncheckedCreateWithoutAutorInput> | MensagemChatCreateWithoutAutorInput[] | MensagemChatUncheckedCreateWithoutAutorInput[]
+    connectOrCreate?: MensagemChatCreateOrConnectWithoutAutorInput | MensagemChatCreateOrConnectWithoutAutorInput[]
+    createMany?: MensagemChatCreateManyAutorInputEnvelope
+    connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+  }
+
+  export type LicitanteCreateNestedOneWithoutUsuarioInput = {
+    create?: XOR<LicitanteCreateWithoutUsuarioInput, LicitanteUncheckedCreateWithoutUsuarioInput>
+    connectOrCreate?: LicitanteCreateOrConnectWithoutUsuarioInput
+    connect?: LicitanteWhereUniqueInput
+  }
+
   export type LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<LogAtividadeCreateWithoutUsuarioInput, LogAtividadeUncheckedCreateWithoutUsuarioInput> | LogAtividadeCreateWithoutUsuarioInput[] | LogAtividadeUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: LogAtividadeCreateOrConnectWithoutUsuarioInput | LogAtividadeCreateOrConnectWithoutUsuarioInput[]
     createMany?: LogAtividadeCreateManyUsuarioInputEnvelope
     connect?: LogAtividadeWhereUniqueInput | LogAtividadeWhereUniqueInput[]
+  }
+
+  export type MensagemChatUncheckedCreateNestedManyWithoutAutorInput = {
+    create?: XOR<MensagemChatCreateWithoutAutorInput, MensagemChatUncheckedCreateWithoutAutorInput> | MensagemChatCreateWithoutAutorInput[] | MensagemChatUncheckedCreateWithoutAutorInput[]
+    connectOrCreate?: MensagemChatCreateOrConnectWithoutAutorInput | MensagemChatCreateOrConnectWithoutAutorInput[]
+    createMany?: MensagemChatCreateManyAutorInputEnvelope
+    connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -17123,6 +20898,34 @@ export namespace Prisma {
     deleteMany?: LogAtividadeScalarWhereInput | LogAtividadeScalarWhereInput[]
   }
 
+  export type MensagemChatUpdateManyWithoutAutorNestedInput = {
+    create?: XOR<MensagemChatCreateWithoutAutorInput, MensagemChatUncheckedCreateWithoutAutorInput> | MensagemChatCreateWithoutAutorInput[] | MensagemChatUncheckedCreateWithoutAutorInput[]
+    connectOrCreate?: MensagemChatCreateOrConnectWithoutAutorInput | MensagemChatCreateOrConnectWithoutAutorInput[]
+    upsert?: MensagemChatUpsertWithWhereUniqueWithoutAutorInput | MensagemChatUpsertWithWhereUniqueWithoutAutorInput[]
+    createMany?: MensagemChatCreateManyAutorInputEnvelope
+    set?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    disconnect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    delete?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    update?: MensagemChatUpdateWithWhereUniqueWithoutAutorInput | MensagemChatUpdateWithWhereUniqueWithoutAutorInput[]
+    updateMany?: MensagemChatUpdateManyWithWhereWithoutAutorInput | MensagemChatUpdateManyWithWhereWithoutAutorInput[]
+    deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
+  }
+
+  export type LicitanteUpdateOneWithoutUsuarioNestedInput = {
+    create?: XOR<LicitanteCreateWithoutUsuarioInput, LicitanteUncheckedCreateWithoutUsuarioInput>
+    connectOrCreate?: LicitanteCreateOrConnectWithoutUsuarioInput
+    upsert?: LicitanteUpsertWithoutUsuarioInput
+    disconnect?: LicitanteWhereInput | boolean
+    delete?: LicitanteWhereInput | boolean
+    connect?: LicitanteWhereUniqueInput
+    update?: XOR<XOR<LicitanteUpdateToOneWithWhereWithoutUsuarioInput, LicitanteUpdateWithoutUsuarioInput>, LicitanteUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput = {
     create?: XOR<LogAtividadeCreateWithoutUsuarioInput, LogAtividadeUncheckedCreateWithoutUsuarioInput> | LogAtividadeCreateWithoutUsuarioInput[] | LogAtividadeUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: LogAtividadeCreateOrConnectWithoutUsuarioInput | LogAtividadeCreateOrConnectWithoutUsuarioInput[]
@@ -17135,6 +20938,20 @@ export namespace Prisma {
     update?: LogAtividadeUpdateWithWhereUniqueWithoutUsuarioInput | LogAtividadeUpdateWithWhereUniqueWithoutUsuarioInput[]
     updateMany?: LogAtividadeUpdateManyWithWhereWithoutUsuarioInput | LogAtividadeUpdateManyWithWhereWithoutUsuarioInput[]
     deleteMany?: LogAtividadeScalarWhereInput | LogAtividadeScalarWhereInput[]
+  }
+
+  export type MensagemChatUncheckedUpdateManyWithoutAutorNestedInput = {
+    create?: XOR<MensagemChatCreateWithoutAutorInput, MensagemChatUncheckedCreateWithoutAutorInput> | MensagemChatCreateWithoutAutorInput[] | MensagemChatUncheckedCreateWithoutAutorInput[]
+    connectOrCreate?: MensagemChatCreateOrConnectWithoutAutorInput | MensagemChatCreateOrConnectWithoutAutorInput[]
+    upsert?: MensagemChatUpsertWithWhereUniqueWithoutAutorInput | MensagemChatUpsertWithWhereUniqueWithoutAutorInput[]
+    createMany?: MensagemChatCreateManyAutorInputEnvelope
+    set?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    disconnect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    delete?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    update?: MensagemChatUpdateWithWhereUniqueWithoutAutorInput | MensagemChatUpdateWithWhereUniqueWithoutAutorInput[]
+    updateMany?: MensagemChatUpdateManyWithWhereWithoutAutorInput | MensagemChatUpdateManyWithWhereWithoutAutorInput[]
+    deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
   }
 
   export type DisputaCreateNestedManyWithoutEditalInput = {
@@ -17151,6 +20968,20 @@ export namespace Prisma {
     connect?: DocumentoObrigatorioWhereUniqueInput | DocumentoObrigatorioWhereUniqueInput[]
   }
 
+  export type LoteCreateNestedManyWithoutEditalInput = {
+    create?: XOR<LoteCreateWithoutEditalInput, LoteUncheckedCreateWithoutEditalInput> | LoteCreateWithoutEditalInput[] | LoteUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: LoteCreateOrConnectWithoutEditalInput | LoteCreateOrConnectWithoutEditalInput[]
+    createMany?: LoteCreateManyEditalInputEnvelope
+    connect?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
+  }
+
+  export type MensagemChatCreateNestedManyWithoutEditalInput = {
+    create?: XOR<MensagemChatCreateWithoutEditalInput, MensagemChatUncheckedCreateWithoutEditalInput> | MensagemChatCreateWithoutEditalInput[] | MensagemChatUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: MensagemChatCreateOrConnectWithoutEditalInput | MensagemChatCreateOrConnectWithoutEditalInput[]
+    createMany?: MensagemChatCreateManyEditalInputEnvelope
+    connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+  }
+
   export type DisputaUncheckedCreateNestedManyWithoutEditalInput = {
     create?: XOR<DisputaCreateWithoutEditalInput, DisputaUncheckedCreateWithoutEditalInput> | DisputaCreateWithoutEditalInput[] | DisputaUncheckedCreateWithoutEditalInput[]
     connectOrCreate?: DisputaCreateOrConnectWithoutEditalInput | DisputaCreateOrConnectWithoutEditalInput[]
@@ -17165,12 +20996,22 @@ export namespace Prisma {
     connect?: DocumentoObrigatorioWhereUniqueInput | DocumentoObrigatorioWhereUniqueInput[]
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type LoteUncheckedCreateNestedManyWithoutEditalInput = {
+    create?: XOR<LoteCreateWithoutEditalInput, LoteUncheckedCreateWithoutEditalInput> | LoteCreateWithoutEditalInput[] | LoteUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: LoteCreateOrConnectWithoutEditalInput | LoteCreateOrConnectWithoutEditalInput[]
+    createMany?: LoteCreateManyEditalInputEnvelope
+    connect?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type MensagemChatUncheckedCreateNestedManyWithoutEditalInput = {
+    create?: XOR<MensagemChatCreateWithoutEditalInput, MensagemChatUncheckedCreateWithoutEditalInput> | MensagemChatCreateWithoutEditalInput[] | MensagemChatUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: MensagemChatCreateOrConnectWithoutEditalInput | MensagemChatCreateOrConnectWithoutEditalInput[]
+    createMany?: MensagemChatCreateManyEditalInputEnvelope
+    connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type DisputaUpdateManyWithoutEditalNestedInput = {
@@ -17201,6 +21042,34 @@ export namespace Prisma {
     deleteMany?: DocumentoObrigatorioScalarWhereInput | DocumentoObrigatorioScalarWhereInput[]
   }
 
+  export type LoteUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<LoteCreateWithoutEditalInput, LoteUncheckedCreateWithoutEditalInput> | LoteCreateWithoutEditalInput[] | LoteUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: LoteCreateOrConnectWithoutEditalInput | LoteCreateOrConnectWithoutEditalInput[]
+    upsert?: LoteUpsertWithWhereUniqueWithoutEditalInput | LoteUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: LoteCreateManyEditalInputEnvelope
+    set?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
+    disconnect?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
+    delete?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
+    connect?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
+    update?: LoteUpdateWithWhereUniqueWithoutEditalInput | LoteUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: LoteUpdateManyWithWhereWithoutEditalInput | LoteUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: LoteScalarWhereInput | LoteScalarWhereInput[]
+  }
+
+  export type MensagemChatUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<MensagemChatCreateWithoutEditalInput, MensagemChatUncheckedCreateWithoutEditalInput> | MensagemChatCreateWithoutEditalInput[] | MensagemChatUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: MensagemChatCreateOrConnectWithoutEditalInput | MensagemChatCreateOrConnectWithoutEditalInput[]
+    upsert?: MensagemChatUpsertWithWhereUniqueWithoutEditalInput | MensagemChatUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: MensagemChatCreateManyEditalInputEnvelope
+    set?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    disconnect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    delete?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    update?: MensagemChatUpdateWithWhereUniqueWithoutEditalInput | MensagemChatUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: MensagemChatUpdateManyWithWhereWithoutEditalInput | MensagemChatUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
+  }
+
   export type DisputaUncheckedUpdateManyWithoutEditalNestedInput = {
     create?: XOR<DisputaCreateWithoutEditalInput, DisputaUncheckedCreateWithoutEditalInput> | DisputaCreateWithoutEditalInput[] | DisputaUncheckedCreateWithoutEditalInput[]
     connectOrCreate?: DisputaCreateOrConnectWithoutEditalInput | DisputaCreateOrConnectWithoutEditalInput[]
@@ -17227,6 +21096,34 @@ export namespace Prisma {
     update?: DocumentoObrigatorioUpdateWithWhereUniqueWithoutEditalInput | DocumentoObrigatorioUpdateWithWhereUniqueWithoutEditalInput[]
     updateMany?: DocumentoObrigatorioUpdateManyWithWhereWithoutEditalInput | DocumentoObrigatorioUpdateManyWithWhereWithoutEditalInput[]
     deleteMany?: DocumentoObrigatorioScalarWhereInput | DocumentoObrigatorioScalarWhereInput[]
+  }
+
+  export type LoteUncheckedUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<LoteCreateWithoutEditalInput, LoteUncheckedCreateWithoutEditalInput> | LoteCreateWithoutEditalInput[] | LoteUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: LoteCreateOrConnectWithoutEditalInput | LoteCreateOrConnectWithoutEditalInput[]
+    upsert?: LoteUpsertWithWhereUniqueWithoutEditalInput | LoteUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: LoteCreateManyEditalInputEnvelope
+    set?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
+    disconnect?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
+    delete?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
+    connect?: LoteWhereUniqueInput | LoteWhereUniqueInput[]
+    update?: LoteUpdateWithWhereUniqueWithoutEditalInput | LoteUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: LoteUpdateManyWithWhereWithoutEditalInput | LoteUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: LoteScalarWhereInput | LoteScalarWhereInput[]
+  }
+
+  export type MensagemChatUncheckedUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<MensagemChatCreateWithoutEditalInput, MensagemChatUncheckedCreateWithoutEditalInput> | MensagemChatCreateWithoutEditalInput[] | MensagemChatUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: MensagemChatCreateOrConnectWithoutEditalInput | MensagemChatCreateOrConnectWithoutEditalInput[]
+    upsert?: MensagemChatUpsertWithWhereUniqueWithoutEditalInput | MensagemChatUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: MensagemChatCreateManyEditalInputEnvelope
+    set?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    disconnect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    delete?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+    update?: MensagemChatUpdateWithWhereUniqueWithoutEditalInput | MensagemChatUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: MensagemChatUpdateManyWithWhereWithoutEditalInput | MensagemChatUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
   }
 
   export type EditalCreateNestedOneWithoutDisputasInput = {
@@ -17511,6 +21408,12 @@ export namespace Prisma {
     deleteMany?: SessaoScalarWhereInput | SessaoScalarWhereInput[]
   }
 
+  export type UsuarioCreateNestedOneWithoutLicitanteInput = {
+    create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
   export type PropostaCreateNestedManyWithoutLicitanteInput = {
     create?: XOR<PropostaCreateWithoutLicitanteInput, PropostaUncheckedCreateWithoutLicitanteInput> | PropostaCreateWithoutLicitanteInput[] | PropostaUncheckedCreateWithoutLicitanteInput[]
     connectOrCreate?: PropostaCreateOrConnectWithoutLicitanteInput | PropostaCreateOrConnectWithoutLicitanteInput[]
@@ -17544,6 +21447,12 @@ export namespace Prisma {
     connectOrCreate?: MensagemChatCreateOrConnectWithoutLicitanteInput | MensagemChatCreateOrConnectWithoutLicitanteInput[]
     createMany?: MensagemChatCreateManyLicitanteInputEnvelope
     connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+  }
+
+  export type UsuarioUncheckedCreateNestedOneWithoutLicitanteInput = {
+    create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
+    connect?: UsuarioWhereUniqueInput
   }
 
   export type PropostaUncheckedCreateNestedManyWithoutLicitanteInput = {
@@ -17583,6 +21492,16 @@ export namespace Prisma {
 
   export type EnumTipoEmpresaFieldUpdateOperationsInput = {
     set?: $Enums.TipoEmpresa
+  }
+
+  export type UsuarioUpdateOneWithoutLicitanteNestedInput = {
+    create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
+    upsert?: UsuarioUpsertWithoutLicitanteInput
+    disconnect?: UsuarioWhereInput | boolean
+    delete?: UsuarioWhereInput | boolean
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutLicitanteInput, UsuarioUpdateWithoutLicitanteInput>, UsuarioUncheckedUpdateWithoutLicitanteInput>
   }
 
   export type PropostaUpdateManyWithoutLicitanteNestedInput = {
@@ -17653,6 +21572,16 @@ export namespace Prisma {
     update?: MensagemChatUpdateWithWhereUniqueWithoutLicitanteInput | MensagemChatUpdateWithWhereUniqueWithoutLicitanteInput[]
     updateMany?: MensagemChatUpdateManyWithWhereWithoutLicitanteInput | MensagemChatUpdateManyWithWhereWithoutLicitanteInput[]
     deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
+  }
+
+  export type UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput = {
+    create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
+    upsert?: UsuarioUpsertWithoutLicitanteInput
+    disconnect?: UsuarioWhereInput | boolean
+    delete?: UsuarioWhereInput | boolean
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutLicitanteInput, UsuarioUpdateWithoutLicitanteInput>, UsuarioUncheckedUpdateWithoutLicitanteInput>
   }
 
   export type PropostaUncheckedUpdateManyWithoutLicitanteNestedInput = {
@@ -17737,12 +21666,22 @@ export namespace Prisma {
     connect?: LicitanteWhereUniqueInput
   }
 
+  export type ItemCreateNestedOneWithoutPropostasInput = {
+    create?: XOR<ItemCreateWithoutPropostasInput, ItemUncheckedCreateWithoutPropostasInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutPropostasInput
+    connect?: ItemWhereUniqueInput
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type EnumStatusPropostaFieldUpdateOperationsInput = {
+    set?: $Enums.StatusProposta
   }
 
   export type DisputaUpdateOneRequiredWithoutPropostasNestedInput = {
@@ -17759,6 +21698,14 @@ export namespace Prisma {
     upsert?: LicitanteUpsertWithoutPropostasInput
     connect?: LicitanteWhereUniqueInput
     update?: XOR<XOR<LicitanteUpdateToOneWithWhereWithoutPropostasInput, LicitanteUpdateWithoutPropostasInput>, LicitanteUncheckedUpdateWithoutPropostasInput>
+  }
+
+  export type ItemUpdateOneRequiredWithoutPropostasNestedInput = {
+    create?: XOR<ItemCreateWithoutPropostasInput, ItemUncheckedCreateWithoutPropostasInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutPropostasInput
+    upsert?: ItemUpsertWithoutPropostasInput
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutPropostasInput, ItemUpdateWithoutPropostasInput>, ItemUncheckedUpdateWithoutPropostasInput>
   }
 
   export type DisputaCreateNestedOneWithoutLancesInput = {
@@ -17839,6 +21786,18 @@ export namespace Prisma {
     update?: XOR<XOR<EditalUpdateToOneWithWhereWithoutDocumentosObrigatoriosInput, EditalUpdateWithoutDocumentosObrigatoriosInput>, EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput>
   }
 
+  export type EditalCreateNestedOneWithoutMensagensChatInput = {
+    create?: XOR<EditalCreateWithoutMensagensChatInput, EditalUncheckedCreateWithoutMensagensChatInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutMensagensChatInput
+    connect?: EditalWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutMensagemChatInput = {
+    create?: XOR<UsuarioCreateWithoutMensagemChatInput, UsuarioUncheckedCreateWithoutMensagemChatInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutMensagemChatInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
   export type DisputaCreateNestedOneWithoutMensagensChatInput = {
     create?: XOR<DisputaCreateWithoutMensagensChatInput, DisputaUncheckedCreateWithoutMensagensChatInput>
     connectOrCreate?: DisputaCreateOrConnectWithoutMensagensChatInput
@@ -17851,14 +21810,32 @@ export namespace Prisma {
     connect?: LicitanteWhereUniqueInput
   }
 
-  export type EnumTipoAutorChatFieldUpdateOperationsInput = {
-    set?: $Enums.TipoAutorChat
+  export type EnumTipoAutorMensagemFieldUpdateOperationsInput = {
+    set?: $Enums.TipoAutorMensagem
   }
 
-  export type DisputaUpdateOneRequiredWithoutMensagensChatNestedInput = {
+  export type EditalUpdateOneRequiredWithoutMensagensChatNestedInput = {
+    create?: XOR<EditalCreateWithoutMensagensChatInput, EditalUncheckedCreateWithoutMensagensChatInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutMensagensChatInput
+    upsert?: EditalUpsertWithoutMensagensChatInput
+    connect?: EditalWhereUniqueInput
+    update?: XOR<XOR<EditalUpdateToOneWithWhereWithoutMensagensChatInput, EditalUpdateWithoutMensagensChatInput>, EditalUncheckedUpdateWithoutMensagensChatInput>
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutMensagemChatNestedInput = {
+    create?: XOR<UsuarioCreateWithoutMensagemChatInput, UsuarioUncheckedCreateWithoutMensagemChatInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutMensagemChatInput
+    upsert?: UsuarioUpsertWithoutMensagemChatInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutMensagemChatInput, UsuarioUpdateWithoutMensagemChatInput>, UsuarioUncheckedUpdateWithoutMensagemChatInput>
+  }
+
+  export type DisputaUpdateOneWithoutMensagensChatNestedInput = {
     create?: XOR<DisputaCreateWithoutMensagensChatInput, DisputaUncheckedCreateWithoutMensagensChatInput>
     connectOrCreate?: DisputaCreateOrConnectWithoutMensagensChatInput
     upsert?: DisputaUpsertWithoutMensagensChatInput
+    disconnect?: DisputaWhereInput | boolean
+    delete?: DisputaWhereInput | boolean
     connect?: DisputaWhereUniqueInput
     update?: XOR<XOR<DisputaUpdateToOneWithWhereWithoutMensagensChatInput, DisputaUpdateWithoutMensagensChatInput>, DisputaUncheckedUpdateWithoutMensagensChatInput>
   }
@@ -17931,6 +21908,118 @@ export namespace Prisma {
     update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutLogAtividadeInput, UsuarioUpdateWithoutLogAtividadeInput>, UsuarioUncheckedUpdateWithoutLogAtividadeInput>
   }
 
+  export type ItemCreateNestedManyWithoutLoteInput = {
+    create?: XOR<ItemCreateWithoutLoteInput, ItemUncheckedCreateWithoutLoteInput> | ItemCreateWithoutLoteInput[] | ItemUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutLoteInput | ItemCreateOrConnectWithoutLoteInput[]
+    createMany?: ItemCreateManyLoteInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type EditalCreateNestedOneWithoutLotesInput = {
+    create?: XOR<EditalCreateWithoutLotesInput, EditalUncheckedCreateWithoutLotesInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutLotesInput
+    connect?: EditalWhereUniqueInput
+  }
+
+  export type ItemUncheckedCreateNestedManyWithoutLoteInput = {
+    create?: XOR<ItemCreateWithoutLoteInput, ItemUncheckedCreateWithoutLoteInput> | ItemCreateWithoutLoteInput[] | ItemUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutLoteInput | ItemCreateOrConnectWithoutLoteInput[]
+    createMany?: ItemCreateManyLoteInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type ItemUpdateManyWithoutLoteNestedInput = {
+    create?: XOR<ItemCreateWithoutLoteInput, ItemUncheckedCreateWithoutLoteInput> | ItemCreateWithoutLoteInput[] | ItemUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutLoteInput | ItemCreateOrConnectWithoutLoteInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutLoteInput | ItemUpsertWithWhereUniqueWithoutLoteInput[]
+    createMany?: ItemCreateManyLoteInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutLoteInput | ItemUpdateWithWhereUniqueWithoutLoteInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutLoteInput | ItemUpdateManyWithWhereWithoutLoteInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type EditalUpdateOneRequiredWithoutLotesNestedInput = {
+    create?: XOR<EditalCreateWithoutLotesInput, EditalUncheckedCreateWithoutLotesInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutLotesInput
+    upsert?: EditalUpsertWithoutLotesInput
+    connect?: EditalWhereUniqueInput
+    update?: XOR<XOR<EditalUpdateToOneWithWhereWithoutLotesInput, EditalUpdateWithoutLotesInput>, EditalUncheckedUpdateWithoutLotesInput>
+  }
+
+  export type ItemUncheckedUpdateManyWithoutLoteNestedInput = {
+    create?: XOR<ItemCreateWithoutLoteInput, ItemUncheckedCreateWithoutLoteInput> | ItemCreateWithoutLoteInput[] | ItemUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutLoteInput | ItemCreateOrConnectWithoutLoteInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutLoteInput | ItemUpsertWithWhereUniqueWithoutLoteInput[]
+    createMany?: ItemCreateManyLoteInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutLoteInput | ItemUpdateWithWhereUniqueWithoutLoteInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutLoteInput | ItemUpdateManyWithWhereWithoutLoteInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type LoteCreateNestedOneWithoutItensInput = {
+    create?: XOR<LoteCreateWithoutItensInput, LoteUncheckedCreateWithoutItensInput>
+    connectOrCreate?: LoteCreateOrConnectWithoutItensInput
+    connect?: LoteWhereUniqueInput
+  }
+
+  export type PropostaCreateNestedManyWithoutItemInput = {
+    create?: XOR<PropostaCreateWithoutItemInput, PropostaUncheckedCreateWithoutItemInput> | PropostaCreateWithoutItemInput[] | PropostaUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: PropostaCreateOrConnectWithoutItemInput | PropostaCreateOrConnectWithoutItemInput[]
+    createMany?: PropostaCreateManyItemInputEnvelope
+    connect?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+  }
+
+  export type PropostaUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<PropostaCreateWithoutItemInput, PropostaUncheckedCreateWithoutItemInput> | PropostaCreateWithoutItemInput[] | PropostaUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: PropostaCreateOrConnectWithoutItemInput | PropostaCreateOrConnectWithoutItemInput[]
+    createMany?: PropostaCreateManyItemInputEnvelope
+    connect?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+  }
+
+  export type LoteUpdateOneRequiredWithoutItensNestedInput = {
+    create?: XOR<LoteCreateWithoutItensInput, LoteUncheckedCreateWithoutItensInput>
+    connectOrCreate?: LoteCreateOrConnectWithoutItensInput
+    upsert?: LoteUpsertWithoutItensInput
+    connect?: LoteWhereUniqueInput
+    update?: XOR<XOR<LoteUpdateToOneWithWhereWithoutItensInput, LoteUpdateWithoutItensInput>, LoteUncheckedUpdateWithoutItensInput>
+  }
+
+  export type PropostaUpdateManyWithoutItemNestedInput = {
+    create?: XOR<PropostaCreateWithoutItemInput, PropostaUncheckedCreateWithoutItemInput> | PropostaCreateWithoutItemInput[] | PropostaUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: PropostaCreateOrConnectWithoutItemInput | PropostaCreateOrConnectWithoutItemInput[]
+    upsert?: PropostaUpsertWithWhereUniqueWithoutItemInput | PropostaUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: PropostaCreateManyItemInputEnvelope
+    set?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+    disconnect?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+    delete?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+    connect?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+    update?: PropostaUpdateWithWhereUniqueWithoutItemInput | PropostaUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: PropostaUpdateManyWithWhereWithoutItemInput | PropostaUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: PropostaScalarWhereInput | PropostaScalarWhereInput[]
+  }
+
+  export type PropostaUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<PropostaCreateWithoutItemInput, PropostaUncheckedCreateWithoutItemInput> | PropostaCreateWithoutItemInput[] | PropostaUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: PropostaCreateOrConnectWithoutItemInput | PropostaCreateOrConnectWithoutItemInput[]
+    upsert?: PropostaUpsertWithWhereUniqueWithoutItemInput | PropostaUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: PropostaCreateManyItemInputEnvelope
+    set?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+    disconnect?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+    delete?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+    connect?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+    update?: PropostaUpdateWithWhereUniqueWithoutItemInput | PropostaUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: PropostaUpdateManyWithWhereWithoutItemInput | PropostaUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: PropostaScalarWhereInput | PropostaScalarWhereInput[]
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -17950,6 +22039,20 @@ export namespace Prisma {
     in?: $Enums.PerfilUsuario[] | ListEnumPerfilUsuarioFieldRefInput<$PrismaModel>
     notIn?: $Enums.PerfilUsuario[] | ListEnumPerfilUsuarioFieldRefInput<$PrismaModel>
     not?: NestedEnumPerfilUsuarioFilter<$PrismaModel> | $Enums.PerfilUsuario
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -17990,45 +22093,6 @@ export namespace Prisma {
     _max?: NestedEnumPerfilUsuarioFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -18055,6 +22119,31 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedEnumDisputaStatusFilter<$PrismaModel = never> = {
@@ -18143,6 +22232,13 @@ export namespace Prisma {
     _max?: NestedEnumTipoEmpresaFilter<$PrismaModel>
   }
 
+  export type NestedEnumStatusPropostaFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusProposta | EnumStatusPropostaFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusProposta[] | ListEnumStatusPropostaFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusProposta[] | ListEnumStatusPropostaFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPropostaFilter<$PrismaModel> | $Enums.StatusProposta
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -18168,6 +22264,16 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumStatusPropostaWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusProposta | EnumStatusPropostaFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusProposta[] | ListEnumStatusPropostaFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusProposta[] | ListEnumStatusPropostaFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPropostaWithAggregatesFilter<$PrismaModel> | $Enums.StatusProposta
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusPropostaFilter<$PrismaModel>
+    _max?: NestedEnumStatusPropostaFilter<$PrismaModel>
   }
 
   export type NestedEnumTipoDocumentoFilter<$PrismaModel = never> = {
@@ -18200,21 +22306,21 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type NestedEnumTipoAutorChatFilter<$PrismaModel = never> = {
-    equals?: $Enums.TipoAutorChat | EnumTipoAutorChatFieldRefInput<$PrismaModel>
-    in?: $Enums.TipoAutorChat[] | ListEnumTipoAutorChatFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TipoAutorChat[] | ListEnumTipoAutorChatFieldRefInput<$PrismaModel>
-    not?: NestedEnumTipoAutorChatFilter<$PrismaModel> | $Enums.TipoAutorChat
+  export type NestedEnumTipoAutorMensagemFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoAutorMensagem | EnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoAutorMensagem[] | ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoAutorMensagem[] | ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoAutorMensagemFilter<$PrismaModel> | $Enums.TipoAutorMensagem
   }
 
-  export type NestedEnumTipoAutorChatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TipoAutorChat | EnumTipoAutorChatFieldRefInput<$PrismaModel>
-    in?: $Enums.TipoAutorChat[] | ListEnumTipoAutorChatFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TipoAutorChat[] | ListEnumTipoAutorChatFieldRefInput<$PrismaModel>
-    not?: NestedEnumTipoAutorChatWithAggregatesFilter<$PrismaModel> | $Enums.TipoAutorChat
+  export type NestedEnumTipoAutorMensagemWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoAutorMensagem | EnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoAutorMensagem[] | ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoAutorMensagem[] | ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoAutorMensagemWithAggregatesFilter<$PrismaModel> | $Enums.TipoAutorMensagem
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTipoAutorChatFilter<$PrismaModel>
-    _max?: NestedEnumTipoAutorChatFilter<$PrismaModel>
+    _min?: NestedEnumTipoAutorMensagemFilter<$PrismaModel>
+    _max?: NestedEnumTipoAutorMensagemFilter<$PrismaModel>
   }
 
   export type LogAtividadeCreateWithoutUsuarioInput = {
@@ -18243,6 +22349,67 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MensagemChatCreateWithoutAutorInput = {
+    id?: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutMensagensChatInput
+    Disputa?: DisputaCreateNestedOneWithoutMensagensChatInput
+    Licitante?: LicitanteCreateNestedOneWithoutMensagensChatInput
+  }
+
+  export type MensagemChatUncheckedCreateWithoutAutorInput = {
+    id?: string
+    editalId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputaId?: string | null
+    licitanteId?: string | null
+  }
+
+  export type MensagemChatCreateOrConnectWithoutAutorInput = {
+    where: MensagemChatWhereUniqueInput
+    create: XOR<MensagemChatCreateWithoutAutorInput, MensagemChatUncheckedCreateWithoutAutorInput>
+  }
+
+  export type MensagemChatCreateManyAutorInputEnvelope = {
+    data: MensagemChatCreateManyAutorInput | MensagemChatCreateManyAutorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LicitanteCreateWithoutUsuarioInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    propostas?: PropostaCreateNestedManyWithoutLicitanteInput
+    lances?: LanceCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteUncheckedCreateWithoutUsuarioInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
+    lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteCreateOrConnectWithoutUsuarioInput = {
+    where: LicitanteWhereUniqueInput
+    create: XOR<LicitanteCreateWithoutUsuarioInput, LicitanteUncheckedCreateWithoutUsuarioInput>
+  }
+
   export type LogAtividadeUpsertWithWhereUniqueWithoutUsuarioInput = {
     where: LogAtividadeWhereUniqueInput
     update: XOR<LogAtividadeUpdateWithoutUsuarioInput, LogAtividadeUncheckedUpdateWithoutUsuarioInput>
@@ -18269,6 +22436,72 @@ export namespace Prisma {
     acao?: StringFilter<"LogAtividade"> | string
     detalhes?: StringNullableFilter<"LogAtividade"> | string | null
     data?: DateTimeFilter<"LogAtividade"> | Date | string
+  }
+
+  export type MensagemChatUpsertWithWhereUniqueWithoutAutorInput = {
+    where: MensagemChatWhereUniqueInput
+    update: XOR<MensagemChatUpdateWithoutAutorInput, MensagemChatUncheckedUpdateWithoutAutorInput>
+    create: XOR<MensagemChatCreateWithoutAutorInput, MensagemChatUncheckedCreateWithoutAutorInput>
+  }
+
+  export type MensagemChatUpdateWithWhereUniqueWithoutAutorInput = {
+    where: MensagemChatWhereUniqueInput
+    data: XOR<MensagemChatUpdateWithoutAutorInput, MensagemChatUncheckedUpdateWithoutAutorInput>
+  }
+
+  export type MensagemChatUpdateManyWithWhereWithoutAutorInput = {
+    where: MensagemChatScalarWhereInput
+    data: XOR<MensagemChatUpdateManyMutationInput, MensagemChatUncheckedUpdateManyWithoutAutorInput>
+  }
+
+  export type MensagemChatScalarWhereInput = {
+    AND?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
+    OR?: MensagemChatScalarWhereInput[]
+    NOT?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
+    id?: StringFilter<"MensagemChat"> | string
+    editalId?: StringFilter<"MensagemChat"> | string
+    autorId?: StringFilter<"MensagemChat"> | string
+    tipoAutor?: EnumTipoAutorMensagemFilter<"MensagemChat"> | $Enums.TipoAutorMensagem
+    conteudo?: StringFilter<"MensagemChat"> | string
+    createdAt?: DateTimeFilter<"MensagemChat"> | Date | string
+    updatedAt?: DateTimeFilter<"MensagemChat"> | Date | string
+    disputaId?: StringNullableFilter<"MensagemChat"> | string | null
+    licitanteId?: StringNullableFilter<"MensagemChat"> | string | null
+  }
+
+  export type LicitanteUpsertWithoutUsuarioInput = {
+    update: XOR<LicitanteUpdateWithoutUsuarioInput, LicitanteUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<LicitanteCreateWithoutUsuarioInput, LicitanteUncheckedCreateWithoutUsuarioInput>
+    where?: LicitanteWhereInput
+  }
+
+  export type LicitanteUpdateToOneWithWhereWithoutUsuarioInput = {
+    where?: LicitanteWhereInput
+    data: XOR<LicitanteUpdateWithoutUsuarioInput, LicitanteUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type LicitanteUpdateWithoutUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type LicitanteUncheckedUpdateWithoutUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type DisputaCreateWithoutEditalInput = {
@@ -18333,6 +22566,68 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LoteCreateWithoutEditalInput = {
+    id?: string
+    numero: string
+    descricao: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itens?: ItemCreateNestedManyWithoutLoteInput
+  }
+
+  export type LoteUncheckedCreateWithoutEditalInput = {
+    id?: string
+    numero: string
+    descricao: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itens?: ItemUncheckedCreateNestedManyWithoutLoteInput
+  }
+
+  export type LoteCreateOrConnectWithoutEditalInput = {
+    where: LoteWhereUniqueInput
+    create: XOR<LoteCreateWithoutEditalInput, LoteUncheckedCreateWithoutEditalInput>
+  }
+
+  export type LoteCreateManyEditalInputEnvelope = {
+    data: LoteCreateManyEditalInput | LoteCreateManyEditalInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MensagemChatCreateWithoutEditalInput = {
+    id?: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    autor: UsuarioCreateNestedOneWithoutMensagemChatInput
+    Disputa?: DisputaCreateNestedOneWithoutMensagensChatInput
+    Licitante?: LicitanteCreateNestedOneWithoutMensagensChatInput
+  }
+
+  export type MensagemChatUncheckedCreateWithoutEditalInput = {
+    id?: string
+    autorId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputaId?: string | null
+    licitanteId?: string | null
+  }
+
+  export type MensagemChatCreateOrConnectWithoutEditalInput = {
+    where: MensagemChatWhereUniqueInput
+    create: XOR<MensagemChatCreateWithoutEditalInput, MensagemChatUncheckedCreateWithoutEditalInput>
+  }
+
+  export type MensagemChatCreateManyEditalInputEnvelope = {
+    data: MensagemChatCreateManyEditalInput | MensagemChatCreateManyEditalInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DisputaUpsertWithWhereUniqueWithoutEditalInput = {
     where: DisputaWhereUniqueInput
     update: XOR<DisputaUpdateWithoutEditalInput, DisputaUncheckedUpdateWithoutEditalInput>
@@ -18388,6 +22683,51 @@ export namespace Prisma {
     descricao?: StringFilter<"DocumentoObrigatorio"> | string
   }
 
+  export type LoteUpsertWithWhereUniqueWithoutEditalInput = {
+    where: LoteWhereUniqueInput
+    update: XOR<LoteUpdateWithoutEditalInput, LoteUncheckedUpdateWithoutEditalInput>
+    create: XOR<LoteCreateWithoutEditalInput, LoteUncheckedCreateWithoutEditalInput>
+  }
+
+  export type LoteUpdateWithWhereUniqueWithoutEditalInput = {
+    where: LoteWhereUniqueInput
+    data: XOR<LoteUpdateWithoutEditalInput, LoteUncheckedUpdateWithoutEditalInput>
+  }
+
+  export type LoteUpdateManyWithWhereWithoutEditalInput = {
+    where: LoteScalarWhereInput
+    data: XOR<LoteUpdateManyMutationInput, LoteUncheckedUpdateManyWithoutEditalInput>
+  }
+
+  export type LoteScalarWhereInput = {
+    AND?: LoteScalarWhereInput | LoteScalarWhereInput[]
+    OR?: LoteScalarWhereInput[]
+    NOT?: LoteScalarWhereInput | LoteScalarWhereInput[]
+    id?: StringFilter<"Lote"> | string
+    numero?: StringFilter<"Lote"> | string
+    descricao?: StringFilter<"Lote"> | string
+    editalId?: StringFilter<"Lote"> | string
+    status?: StringFilter<"Lote"> | string
+    createdAt?: DateTimeFilter<"Lote"> | Date | string
+    updatedAt?: DateTimeFilter<"Lote"> | Date | string
+  }
+
+  export type MensagemChatUpsertWithWhereUniqueWithoutEditalInput = {
+    where: MensagemChatWhereUniqueInput
+    update: XOR<MensagemChatUpdateWithoutEditalInput, MensagemChatUncheckedUpdateWithoutEditalInput>
+    create: XOR<MensagemChatCreateWithoutEditalInput, MensagemChatUncheckedCreateWithoutEditalInput>
+  }
+
+  export type MensagemChatUpdateWithWhereUniqueWithoutEditalInput = {
+    where: MensagemChatWhereUniqueInput
+    data: XOR<MensagemChatUpdateWithoutEditalInput, MensagemChatUncheckedUpdateWithoutEditalInput>
+  }
+
+  export type MensagemChatUpdateManyWithWhereWithoutEditalInput = {
+    where: MensagemChatScalarWhereInput
+    data: XOR<MensagemChatUpdateManyMutationInput, MensagemChatUncheckedUpdateManyWithoutEditalInput>
+  }
+
   export type EditalCreateWithoutDisputasInput = {
     id?: string
     numero: string
@@ -18396,7 +22736,11 @@ export namespace Prisma {
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    lotes?: LoteCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutDisputasInput = {
@@ -18407,7 +22751,11 @@ export namespace Prisma {
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutDisputasInput = {
@@ -18420,15 +22768,33 @@ export namespace Prisma {
     valorCentavos: number
     dataEnvio: Date | string
     arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     licitante: LicitanteCreateNestedOneWithoutPropostasInput
+    item: ItemCreateNestedOneWithoutPropostasInput
   }
 
   export type PropostaUncheckedCreateWithoutDisputaInput = {
     id?: string
     licitanteId: string
+    itemId: string
     valorCentavos: number
     dataEnvio: Date | string
     arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PropostaCreateOrConnectWithoutDisputaInput = {
@@ -18511,20 +22877,24 @@ export namespace Prisma {
 
   export type MensagemChatCreateWithoutDisputaInput = {
     id?: string
-    autor: string
-    mensagem: string
-    horario: Date | string
-    tipoAutor: $Enums.TipoAutorChat
-    licitante?: LicitanteCreateNestedOneWithoutMensagensChatInput
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutMensagensChatInput
+    autor: UsuarioCreateNestedOneWithoutMensagemChatInput
+    Licitante?: LicitanteCreateNestedOneWithoutMensagensChatInput
   }
 
   export type MensagemChatUncheckedCreateWithoutDisputaInput = {
     id?: string
+    editalId: string
+    autorId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     licitanteId?: string | null
-    autor: string
-    mensagem: string
-    horario: Date | string
-    tipoAutor: $Enums.TipoAutorChat
   }
 
   export type MensagemChatCreateOrConnectWithoutDisputaInput = {
@@ -18610,7 +22980,11 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutDisputasInput = {
@@ -18621,7 +22995,11 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type PropostaUpsertWithWhereUniqueWithoutDisputaInput = {
@@ -18647,9 +23025,18 @@ export namespace Prisma {
     id?: StringFilter<"Proposta"> | string
     disputaId?: StringFilter<"Proposta"> | string
     licitanteId?: StringFilter<"Proposta"> | string
+    itemId?: StringFilter<"Proposta"> | string
     valorCentavos?: IntFilter<"Proposta"> | number
     dataEnvio?: DateTimeFilter<"Proposta"> | Date | string
     arquivo?: StringNullableFilter<"Proposta"> | string | null
+    status?: EnumStatusPropostaFilter<"Proposta"> | $Enums.StatusProposta
+    observacao?: StringNullableFilter<"Proposta"> | string | null
+    versao?: IntFilter<"Proposta"> | number
+    createdBy?: StringFilter<"Proposta"> | string
+    updatedBy?: StringNullableFilter<"Proposta"> | string | null
+    deletedAt?: DateTimeNullableFilter<"Proposta"> | Date | string | null
+    createdAt?: DateTimeFilter<"Proposta"> | Date | string
+    updatedAt?: DateTimeFilter<"Proposta"> | Date | string
   }
 
   export type LanceUpsertWithWhereUniqueWithoutDisputaInput = {
@@ -18732,19 +23119,6 @@ export namespace Prisma {
     data: XOR<MensagemChatUpdateManyMutationInput, MensagemChatUncheckedUpdateManyWithoutDisputaInput>
   }
 
-  export type MensagemChatScalarWhereInput = {
-    AND?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
-    OR?: MensagemChatScalarWhereInput[]
-    NOT?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
-    id?: StringFilter<"MensagemChat"> | string
-    disputaId?: StringFilter<"MensagemChat"> | string
-    licitanteId?: StringNullableFilter<"MensagemChat"> | string | null
-    autor?: StringFilter<"MensagemChat"> | string
-    mensagem?: StringFilter<"MensagemChat"> | string
-    horario?: DateTimeFilter<"MensagemChat"> | Date | string
-    tipoAutor?: EnumTipoAutorChatFilter<"MensagemChat"> | $Enums.TipoAutorChat
-  }
-
   export type LogAtividadeUpsertWithWhereUniqueWithoutDisputaInput = {
     where: LogAtividadeWhereUniqueInput
     update: XOR<LogAtividadeUpdateWithoutDisputaInput, LogAtividadeUncheckedUpdateWithoutDisputaInput>
@@ -18790,20 +23164,63 @@ export namespace Prisma {
     hash?: StringFilter<"Sessao"> | string
   }
 
+  export type UsuarioCreateWithoutLicitanteInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutLicitanteInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutLicitanteInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
+  }
+
   export type PropostaCreateWithoutLicitanteInput = {
     id?: string
     valorCentavos: number
     dataEnvio: Date | string
     arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     disputa: DisputaCreateNestedOneWithoutPropostasInput
+    item: ItemCreateNestedOneWithoutPropostasInput
   }
 
   export type PropostaUncheckedCreateWithoutLicitanteInput = {
     id?: string
     disputaId: string
+    itemId: string
     valorCentavos: number
     dataEnvio: Date | string
     arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PropostaCreateOrConnectWithoutLicitanteInput = {
@@ -18914,20 +23331,24 @@ export namespace Prisma {
 
   export type MensagemChatCreateWithoutLicitanteInput = {
     id?: string
-    autor: string
-    mensagem: string
-    horario: Date | string
-    tipoAutor: $Enums.TipoAutorChat
-    disputa: DisputaCreateNestedOneWithoutMensagensChatInput
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutMensagensChatInput
+    autor: UsuarioCreateNestedOneWithoutMensagemChatInput
+    Disputa?: DisputaCreateNestedOneWithoutMensagensChatInput
   }
 
   export type MensagemChatUncheckedCreateWithoutLicitanteInput = {
     id?: string
-    disputaId: string
-    autor: string
-    mensagem: string
-    horario: Date | string
-    tipoAutor: $Enums.TipoAutorChat
+    editalId: string
+    autorId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputaId?: string | null
   }
 
   export type MensagemChatCreateOrConnectWithoutLicitanteInput = {
@@ -18938,6 +23359,37 @@ export namespace Prisma {
   export type MensagemChatCreateManyLicitanteInputEnvelope = {
     data: MensagemChatCreateManyLicitanteInput | MensagemChatCreateManyLicitanteInput[]
     skipDuplicates?: boolean
+  }
+
+  export type UsuarioUpsertWithoutLicitanteInput = {
+    update: XOR<UsuarioUpdateWithoutLicitanteInput, UsuarioUncheckedUpdateWithoutLicitanteInput>
+    create: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutLicitanteInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutLicitanteInput, UsuarioUncheckedUpdateWithoutLicitanteInput>
+  }
+
+  export type UsuarioUpdateWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
   }
 
   export type PropostaUpsertWithWhereUniqueWithoutLicitanteInput = {
@@ -19060,6 +23512,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
     lances?: LanceCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
@@ -19071,6 +23524,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
     lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
@@ -19080,6 +23534,37 @@ export namespace Prisma {
   export type LicitanteCreateOrConnectWithoutPropostasInput = {
     where: LicitanteWhereUniqueInput
     create: XOR<LicitanteCreateWithoutPropostasInput, LicitanteUncheckedCreateWithoutPropostasInput>
+  }
+
+  export type ItemCreateWithoutPropostasInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lote: LoteCreateNestedOneWithoutItensInput
+  }
+
+  export type ItemUncheckedCreateWithoutPropostasInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    loteId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ItemCreateOrConnectWithoutPropostasInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutPropostasInput, ItemUncheckedCreateWithoutPropostasInput>
   }
 
   export type DisputaUpsertWithoutPropostasInput = {
@@ -19139,6 +23624,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
     lances?: LanceUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
@@ -19150,10 +23636,48 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
     lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type ItemUpsertWithoutPropostasInput = {
+    update: XOR<ItemUpdateWithoutPropostasInput, ItemUncheckedUpdateWithoutPropostasInput>
+    create: XOR<ItemCreateWithoutPropostasInput, ItemUncheckedCreateWithoutPropostasInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutPropostasInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutPropostasInput, ItemUncheckedUpdateWithoutPropostasInput>
+  }
+
+  export type ItemUpdateWithoutPropostasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lote?: LoteUpdateOneRequiredWithoutItensNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutPropostasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    loteId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DisputaCreateWithoutLancesInput = {
@@ -19196,6 +23720,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
@@ -19207,6 +23732,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
@@ -19275,6 +23801,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
@@ -19286,6 +23813,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
@@ -19332,6 +23860,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaCreateNestedManyWithoutLicitanteInput
     lances?: LanceCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
@@ -19343,6 +23872,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
     lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
@@ -19411,6 +23941,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
     lances?: LanceUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
@@ -19422,6 +23953,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
     lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
@@ -19436,7 +23968,11 @@ export namespace Prisma {
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     disputas?: DisputaCreateNestedManyWithoutEditalInput
+    lotes?: LoteCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutDocumentosObrigatoriosInput = {
@@ -19447,7 +23983,11 @@ export namespace Prisma {
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
+    lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutDocumentosObrigatoriosInput = {
@@ -19474,7 +24014,11 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput = {
@@ -19485,7 +24029,71 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+  }
+
+  export type EditalCreateWithoutMensagensChatInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade: string
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    lotes?: LoteCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalUncheckedCreateWithoutMensagensChatInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade: string
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalCreateOrConnectWithoutMensagensChatInput = {
+    where: EditalWhereUniqueInput
+    create: XOR<EditalCreateWithoutMensagensChatInput, EditalUncheckedCreateWithoutMensagensChatInput>
+  }
+
+  export type UsuarioCreateWithoutMensagemChatInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
+    licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutMensagemChatInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
+    LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutMensagemChatInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutMensagemChatInput, UsuarioUncheckedCreateWithoutMensagemChatInput>
   }
 
   export type DisputaCreateWithoutMensagensChatInput = {
@@ -19528,6 +24136,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaCreateNestedManyWithoutLicitanteInput
     lances?: LanceCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
@@ -19539,6 +24148,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
     lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
@@ -19548,6 +24158,78 @@ export namespace Prisma {
   export type LicitanteCreateOrConnectWithoutMensagensChatInput = {
     where: LicitanteWhereUniqueInput
     create: XOR<LicitanteCreateWithoutMensagensChatInput, LicitanteUncheckedCreateWithoutMensagensChatInput>
+  }
+
+  export type EditalUpsertWithoutMensagensChatInput = {
+    update: XOR<EditalUpdateWithoutMensagensChatInput, EditalUncheckedUpdateWithoutMensagensChatInput>
+    create: XOR<EditalCreateWithoutMensagensChatInput, EditalUncheckedCreateWithoutMensagensChatInput>
+    where?: EditalWhereInput
+  }
+
+  export type EditalUpdateToOneWithWhereWithoutMensagensChatInput = {
+    where?: EditalWhereInput
+    data: XOR<EditalUpdateWithoutMensagensChatInput, EditalUncheckedUpdateWithoutMensagensChatInput>
+  }
+
+  export type EditalUpdateWithoutMensagensChatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUpdateManyWithoutEditalNestedInput
+  }
+
+  export type EditalUncheckedUpdateWithoutMensagensChatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
+  }
+
+  export type UsuarioUpsertWithoutMensagemChatInput = {
+    update: XOR<UsuarioUpdateWithoutMensagemChatInput, UsuarioUncheckedUpdateWithoutMensagemChatInput>
+    create: XOR<UsuarioCreateWithoutMensagemChatInput, UsuarioUncheckedCreateWithoutMensagemChatInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutMensagemChatInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutMensagemChatInput, UsuarioUncheckedUpdateWithoutMensagemChatInput>
+  }
+
+  export type UsuarioUpdateWithoutMensagemChatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
+    licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutMensagemChatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type DisputaUpsertWithoutMensagensChatInput = {
@@ -19607,6 +24289,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
     lances?: LanceUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
@@ -19618,6 +24301,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
     lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
@@ -19629,6 +24313,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaCreateNestedManyWithoutLicitanteInput
     lances?: LanceCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
@@ -19640,6 +24325,7 @@ export namespace Prisma {
     razaoSocial: string
     cnpj: string
     tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
     propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
     lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
@@ -19702,6 +24388,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
     lances?: LanceUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
@@ -19713,6 +24400,7 @@ export namespace Prisma {
     razaoSocial?: StringFieldUpdateOperationsInput | string
     cnpj?: StringFieldUpdateOperationsInput | string
     tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
     propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
     lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
@@ -19801,6 +24489,8 @@ export namespace Prisma {
     email: string
     senha: string
     perfil: $Enums.PerfilUsuario
+    MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+    licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutLogAtividadeInput = {
@@ -19809,6 +24499,8 @@ export namespace Prisma {
     email: string
     senha: string
     perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
+    MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
   }
 
   export type UsuarioCreateOrConnectWithoutLogAtividadeInput = {
@@ -19874,6 +24566,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+    licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutLogAtividadeInput = {
@@ -19882,6 +24576,268 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+  }
+
+  export type ItemCreateWithoutLoteInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    propostas?: PropostaCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutLoteInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    propostas?: PropostaUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutLoteInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutLoteInput, ItemUncheckedCreateWithoutLoteInput>
+  }
+
+  export type ItemCreateManyLoteInputEnvelope = {
+    data: ItemCreateManyLoteInput | ItemCreateManyLoteInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EditalCreateWithoutLotesInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade: string
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalUncheckedCreateWithoutLotesInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade: string
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalCreateOrConnectWithoutLotesInput = {
+    where: EditalWhereUniqueInput
+    create: XOR<EditalCreateWithoutLotesInput, EditalUncheckedCreateWithoutLotesInput>
+  }
+
+  export type ItemUpsertWithWhereUniqueWithoutLoteInput = {
+    where: ItemWhereUniqueInput
+    update: XOR<ItemUpdateWithoutLoteInput, ItemUncheckedUpdateWithoutLoteInput>
+    create: XOR<ItemCreateWithoutLoteInput, ItemUncheckedCreateWithoutLoteInput>
+  }
+
+  export type ItemUpdateWithWhereUniqueWithoutLoteInput = {
+    where: ItemWhereUniqueInput
+    data: XOR<ItemUpdateWithoutLoteInput, ItemUncheckedUpdateWithoutLoteInput>
+  }
+
+  export type ItemUpdateManyWithWhereWithoutLoteInput = {
+    where: ItemScalarWhereInput
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutLoteInput>
+  }
+
+  export type ItemScalarWhereInput = {
+    AND?: ItemScalarWhereInput | ItemScalarWhereInput[]
+    OR?: ItemScalarWhereInput[]
+    NOT?: ItemScalarWhereInput | ItemScalarWhereInput[]
+    id?: StringFilter<"Item"> | string
+    numero?: StringFilter<"Item"> | string
+    descricao?: StringFilter<"Item"> | string
+    quantidade?: IntFilter<"Item"> | number
+    unidade?: StringFilter<"Item"> | string
+    valorEstimado?: IntNullableFilter<"Item"> | number | null
+    loteId?: StringFilter<"Item"> | string
+    status?: StringFilter<"Item"> | string
+    createdAt?: DateTimeFilter<"Item"> | Date | string
+    updatedAt?: DateTimeFilter<"Item"> | Date | string
+  }
+
+  export type EditalUpsertWithoutLotesInput = {
+    update: XOR<EditalUpdateWithoutLotesInput, EditalUncheckedUpdateWithoutLotesInput>
+    create: XOR<EditalCreateWithoutLotesInput, EditalUncheckedCreateWithoutLotesInput>
+    where?: EditalWhereInput
+  }
+
+  export type EditalUpdateToOneWithWhereWithoutLotesInput = {
+    where?: EditalWhereInput
+    data: XOR<EditalUpdateWithoutLotesInput, EditalUncheckedUpdateWithoutLotesInput>
+  }
+
+  export type EditalUpdateWithoutLotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+  }
+
+  export type EditalUncheckedUpdateWithoutLotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+  }
+
+  export type LoteCreateWithoutItensInput = {
+    id?: string
+    numero: string
+    descricao: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutLotesInput
+  }
+
+  export type LoteUncheckedCreateWithoutItensInput = {
+    id?: string
+    numero: string
+    descricao: string
+    editalId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LoteCreateOrConnectWithoutItensInput = {
+    where: LoteWhereUniqueInput
+    create: XOR<LoteCreateWithoutItensInput, LoteUncheckedCreateWithoutItensInput>
+  }
+
+  export type PropostaCreateWithoutItemInput = {
+    id?: string
+    valorCentavos: number
+    dataEnvio: Date | string
+    arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputa: DisputaCreateNestedOneWithoutPropostasInput
+    licitante: LicitanteCreateNestedOneWithoutPropostasInput
+  }
+
+  export type PropostaUncheckedCreateWithoutItemInput = {
+    id?: string
+    disputaId: string
+    licitanteId: string
+    valorCentavos: number
+    dataEnvio: Date | string
+    arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PropostaCreateOrConnectWithoutItemInput = {
+    where: PropostaWhereUniqueInput
+    create: XOR<PropostaCreateWithoutItemInput, PropostaUncheckedCreateWithoutItemInput>
+  }
+
+  export type PropostaCreateManyItemInputEnvelope = {
+    data: PropostaCreateManyItemInput | PropostaCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LoteUpsertWithoutItensInput = {
+    update: XOR<LoteUpdateWithoutItensInput, LoteUncheckedUpdateWithoutItensInput>
+    create: XOR<LoteCreateWithoutItensInput, LoteUncheckedCreateWithoutItensInput>
+    where?: LoteWhereInput
+  }
+
+  export type LoteUpdateToOneWithWhereWithoutItensInput = {
+    where?: LoteWhereInput
+    data: XOR<LoteUpdateWithoutItensInput, LoteUncheckedUpdateWithoutItensInput>
+  }
+
+  export type LoteUpdateWithoutItensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutLotesNestedInput
+  }
+
+  export type LoteUncheckedUpdateWithoutItensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PropostaUpsertWithWhereUniqueWithoutItemInput = {
+    where: PropostaWhereUniqueInput
+    update: XOR<PropostaUpdateWithoutItemInput, PropostaUncheckedUpdateWithoutItemInput>
+    create: XOR<PropostaCreateWithoutItemInput, PropostaUncheckedCreateWithoutItemInput>
+  }
+
+  export type PropostaUpdateWithWhereUniqueWithoutItemInput = {
+    where: PropostaWhereUniqueInput
+    data: XOR<PropostaUpdateWithoutItemInput, PropostaUncheckedUpdateWithoutItemInput>
+  }
+
+  export type PropostaUpdateManyWithWhereWithoutItemInput = {
+    where: PropostaScalarWhereInput
+    data: XOR<PropostaUpdateManyMutationInput, PropostaUncheckedUpdateManyWithoutItemInput>
   }
 
   export type LogAtividadeCreateManyUsuarioInput = {
@@ -19890,6 +24846,17 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+  }
+
+  export type MensagemChatCreateManyAutorInput = {
+    id?: string
+    editalId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputaId?: string | null
+    licitanteId?: string | null
   }
 
   export type LogAtividadeUpdateWithoutUsuarioInput = {
@@ -19916,6 +24883,39 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MensagemChatUpdateWithoutAutorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutMensagensChatNestedInput
+    Disputa?: DisputaUpdateOneWithoutMensagensChatNestedInput
+    Licitante?: LicitanteUpdateOneWithoutMensagensChatNestedInput
+  }
+
+  export type MensagemChatUncheckedUpdateWithoutAutorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MensagemChatUncheckedUpdateManyWithoutAutorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type DisputaCreateManyEditalInput = {
     id?: string
     status: $Enums.DisputaStatus
@@ -19929,6 +24929,26 @@ export namespace Prisma {
     id?: string
     tipoDocumento: $Enums.TipoDocumento
     descricao: string
+  }
+
+  export type LoteCreateManyEditalInput = {
+    id?: string
+    numero: string
+    descricao: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MensagemChatCreateManyEditalInput = {
+    id?: string
+    autorId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputaId?: string | null
+    licitanteId?: string | null
   }
 
   export type DisputaUpdateWithoutEditalInput = {
@@ -19988,12 +25008,83 @@ export namespace Prisma {
     descricao?: StringFieldUpdateOperationsInput | string
   }
 
+  export type LoteUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itens?: ItemUpdateManyWithoutLoteNestedInput
+  }
+
+  export type LoteUncheckedUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itens?: ItemUncheckedUpdateManyWithoutLoteNestedInput
+  }
+
+  export type LoteUncheckedUpdateManyWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MensagemChatUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    autor?: UsuarioUpdateOneRequiredWithoutMensagemChatNestedInput
+    Disputa?: DisputaUpdateOneWithoutMensagensChatNestedInput
+    Licitante?: LicitanteUpdateOneWithoutMensagensChatNestedInput
+  }
+
+  export type MensagemChatUncheckedUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    autorId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MensagemChatUncheckedUpdateManyWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    autorId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type PropostaCreateManyDisputaInput = {
     id?: string
     licitanteId: string
+    itemId: string
     valorCentavos: number
     dataEnvio: Date | string
     arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LanceCreateManyDisputaInput = {
@@ -20022,11 +25113,13 @@ export namespace Prisma {
 
   export type MensagemChatCreateManyDisputaInput = {
     id?: string
+    editalId: string
+    autorId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     licitanteId?: string | null
-    autor: string
-    mensagem: string
-    horario: Date | string
-    tipoAutor: $Enums.TipoAutorChat
   }
 
   export type LogAtividadeCreateManyDisputaInput = {
@@ -20051,23 +25144,50 @@ export namespace Prisma {
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licitante?: LicitanteUpdateOneRequiredWithoutPropostasNestedInput
+    item?: ItemUpdateOneRequiredWithoutPropostasNestedInput
   }
 
   export type PropostaUncheckedUpdateWithoutDisputaInput = {
     id?: StringFieldUpdateOperationsInput | string
     licitanteId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PropostaUncheckedUpdateManyWithoutDisputaInput = {
     id?: StringFieldUpdateOperationsInput | string
     licitanteId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LanceUpdateWithoutDisputaInput = {
@@ -20144,29 +25264,35 @@ export namespace Prisma {
 
   export type MensagemChatUpdateWithoutDisputaInput = {
     id?: StringFieldUpdateOperationsInput | string
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
-    licitante?: LicitanteUpdateOneWithoutMensagensChatNestedInput
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutMensagensChatNestedInput
+    autor?: UsuarioUpdateOneRequiredWithoutMensagemChatNestedInput
+    Licitante?: LicitanteUpdateOneWithoutMensagensChatNestedInput
   }
 
   export type MensagemChatUncheckedUpdateWithoutDisputaInput = {
     id?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    autorId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
   }
 
   export type MensagemChatUncheckedUpdateManyWithoutDisputaInput = {
     id?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    autorId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
   }
 
   export type LogAtividadeUpdateWithoutDisputaInput = {
@@ -20223,9 +25349,18 @@ export namespace Prisma {
   export type PropostaCreateManyLicitanteInput = {
     id?: string
     disputaId: string
+    itemId: string
     valorCentavos: number
     dataEnvio: Date | string
     arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LanceCreateManyLicitanteInput = {
@@ -20263,11 +25398,13 @@ export namespace Prisma {
 
   export type MensagemChatCreateManyLicitanteInput = {
     id?: string
-    disputaId: string
-    autor: string
-    mensagem: string
-    horario: Date | string
-    tipoAutor: $Enums.TipoAutorChat
+    editalId: string
+    autorId: string
+    tipoAutor: $Enums.TipoAutorMensagem
+    conteudo: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputaId?: string | null
   }
 
   export type PropostaUpdateWithoutLicitanteInput = {
@@ -20275,23 +25412,50 @@ export namespace Prisma {
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputa?: DisputaUpdateOneRequiredWithoutPropostasNestedInput
+    item?: ItemUpdateOneRequiredWithoutPropostasNestedInput
   }
 
   export type PropostaUncheckedUpdateWithoutLicitanteInput = {
     id?: StringFieldUpdateOperationsInput | string
     disputaId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PropostaUncheckedUpdateManyWithoutLicitanteInput = {
     id?: StringFieldUpdateOperationsInput | string
     disputaId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
     valorCentavos?: IntFieldUpdateOperationsInput | number
     dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LanceUpdateWithoutLicitanteInput = {
@@ -20395,29 +25559,153 @@ export namespace Prisma {
 
   export type MensagemChatUpdateWithoutLicitanteInput = {
     id?: StringFieldUpdateOperationsInput | string
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
-    disputa?: DisputaUpdateOneRequiredWithoutMensagensChatNestedInput
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutMensagensChatNestedInput
+    autor?: UsuarioUpdateOneRequiredWithoutMensagemChatNestedInput
+    Disputa?: DisputaUpdateOneWithoutMensagensChatNestedInput
   }
 
   export type MensagemChatUncheckedUpdateWithoutLicitanteInput = {
     id?: StringFieldUpdateOperationsInput | string
-    disputaId?: StringFieldUpdateOperationsInput | string
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
+    editalId?: StringFieldUpdateOperationsInput | string
+    autorId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MensagemChatUncheckedUpdateManyWithoutLicitanteInput = {
     id?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    autorId?: StringFieldUpdateOperationsInput | string
+    tipoAutor?: EnumTipoAutorMensagemFieldUpdateOperationsInput | $Enums.TipoAutorMensagem
+    conteudo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ItemCreateManyLoteInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ItemUpdateWithoutLoteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    propostas?: PropostaUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutLoteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    propostas?: PropostaUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateManyWithoutLoteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PropostaCreateManyItemInput = {
+    id?: string
+    disputaId: string
+    licitanteId: string
+    valorCentavos: number
+    dataEnvio: Date | string
+    arquivo?: string | null
+    status?: $Enums.StatusProposta
+    observacao?: string | null
+    versao?: number
+    createdBy: string
+    updatedBy?: string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PropostaUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    valorCentavos?: IntFieldUpdateOperationsInput | number
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputa?: DisputaUpdateOneRequiredWithoutPropostasNestedInput
+    licitante?: LicitanteUpdateOneRequiredWithoutPropostasNestedInput
+  }
+
+  export type PropostaUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
     disputaId?: StringFieldUpdateOperationsInput | string
-    autor?: StringFieldUpdateOperationsInput | string
-    mensagem?: StringFieldUpdateOperationsInput | string
-    horario?: DateTimeFieldUpdateOperationsInput | Date | string
-    tipoAutor?: EnumTipoAutorChatFieldUpdateOperationsInput | $Enums.TipoAutorChat
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    valorCentavos?: IntFieldUpdateOperationsInput | number
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PropostaUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disputaId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    valorCentavos?: IntFieldUpdateOperationsInput | number
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPropostaFieldUpdateOperationsInput | $Enums.StatusProposta
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    versao?: IntFieldUpdateOperationsInput | number
+    createdBy?: StringFieldUpdateOperationsInput | string
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

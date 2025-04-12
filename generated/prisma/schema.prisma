@@ -45,6 +45,18 @@ enum TipoAutorChat {
   LICITANTE
 }
 
+enum StatusProposta {
+  PENDENTE
+  ACEITA
+  REJEITADA
+  CANCELADA
+}
+
+enum TipoAutorMensagem {
+  PREGOEIRO
+  LICITANTE
+}
+
 model Usuario {
   id           String         @id @default(uuid())
   nome         String
@@ -52,11 +64,14 @@ model Usuario {
   senha        String
   perfil       PerfilUsuario
   LogAtividade LogAtividade[]
+  MensagemChat MensagemChat[]
+  licitante    Licitante?     @relation(fields: [licitanteId], references: [id])
+  licitanteId  String?        @unique
 }
 
 model Edital {
   id                     String                 @id @default(uuid())
-  numero                 String
+  numero                 String                 @unique
   objeto                 String
   modalidade             String
   status                 String
@@ -64,6 +79,10 @@ model Edital {
   arquivoPdf             String?
   disputas               Disputa[]
   documentosObrigatorios DocumentoObrigatorio[]
+  lotes                  Lote[]
+  mensagensChat          MensagemChat[]
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
 }
 
 model Disputa {
@@ -89,6 +108,7 @@ model Licitante {
   razaoSocial String
   cnpj        String      @unique
   tipoEmpresa TipoEmpresa
+  usuario     Usuario?
 
   propostas     Proposta[]
   lances        Lance[]
@@ -98,15 +118,29 @@ model Licitante {
 }
 
 model Proposta {
-  id            String   @id @default(uuid())
+  id            String         @id @default(uuid())
   disputaId     String
   licitanteId   String
+  itemId        String
   valorCentavos Int // valor em centavos
   dataEnvio     DateTime
   arquivo       String?
+  status        StatusProposta @default(PENDENTE)
+  observacao    String?
+  versao        Int            @default(1)
+  createdBy     String
+  updatedBy     String?
+  deletedAt     DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 
   disputa   Disputa   @relation(fields: [disputaId], references: [id], onDelete: Cascade)
   licitante Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
+  item      Item      @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, licitanteId, versao])
+  @@index([disputaId, itemId])
+  @@index([licitanteId, status])
 }
 
 model Lance {
@@ -151,16 +185,22 @@ model DocumentoObrigatorio {
 }
 
 model MensagemChat {
-  id          String        @id @default(uuid())
-  disputaId   String
-  licitanteId String?
-  autor       String
-  mensagem    String
-  horario     DateTime
-  tipoAutor   TipoAutorChat
+  id        String            @id @default(uuid())
+  editalId  String
+  autorId   String
+  tipoAutor TipoAutorMensagem
+  conteudo  String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
 
-  disputa   Disputa    @relation(fields: [disputaId], references: [id])
-  licitante Licitante? @relation(fields: [licitanteId], references: [id])
+  edital      Edital     @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  autor       Usuario    @relation(fields: [autorId], references: [id], onDelete: Cascade)
+  Disputa     Disputa?   @relation(fields: [disputaId], references: [id])
+  disputaId   String?
+  Licitante   Licitante? @relation(fields: [licitanteId], references: [id])
+  licitanteId String?
+
+  @@index([editalId, createdAt])
 }
 
 model Sessao {
@@ -186,4 +226,37 @@ model LogAtividade {
 
   disputa Disputa  @relation(fields: [disputaId], references: [id])
   usuario Usuario? @relation(fields: [usuarioId], references: [id])
+}
+
+model Lote {
+  id        String   @id @default(uuid())
+  numero    String
+  descricao String
+  editalId  String
+  status    String   @default("ATIVO") // ATIVO, CANCELADO
+  itens     Item[]
+  edital    Edital   @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([numero, editalId])
+  @@index([editalId, status])
+}
+
+model Item {
+  id            String     @id @default(uuid())
+  numero        String
+  descricao     String
+  quantidade    Int
+  unidade       String
+  valorEstimado Int? // valor estimado em centavos
+  loteId        String
+  status        String     @default("ATIVO") // ATIVO, CANCELADO
+  lote          Lote       @relation(fields: [loteId], references: [id], onDelete: Cascade)
+  propostas     Proposta[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@unique([numero, loteId])
+  @@index([loteId, status])
 }

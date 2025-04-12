@@ -122,7 +122,8 @@ exports.Prisma.UsuarioScalarFieldEnum = {
   nome: 'nome',
   email: 'email',
   senha: 'senha',
-  perfil: 'perfil'
+  perfil: 'perfil',
+  licitanteId: 'licitanteId'
 };
 
 exports.Prisma.EditalScalarFieldEnum = {
@@ -132,7 +133,9 @@ exports.Prisma.EditalScalarFieldEnum = {
   modalidade: 'modalidade',
   status: 'status',
   dataAbertura: 'dataAbertura',
-  arquivoPdf: 'arquivoPdf'
+  arquivoPdf: 'arquivoPdf',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.DisputaScalarFieldEnum = {
@@ -156,9 +159,18 @@ exports.Prisma.PropostaScalarFieldEnum = {
   id: 'id',
   disputaId: 'disputaId',
   licitanteId: 'licitanteId',
+  itemId: 'itemId',
   valorCentavos: 'valorCentavos',
   dataEnvio: 'dataEnvio',
-  arquivo: 'arquivo'
+  arquivo: 'arquivo',
+  status: 'status',
+  observacao: 'observacao',
+  versao: 'versao',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.LanceScalarFieldEnum = {
@@ -196,12 +208,14 @@ exports.Prisma.DocumentoObrigatorioScalarFieldEnum = {
 
 exports.Prisma.MensagemChatScalarFieldEnum = {
   id: 'id',
+  editalId: 'editalId',
+  autorId: 'autorId',
+  tipoAutor: 'tipoAutor',
+  conteudo: 'conteudo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   disputaId: 'disputaId',
-  licitanteId: 'licitanteId',
-  autor: 'autor',
-  mensagem: 'mensagem',
-  horario: 'horario',
-  tipoAutor: 'tipoAutor'
+  licitanteId: 'licitanteId'
 };
 
 exports.Prisma.SessaoScalarFieldEnum = {
@@ -221,6 +235,29 @@ exports.Prisma.LogAtividadeScalarFieldEnum = {
   acao: 'acao',
   detalhes: 'detalhes',
   data: 'data'
+};
+
+exports.Prisma.LoteScalarFieldEnum = {
+  id: 'id',
+  numero: 'numero',
+  descricao: 'descricao',
+  editalId: 'editalId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ItemScalarFieldEnum = {
+  id: 'id',
+  numero: 'numero',
+  descricao: 'descricao',
+  quantidade: 'quantidade',
+  unidade: 'unidade',
+  valorEstimado: 'valorEstimado',
+  loteId: 'loteId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -257,13 +294,20 @@ exports.TipoEmpresa = exports.$Enums.TipoEmpresa = {
   OUTRA: 'OUTRA'
 };
 
+exports.StatusProposta = exports.$Enums.StatusProposta = {
+  PENDENTE: 'PENDENTE',
+  ACEITA: 'ACEITA',
+  REJEITADA: 'REJEITADA',
+  CANCELADA: 'CANCELADA'
+};
+
 exports.TipoDocumento = exports.$Enums.TipoDocumento = {
   PROPOSTA: 'PROPOSTA',
   HABILITACAO: 'HABILITACAO',
   OUTROS: 'OUTROS'
 };
 
-exports.TipoAutorChat = exports.$Enums.TipoAutorChat = {
+exports.TipoAutorMensagem = exports.$Enums.TipoAutorMensagem = {
   PREGOEIRO: 'PREGOEIRO',
   LICITANTE: 'LICITANTE'
 };
@@ -279,7 +323,9 @@ exports.Prisma.ModelName = {
   DocumentoObrigatorio: 'DocumentoObrigatorio',
   MensagemChat: 'MensagemChat',
   Sessao: 'Sessao',
-  LogAtividade: 'LogAtividade'
+  LogAtividade: 'LogAtividade',
+  Lote: 'Lote',
+  Item: 'Item'
 };
 
 /**
