@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../database/prisma.service';
+import { PrismaService } from '../database/database.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { ApiTags } from '@nestjs/swagger';
 

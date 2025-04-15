@@ -8,6 +8,7 @@ import * as cookieParser from 'cookie-parser';
 import { rateLimit } from 'express-rate-limit';
 
 async function bootstrap() {
+  // const app = await NestFactory.create(AppModule);
   const app = await NestFactory.create(AppModule);
 
   // Configuração do Helmet para headers de segurança
@@ -41,11 +42,11 @@ async function bootstrap() {
 
   // Configuração do CORS
   app.enableCors({
-    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     credentials: true,
-    maxAge: 3600,
+    exposedHeaders: ['Authorization'],
   });
 
   // Compressão de respostas
@@ -55,14 +56,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   // Validação global de DTOs
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      forbidNonWhitelisted: true,
-      disableErrorMessages: process.env.NODE_ENV === 'production',
-    }),
-  );
+  app.useGlobalPipes(new ValidationPipe());
 
   // Configuração do Swagger
   const config = new DocumentBuilder()

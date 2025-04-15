@@ -7,6 +7,5 @@ import { PrismaModule } from '../database/database.module';
     imports: [PrismaModule],
     controllers: [PropostaController],
     providers: [PropostaService],
-    exports: [PropostaService],
 })
 export class PropostaModule {}

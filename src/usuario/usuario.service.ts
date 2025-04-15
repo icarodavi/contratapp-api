@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException, UnauthorizedException, ConflictException } from '@nestjs/common';
-import { PrismaService } from '../database/prisma.service';
+import { PrismaService } from '../database/database.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { LoginDto } from './dto/auth.dto';
+import { UpdateSenhaDto } from './dto/update-senha.dto';
 
 @ApiTags('Usuários')
 @Injectable()
@@ -86,5 +87,28 @@ export class UsuarioService {
             access_token: this.jwtService.sign(payload),
             usuario,
         };
+    }
+
+    async updateSenha(id: string, updateSenhaDto: UpdateSenhaDto) {
+        const usuario = await this.prisma.usuario.findUnique({
+            where: { id },
+        });
+
+        if (!usuario) {
+            throw new NotFoundException('Usuário não encontrado');
+        }
+
+        const senhaValida = await bcrypt.compare(updateSenhaDto.senhaAtual, usuario.senha);
+
+        if (!senhaValida) {
+            throw new UnauthorizedException('Senha atual incorreta');
+        }
+
+        const novaSenhaHash = await bcrypt.hash(updateSenhaDto.novaSenha, 10);
+
+        return this.prisma.usuario.update({
+            where: { id },
+            data: { senha: novaSenhaHash },
+        });
     }
 } 

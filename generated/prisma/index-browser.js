@@ -234,7 +234,9 @@ exports.Prisma.LogAtividadeScalarFieldEnum = {
   usuarioId: 'usuarioId',
   acao: 'acao',
   detalhes: 'detalhes',
-  data: 'data'
+  data: 'data',
+  ip: 'ip',
+  userAgent: 'userAgent'
 };
 
 exports.Prisma.LoteScalarFieldEnum = {

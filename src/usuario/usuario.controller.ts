@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/auth.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { UpdateSenhaDto } from './dto/update-senha.dto';
 
 @ApiTags('Usuários')
 @Controller('usuarios')
@@ -41,5 +42,15 @@ export class UsuarioController {
     @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
     findOne(@Param('id') id: string) {
         return this.usuarioService.findOne(id);
+    }
+
+    @Put(':id/senha')
+    @UseGuards(JwtAuthGuard)
+    @ApiOperation({ summary: 'Atualizar senha do usuário' })
+    @ApiResponse({ status: 200, description: 'Senha atualizada com sucesso' })
+    @ApiResponse({ status: 401, description: 'Senha atual incorreta' })
+    @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
+    updateSenha(@Param('id') id: string, @Body() updateSenhaDto: UpdateSenhaDto) {
+        return this.usuarioService.updateSenha(id, updateSenhaDto);
     }
 } 

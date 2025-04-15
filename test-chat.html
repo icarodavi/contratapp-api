@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Teste de Chat - Sistema de Licitação</title>
+        <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .chat-container {
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 20px;
+                margin-bottom: 20px;
+                height: 400px;
+                overflow-y: auto;
+            }
+
+            .message {
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .pregoeiro {
+                background-color: #e3f2fd;
+                margin-right: 20%;
+            }
+
+            .licitante {
+                background-color: #f1f1f1;
+                margin-left: 20%;
+            }
+
+            .message-header {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .message-content {
+                margin-bottom: 5px;
+            }
+
+            .message-time {
+                font-size: 0.8em;
+                color: #666;
+            }
+
+            .input-container {
+                display: flex;
+                gap: 10px;
+            }
+
+            #messageInput {
+                flex: 1;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            button {
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+            .status {
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                background-color: #f8f9fa;
+            }
+
+            .connected {
+                color: #28a745;
+            }
+
+            .disconnected {
+                color: #dc3545;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Teste de Chat - Sistema de Licitação</h1>
+
+        <div class="status" id="connectionStatus">
+            Status: Desconectado
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <!-- Mensagens serão inseridas aqui -->
+        </div>
+
+        <div class="input-container">
+            <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+
+        <script>
+            let socket;
+            let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMmRhNzYxNi0xYjgwLTRhOTAtOWY0Ni0wMzY1NDdkMjIyNWQiLCJlbWFpbCI6ImpvYW9AZXhlbXBsby5jb20iLCJwZXJmaWwiOiJBRE1JTiIsImlhdCI6MTc0NDU2NDU4MywiZXhwIjoxNzQ0NjUwOTgzfQ.511V8siKmG_BX_fM7MjaRml4gaFHKlKhUpbL2ZlsoK8'; // Token JWT do usuário
+            let editalId = '1'; // ID do edital de teste
+            let usuarioId = '02da7616-1b80-4a90-9f46-036547d2225d'; // ID do usuário atual
+            let tipoAutor = 'PREGOEIRO'; // Tipo do autor (PREGOEIRO ou LICITANTE)
+
+            // Função para conectar ao Socket.IO
+            function connect() {
+                console.log('Conectando ao Socket.IO');
+                socket = io('http://127.0.0.1:3001', {
+                    query: {
+                        editalId: editalId
+                    },
+                    extraHeaders: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    transports: ['websocket', 'polling'],
+                    reconnection: true,
+                    reconnectionAttempts: 5,
+                    reconnectionDelay: 1000
+                });
+
+                socket.on('connect', () => {
+                    document.getElementById('connectionStatus').innerHTML = 'Status: <span class="connected">Conectado</span>';
+                    console.log('Conexão estabelecida');
+                });
+
+                socket.on('message', (message) => {
+                    if (message.type === 'historicoMensagens') {
+                        message.data.forEach(msg => appendMessage(msg));
+                    } else if (message.type === 'novaMensagem') {
+                        appendMessage(message.data);
+                    }
+                });
+
+                socket.on('disconnect', () => {
+                    document.getElementById('connectionStatus').innerHTML = 'Status: <span class="disconnected">Desconectado</span>';
+                    console.log('Conexão fechada');
+                    setTimeout(connect, 5000);
+                });
+
+                socket.on('connect_error', (error) => {
+                    console.error('Erro na conexão:', error);
+                    document.getElementById('connectionStatus').innerHTML = 'Status: <span class="disconnected">Erro na conexão</span>';
+                });
+            }
+
+            // Função para enviar mensagem
+            function sendMessage() {
+                const input = document.getElementById('messageInput');
+                const message = input.value.trim();
+
+                if (message && socket && socket.connected) {
+                    socket.emit('message', {
+                        conteudo: message
+                    });
+                    input.value = '';
+                }
+            }
+
+            // Função para adicionar mensagem ao chat
+            function appendMessage(message) {
+                const container = document.getElementById('chatContainer');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${message.tipoAutor.toLowerCase()}`;
+
+                const header = document.createElement('div');
+                header.className = 'message-header';
+                header.textContent = message.tipoAutor === 'PREGOEIRO' ? 'Pregoeiro' : 'Licitante';
+
+                const content = document.createElement('div');
+                content.className = 'message-content';
+                content.textContent = message.conteudo;
+
+                const time = document.createElement('div');
+                time.className = 'message-time';
+                time.textContent = new Date(message.createdAt).toLocaleString();
+
+                messageDiv.appendChild(header);
+                messageDiv.appendChild(content);
+                messageDiv.appendChild(time);
+                container.appendChild(messageDiv);
+
+                // Scroll para a última mensagem
+                container.scrollTop = container.scrollHeight;
+            }
+
+            // Função para fazer login e obter o token
+            async function login(email, senha) {
+                try {
+                    const response = await fetch('http://127.0.0.1:3001/usuarios/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        mode: 'cors',
+                        credentials: 'include',
+                        body: JSON.stringify({ email, senha })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    if (data.token) {
+                        token = data.token;
+                        usuarioId = data.usuario.id;
+                        tipoAutor = data.usuario.perfil === 'PREGOEIRO' ? 'PREGOEIRO' : 'LICITANTE';
+                        connect();
+                    }
+                } catch (error) {
+                    console.error('Erro no login:', error);
+                }
+            }
+
+            // Função para carregar histórico de mensagens
+            async function loadMessageHistory() {
+                try {
+                    const response = await fetch(`http://127.0.0.1:3001/chat/${editalId}`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include'
+                    });
+
+                    const messages = await response.json();
+                    messages.forEach(message => appendMessage(message));
+                } catch (error) {
+                    console.error('Erro ao carregar histórico:', error);
+                }
+            }
+
+            // Inicialização
+            document.addEventListener('DOMContentLoaded', () => {
+                // Solicitar credenciais ao usuário
+                // const email = prompt('Digite seu email:');
+                // const senha = prompt('Digite sua senha:');
+                const email = 'joao@exemplo.com'
+                const senha = 'senha123'
+
+                // loadMessageHistory()
+                if (email && senha) {
+                    login(email, senha);
+                }
+                connect()
+
+                // Permitir enviar mensagem ao pressionar Enter
+                document.getElementById('messageInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</html>

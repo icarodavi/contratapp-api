@@ -86,21 +86,21 @@ model Edital {
 }
 
 model Disputa {
-  id            String        @id @default(uuid())
+  id            String               @id @default(uuid())
   editalId      String
   status        DisputaStatus
   inicio        DateTime?
   fimPrevisto   DateTime?
   encerramento  DateTime?
   tempoRestante Int?
-
   edital        Edital               @relation(fields: [editalId], references: [id], onDelete: Cascade)
   propostas     Proposta[]
   lances        Lance[]
   documentos    DocumentoLicitante[]
   mensagensChat MensagemChat[]
   logs          LogAtividade[]
-  Sessao        Sessao[]
+  sessoes       Sessao[]
+  licitantes    Licitante[]
 }
 
 model Licitante {
@@ -115,6 +115,7 @@ model Licitante {
   documentos    DocumentoLicitante[]
   sessoes       Sessao[]
   mensagensChat MensagemChat[]
+  disputas      Disputa[]
 }
 
 model Proposta {
@@ -223,6 +224,8 @@ model LogAtividade {
   acao      String
   detalhes  String?
   data      DateTime @default(now())
+  ip        String?
+  userAgent String?
 
   disputa Disputa  @relation(fields: [disputaId], references: [id])
   usuario Usuario? @relation(fields: [usuarioId], references: [id])

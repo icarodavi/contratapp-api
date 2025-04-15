@@ -2161,7 +2161,8 @@ export namespace Prisma {
     documentos: number
     mensagensChat: number
     logs: number
-    Sessao: number
+    sessoes: number
+    licitantes: number
   }
 
   export type DisputaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2170,7 +2171,8 @@ export namespace Prisma {
     documentos?: boolean | DisputaCountOutputTypeCountDocumentosArgs
     mensagensChat?: boolean | DisputaCountOutputTypeCountMensagensChatArgs
     logs?: boolean | DisputaCountOutputTypeCountLogsArgs
-    Sessao?: boolean | DisputaCountOutputTypeCountSessaoArgs
+    sessoes?: boolean | DisputaCountOutputTypeCountSessoesArgs
+    licitantes?: boolean | DisputaCountOutputTypeCountLicitantesArgs
   }
 
   // Custom InputTypes
@@ -2222,8 +2224,15 @@ export namespace Prisma {
   /**
    * DisputaCountOutputType without action
    */
-  export type DisputaCountOutputTypeCountSessaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DisputaCountOutputTypeCountSessoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SessaoWhereInput
+  }
+
+  /**
+   * DisputaCountOutputType without action
+   */
+  export type DisputaCountOutputTypeCountLicitantesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LicitanteWhereInput
   }
 
 
@@ -2237,6 +2246,7 @@ export namespace Prisma {
     documentos: number
     sessoes: number
     mensagensChat: number
+    disputas: number
   }
 
   export type LicitanteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2245,6 +2255,7 @@ export namespace Prisma {
     documentos?: boolean | LicitanteCountOutputTypeCountDocumentosArgs
     sessoes?: boolean | LicitanteCountOutputTypeCountSessoesArgs
     mensagensChat?: boolean | LicitanteCountOutputTypeCountMensagensChatArgs
+    disputas?: boolean | LicitanteCountOutputTypeCountDisputasArgs
   }
 
   // Custom InputTypes
@@ -2291,6 +2302,13 @@ export namespace Prisma {
    */
   export type LicitanteCountOutputTypeCountMensagensChatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MensagemChatWhereInput
+  }
+
+  /**
+   * LicitanteCountOutputType without action
+   */
+  export type LicitanteCountOutputTypeCountDisputasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputaWhereInput
   }
 
 
@@ -4934,7 +4952,8 @@ export namespace Prisma {
     documentos?: boolean | Disputa$documentosArgs<ExtArgs>
     mensagensChat?: boolean | Disputa$mensagensChatArgs<ExtArgs>
     logs?: boolean | Disputa$logsArgs<ExtArgs>
-    Sessao?: boolean | Disputa$SessaoArgs<ExtArgs>
+    sessoes?: boolean | Disputa$sessoesArgs<ExtArgs>
+    licitantes?: boolean | Disputa$licitantesArgs<ExtArgs>
     _count?: boolean | DisputaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["disputa"]>
 
@@ -4978,7 +4997,8 @@ export namespace Prisma {
     documentos?: boolean | Disputa$documentosArgs<ExtArgs>
     mensagensChat?: boolean | Disputa$mensagensChatArgs<ExtArgs>
     logs?: boolean | Disputa$logsArgs<ExtArgs>
-    Sessao?: boolean | Disputa$SessaoArgs<ExtArgs>
+    sessoes?: boolean | Disputa$sessoesArgs<ExtArgs>
+    licitantes?: boolean | Disputa$licitantesArgs<ExtArgs>
     _count?: boolean | DisputaCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DisputaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4997,7 +5017,8 @@ export namespace Prisma {
       documentos: Prisma.$DocumentoLicitantePayload<ExtArgs>[]
       mensagensChat: Prisma.$MensagemChatPayload<ExtArgs>[]
       logs: Prisma.$LogAtividadePayload<ExtArgs>[]
-      Sessao: Prisma.$SessaoPayload<ExtArgs>[]
+      sessoes: Prisma.$SessaoPayload<ExtArgs>[]
+      licitantes: Prisma.$LicitantePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5407,7 +5428,8 @@ export namespace Prisma {
     documentos<T extends Disputa$documentosArgs<ExtArgs> = {}>(args?: Subset<T, Disputa$documentosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoLicitantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mensagensChat<T extends Disputa$mensagensChatArgs<ExtArgs> = {}>(args?: Subset<T, Disputa$mensagensChatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     logs<T extends Disputa$logsArgs<ExtArgs> = {}>(args?: Subset<T, Disputa$logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LogAtividadePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Sessao<T extends Disputa$SessaoArgs<ExtArgs> = {}>(args?: Subset<T, Disputa$SessaoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessoes<T extends Disputa$sessoesArgs<ExtArgs> = {}>(args?: Subset<T, Disputa$sessoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    licitantes<T extends Disputa$licitantesArgs<ExtArgs> = {}>(args?: Subset<T, Disputa$licitantesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicitantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5960,9 +5982,9 @@ export namespace Prisma {
   }
 
   /**
-   * Disputa.Sessao
+   * Disputa.sessoes
    */
-  export type Disputa$SessaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Disputa$sessoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Sessao
      */
@@ -5981,6 +6003,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SessaoScalarFieldEnum | SessaoScalarFieldEnum[]
+  }
+
+  /**
+   * Disputa.licitantes
+   */
+  export type Disputa$licitantesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Licitante
+     */
+    select?: LicitanteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Licitante
+     */
+    omit?: LicitanteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LicitanteInclude<ExtArgs> | null
+    where?: LicitanteWhereInput
+    orderBy?: LicitanteOrderByWithRelationInput | LicitanteOrderByWithRelationInput[]
+    cursor?: LicitanteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LicitanteScalarFieldEnum | LicitanteScalarFieldEnum[]
   }
 
   /**
@@ -6164,6 +6210,7 @@ export namespace Prisma {
     documentos?: boolean | Licitante$documentosArgs<ExtArgs>
     sessoes?: boolean | Licitante$sessoesArgs<ExtArgs>
     mensagensChat?: boolean | Licitante$mensagensChatArgs<ExtArgs>
+    disputas?: boolean | Licitante$disputasArgs<ExtArgs>
     _count?: boolean | LicitanteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["licitante"]>
 
@@ -6196,6 +6243,7 @@ export namespace Prisma {
     documentos?: boolean | Licitante$documentosArgs<ExtArgs>
     sessoes?: boolean | Licitante$sessoesArgs<ExtArgs>
     mensagensChat?: boolean | Licitante$mensagensChatArgs<ExtArgs>
+    disputas?: boolean | Licitante$disputasArgs<ExtArgs>
     _count?: boolean | LicitanteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LicitanteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6210,6 +6258,7 @@ export namespace Prisma {
       documentos: Prisma.$DocumentoLicitantePayload<ExtArgs>[]
       sessoes: Prisma.$SessaoPayload<ExtArgs>[]
       mensagensChat: Prisma.$MensagemChatPayload<ExtArgs>[]
+      disputas: Prisma.$DisputaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6616,6 +6665,7 @@ export namespace Prisma {
     documentos<T extends Licitante$documentosArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$documentosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoLicitantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessoes<T extends Licitante$sessoesArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$sessoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mensagensChat<T extends Licitante$mensagensChatArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$mensagensChatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    disputas<T extends Licitante$disputasArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$disputasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7173,6 +7223,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MensagemChatScalarFieldEnum | MensagemChatScalarFieldEnum[]
+  }
+
+  /**
+   * Licitante.disputas
+   */
+  export type Licitante$disputasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disputa
+     */
+    select?: DisputaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disputa
+     */
+    omit?: DisputaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputaInclude<ExtArgs> | null
+    where?: DisputaWhereInput
+    orderBy?: DisputaOrderByWithRelationInput | DisputaOrderByWithRelationInput[]
+    cursor?: DisputaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DisputaScalarFieldEnum | DisputaScalarFieldEnum[]
   }
 
   /**
@@ -14092,6 +14166,8 @@ export namespace Prisma {
     acao: string | null
     detalhes: string | null
     data: Date | null
+    ip: string | null
+    userAgent: string | null
   }
 
   export type LogAtividadeMaxAggregateOutputType = {
@@ -14101,6 +14177,8 @@ export namespace Prisma {
     acao: string | null
     detalhes: string | null
     data: Date | null
+    ip: string | null
+    userAgent: string | null
   }
 
   export type LogAtividadeCountAggregateOutputType = {
@@ -14110,6 +14188,8 @@ export namespace Prisma {
     acao: number
     detalhes: number
     data: number
+    ip: number
+    userAgent: number
     _all: number
   }
 
@@ -14121,6 +14201,8 @@ export namespace Prisma {
     acao?: true
     detalhes?: true
     data?: true
+    ip?: true
+    userAgent?: true
   }
 
   export type LogAtividadeMaxAggregateInputType = {
@@ -14130,6 +14212,8 @@ export namespace Prisma {
     acao?: true
     detalhes?: true
     data?: true
+    ip?: true
+    userAgent?: true
   }
 
   export type LogAtividadeCountAggregateInputType = {
@@ -14139,6 +14223,8 @@ export namespace Prisma {
     acao?: true
     detalhes?: true
     data?: true
+    ip?: true
+    userAgent?: true
     _all?: true
   }
 
@@ -14221,6 +14307,8 @@ export namespace Prisma {
     acao: string
     detalhes: string | null
     data: Date
+    ip: string | null
+    userAgent: string | null
     _count: LogAtividadeCountAggregateOutputType | null
     _min: LogAtividadeMinAggregateOutputType | null
     _max: LogAtividadeMaxAggregateOutputType | null
@@ -14247,6 +14335,8 @@ export namespace Prisma {
     acao?: boolean
     detalhes?: boolean
     data?: boolean
+    ip?: boolean
+    userAgent?: boolean
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
   }, ExtArgs["result"]["logAtividade"]>
@@ -14258,6 +14348,8 @@ export namespace Prisma {
     acao?: boolean
     detalhes?: boolean
     data?: boolean
+    ip?: boolean
+    userAgent?: boolean
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
   }, ExtArgs["result"]["logAtividade"]>
@@ -14269,6 +14361,8 @@ export namespace Prisma {
     acao?: boolean
     detalhes?: boolean
     data?: boolean
+    ip?: boolean
+    userAgent?: boolean
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
   }, ExtArgs["result"]["logAtividade"]>
@@ -14280,9 +14374,11 @@ export namespace Prisma {
     acao?: boolean
     detalhes?: boolean
     data?: boolean
+    ip?: boolean
+    userAgent?: boolean
   }
 
-  export type LogAtividadeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "disputaId" | "usuarioId" | "acao" | "detalhes" | "data", ExtArgs["result"]["logAtividade"]>
+  export type LogAtividadeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "disputaId" | "usuarioId" | "acao" | "detalhes" | "data" | "ip" | "userAgent", ExtArgs["result"]["logAtividade"]>
   export type LogAtividadeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     disputa?: boolean | DisputaDefaultArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
@@ -14309,6 +14405,8 @@ export namespace Prisma {
       acao: string
       detalhes: string | null
       data: Date
+      ip: string | null
+      userAgent: string | null
     }, ExtArgs["result"]["logAtividade"]>
     composites: {}
   }
@@ -14740,6 +14838,8 @@ export namespace Prisma {
     readonly acao: FieldRef<"LogAtividade", 'String'>
     readonly detalhes: FieldRef<"LogAtividade", 'String'>
     readonly data: FieldRef<"LogAtividade", 'DateTime'>
+    readonly ip: FieldRef<"LogAtividade", 'String'>
+    readonly userAgent: FieldRef<"LogAtividade", 'String'>
   }
     
 
@@ -17639,7 +17739,9 @@ export namespace Prisma {
     usuarioId: 'usuarioId',
     acao: 'acao',
     detalhes: 'detalhes',
-    data: 'data'
+    data: 'data',
+    ip: 'ip',
+    userAgent: 'userAgent'
   };
 
   export type LogAtividadeScalarFieldEnum = (typeof LogAtividadeScalarFieldEnum)[keyof typeof LogAtividadeScalarFieldEnum]
@@ -18020,7 +18122,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
     logs?: LogAtividadeListRelationFilter
-    Sessao?: SessaoListRelationFilter
+    sessoes?: SessaoListRelationFilter
+    licitantes?: LicitanteListRelationFilter
   }
 
   export type DisputaOrderByWithRelationInput = {
@@ -18037,7 +18140,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteOrderByRelationAggregateInput
     mensagensChat?: MensagemChatOrderByRelationAggregateInput
     logs?: LogAtividadeOrderByRelationAggregateInput
-    Sessao?: SessaoOrderByRelationAggregateInput
+    sessoes?: SessaoOrderByRelationAggregateInput
+    licitantes?: LicitanteOrderByRelationAggregateInput
   }
 
   export type DisputaWhereUniqueInput = Prisma.AtLeast<{
@@ -18057,7 +18161,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
     logs?: LogAtividadeListRelationFilter
-    Sessao?: SessaoListRelationFilter
+    sessoes?: SessaoListRelationFilter
+    licitantes?: LicitanteListRelationFilter
   }, "id">
 
   export type DisputaOrderByWithAggregationInput = {
@@ -18102,6 +18207,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteListRelationFilter
     sessoes?: SessaoListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
+    disputas?: DisputaListRelationFilter
   }
 
   export type LicitanteOrderByWithRelationInput = {
@@ -18115,6 +18221,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteOrderByRelationAggregateInput
     sessoes?: SessaoOrderByRelationAggregateInput
     mensagensChat?: MensagemChatOrderByRelationAggregateInput
+    disputas?: DisputaOrderByRelationAggregateInput
   }
 
   export type LicitanteWhereUniqueInput = Prisma.AtLeast<{
@@ -18131,6 +18238,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteListRelationFilter
     sessoes?: SessaoListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
+    disputas?: DisputaListRelationFilter
   }, "id" | "cnpj">
 
   export type LicitanteOrderByWithAggregationInput = {
@@ -18649,6 +18757,8 @@ export namespace Prisma {
     acao?: StringFilter<"LogAtividade"> | string
     detalhes?: StringNullableFilter<"LogAtividade"> | string | null
     data?: DateTimeFilter<"LogAtividade"> | Date | string
+    ip?: StringNullableFilter<"LogAtividade"> | string | null
+    userAgent?: StringNullableFilter<"LogAtividade"> | string | null
     disputa?: XOR<DisputaScalarRelationFilter, DisputaWhereInput>
     usuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
   }
@@ -18660,6 +18770,8 @@ export namespace Prisma {
     acao?: SortOrder
     detalhes?: SortOrderInput | SortOrder
     data?: SortOrder
+    ip?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
     disputa?: DisputaOrderByWithRelationInput
     usuario?: UsuarioOrderByWithRelationInput
   }
@@ -18674,6 +18786,8 @@ export namespace Prisma {
     acao?: StringFilter<"LogAtividade"> | string
     detalhes?: StringNullableFilter<"LogAtividade"> | string | null
     data?: DateTimeFilter<"LogAtividade"> | Date | string
+    ip?: StringNullableFilter<"LogAtividade"> | string | null
+    userAgent?: StringNullableFilter<"LogAtividade"> | string | null
     disputa?: XOR<DisputaScalarRelationFilter, DisputaWhereInput>
     usuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
   }, "id">
@@ -18685,6 +18799,8 @@ export namespace Prisma {
     acao?: SortOrder
     detalhes?: SortOrderInput | SortOrder
     data?: SortOrder
+    ip?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
     _count?: LogAtividadeCountOrderByAggregateInput
     _max?: LogAtividadeMaxOrderByAggregateInput
     _min?: LogAtividadeMinOrderByAggregateInput
@@ -18700,6 +18816,8 @@ export namespace Prisma {
     acao?: StringWithAggregatesFilter<"LogAtividade"> | string
     detalhes?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
     data?: DateTimeWithAggregatesFilter<"LogAtividade"> | Date | string
+    ip?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
   }
 
   export type LoteWhereInput = {
@@ -19040,7 +19158,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaUncheckedCreateInput = {
@@ -19056,7 +19175,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteUncheckedCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaUpdateInput = {
@@ -19072,7 +19192,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaUncheckedUpdateInput = {
@@ -19088,7 +19209,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaCreateManyInput = {
@@ -19131,6 +19253,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteUncheckedCreateInput = {
@@ -19144,6 +19267,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteUpdateInput = {
@@ -19157,6 +19281,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
   }
 
   export type LicitanteUncheckedUpdateInput = {
@@ -19170,6 +19295,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   }
 
   export type LicitanteCreateManyInput = {
@@ -19629,7 +19755,7 @@ export namespace Prisma {
     ip: string
     hash: string
     licitante: LicitanteCreateNestedOneWithoutSessoesInput
-    disputa: DisputaCreateNestedOneWithoutSessaoInput
+    disputa: DisputaCreateNestedOneWithoutSessoesInput
   }
 
   export type SessaoUncheckedCreateInput = {
@@ -19649,7 +19775,7 @@ export namespace Prisma {
     ip?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     licitante?: LicitanteUpdateOneRequiredWithoutSessoesNestedInput
-    disputa?: DisputaUpdateOneRequiredWithoutSessaoNestedInput
+    disputa?: DisputaUpdateOneRequiredWithoutSessoesNestedInput
   }
 
   export type SessaoUncheckedUpdateInput = {
@@ -19695,6 +19821,8 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+    ip?: string | null
+    userAgent?: string | null
     disputa: DisputaCreateNestedOneWithoutLogsInput
     usuario?: UsuarioCreateNestedOneWithoutLogAtividadeInput
   }
@@ -19706,6 +19834,8 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+    ip?: string | null
+    userAgent?: string | null
   }
 
   export type LogAtividadeUpdateInput = {
@@ -19713,6 +19843,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     disputa?: DisputaUpdateOneRequiredWithoutLogsNestedInput
     usuario?: UsuarioUpdateOneWithoutLogAtividadeNestedInput
   }
@@ -19724,6 +19856,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LogAtividadeCreateManyInput = {
@@ -19733,6 +19867,8 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+    ip?: string | null
+    userAgent?: string | null
   }
 
   export type LogAtividadeUpdateManyMutationInput = {
@@ -19740,6 +19876,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LogAtividadeUncheckedUpdateManyInput = {
@@ -19749,6 +19887,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LoteCreateInput = {
@@ -20207,6 +20347,12 @@ export namespace Prisma {
     none?: SessaoWhereInput
   }
 
+  export type LicitanteListRelationFilter = {
+    every?: LicitanteWhereInput
+    some?: LicitanteWhereInput
+    none?: LicitanteWhereInput
+  }
+
   export type PropostaOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -20220,6 +20366,10 @@ export namespace Prisma {
   }
 
   export type SessaoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LicitanteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -20718,6 +20868,8 @@ export namespace Prisma {
     acao?: SortOrder
     detalhes?: SortOrder
     data?: SortOrder
+    ip?: SortOrder
+    userAgent?: SortOrder
   }
 
   export type LogAtividadeMaxOrderByAggregateInput = {
@@ -20727,6 +20879,8 @@ export namespace Prisma {
     acao?: SortOrder
     detalhes?: SortOrder
     data?: SortOrder
+    ip?: SortOrder
+    userAgent?: SortOrder
   }
 
   export type LogAtividadeMinOrderByAggregateInput = {
@@ -20736,6 +20890,8 @@ export namespace Prisma {
     acao?: SortOrder
     detalhes?: SortOrder
     data?: SortOrder
+    ip?: SortOrder
+    userAgent?: SortOrder
   }
 
   export type ItemListRelationFilter = {
@@ -21174,6 +21330,12 @@ export namespace Prisma {
     connect?: SessaoWhereUniqueInput | SessaoWhereUniqueInput[]
   }
 
+  export type LicitanteCreateNestedManyWithoutDisputasInput = {
+    create?: XOR<LicitanteCreateWithoutDisputasInput, LicitanteUncheckedCreateWithoutDisputasInput> | LicitanteCreateWithoutDisputasInput[] | LicitanteUncheckedCreateWithoutDisputasInput[]
+    connectOrCreate?: LicitanteCreateOrConnectWithoutDisputasInput | LicitanteCreateOrConnectWithoutDisputasInput[]
+    connect?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
+  }
+
   export type PropostaUncheckedCreateNestedManyWithoutDisputaInput = {
     create?: XOR<PropostaCreateWithoutDisputaInput, PropostaUncheckedCreateWithoutDisputaInput> | PropostaCreateWithoutDisputaInput[] | PropostaUncheckedCreateWithoutDisputaInput[]
     connectOrCreate?: PropostaCreateOrConnectWithoutDisputaInput | PropostaCreateOrConnectWithoutDisputaInput[]
@@ -21214,6 +21376,12 @@ export namespace Prisma {
     connectOrCreate?: SessaoCreateOrConnectWithoutDisputaInput | SessaoCreateOrConnectWithoutDisputaInput[]
     createMany?: SessaoCreateManyDisputaInputEnvelope
     connect?: SessaoWhereUniqueInput | SessaoWhereUniqueInput[]
+  }
+
+  export type LicitanteUncheckedCreateNestedManyWithoutDisputasInput = {
+    create?: XOR<LicitanteCreateWithoutDisputasInput, LicitanteUncheckedCreateWithoutDisputasInput> | LicitanteCreateWithoutDisputasInput[] | LicitanteUncheckedCreateWithoutDisputasInput[]
+    connectOrCreate?: LicitanteCreateOrConnectWithoutDisputasInput | LicitanteCreateOrConnectWithoutDisputasInput[]
+    connect?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
   }
 
   export type EnumDisputaStatusFieldUpdateOperationsInput = {
@@ -21324,6 +21492,19 @@ export namespace Prisma {
     deleteMany?: SessaoScalarWhereInput | SessaoScalarWhereInput[]
   }
 
+  export type LicitanteUpdateManyWithoutDisputasNestedInput = {
+    create?: XOR<LicitanteCreateWithoutDisputasInput, LicitanteUncheckedCreateWithoutDisputasInput> | LicitanteCreateWithoutDisputasInput[] | LicitanteUncheckedCreateWithoutDisputasInput[]
+    connectOrCreate?: LicitanteCreateOrConnectWithoutDisputasInput | LicitanteCreateOrConnectWithoutDisputasInput[]
+    upsert?: LicitanteUpsertWithWhereUniqueWithoutDisputasInput | LicitanteUpsertWithWhereUniqueWithoutDisputasInput[]
+    set?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
+    disconnect?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
+    delete?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
+    connect?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
+    update?: LicitanteUpdateWithWhereUniqueWithoutDisputasInput | LicitanteUpdateWithWhereUniqueWithoutDisputasInput[]
+    updateMany?: LicitanteUpdateManyWithWhereWithoutDisputasInput | LicitanteUpdateManyWithWhereWithoutDisputasInput[]
+    deleteMany?: LicitanteScalarWhereInput | LicitanteScalarWhereInput[]
+  }
+
   export type PropostaUncheckedUpdateManyWithoutDisputaNestedInput = {
     create?: XOR<PropostaCreateWithoutDisputaInput, PropostaUncheckedCreateWithoutDisputaInput> | PropostaCreateWithoutDisputaInput[] | PropostaUncheckedCreateWithoutDisputaInput[]
     connectOrCreate?: PropostaCreateOrConnectWithoutDisputaInput | PropostaCreateOrConnectWithoutDisputaInput[]
@@ -21408,6 +21589,19 @@ export namespace Prisma {
     deleteMany?: SessaoScalarWhereInput | SessaoScalarWhereInput[]
   }
 
+  export type LicitanteUncheckedUpdateManyWithoutDisputasNestedInput = {
+    create?: XOR<LicitanteCreateWithoutDisputasInput, LicitanteUncheckedCreateWithoutDisputasInput> | LicitanteCreateWithoutDisputasInput[] | LicitanteUncheckedCreateWithoutDisputasInput[]
+    connectOrCreate?: LicitanteCreateOrConnectWithoutDisputasInput | LicitanteCreateOrConnectWithoutDisputasInput[]
+    upsert?: LicitanteUpsertWithWhereUniqueWithoutDisputasInput | LicitanteUpsertWithWhereUniqueWithoutDisputasInput[]
+    set?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
+    disconnect?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
+    delete?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
+    connect?: LicitanteWhereUniqueInput | LicitanteWhereUniqueInput[]
+    update?: LicitanteUpdateWithWhereUniqueWithoutDisputasInput | LicitanteUpdateWithWhereUniqueWithoutDisputasInput[]
+    updateMany?: LicitanteUpdateManyWithWhereWithoutDisputasInput | LicitanteUpdateManyWithWhereWithoutDisputasInput[]
+    deleteMany?: LicitanteScalarWhereInput | LicitanteScalarWhereInput[]
+  }
+
   export type UsuarioCreateNestedOneWithoutLicitanteInput = {
     create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
     connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
@@ -21449,6 +21643,12 @@ export namespace Prisma {
     connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
   }
 
+  export type DisputaCreateNestedManyWithoutLicitantesInput = {
+    create?: XOR<DisputaCreateWithoutLicitantesInput, DisputaUncheckedCreateWithoutLicitantesInput> | DisputaCreateWithoutLicitantesInput[] | DisputaUncheckedCreateWithoutLicitantesInput[]
+    connectOrCreate?: DisputaCreateOrConnectWithoutLicitantesInput | DisputaCreateOrConnectWithoutLicitantesInput[]
+    connect?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+  }
+
   export type UsuarioUncheckedCreateNestedOneWithoutLicitanteInput = {
     create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
     connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
@@ -21488,6 +21688,12 @@ export namespace Prisma {
     connectOrCreate?: MensagemChatCreateOrConnectWithoutLicitanteInput | MensagemChatCreateOrConnectWithoutLicitanteInput[]
     createMany?: MensagemChatCreateManyLicitanteInputEnvelope
     connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+  }
+
+  export type DisputaUncheckedCreateNestedManyWithoutLicitantesInput = {
+    create?: XOR<DisputaCreateWithoutLicitantesInput, DisputaUncheckedCreateWithoutLicitantesInput> | DisputaCreateWithoutLicitantesInput[] | DisputaUncheckedCreateWithoutLicitantesInput[]
+    connectOrCreate?: DisputaCreateOrConnectWithoutLicitantesInput | DisputaCreateOrConnectWithoutLicitantesInput[]
+    connect?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
   }
 
   export type EnumTipoEmpresaFieldUpdateOperationsInput = {
@@ -21574,6 +21780,19 @@ export namespace Prisma {
     deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
   }
 
+  export type DisputaUpdateManyWithoutLicitantesNestedInput = {
+    create?: XOR<DisputaCreateWithoutLicitantesInput, DisputaUncheckedCreateWithoutLicitantesInput> | DisputaCreateWithoutLicitantesInput[] | DisputaUncheckedCreateWithoutLicitantesInput[]
+    connectOrCreate?: DisputaCreateOrConnectWithoutLicitantesInput | DisputaCreateOrConnectWithoutLicitantesInput[]
+    upsert?: DisputaUpsertWithWhereUniqueWithoutLicitantesInput | DisputaUpsertWithWhereUniqueWithoutLicitantesInput[]
+    set?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+    disconnect?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+    delete?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+    connect?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+    update?: DisputaUpdateWithWhereUniqueWithoutLicitantesInput | DisputaUpdateWithWhereUniqueWithoutLicitantesInput[]
+    updateMany?: DisputaUpdateManyWithWhereWithoutLicitantesInput | DisputaUpdateManyWithWhereWithoutLicitantesInput[]
+    deleteMany?: DisputaScalarWhereInput | DisputaScalarWhereInput[]
+  }
+
   export type UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput = {
     create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
     connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
@@ -21652,6 +21871,19 @@ export namespace Prisma {
     update?: MensagemChatUpdateWithWhereUniqueWithoutLicitanteInput | MensagemChatUpdateWithWhereUniqueWithoutLicitanteInput[]
     updateMany?: MensagemChatUpdateManyWithWhereWithoutLicitanteInput | MensagemChatUpdateManyWithWhereWithoutLicitanteInput[]
     deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
+  }
+
+  export type DisputaUncheckedUpdateManyWithoutLicitantesNestedInput = {
+    create?: XOR<DisputaCreateWithoutLicitantesInput, DisputaUncheckedCreateWithoutLicitantesInput> | DisputaCreateWithoutLicitantesInput[] | DisputaUncheckedCreateWithoutLicitantesInput[]
+    connectOrCreate?: DisputaCreateOrConnectWithoutLicitantesInput | DisputaCreateOrConnectWithoutLicitantesInput[]
+    upsert?: DisputaUpsertWithWhereUniqueWithoutLicitantesInput | DisputaUpsertWithWhereUniqueWithoutLicitantesInput[]
+    set?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+    disconnect?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+    delete?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+    connect?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+    update?: DisputaUpdateWithWhereUniqueWithoutLicitantesInput | DisputaUpdateWithWhereUniqueWithoutLicitantesInput[]
+    updateMany?: DisputaUpdateManyWithWhereWithoutLicitantesInput | DisputaUpdateManyWithWhereWithoutLicitantesInput[]
+    deleteMany?: DisputaScalarWhereInput | DisputaScalarWhereInput[]
   }
 
   export type DisputaCreateNestedOneWithoutPropostasInput = {
@@ -21856,9 +22088,9 @@ export namespace Prisma {
     connect?: LicitanteWhereUniqueInput
   }
 
-  export type DisputaCreateNestedOneWithoutSessaoInput = {
-    create?: XOR<DisputaCreateWithoutSessaoInput, DisputaUncheckedCreateWithoutSessaoInput>
-    connectOrCreate?: DisputaCreateOrConnectWithoutSessaoInput
+  export type DisputaCreateNestedOneWithoutSessoesInput = {
+    create?: XOR<DisputaCreateWithoutSessoesInput, DisputaUncheckedCreateWithoutSessoesInput>
+    connectOrCreate?: DisputaCreateOrConnectWithoutSessoesInput
     connect?: DisputaWhereUniqueInput
   }
 
@@ -21870,12 +22102,12 @@ export namespace Prisma {
     update?: XOR<XOR<LicitanteUpdateToOneWithWhereWithoutSessoesInput, LicitanteUpdateWithoutSessoesInput>, LicitanteUncheckedUpdateWithoutSessoesInput>
   }
 
-  export type DisputaUpdateOneRequiredWithoutSessaoNestedInput = {
-    create?: XOR<DisputaCreateWithoutSessaoInput, DisputaUncheckedCreateWithoutSessaoInput>
-    connectOrCreate?: DisputaCreateOrConnectWithoutSessaoInput
-    upsert?: DisputaUpsertWithoutSessaoInput
+  export type DisputaUpdateOneRequiredWithoutSessoesNestedInput = {
+    create?: XOR<DisputaCreateWithoutSessoesInput, DisputaUncheckedCreateWithoutSessoesInput>
+    connectOrCreate?: DisputaCreateOrConnectWithoutSessoesInput
+    upsert?: DisputaUpsertWithoutSessoesInput
     connect?: DisputaWhereUniqueInput
-    update?: XOR<XOR<DisputaUpdateToOneWithWhereWithoutSessaoInput, DisputaUpdateWithoutSessaoInput>, DisputaUncheckedUpdateWithoutSessaoInput>
+    update?: XOR<XOR<DisputaUpdateToOneWithWhereWithoutSessoesInput, DisputaUpdateWithoutSessoesInput>, DisputaUncheckedUpdateWithoutSessoesInput>
   }
 
   export type DisputaCreateNestedOneWithoutLogsInput = {
@@ -22328,6 +22560,8 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+    ip?: string | null
+    userAgent?: string | null
     disputa: DisputaCreateNestedOneWithoutLogsInput
   }
 
@@ -22337,6 +22571,8 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+    ip?: string | null
+    userAgent?: string | null
   }
 
   export type LogAtividadeCreateOrConnectWithoutUsuarioInput = {
@@ -22391,6 +22627,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteUncheckedCreateWithoutUsuarioInput = {
@@ -22403,6 +22640,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteCreateOrConnectWithoutUsuarioInput = {
@@ -22436,6 +22674,8 @@ export namespace Prisma {
     acao?: StringFilter<"LogAtividade"> | string
     detalhes?: StringNullableFilter<"LogAtividade"> | string | null
     data?: DateTimeFilter<"LogAtividade"> | Date | string
+    ip?: StringNullableFilter<"LogAtividade"> | string | null
+    userAgent?: StringNullableFilter<"LogAtividade"> | string | null
   }
 
   export type MensagemChatUpsertWithWhereUniqueWithoutAutorInput = {
@@ -22490,6 +22730,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutUsuarioInput = {
@@ -22502,6 +22743,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   }
 
   export type DisputaCreateWithoutEditalInput = {
@@ -22516,7 +22758,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaUncheckedCreateWithoutEditalInput = {
@@ -22531,7 +22774,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteUncheckedCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaCreateOrConnectWithoutEditalInput = {
@@ -22912,6 +23156,8 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+    ip?: string | null
+    userAgent?: string | null
     usuario?: UsuarioCreateNestedOneWithoutLogAtividadeInput
   }
 
@@ -22921,6 +23167,8 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+    ip?: string | null
+    userAgent?: string | null
   }
 
   export type LogAtividadeCreateOrConnectWithoutDisputaInput = {
@@ -22959,6 +23207,37 @@ export namespace Prisma {
   export type SessaoCreateManyDisputaInputEnvelope = {
     data: SessaoCreateManyDisputaInput | SessaoCreateManyDisputaInput[]
     skipDuplicates?: boolean
+  }
+
+  export type LicitanteCreateWithoutDisputasInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
+    propostas?: PropostaCreateNestedManyWithoutLicitanteInput
+    lances?: LanceCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteUncheckedCreateWithoutDisputasInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
+    propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
+    lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteCreateOrConnectWithoutDisputasInput = {
+    where: LicitanteWhereUniqueInput
+    create: XOR<LicitanteCreateWithoutDisputasInput, LicitanteUncheckedCreateWithoutDisputasInput>
   }
 
   export type EditalUpsertWithoutDisputasInput = {
@@ -23164,6 +23443,32 @@ export namespace Prisma {
     hash?: StringFilter<"Sessao"> | string
   }
 
+  export type LicitanteUpsertWithWhereUniqueWithoutDisputasInput = {
+    where: LicitanteWhereUniqueInput
+    update: XOR<LicitanteUpdateWithoutDisputasInput, LicitanteUncheckedUpdateWithoutDisputasInput>
+    create: XOR<LicitanteCreateWithoutDisputasInput, LicitanteUncheckedCreateWithoutDisputasInput>
+  }
+
+  export type LicitanteUpdateWithWhereUniqueWithoutDisputasInput = {
+    where: LicitanteWhereUniqueInput
+    data: XOR<LicitanteUpdateWithoutDisputasInput, LicitanteUncheckedUpdateWithoutDisputasInput>
+  }
+
+  export type LicitanteUpdateManyWithWhereWithoutDisputasInput = {
+    where: LicitanteScalarWhereInput
+    data: XOR<LicitanteUpdateManyMutationInput, LicitanteUncheckedUpdateManyWithoutDisputasInput>
+  }
+
+  export type LicitanteScalarWhereInput = {
+    AND?: LicitanteScalarWhereInput | LicitanteScalarWhereInput[]
+    OR?: LicitanteScalarWhereInput[]
+    NOT?: LicitanteScalarWhereInput | LicitanteScalarWhereInput[]
+    id?: StringFilter<"Licitante"> | string
+    razaoSocial?: StringFilter<"Licitante"> | string
+    cnpj?: StringFilter<"Licitante"> | string
+    tipoEmpresa?: EnumTipoEmpresaFilter<"Licitante"> | $Enums.TipoEmpresa
+  }
+
   export type UsuarioCreateWithoutLicitanteInput = {
     id?: string
     nome: string
@@ -23307,7 +23612,7 @@ export namespace Prisma {
     fim?: Date | string | null
     ip: string
     hash: string
-    disputa: DisputaCreateNestedOneWithoutSessaoInput
+    disputa: DisputaCreateNestedOneWithoutSessoesInput
   }
 
   export type SessaoUncheckedCreateWithoutLicitanteInput = {
@@ -23359,6 +23664,43 @@ export namespace Prisma {
   export type MensagemChatCreateManyLicitanteInputEnvelope = {
     data: MensagemChatCreateManyLicitanteInput | MensagemChatCreateManyLicitanteInput[]
     skipDuplicates?: boolean
+  }
+
+  export type DisputaCreateWithoutLicitantesInput = {
+    id?: string
+    status: $Enums.DisputaStatus
+    inicio?: Date | string | null
+    fimPrevisto?: Date | string | null
+    encerramento?: Date | string | null
+    tempoRestante?: number | null
+    edital: EditalCreateNestedOneWithoutDisputasInput
+    propostas?: PropostaCreateNestedManyWithoutDisputaInput
+    lances?: LanceCreateNestedManyWithoutDisputaInput
+    documentos?: DocumentoLicitanteCreateNestedManyWithoutDisputaInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutDisputaInput
+    logs?: LogAtividadeCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoCreateNestedManyWithoutDisputaInput
+  }
+
+  export type DisputaUncheckedCreateWithoutLicitantesInput = {
+    id?: string
+    editalId: string
+    status: $Enums.DisputaStatus
+    inicio?: Date | string | null
+    fimPrevisto?: Date | string | null
+    encerramento?: Date | string | null
+    tempoRestante?: number | null
+    propostas?: PropostaUncheckedCreateNestedManyWithoutDisputaInput
+    lances?: LanceUncheckedCreateNestedManyWithoutDisputaInput
+    documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
+    logs?: LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+  }
+
+  export type DisputaCreateOrConnectWithoutLicitantesInput = {
+    where: DisputaWhereUniqueInput
+    create: XOR<DisputaCreateWithoutLicitantesInput, DisputaUncheckedCreateWithoutLicitantesInput>
   }
 
   export type UsuarioUpsertWithoutLicitanteInput = {
@@ -23472,6 +23814,22 @@ export namespace Prisma {
     data: XOR<MensagemChatUpdateManyMutationInput, MensagemChatUncheckedUpdateManyWithoutLicitanteInput>
   }
 
+  export type DisputaUpsertWithWhereUniqueWithoutLicitantesInput = {
+    where: DisputaWhereUniqueInput
+    update: XOR<DisputaUpdateWithoutLicitantesInput, DisputaUncheckedUpdateWithoutLicitantesInput>
+    create: XOR<DisputaCreateWithoutLicitantesInput, DisputaUncheckedCreateWithoutLicitantesInput>
+  }
+
+  export type DisputaUpdateWithWhereUniqueWithoutLicitantesInput = {
+    where: DisputaWhereUniqueInput
+    data: XOR<DisputaUpdateWithoutLicitantesInput, DisputaUncheckedUpdateWithoutLicitantesInput>
+  }
+
+  export type DisputaUpdateManyWithWhereWithoutLicitantesInput = {
+    where: DisputaScalarWhereInput
+    data: XOR<DisputaUpdateManyMutationInput, DisputaUncheckedUpdateManyWithoutLicitantesInput>
+  }
+
   export type DisputaCreateWithoutPropostasInput = {
     id?: string
     status: $Enums.DisputaStatus
@@ -23484,7 +23842,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaUncheckedCreateWithoutPropostasInput = {
@@ -23499,7 +23858,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteUncheckedCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaCreateOrConnectWithoutPropostasInput = {
@@ -23517,6 +23877,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteUncheckedCreateWithoutPropostasInput = {
@@ -23529,6 +23890,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteCreateOrConnectWithoutPropostasInput = {
@@ -23590,7 +23952,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaUncheckedUpdateWithoutPropostasInput = {
@@ -23605,7 +23968,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
   }
 
   export type LicitanteUpsertWithoutPropostasInput = {
@@ -23629,6 +23993,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutPropostasInput = {
@@ -23641,6 +24006,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   }
 
   export type ItemUpsertWithoutPropostasInput = {
@@ -23692,7 +24058,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaUncheckedCreateWithoutLancesInput = {
@@ -23707,7 +24074,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteUncheckedCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaCreateOrConnectWithoutLancesInput = {
@@ -23725,6 +24093,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteUncheckedCreateWithoutLancesInput = {
@@ -23737,6 +24106,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteCreateOrConnectWithoutLancesInput = {
@@ -23767,7 +24137,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaUncheckedUpdateWithoutLancesInput = {
@@ -23782,7 +24153,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
   }
 
   export type LicitanteUpsertWithoutLancesInput = {
@@ -23806,6 +24178,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutLancesInput = {
@@ -23818,6 +24191,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   }
 
   export type DisputaCreateWithoutDocumentosInput = {
@@ -23832,7 +24206,8 @@ export namespace Prisma {
     lances?: LanceCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaUncheckedCreateWithoutDocumentosInput = {
@@ -23847,7 +24222,8 @@ export namespace Prisma {
     lances?: LanceUncheckedCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteUncheckedCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaCreateOrConnectWithoutDocumentosInput = {
@@ -23865,6 +24241,7 @@ export namespace Prisma {
     lances?: LanceCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteUncheckedCreateWithoutDocumentosInput = {
@@ -23877,6 +24254,7 @@ export namespace Prisma {
     lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteCreateOrConnectWithoutDocumentosInput = {
@@ -23907,7 +24285,8 @@ export namespace Prisma {
     lances?: LanceUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaUncheckedUpdateWithoutDocumentosInput = {
@@ -23922,7 +24301,8 @@ export namespace Prisma {
     lances?: LanceUncheckedUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
   }
 
   export type LicitanteUpsertWithoutDocumentosInput = {
@@ -23946,6 +24326,7 @@ export namespace Prisma {
     lances?: LanceUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutDocumentosInput = {
@@ -23958,6 +24339,7 @@ export namespace Prisma {
     lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   }
 
   export type EditalCreateWithoutDocumentosObrigatoriosInput = {
@@ -24108,7 +24490,8 @@ export namespace Prisma {
     lances?: LanceCreateNestedManyWithoutDisputaInput
     documentos?: DocumentoLicitanteCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaUncheckedCreateWithoutMensagensChatInput = {
@@ -24123,7 +24506,8 @@ export namespace Prisma {
     lances?: LanceUncheckedCreateNestedManyWithoutDisputaInput
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteUncheckedCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaCreateOrConnectWithoutMensagensChatInput = {
@@ -24141,6 +24525,7 @@ export namespace Prisma {
     lances?: LanceCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteUncheckedCreateWithoutMensagensChatInput = {
@@ -24153,6 +24538,7 @@ export namespace Prisma {
     lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteCreateOrConnectWithoutMensagensChatInput = {
@@ -24255,7 +24641,8 @@ export namespace Prisma {
     lances?: LanceUpdateManyWithoutDisputaNestedInput
     documentos?: DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaUncheckedUpdateWithoutMensagensChatInput = {
@@ -24270,7 +24657,8 @@ export namespace Prisma {
     lances?: LanceUncheckedUpdateManyWithoutDisputaNestedInput
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
   }
 
   export type LicitanteUpsertWithoutMensagensChatInput = {
@@ -24294,6 +24682,7 @@ export namespace Prisma {
     lances?: LanceUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutMensagensChatInput = {
@@ -24306,6 +24695,7 @@ export namespace Prisma {
     lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   }
 
   export type LicitanteCreateWithoutSessoesInput = {
@@ -24318,6 +24708,7 @@ export namespace Prisma {
     lances?: LanceCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteUncheckedCreateWithoutSessoesInput = {
@@ -24330,6 +24721,7 @@ export namespace Prisma {
     lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   }
 
   export type LicitanteCreateOrConnectWithoutSessoesInput = {
@@ -24337,7 +24729,7 @@ export namespace Prisma {
     create: XOR<LicitanteCreateWithoutSessoesInput, LicitanteUncheckedCreateWithoutSessoesInput>
   }
 
-  export type DisputaCreateWithoutSessaoInput = {
+  export type DisputaCreateWithoutSessoesInput = {
     id?: string
     status: $Enums.DisputaStatus
     inicio?: Date | string | null
@@ -24350,9 +24742,10 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteCreateNestedManyWithoutDisputasInput
   }
 
-  export type DisputaUncheckedCreateWithoutSessaoInput = {
+  export type DisputaUncheckedCreateWithoutSessoesInput = {
     id?: string
     editalId: string
     status: $Enums.DisputaStatus
@@ -24365,11 +24758,12 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
     logs?: LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteUncheckedCreateNestedManyWithoutDisputasInput
   }
 
-  export type DisputaCreateOrConnectWithoutSessaoInput = {
+  export type DisputaCreateOrConnectWithoutSessoesInput = {
     where: DisputaWhereUniqueInput
-    create: XOR<DisputaCreateWithoutSessaoInput, DisputaUncheckedCreateWithoutSessaoInput>
+    create: XOR<DisputaCreateWithoutSessoesInput, DisputaUncheckedCreateWithoutSessoesInput>
   }
 
   export type LicitanteUpsertWithoutSessoesInput = {
@@ -24393,6 +24787,7 @@ export namespace Prisma {
     lances?: LanceUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutSessoesInput = {
@@ -24405,20 +24800,21 @@ export namespace Prisma {
     lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   }
 
-  export type DisputaUpsertWithoutSessaoInput = {
-    update: XOR<DisputaUpdateWithoutSessaoInput, DisputaUncheckedUpdateWithoutSessaoInput>
-    create: XOR<DisputaCreateWithoutSessaoInput, DisputaUncheckedCreateWithoutSessaoInput>
+  export type DisputaUpsertWithoutSessoesInput = {
+    update: XOR<DisputaUpdateWithoutSessoesInput, DisputaUncheckedUpdateWithoutSessoesInput>
+    create: XOR<DisputaCreateWithoutSessoesInput, DisputaUncheckedCreateWithoutSessoesInput>
     where?: DisputaWhereInput
   }
 
-  export type DisputaUpdateToOneWithWhereWithoutSessaoInput = {
+  export type DisputaUpdateToOneWithWhereWithoutSessoesInput = {
     where?: DisputaWhereInput
-    data: XOR<DisputaUpdateWithoutSessaoInput, DisputaUncheckedUpdateWithoutSessaoInput>
+    data: XOR<DisputaUpdateWithoutSessoesInput, DisputaUncheckedUpdateWithoutSessoesInput>
   }
 
-  export type DisputaUpdateWithoutSessaoInput = {
+  export type DisputaUpdateWithoutSessoesInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
     inicio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24431,9 +24827,10 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUpdateManyWithoutDisputasNestedInput
   }
 
-  export type DisputaUncheckedUpdateWithoutSessaoInput = {
+  export type DisputaUncheckedUpdateWithoutSessoesInput = {
     id?: StringFieldUpdateOperationsInput | string
     editalId?: StringFieldUpdateOperationsInput | string
     status?: EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
@@ -24446,6 +24843,7 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaCreateWithoutLogsInput = {
@@ -24460,7 +24858,8 @@ export namespace Prisma {
     lances?: LanceCreateNestedManyWithoutDisputaInput
     documentos?: DocumentoLicitanteCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaUncheckedCreateWithoutLogsInput = {
@@ -24475,7 +24874,8 @@ export namespace Prisma {
     lances?: LanceUncheckedCreateNestedManyWithoutDisputaInput
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
-    Sessao?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutDisputaInput
+    licitantes?: LicitanteUncheckedCreateNestedManyWithoutDisputasInput
   }
 
   export type DisputaCreateOrConnectWithoutLogsInput = {
@@ -24531,7 +24931,8 @@ export namespace Prisma {
     lances?: LanceUpdateManyWithoutDisputaNestedInput
     documentos?: DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaUncheckedUpdateWithoutLogsInput = {
@@ -24546,7 +24947,8 @@ export namespace Prisma {
     lances?: LanceUncheckedUpdateManyWithoutDisputaNestedInput
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
   }
 
   export type UsuarioUpsertWithoutLogAtividadeInput = {
@@ -24846,6 +25248,8 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+    ip?: string | null
+    userAgent?: string | null
   }
 
   export type MensagemChatCreateManyAutorInput = {
@@ -24864,6 +25268,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     disputa?: DisputaUpdateOneRequiredWithoutLogsNestedInput
   }
 
@@ -24873,6 +25279,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LogAtividadeUncheckedUpdateManyWithoutUsuarioInput = {
@@ -24881,6 +25289,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MensagemChatUpdateWithoutAutorInput = {
@@ -24963,7 +25373,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaUncheckedUpdateWithoutEditalInput = {
@@ -24978,7 +25389,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
     logs?: LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
-    Sessao?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+    licitantes?: LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
   }
 
   export type DisputaUncheckedUpdateManyWithoutEditalInput = {
@@ -25128,6 +25540,8 @@ export namespace Prisma {
     acao: string
     detalhes?: string | null
     data?: Date | string
+    ip?: string | null
+    userAgent?: string | null
   }
 
   export type SessaoCreateManyDisputaInput = {
@@ -25300,6 +25714,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     usuario?: UsuarioUpdateOneWithoutLogAtividadeNestedInput
   }
 
@@ -25309,6 +25725,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LogAtividadeUncheckedUpdateManyWithoutDisputaInput = {
@@ -25317,6 +25735,8 @@ export namespace Prisma {
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessaoUpdateWithoutDisputaInput = {
@@ -25344,6 +25764,39 @@ export namespace Prisma {
     fim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ip?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LicitanteUpdateWithoutDisputasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
+    propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type LicitanteUncheckedUpdateWithoutDisputasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
+    propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type LicitanteUncheckedUpdateManyWithoutDisputasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
   }
 
   export type PropostaCreateManyLicitanteInput = {
@@ -25536,7 +25989,7 @@ export namespace Prisma {
     fim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ip?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    disputa?: DisputaUpdateOneRequiredWithoutSessaoNestedInput
+    disputa?: DisputaUpdateOneRequiredWithoutSessoesNestedInput
   }
 
   export type SessaoUncheckedUpdateWithoutLicitanteInput = {
@@ -25588,6 +26041,48 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputaId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DisputaUpdateWithoutLicitantesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
+    inicio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fimPrevisto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    encerramento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tempoRestante?: NullableIntFieldUpdateOperationsInput | number | null
+    edital?: EditalUpdateOneRequiredWithoutDisputasNestedInput
+    propostas?: PropostaUpdateManyWithoutDisputaNestedInput
+    lances?: LanceUpdateManyWithoutDisputaNestedInput
+    documentos?: DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutDisputaNestedInput
+    logs?: LogAtividadeUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUpdateManyWithoutDisputaNestedInput
+  }
+
+  export type DisputaUncheckedUpdateWithoutLicitantesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
+    inicio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fimPrevisto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    encerramento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tempoRestante?: NullableIntFieldUpdateOperationsInput | number | null
+    propostas?: PropostaUncheckedUpdateManyWithoutDisputaNestedInput
+    lances?: LanceUncheckedUpdateManyWithoutDisputaNestedInput
+    documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
+    logs?: LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+  }
+
+  export type DisputaUncheckedUpdateManyWithoutLicitantesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    editalId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
+    inicio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fimPrevisto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    encerramento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tempoRestante?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ItemCreateManyLoteInput = {
