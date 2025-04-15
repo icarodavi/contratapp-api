@@ -7,54 +7,59 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { UseGuards } from '@nestjs/common';
-import { WsJwtAuthGuard } from '../auth/guards/ws-jwt-auth.guard';
 import { ChatService } from './chat.service';
+import { PerfilUsuario } from '@generated/prisma';
 
 @WebSocketGateway({
     cors: {
         origin: '*',
         methods: ['GET', 'POST'],
         credentials: true,
-        allowedHeaders: ['Authorization', 'Content-Type']
+        allowedHeaders: ['Authorization', 'Content-Type'],
     },
     transports: ['websocket', 'polling'],
-    namespace: '/'
+    namespace: '/',
 })
-@UseGuards(WsJwtAuthGuard)
+// @UseGuards(WsJwtAuthGuard) // pode ser reativado se desejar proteger com JWT
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer()
     server: Server;
 
-    constructor(private readonly chatService: ChatService) {}
+    constructor(private readonly chatService: ChatService) {
+        console.log('🚀 ChatGateway INSTANCIADO');
+    }
 
     async handleConnection(client: Socket) {
         const editalId = client.handshake.query.editalId as string;
-        if (!editalId) {
+        const usuarioId = client.handshake.query.usuarioId as string;
+        const perfil = client.handshake.query.perfil as PerfilUsuario;
+
+        if (!editalId || !usuarioId || !perfil) {
             client.disconnect();
             return;
         }
 
-        // Verifica se o usuário tem acesso ao edital
-        // const usuarioId = client.data.user.id;
-        const usuarioId = '02da7616-1b80-4a90-9f46-036547d2225d';
-        // const perfil = client.data.user.perfil;
-        const perfil = 'PREGOEIRO';
-        // const temAcesso = await this.chatService.verificarAcessoEdital(editalId, usuarioId, perfil);
-        const temAcesso = true;
+        const temAcesso = await this.chatService.verificarAcessoEdital(
+            editalId,
+            usuarioId,
+            perfil,
+        );
 
         if (!temAcesso) {
             client.disconnect();
             return;
         }
 
-        // Entra na sala do edital
+        // Junta-se à sala do edital
         client.join(editalId);
 
-        // Envia o histórico de mensagens
+        // Envia o histórico de mensagens apenas ao usuário conectado
         const historico = await this.chatService.obterHistoricoMensagens(editalId, usuarioId);
+
         client.emit('message', {
             type: 'historicoMensagens',
-            data: historico
+            data: historico,
+            messageId: `historico-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         });
     }
 
@@ -64,22 +69,29 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     @SubscribeMessage('enviarMensagem')
     async handleMessage(client: Socket, data: { conteudo: string }) {
-        console.log(data)
+        console.log('🔔 handleMessage chamado por:', client.id, 'conteúdo:', data?.conteudo);
         const editalId = client.handshake.query.editalId as string;
-        const usuarioId = client.data.user.id;
-        const perfil = client.data.user.perfil;
+        const usuarioId = client.handshake.query.usuarioId as string;
+        const perfil = client.handshake.query.perfil as PerfilUsuario;
+
+        if (!data?.conteudo?.trim()) return;
 
         const mensagem = await this.chatService.criarMensagem(
             editalId,
             usuarioId,
             perfil,
-            data.conteudo
+            data.conteudo.trim(),
         );
-        console.log(mensagem)
-        // Envia a mensagem para todos na sala do edital
-        this.server.to(editalId).emit('message', {
+
+        const messageId = `mensagem-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+        const payload = {
             type: 'novaMensagem',
-            data: mensagem
-        });
+            data: mensagem,
+            messageId,
+        };
+
+        // Envia para todos na sala (inclusive o remetente)
+        this.server.to(editalId).emit('message', payload);
     }
-} 
+}

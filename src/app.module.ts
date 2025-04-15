@@ -8,7 +8,7 @@ import { PropostaModule } from './proposta/proposta.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { EditalModule } from './edital/edital.module';
 import { PrismaModule } from './database/database.module';
-import { ChatGateway } from './chat/chat.gateway';
+// import { ChatGateway } from './chat/chat.gateway';
 
 @Module({
   imports: [
@@ -20,6 +20,6 @@ import { ChatGateway } from './chat/chat.gateway';
     ChatModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ChatGateway],
+  providers: [AppService],
 })
 export class AppModule {}
