@@ -25,9 +25,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer()
     server: Server;
 
-    constructor(private readonly chatService: ChatService) {
-        console.log('🚀 ChatGateway INSTANCIADO');
-    }
+    constructor(private readonly chatService: ChatService) {}
 
     async handleConnection(client: Socket) {
         const editalId = client.handshake.query.editalId as string;
