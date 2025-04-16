@@ -10,6 +10,7 @@ import { EditalModule } from './edital/edital.module';
 import { PrismaModule } from './database/database.module';
 import { TimeModule } from './time/time.module';
 import { DisputaModule } from './disputa/disputa.module';
+import { LicitanteModule } from './licitante/licitante.module';
 // import { ChatGateway } from './chat/chat.gateway';
 
 @Module({
@@ -22,6 +23,7 @@ import { DisputaModule } from './disputa/disputa.module';
     ChatModule,
     TimeModule,
     DisputaModule,
+    LicitanteModule,
   ],
   controllers: [AppController],
   providers: [AppService],
