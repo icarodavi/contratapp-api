@@ -1,19 +1,40 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { CreateEditalDto } from './create-edital.dto';
+import { IsOptional, IsString, IsDate, IsEnum } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { ModalidadeLicitação } from '@prisma/client';
 
-export class UpdateEditalDto extends PartialType(CreateEditalDto) {
-    @ApiProperty({ required: false, description: 'Número do edital' })
+export class UpdateEditalDto {
+    @ApiProperty({ description: 'Número do edital', required: false })
+    @IsOptional()
+    @IsString()
     numero?: string;
 
-    @ApiProperty({ required: false, description: 'Título do edital' })
-    titulo?: string;
+    @ApiProperty({ description: 'Objeto da licitação', required: false })
+    @IsOptional()
+    @IsString()
+    objeto?: string;
 
-    @ApiProperty({ required: false, description: 'Descrição do edital' })
-    descricao?: string;
+    @ApiProperty({
+        description: 'Modalidade da licitação',
+        enum: ModalidadeLicitação,
+        example: ModalidadeLicitação.PREGÃO_ELETRÔNICO,
+        required: false
+    })
+    @IsOptional()
+    @IsEnum(ModalidadeLicitação)
+    modalidade?: ModalidadeLicitação;
 
-    @ApiProperty({ required: false, description: 'Data de abertura do edital' })
+    @ApiProperty({ description: 'Status do edital', required: false })
+    @IsOptional()
+    @IsString()
+    status?: string;
+
+    @ApiProperty({ description: 'Data de abertura do edital', required: false })
+    @IsOptional()
+    @IsDate()
     dataAbertura?: Date;
 
-    @ApiProperty({ required: false, description: 'Status do edital' })
-    status?: string;
+    @ApiProperty({ description: 'Caminho do arquivo PDF do edital', required: false })
+    @IsOptional()
+    @IsString()
+    arquivoPdf?: string;
 } 

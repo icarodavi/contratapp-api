@@ -35,6 +35,9 @@ enum TipoDocumento {
   ATA
   CONTRATO
   ANEXO
+  CERTIDAO
+  DECLARACAO
+  COMPROVANTE
 }
 
 enum PerfilUsuario {
@@ -61,6 +64,22 @@ enum TipoAutorMensagem {
   LICITANTE
 }
 
+enum StatusDocumento {
+  PENDENTE
+  VALIDADO
+  INVALIDO
+  EXPIRADO
+}
+
+enum ModalidadeLicitação {
+  PREGÃO_ELETRÔNICO
+  CONCORRÊNCIA
+  CONCURSO
+  LEILÃO
+  DISPENSA
+  INEXIGIBILIDADE
+}
+
 model Usuario {
   id           String         @id @default(uuid())
   nome         String
@@ -77,7 +96,7 @@ model Edital {
   id                     String                 @id @default(uuid())
   numero                 String                 @unique
   objeto                 String
-  modalidade             String
+  modalidade             ModalidadeLicitação
   status                 String
   dataAbertura           DateTime
   arquivoPdf             String?
@@ -162,23 +181,22 @@ model Lance {
   licitante Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
 }
 
-model DocumentoLicitante {
-  id               String        @id @default(uuid())
-  disputaId        String
-  licitanteId      String
-  tipoDocumento    TipoDocumento
-  nomeOriginal     String
-  descricao        String?
-  arquivoPath      String
-  dataEnvio        DateTime
-  versao           Int           @default(1)
-  valido           Boolean       @default(true)
-  hashDocumento    String?
-  assinaturaBase64 String?
-  assinadoPor      String?
+model Documento {
+  id        String        @id @default(uuid())
+  nome      String
+  tipo      TipoDocumento
+  caminho   String
+  descricao String?
+  ativo     Boolean       @default(true)
+  editalId  String
+  edital    Edital        @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  deletedAt DateTime?
 
-  disputa   Disputa   @relation(fields: [disputaId], references: [id], onDelete: Cascade)
-  licitante Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
+  @@index([editalId])
+  @@index([tipo])
+  @@index([ativo])
 }
 
 model DocumentoObrigatorio {
@@ -186,8 +204,44 @@ model DocumentoObrigatorio {
   editalId      String
   tipoDocumento TipoDocumento
   descricao     String
+  prazoValidade Int? // dias de validade
+  observacoes   String?
+  edital        Edital        @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 
-  edital Edital @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  @@index([editalId])
+  @@index([tipoDocumento])
+}
+
+model DocumentoLicitante {
+  id               String          @id @default(uuid())
+  disputaId        String
+  licitanteId      String
+  tipoDocumento    TipoDocumento
+  nomeOriginal     String
+  descricao        String?
+  arquivoPath      String
+  dataEnvio        DateTime
+  versao           Int             @default(1)
+  status           StatusDocumento @default(PENDENTE)
+  valido           Boolean         @default(true)
+  hashDocumento    String?
+  assinaturaBase64 String?
+  assinadoPor      String?
+  observacoes      String?
+  dataValidade     DateTime?
+  dataValidacao    DateTime?
+  validadoPor      String?
+
+  disputa   Disputa   @relation(fields: [disputaId], references: [id], onDelete: Cascade)
+  licitante Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
+
+  @@index([disputaId])
+  @@index([licitanteId])
+  @@index([tipoDocumento])
+  @@index([status])
+  @@index([valido])
 }
 
 model MensagemChat {
@@ -267,21 +321,4 @@ model Item {
 
   @@unique([numero, loteId])
   @@index([loteId, status])
-}
-
-model Documento {
-  id        String        @id @default(uuid())
-  nome      String
-  tipo      TipoDocumento
-  caminho   String
-  descricao String?
-  ativo     Boolean       @default(true)
-  editalId  String
-  edital    Edital        @relation(fields: [editalId], references: [id], onDelete: Cascade)
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  deletedAt DateTime?
-
-  @@index([editalId])
-  @@index([tipo])
 }

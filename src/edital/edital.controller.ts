@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param, NotFoundException, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes } from '@nestjs/common';
 import { EditalService } from './edital.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ModalidadeLicitaçãoPipe } from './pipes/modalidade-licitacao.pipe';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @ApiTags('Editais')
 @Controller('editais')
@@ -10,6 +11,7 @@ export class EditalController {
     constructor(private readonly editalService: EditalService) {}
 
     @Post()
+    @UsePipes(ModalidadeLicitaçãoPipe)
     @ApiOperation({ summary: 'Criar um novo edital' })
     @ApiResponse({ status: 201, description: 'Edital criado com sucesso' })
     @ApiResponse({ status: 400, description: 'Dados inválidos' })
@@ -40,7 +42,8 @@ export class EditalController {
         return this.editalService.findByNumero(numero);
     }
 
-    @Put(':id')
+    @Patch(':id')
+    @UsePipes(ModalidadeLicitaçãoPipe)
     @ApiOperation({ summary: 'Atualizar edital' })
     @ApiResponse({ status: 200, description: 'Edital atualizado com sucesso' })
     @ApiResponse({ status: 404, description: 'Edital não encontrado' })

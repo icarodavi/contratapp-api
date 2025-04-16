@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+
 import { AuthModule } from './auth/auth.module';
 import { ChatModule } from './chat/chat.module';
 import { PropostaModule } from './proposta/proposta.module';
@@ -20,10 +21,10 @@ import { SessaoModule } from './sessao/sessao.module';
 
 @Module({
   imports: [
+    PrismaModule,
     PropostaModule,
     UsuarioModule,
     EditalModule,
-    PrismaModule,
     AuthModule,
     ChatModule,
     TimeModule,

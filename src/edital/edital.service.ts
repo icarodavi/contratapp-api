@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../database/database.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { ModalidadeLicitação } from '@prisma/client';
 
 @ApiTags('Editais')
 @Injectable()
@@ -11,7 +12,10 @@ export class EditalService {
 
     async create(createEditalDto: CreateEditalDto) {
         return this.prisma.edital.create({
-            data: createEditalDto,
+            data: {
+                ...createEditalDto,
+                modalidade: createEditalDto.modalidade as ModalidadeLicitação,
+            },
         });
     }
 
@@ -20,6 +24,8 @@ export class EditalService {
             include: {
                 disputas: true,
                 documentosObrigatorios: true,
+                documentos: true,
+                lotes: true,
             },
         });
     }
@@ -30,11 +36,13 @@ export class EditalService {
             include: {
                 disputas: true,
                 documentosObrigatorios: true,
+                documentos: true,
+                lotes: true,
             },
         });
 
         if (!edital) {
-            throw new NotFoundException('Edital não encontrado');
+            throw new NotFoundException(`Edital com ID ${id} não encontrado`);
         }
 
         return edital;
@@ -51,20 +59,31 @@ export class EditalService {
     }
 
     async update(id: string, updateEditalDto: UpdateEditalDto) {
-        const edital = await this.findOne(id);
+        const edital = await this.prisma.edital.findUnique({
+            where: { id },
+        });
+
+        if (!edital) {
+            throw new NotFoundException(`Edital com ID ${id} não encontrado`);
+        }
 
         return this.prisma.edital.update({
             where: { id },
-            data: updateEditalDto,
-            include: {
-                disputas: true,
-                documentosObrigatorios: true,
+            data: {
+                ...updateEditalDto,
+                modalidade: updateEditalDto.modalidade as ModalidadeLicitação,
             },
         });
     }
 
     async remove(id: string) {
-        const edital = await this.findOne(id);
+        const edital = await this.prisma.edital.findUnique({
+            where: { id },
+        });
+
+        if (!edital) {
+            throw new NotFoundException(`Edital com ID ${id} não encontrado`);
+        }
 
         return this.prisma.edital.delete({
             where: { id },

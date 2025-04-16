@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsNotEmpty, IsOptional, IsString, IsEnum } from 'class-validator';
+import { ModalidadeLicitação } from '@prisma/client';
 
 export class CreateEditalDto {
     @ApiProperty({
@@ -20,11 +21,12 @@ export class CreateEditalDto {
 
     @ApiProperty({
         description: 'Modalidade da licitação',
-        example: 'Pregão Eletrônico',
+        enum: ModalidadeLicitação,
+        example: ModalidadeLicitação.PREGÃO_ELETRÔNICO
     })
-    @IsString()
     @IsNotEmpty()
-    modalidade: string;
+    @IsEnum(ModalidadeLicitação)
+    modalidade: ModalidadeLicitação;
 
     @ApiProperty({
         description: 'Status do edital',
