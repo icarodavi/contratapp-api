@@ -11,6 +11,11 @@ import { PrismaModule } from './database/database.module';
 import { TimeModule } from './time/time.module';
 import { DisputaModule } from './disputa/disputa.module';
 import { LicitanteModule } from './licitante/licitante.module';
+import { DocumentoModule } from './documento/documento.module';
+import { LoteModule } from './lote/lote.module';
+import { ItemModule } from './item/item.module';
+import { LogAtividadeModule } from './log-atividade/log-atividade.module';
+import { SessaoModule } from './sessao/sessao.module';
 // import { ChatGateway } from './chat/chat.gateway';
 
 @Module({
@@ -24,6 +29,11 @@ import { LicitanteModule } from './licitante/licitante.module';
     TimeModule,
     DisputaModule,
     LicitanteModule,
+    DocumentoModule,
+    LoteModule,
+    ItemModule,
+    LogAtividadeModule,
+    SessaoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
