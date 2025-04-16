@@ -116,6 +116,53 @@
                 font-weight: bold;
                 color: #333;
             }
+
+            .contador-container {
+                text-align: center;
+                margin: 20px 0;
+                padding: 10px;
+                background-color: #f8f9fa;
+                border-radius: 5px;
+            }
+
+            #contador {
+                font-size: 2em;
+                font-weight: bold;
+                margin: 10px 0;
+                color: #333;
+            }
+
+            .controles-contador {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .controles-contador button {
+                padding: 8px 16px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 0.9em;
+            }
+
+            .controles-contador button:hover {
+                background-color: #45a049;
+            }
+
+            .controles-contador button:disabled {
+                background-color: #cccccc;
+                cursor: not-allowed;
+            }
+
+            .contador-status {
+                font-size: 0.9em;
+                color: #666;
+                margin-top: 5px;
+            }
         </style>
         <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
         <script>eruda.init();</script>
@@ -137,6 +184,16 @@
             Status: Desconectado
         </div>
 
+        <div class="contador-container" id="contadorContainer" style="display: none;">
+            <div id="contador">00:00</div>
+            <div class="controles-contador" id="controlesContador">
+                <button id="iniciar5min">Iniciar 5 minutos</button>
+                <button id="pausarContagem" disabled>Pausar</button>
+                <button id="retomarContagem" disabled>Retomar</button>
+            </div>
+            <div class="contador-status" id="contadorStatus"></div>
+        </div>
+
         <div class="chat-container" id="chatContainer">
             <!-- Mensagens serão inseridas aqui -->
         </div>
@@ -148,22 +205,124 @@
 
         <script>
             let socket;
+            let timeSocket;
             let token = '';
             let editalId = '1';
             let usuarioId = '';
             let tipoAutor = '';
             let nomeUsuario = '';
             const mensagensRecebidas = new Set();
+            let tempoRestante = 0;
+            let timestampInicio = 0;
+            let contadorIntervalo;
+            let ultimaAtualizacao = 0;
+            let tempoPausado = 0;
+            let contadorAtivo = false;
+
+            function formatarTempo(tempoEmMilissegundos) {
+                if (typeof tempoEmMilissegundos !== 'number' || isNaN(tempoEmMilissegundos)) {
+                    console.error('Tempo inválido:', tempoEmMilissegundos);
+                    return '00:00';
+                }
+
+                const tempoEmSegundos = Math.ceil(tempoEmMilissegundos / 1000);
+                const minutos = Math.floor(tempoEmSegundos / 60);
+                const segundos = tempoEmSegundos % 60;
+                return `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            }
+
+            function atualizarContador(tempoRestante) {
+                if (typeof tempoRestante !== 'number' || isNaN(tempoRestante)) {
+                    console.error('Tempo inválido:', tempoRestante);
+                    return;
+                }
+
+                const tempoFormatado = formatarTempo(tempoRestante);
+                document.getElementById('contador').textContent = tempoFormatado;
+            }
+
+            function iniciarContador(tempoInicial, timestampInicial) {
+                console.log('Debug iniciarContador - ANTES:', {
+                    tempoInicial,
+                    timestampInicial,
+                    contadorAtivo,
+                    tempoRestante,
+                    timestampInicio,
+                    formatado: formatarTempo(tempoInicial)
+                });
+
+                // Reseta o estado do contador
+                clearInterval(contadorIntervalo);
+                contadorIntervalo = null;
+
+                // Atualiza as variáveis globais
+                tempoRestante = tempoInicial;
+                timestampInicio = timestampInicial;
+                contadorAtivo = true;
+
+                console.log('Debug iniciarContador - DEPOIS:', {
+                    tempoInicial,
+                    timestampInicial,
+                    contadorAtivo,
+                    tempoRestante,
+                    timestampInicio,
+                    formatado: formatarTempo(tempoInicial)
+                });
+
+                // Inicia o intervalo e força a primeira atualização
+                contadorIntervalo = setInterval(atualizarContador, 100);
+                atualizarContador();
+
+                // Atualiza a interface
+                document.getElementById('contadorStatus').textContent = 'Contagem em andamento';
+                if (tipoAutor === 'PREGOEIRO') {
+                    document.getElementById('pausarContagem').disabled = false;
+                    document.getElementById('retomarContagem').disabled = true;
+                }
+            }
+
+            function pausarContador(tempoPausado) {
+                console.log('Pausando contador:', tempoPausado);
+                clearInterval(contadorIntervalo);
+                contadorAtivo = false;
+                document.getElementById('contador').textContent = formatarTempo(tempoPausado);
+            }
+
+            function retomarContador(tempoRestanteAtual, timestampInicial) {
+                console.log('Retomando contador:', { tempoRestanteAtual, timestampInicial });
+                tempoRestante = tempoRestanteAtual;
+                timestampInicio = timestampInicial;
+                contadorAtivo = true;
+
+                clearInterval(contadorIntervalo);
+                contadorIntervalo = setInterval(atualizarContador, 100);
+                atualizarContador();
+            }
 
             function updateConnectionStatus() {
                 const statusElement = document.getElementById('connectionStatus');
                 if (socket?.connected) {
-                    statusElement.innerHTML =
+                    let statusHtml =
                         `Status: <span class="connected">Conectado</span> | 
-                     Usuário: <span class="user-info">${nomeUsuario || 'Não identificado'}</span> | 
-                     Perfil: <span class="user-info">${tipoAutor || 'Não definido'}</span>`;
+                         Usuário: <span class="user-info">${nomeUsuario || 'Não identificado'}</span> | 
+                         Perfil: <span class="user-info">${tipoAutor || 'Não definido'}</span>`;
+
+                    if (tipoAutor === 'PREGOEIRO') {
+                        statusHtml += ` | Usuários Online: <span id="usuariosOnlineCount" class="user-info">0</span>`;
+                    }
+
+                    statusElement.innerHTML = statusHtml;
                 } else {
                     statusElement.innerHTML = 'Status: <span class="disconnected">Desconectado</span>';
+                }
+            }
+
+            function updateUsuariosOnline(quantidade) {
+                if (tipoAutor === 'PREGOEIRO') {
+                    const countElement = document.getElementById('usuariosOnlineCount');
+                    if (countElement) {
+                        countElement.textContent = quantidade;
+                    }
                 }
             }
 
@@ -192,6 +351,12 @@
                         updateConnectionStatus();
                         document.getElementById('messageInput').disabled = false;
                         document.getElementById('sendButton').disabled = false;
+
+                        // Mostra o contador para todos, mas os controles apenas para o pregoeiro
+                        document.getElementById('contadorContainer').style.display = 'block';
+                        if (tipoAutor !== 'PREGOEIRO') {
+                            document.getElementById('controlesContador').style.display = 'none';
+                        }
                     }
                 } catch (error) {
                     console.error('Erro no login:', error);
@@ -203,7 +368,11 @@
             function connect() {
                 return new Promise((resolve, reject) => {
                     if (socket) socket.disconnect();
+                    if (timeSocket) timeSocket.disconnect();
 
+                    console.log('Iniciando conexão com o servidor...');
+
+                    // Conecta ao chat
                     socket = io(`http://${window.location.hostname}:3001`, {
                         query: {
                             editalId,
@@ -218,22 +387,35 @@
                         reconnectionDelay: 1000
                     });
 
+                    // Conecta ao time
+                    timeSocket = io(`http://${window.location.hostname}:3001/time`, {
+                        query: {
+                            editalId,
+                            tipoAutor
+                        },
+                        auth: { token },
+                        transports: ['websocket'],
+                        reconnection: true,
+                        reconnectionAttempts: 5,
+                        reconnectionDelay: 1000
+                    });
+
+                    // Eventos do chat
                     socket.on('connect', () => {
+                        console.log('Conectado ao chat gateway');
                         updateConnectionStatus();
-                        resolve();
                     });
 
                     socket.on('connect_error', (error) => {
-                        console.error('Erro na conexão:', error);
+                        console.error('Erro na conexão do chat:', error);
                         updateConnectionStatus();
                         reject(error);
                     });
 
                     socket.on('message', (message) => {
                         if (!message.messageId || mensagensRecebidas.has(message.messageId)) {
-                            return; // Ignora mensagens duplicadas
+                            return;
                         }
-
                         mensagensRecebidas.add(message.messageId);
 
                         if (message.type === 'historicoMensagens') {
@@ -244,22 +426,157 @@
                             appendMessage(message.data);
                         }
 
-                        // Opcional: Limpeza após 100 mensagens
                         if (mensagensRecebidas.size > 100) {
                             mensagensRecebidas.clear();
                         }
                     });
 
-                    socket.on('disconnect', () => {
-                        updateConnectionStatus();
-                        setTimeout(() => connect().catch(console.error), 5000);
+                    // Eventos do time
+                    timeSocket.on('connect', () => {
+                        console.log('Conectado ao time gateway');
+                        resolve();
                     });
+
+                    timeSocket.on('connect_error', (error) => {
+                        console.error('Erro na conexão do time:', error);
+                        reject(error);
+                    });
+
+                    timeSocket.on('usuariosOnline', (data) => {
+                        if (tipoAutor === 'PREGOEIRO') {
+                            updateUsuariosOnline(data.quantidade);
+                        }
+                    });
+
+                    timeSocket.on('disconnect', () => {
+                        console.log('Desconectado do time gateway');
+                        contadorAtivo = false;
+                        clearInterval(contadorIntervalo);
+                    });
+
+                    timeSocket.on('error', (error) => {
+                        console.error('Erro no socket do time:', error);
+                    });
+
+                    // Configuração dos eventos do contador
+                    setupContadorEventos();
                 });
             }
+
+            function setupContadorEventos() {
+                // Remove listeners anteriores para evitar duplicação
+                timeSocket.off('contagemIniciada');
+                timeSocket.off('atualizarTempo');
+                timeSocket.off('contagemPausada');
+                timeSocket.off('contagemRetomada');
+                timeSocket.off('contagemFinalizada');
+
+                timeSocket.on('contagemIniciada', (data) => {
+                    console.log('Debug contagemIniciada - Dados recebidos:', data);
+
+                    if (!data) {
+                        console.error('Dados inválidos recebidos em contagemIniciada');
+                        return;
+                    }
+
+                    if (typeof data.tempoRestante !== 'number') {
+                        console.error('Tempo restante inválido em contagemIniciada:', data);
+                        return;
+                    }
+
+                    console.log('Debug contagemIniciada - Iniciando contador com:', {
+                        tempoRestante: data.tempoRestante,
+                        formatado: formatarTempo(data.tempoRestante)
+                    });
+
+                    document.getElementById('contadorStatus').textContent = 'Contagem em andamento';
+                    if (tipoAutor === 'PREGOEIRO') {
+                        document.getElementById('pausarContagem').disabled = false;
+                        document.getElementById('retomarContagem').disabled = true;
+                    }
+
+                    atualizarContador(data.tempoRestante);
+                });
+
+                timeSocket.on('atualizarTempo', (data) => {
+                    console.log('Debug atualizarTempo - Dados recebidos:', data);
+
+                    if (!data || typeof data.tempoRestante !== 'number' || typeof data.timestampInicio !== 'number') {
+                        console.error('Dados inválidos em atualizarTempo:', data);
+                        return;
+                    }
+
+                    console.log('Debug atualizarTempo - Atualizando valores:', {
+                        tempoRestanteAtual: tempoRestante,
+                        tempoRestanteNovo: data.tempoRestante,
+                        timestampInicioAtual: timestampInicio,
+                        timestampInicioNovo: data.timestampInicio,
+                        contadorAtivo,
+                        formatadoNovo: formatarTempo(data.tempoRestante)
+                    });
+
+                    tempoRestante = data.tempoRestante;
+                    timestampInicio = data.timestampInicio;
+
+                    if (!contadorAtivo) {
+                        console.log('Debug: Reativando contador após atualização');
+                        contadorAtivo = true;
+                        if (!contadorIntervalo) {
+                            contadorIntervalo = setInterval(atualizarContador, 100);
+                            atualizarContador();
+                        }
+                    }
+                });
+
+                timeSocket.on('contagemPausada', (data) => {
+                    console.log('Evento contagemPausada recebido:', data);
+                    if (data && typeof data.tempoRestante === 'number') {
+                        pausarContador(data.tempoRestante);
+                        document.getElementById('contadorStatus').textContent = 'Contagem pausada';
+
+                        if (tipoAutor === 'PREGOEIRO') {
+                            document.getElementById('pausarContagem').disabled = true;
+                            document.getElementById('retomarContagem').disabled = false;
+                        }
+                    }
+                });
+
+                timeSocket.on('contagemRetomada', (data) => {
+                    console.log('Evento contagemRetomada recebido:', data);
+                    if (data && typeof data.timestampInicio === 'number' && typeof data.tempoRestante === 'number') {
+                        retomarContador(data.tempoRestante, data.timestampInicio);
+
+                        document.getElementById('contadorStatus').textContent = 'Contagem em andamento';
+                        if (tipoAutor === 'PREGOEIRO') {
+                            document.getElementById('pausarContagem').disabled = false;
+                            document.getElementById('retomarContagem').disabled = true;
+                        }
+                    }
+                });
+
+                timeSocket.on('contagemFinalizada', () => {
+                    console.log('Evento contagemFinalizada recebido');
+                    clearInterval(contadorIntervalo);
+                    contadorAtivo = false;
+                    document.getElementById('contador').textContent = '00:00';
+                    document.getElementById('contadorStatus').textContent = 'Contagem finalizada';
+
+                    if (tipoAutor === 'PREGOEIRO') {
+                        document.getElementById('pausarContagem').disabled = true;
+                        document.getElementById('retomarContagem').disabled = true;
+                    }
+                });
+
+                socket.on('disconnect', () => {
+                    updateConnectionStatus();
+                    setTimeout(() => connect().catch(console.error), 5000);
+                });
+            }
+
             let ultimaMensagemTimestamp = 0;
             function sendMessage() {
                 const agora = Date.now();
-                if (agora - ultimaMensagemTimestamp < 300) return; // ignora se for dentro de 300ms
+                if (agora - ultimaMensagemTimestamp < 300) return;
                 ultimaMensagemTimestamp = agora;
                 const input = document.getElementById('messageInput');
                 const message = input.value.trim();
@@ -313,6 +630,57 @@
 
                 document.getElementById('passwordInput').addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') document.getElementById('loginButton').click();
+                });
+
+                // Eventos do contador
+                document.getElementById('iniciar5min').addEventListener('click', () => {
+                    console.log('Debug: Botão iniciar 5 minutos clicado', {
+                        socketStatus: timeSocket?.connected,
+                        socketId: timeSocket?.id,
+                        socketNamespace: timeSocket?.nsp,
+                        editalId,
+                        tipoAutor
+                    });
+
+                    if (!timeSocket) {
+                        console.error('Socket não está inicializado');
+                        return;
+                    }
+                    if (!timeSocket.connected) {
+                        console.error('Socket não está conectado');
+                        return;
+                    }
+
+                    const payload = { tempoInicial: 300000 }; // 5 minutos
+                    console.log('Debug: Enviando evento iniciarContagem:', payload);
+
+                    timeSocket.emit('iniciarContagem', payload, (response) => {
+                        console.log('Debug: Resposta do evento iniciarContagem:', response);
+                        if (response?.error) {
+                            console.error('Erro ao iniciar contagem:', response.error);
+                            document.getElementById('contadorStatus').textContent = `Erro: ${response.error}`;
+                        }
+                    });
+                });
+
+                document.getElementById('pausarContagem').addEventListener('click', () => {
+                    console.log('Botão pausar clicado');
+                    if (timeSocket && timeSocket.connected) {
+                        timeSocket.emit('pausarContagem');
+                        console.log('Evento pausarContagem enviado');
+                    } else {
+                        console.error('Socket não está conectado');
+                    }
+                });
+
+                document.getElementById('retomarContagem').addEventListener('click', () => {
+                    console.log('Botão retomar clicado');
+                    if (timeSocket && timeSocket.connected) {
+                        timeSocket.emit('retomarContagem');
+                        console.log('Evento retomarContagem enviado');
+                    } else {
+                        console.error('Socket não está conectado');
+                    }
                 });
             });
         </script>

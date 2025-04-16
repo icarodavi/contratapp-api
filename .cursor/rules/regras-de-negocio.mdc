@@ -1,0 +1,181 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 📍 PLANO DE DESENVOLVIMENTO — SISTEMA DE DISPUTA ELETRÔNICA DE LICITAÇÕES
+
+Este documento apresenta o plano oficial de desenvolvimento do sistema de disputa eletrônica, parte integrante da plataforma de licitações públicas conforme a **Lei nº 14.133/21**. Cada fase representa um estágio modular do projeto, com tarefas específicas, metas técnicas e legais.
+
+---
+
+## ✅ FASE 0 – PREPARAÇÃO
+
+**Objetivo:** Definir estrutura base, escopo e tecnologias.
+
+### Tarefas:
+- [ ] Definir escopo do MVP (disputa eletrônica com chat, lances e documentos)
+- [ ] Levantar exigências legais da Lei nº 14.133/21
+- [ ] Mapear perfis de usuário: ADMIN, PREGOEIRO, LICITANTE, VISUALIZADOR
+- [ ] Definir tecnologias:
+  - Backend: NestJS + Prisma + PostgreSQL
+  - Frontend: Next.js + Tailwind
+  - Real-time: Socket.IO
+- [ ] Criar repositório Git e estrutura base do projeto
+- [ ] Configurar ambiente com `.env.example` e scripts básicos
+
+---
+
+## 🔧 FASE 1 – MODELAGEM E BACK-END BASE
+
+**Objetivo:** Criar estrutura de dados e primeiros serviços.
+
+### Tarefas:
+- [x] Modelar `schema.prisma` com:
+  - Edital, Disputa, Licitante, Proposta, Lance
+  - DocumentoLicitante, Sessão, MensagemChat
+  - DocumentoObrigatorio, LogAtividade, Usuario
+- [x] Usar `Int` para valores monetários (centavos)
+- [ ] Executar `prisma migrate dev`
+- [ ] Criar serviços e controllers básicos para:
+  - Editais
+  - Disputas
+  - Licitantes
+  - Propostas
+
+---
+
+## 📁 FASE 2 – ENVIO DE DOCUMENTOS
+
+**Objetivo:** Permitir protocolo de documentos por disputa.
+
+### Tarefas:
+- [ ] Criar endpoint de upload com Multer
+- [ ] Armazenar arquivos no formato:
+/uploads/{disputaId}/{licitanteId}/{tipoDocumento}/{versao}.pdf
+- [ ] Validar tipo de documento com base na tabela `DocumentoObrigatorio`
+- [ ] Armazenar metadados: nome original, descrição, versão, hash, assinatura
+- [ ] Registrar envio no `LogAtividade`
+
+---
+
+## 💬 FASE 3 – CHAT EM TEMPO REAL
+
+**Objetivo:** Permitir comunicação aberta durante a disputa.
+
+### Tarefas:
+- [ ] Criar `ChatGateway` com eventos:
+- `join_disputa`
+- `send_message`
+- `receive_message`
+- [ ] Exibir mensagens com autor, horário e tipo
+- [ ] Armazenar todas as mensagens no banco (`MensagemChat`)
+- [ ] Restringir participação com autenticação (JWT)
+
+---
+
+## ⏳ FASE 4 – CONTROLE DE TEMPO OFICIAL
+
+**Objetivo:** Garantir cronômetro sincronizado e auditável.
+
+### Tarefas:
+- [ ] Criar `TempoGateway` com eventos:
+- `controlar_tempo`
+- `atualizar_tempo`
+- [ ] Controlar: INICIAR, PAUSAR, RETOMAR, ENCERRAR
+- [ ] Sincronizar clientes com base em `tempoRestante` e `timestampServidor`
+- [ ] Armazenar eventos no `LogAtividade`
+
+---
+
+## 🎯 FASE 5 – DISPUTA E LANCES
+
+**Objetivo:** Implementar a fase de lances com regras da Lei 14.133/21.
+
+### Tarefas:
+- [ ] Criar painel com propostas iniciais
+- [ ] Permitir envio de lances decrescentes
+- [ ] Exibir classificação em tempo real
+- [ ] Implementar regra de empate ficto (ME/EPP)
+- [ ] Armazenar lance com: valor em centavos, IP, user-agent, horário e `sessaoId`
+
+---
+
+## 🧾 FASE 6 – RELATÓRIOS E VALIDAÇÃO PÚBLICA
+
+**Objetivo:** Emitir relatórios e permitir validação de documentos.
+
+### Tarefas:
+- [ ] Gerar PDF da ata da disputa com QR Code
+- [ ] Criar rota `/validar/:id` com hash e verificação de assinatura
+- [ ] Permitir download de documentos autenticados
+- [ ] Registrar ações de validação pública no `LogAtividade`
+
+---
+
+## 🔐 FASE 7 – SEGURANÇA, PERFIS E PERMISSÕES
+
+**Objetivo:** Controlar ações por tipo de usuário e proteger o sistema.
+
+### Tarefas:
+- [ ] Implementar autenticação com JWT
+- [ ] Criar enum `PerfilUsuario` com:
+- ADMIN, PREGOEIRO, LICITANTE, VISUALIZADOR
+- [ ] Restringir acesso a funcionalidades sensíveis via `@Roles`
+- [ ] Proteger rotas com Guard e Interceptor
+- [ ] Bloquear acesso a documentos de terceiros
+
+---
+
+## 🧪 FASE 8 – TESTES E AUDITORIA
+
+**Objetivo:** Validar segurança, integridade e conformidade do sistema.
+
+### Tarefas:
+- [ ] Criar testes unitários com Jest (serviços principais)
+- [ ] Criar testes e2e simulando uma disputa completa
+- [ ] Testar reconexões WebSocket e tempo de disputa
+- [ ] Validar juridicamente com procuradoria ou assessoria legal
+
+---
+
+## 🚀 FASE 9 – DEPLOY, ENTREGA E TREINAMENTO
+
+**Objetivo:** Colocar o sistema em produção com usuários reais.
+
+### Tarefas:
+- [ ] Preparar ambiente de produção (Docker, VPS, banco seguro)
+- [ ] Realizar deploy e testes finais
+- [ ] Criar documentação de uso e treinamento para:
+- Licitantes
+- Pregoeiros
+- Equipe de apoio técnico
+- [ ] Coletar feedback e planejar versão 2.0
+
+---
+
+## 📌 BOAS PRÁTICAS TÉCNICAS
+
+- **Valores financeiros** devem ser armazenados como `Int` (em centavos)
+- **Documentos** devem ser versionados e validados com hash
+- **Eventos sensíveis** devem ser registrados em `LogAtividade`
+- **Toda comunicação em tempo real** deve passar por autenticação
+- **Arquivos** devem seguir estrutura padronizada por disputa/licitante
+- **PDFs gerados** devem conter QR Code com link de validação pública
+
+---
+
+## 📚 CONFORMIDADE COM A LEI 14.133/21
+
+O sistema seguirá os seguintes princípios da nova Lei de Licitações:
+
+- **Art. 5º** – Legalidade, Impessoalidade, Moralidade, Igualdade, Publicidade, Eficiência
+- **Art. 17, §2º** – Rastreabilidade das propostas e lances
+- **Art. 60–66** – Julgamento e fases da disputa
+- **LC 123/2006, Art. 44–45** – Preferência para ME/EPP (empate ficto)
+
+---
+
+**Este plano deve ser atualizado ao final de cada fase para refletir decisões, adaptações e ajustes técnicos.**
+
+**Desenvolvimento guiado por transparência, legalidade e segurança.**

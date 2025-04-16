@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../database/database.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
+import { UpdateEditalDto } from './dto/update-edital.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Editais')
@@ -46,6 +47,27 @@ export class EditalService {
                 disputas: true,
                 documentosObrigatorios: true,
             },
+        });
+    }
+
+    async update(id: string, updateEditalDto: UpdateEditalDto) {
+        const edital = await this.findOne(id);
+
+        return this.prisma.edital.update({
+            where: { id },
+            data: updateEditalDto,
+            include: {
+                disputas: true,
+                documentosObrigatorios: true,
+            },
+        });
+    }
+
+    async remove(id: string) {
+        const edital = await this.findOne(id);
+
+        return this.prisma.edital.delete({
+            where: { id },
         });
     }
 } 

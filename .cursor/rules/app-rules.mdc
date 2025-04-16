@@ -3,7 +3,8 @@ description:
 globs: 
 alwaysApply: true
 ---
-# 📘 Regras e Diretrizes do Sistema de Licitação Pública — Fase de Disputa
+# SEMPRE UTILIZAR O CLEAN CODE E UTILIZAR S.O.L.I.D.
+# 📘 Regras e Diretrizes do Sistema de Licitação Pública — Fase de Disputa;
 
 Este documento define as regras obrigatórias para o desenvolvimento do sistema de **licitações públicas**, com foco na **fase de disputa eletrônica**, conforme os princípios da **Lei nº 14.133/21** (Nova Lei de Licitações).
 

@@ -8,6 +8,7 @@ import { PropostaModule } from './proposta/proposta.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { EditalModule } from './edital/edital.module';
 import { PrismaModule } from './database/database.module';
+import { TimeModule } from './time/time.module';
 // import { ChatGateway } from './chat/chat.gateway';
 
 @Module({
@@ -18,6 +19,7 @@ import { PrismaModule } from './database/database.module';
     PrismaModule,
     AuthModule,
     ChatModule,
+    TimeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
