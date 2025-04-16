@@ -262,6 +262,19 @@ exports.Prisma.ItemScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DocumentoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  tipo: 'tipo',
+  caminho: 'caminho',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  editalId: 'editalId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -306,7 +319,11 @@ exports.StatusProposta = exports.$Enums.StatusProposta = {
 exports.TipoDocumento = exports.$Enums.TipoDocumento = {
   PROPOSTA: 'PROPOSTA',
   HABILITACAO: 'HABILITACAO',
-  OUTROS: 'OUTROS'
+  OUTROS: 'OUTROS',
+  EDITAL: 'EDITAL',
+  ATA: 'ATA',
+  CONTRATO: 'CONTRATO',
+  ANEXO: 'ANEXO'
 };
 
 exports.TipoAutorMensagem = exports.$Enums.TipoAutorMensagem = {
@@ -327,7 +344,8 @@ exports.Prisma.ModelName = {
   Sessao: 'Sessao',
   LogAtividade: 'LogAtividade',
   Lote: 'Lote',
-  Item: 'Item'
+  Item: 'Item',
+  Documento: 'Documento'
 };
 
 /**

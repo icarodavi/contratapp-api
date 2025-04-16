@@ -31,6 +31,10 @@ enum TipoDocumento {
   PROPOSTA
   HABILITACAO
   OUTROS
+  EDITAL
+  ATA
+  CONTRATO
+  ANEXO
 }
 
 enum PerfilUsuario {
@@ -79,6 +83,7 @@ model Edital {
   arquivoPdf             String?
   disputas               Disputa[]
   documentosObrigatorios DocumentoObrigatorio[]
+  documentos             Documento[]
   lotes                  Lote[]
   mensagensChat          MensagemChat[]
   createdAt              DateTime               @default(now())
@@ -262,4 +267,21 @@ model Item {
 
   @@unique([numero, loteId])
   @@index([loteId, status])
+}
+
+model Documento {
+  id        String        @id @default(uuid())
+  nome      String
+  tipo      TipoDocumento
+  caminho   String
+  descricao String?
+  ativo     Boolean       @default(true)
+  editalId  String
+  edital    Edital        @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  deletedAt DateTime?
+
+  @@index([editalId])
+  @@index([tipo])
 }

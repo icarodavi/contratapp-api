@@ -78,6 +78,11 @@ export type Lote = $Result.DefaultSelection<Prisma.$LotePayload>
  * 
  */
 export type Item = $Result.DefaultSelection<Prisma.$ItemPayload>
+/**
+ * Model Documento
+ * 
+ */
+export type Documento = $Result.DefaultSelection<Prisma.$DocumentoPayload>
 
 /**
  * Enums
@@ -105,7 +110,11 @@ export type TipoEmpresa = (typeof TipoEmpresa)[keyof typeof TipoEmpresa]
 export const TipoDocumento: {
   PROPOSTA: 'PROPOSTA',
   HABILITACAO: 'HABILITACAO',
-  OUTROS: 'OUTROS'
+  OUTROS: 'OUTROS',
+  EDITAL: 'EDITAL',
+  ATA: 'ATA',
+  CONTRATO: 'CONTRATO',
+  ANEXO: 'ANEXO'
 };
 
 export type TipoDocumento = (typeof TipoDocumento)[keyof typeof TipoDocumento]
@@ -430,6 +439,16 @@ export class PrismaClient<
     * ```
     */
   get item(): Prisma.ItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.documento`: Exposes CRUD operations for the **Documento** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Documentos
+    * const documentos = await prisma.documento.findMany()
+    * ```
+    */
+  get documento(): Prisma.DocumentoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -882,7 +901,8 @@ export namespace Prisma {
     Sessao: 'Sessao',
     LogAtividade: 'LogAtividade',
     Lote: 'Lote',
-    Item: 'Item'
+    Item: 'Item',
+    Documento: 'Documento'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -901,7 +921,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "usuario" | "edital" | "disputa" | "licitante" | "proposta" | "lance" | "documentoLicitante" | "documentoObrigatorio" | "mensagemChat" | "sessao" | "logAtividade" | "lote" | "item"
+      modelProps: "usuario" | "edital" | "disputa" | "licitante" | "proposta" | "lance" | "documentoLicitante" | "documentoObrigatorio" | "mensagemChat" | "sessao" | "logAtividade" | "lote" | "item" | "documento"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1867,6 +1887,80 @@ export namespace Prisma {
           }
         }
       }
+      Documento: {
+        payload: Prisma.$DocumentoPayload<ExtArgs>
+        fields: Prisma.DocumentoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DocumentoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DocumentoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload>
+          }
+          findFirst: {
+            args: Prisma.DocumentoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DocumentoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload>
+          }
+          findMany: {
+            args: Prisma.DocumentoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload>[]
+          }
+          create: {
+            args: Prisma.DocumentoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload>
+          }
+          createMany: {
+            args: Prisma.DocumentoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DocumentoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload>[]
+          }
+          delete: {
+            args: Prisma.DocumentoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload>
+          }
+          update: {
+            args: Prisma.DocumentoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload>
+          }
+          deleteMany: {
+            args: Prisma.DocumentoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DocumentoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DocumentoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload>[]
+          }
+          upsert: {
+            args: Prisma.DocumentoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentoPayload>
+          }
+          aggregate: {
+            args: Prisma.DocumentoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDocumento>
+          }
+          groupBy: {
+            args: Prisma.DocumentoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DocumentoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DocumentoCountArgs<ExtArgs>
+            result: $Utils.Optional<DocumentoCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1964,6 +2058,7 @@ export namespace Prisma {
     logAtividade?: LogAtividadeOmit
     lote?: LoteOmit
     item?: ItemOmit
+    documento?: DocumentoOmit
   }
 
   /* Types for Logging */
@@ -2100,6 +2195,7 @@ export namespace Prisma {
   export type EditalCountOutputType = {
     disputas: number
     documentosObrigatorios: number
+    documentos: number
     lotes: number
     mensagensChat: number
   }
@@ -2107,6 +2203,7 @@ export namespace Prisma {
   export type EditalCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     disputas?: boolean | EditalCountOutputTypeCountDisputasArgs
     documentosObrigatorios?: boolean | EditalCountOutputTypeCountDocumentosObrigatoriosArgs
+    documentos?: boolean | EditalCountOutputTypeCountDocumentosArgs
     lotes?: boolean | EditalCountOutputTypeCountLotesArgs
     mensagensChat?: boolean | EditalCountOutputTypeCountMensagensChatArgs
   }
@@ -2134,6 +2231,13 @@ export namespace Prisma {
    */
   export type EditalCountOutputTypeCountDocumentosObrigatoriosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DocumentoObrigatorioWhereInput
+  }
+
+  /**
+   * EditalCountOutputType without action
+   */
+  export type EditalCountOutputTypeCountDocumentosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DocumentoWhereInput
   }
 
   /**
@@ -3724,6 +3828,7 @@ export namespace Prisma {
     updatedAt?: boolean
     disputas?: boolean | Edital$disputasArgs<ExtArgs>
     documentosObrigatorios?: boolean | Edital$documentosObrigatoriosArgs<ExtArgs>
+    documentos?: boolean | Edital$documentosArgs<ExtArgs>
     lotes?: boolean | Edital$lotesArgs<ExtArgs>
     mensagensChat?: boolean | Edital$mensagensChatArgs<ExtArgs>
     _count?: boolean | EditalCountOutputTypeDefaultArgs<ExtArgs>
@@ -3769,6 +3874,7 @@ export namespace Prisma {
   export type EditalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     disputas?: boolean | Edital$disputasArgs<ExtArgs>
     documentosObrigatorios?: boolean | Edital$documentosObrigatoriosArgs<ExtArgs>
+    documentos?: boolean | Edital$documentosArgs<ExtArgs>
     lotes?: boolean | Edital$lotesArgs<ExtArgs>
     mensagensChat?: boolean | Edital$mensagensChatArgs<ExtArgs>
     _count?: boolean | EditalCountOutputTypeDefaultArgs<ExtArgs>
@@ -3781,6 +3887,7 @@ export namespace Prisma {
     objects: {
       disputas: Prisma.$DisputaPayload<ExtArgs>[]
       documentosObrigatorios: Prisma.$DocumentoObrigatorioPayload<ExtArgs>[]
+      documentos: Prisma.$DocumentoPayload<ExtArgs>[]
       lotes: Prisma.$LotePayload<ExtArgs>[]
       mensagensChat: Prisma.$MensagemChatPayload<ExtArgs>[]
     }
@@ -4190,6 +4297,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     disputas<T extends Edital$disputasArgs<ExtArgs> = {}>(args?: Subset<T, Edital$disputasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     documentosObrigatorios<T extends Edital$documentosObrigatoriosArgs<ExtArgs> = {}>(args?: Subset<T, Edital$documentosObrigatoriosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoObrigatorioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    documentos<T extends Edital$documentosArgs<ExtArgs> = {}>(args?: Subset<T, Edital$documentosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     lotes<T extends Edital$lotesArgs<ExtArgs> = {}>(args?: Subset<T, Edital$lotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mensagensChat<T extends Edital$mensagensChatArgs<ExtArgs> = {}>(args?: Subset<T, Edital$mensagensChatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -4663,6 +4771,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DocumentoObrigatorioScalarFieldEnum | DocumentoObrigatorioScalarFieldEnum[]
+  }
+
+  /**
+   * Edital.documentos
+   */
+  export type Edital$documentosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    where?: DocumentoWhereInput
+    orderBy?: DocumentoOrderByWithRelationInput | DocumentoOrderByWithRelationInput[]
+    cursor?: DocumentoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DocumentoScalarFieldEnum | DocumentoScalarFieldEnum[]
   }
 
   /**
@@ -17579,6 +17711,1129 @@ export namespace Prisma {
 
 
   /**
+   * Model Documento
+   */
+
+  export type AggregateDocumento = {
+    _count: DocumentoCountAggregateOutputType | null
+    _min: DocumentoMinAggregateOutputType | null
+    _max: DocumentoMaxAggregateOutputType | null
+  }
+
+  export type DocumentoMinAggregateOutputType = {
+    id: string | null
+    nome: string | null
+    tipo: $Enums.TipoDocumento | null
+    caminho: string | null
+    descricao: string | null
+    ativo: boolean | null
+    editalId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type DocumentoMaxAggregateOutputType = {
+    id: string | null
+    nome: string | null
+    tipo: $Enums.TipoDocumento | null
+    caminho: string | null
+    descricao: string | null
+    ativo: boolean | null
+    editalId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type DocumentoCountAggregateOutputType = {
+    id: number
+    nome: number
+    tipo: number
+    caminho: number
+    descricao: number
+    ativo: number
+    editalId: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    _all: number
+  }
+
+
+  export type DocumentoMinAggregateInputType = {
+    id?: true
+    nome?: true
+    tipo?: true
+    caminho?: true
+    descricao?: true
+    ativo?: true
+    editalId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type DocumentoMaxAggregateInputType = {
+    id?: true
+    nome?: true
+    tipo?: true
+    caminho?: true
+    descricao?: true
+    ativo?: true
+    editalId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type DocumentoCountAggregateInputType = {
+    id?: true
+    nome?: true
+    tipo?: true
+    caminho?: true
+    descricao?: true
+    ativo?: true
+    editalId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    _all?: true
+  }
+
+  export type DocumentoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Documento to aggregate.
+     */
+    where?: DocumentoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Documentos to fetch.
+     */
+    orderBy?: DocumentoOrderByWithRelationInput | DocumentoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DocumentoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Documentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Documentos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Documentos
+    **/
+    _count?: true | DocumentoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DocumentoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DocumentoMaxAggregateInputType
+  }
+
+  export type GetDocumentoAggregateType<T extends DocumentoAggregateArgs> = {
+        [P in keyof T & keyof AggregateDocumento]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDocumento[P]>
+      : GetScalarType<T[P], AggregateDocumento[P]>
+  }
+
+
+
+
+  export type DocumentoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DocumentoWhereInput
+    orderBy?: DocumentoOrderByWithAggregationInput | DocumentoOrderByWithAggregationInput[]
+    by: DocumentoScalarFieldEnum[] | DocumentoScalarFieldEnum
+    having?: DocumentoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DocumentoCountAggregateInputType | true
+    _min?: DocumentoMinAggregateInputType
+    _max?: DocumentoMaxAggregateInputType
+  }
+
+  export type DocumentoGroupByOutputType = {
+    id: string
+    nome: string
+    tipo: $Enums.TipoDocumento
+    caminho: string
+    descricao: string | null
+    ativo: boolean
+    editalId: string
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    _count: DocumentoCountAggregateOutputType | null
+    _min: DocumentoMinAggregateOutputType | null
+    _max: DocumentoMaxAggregateOutputType | null
+  }
+
+  type GetDocumentoGroupByPayload<T extends DocumentoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DocumentoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DocumentoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DocumentoGroupByOutputType[P]>
+            : GetScalarType<T[P], DocumentoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DocumentoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    tipo?: boolean
+    caminho?: boolean
+    descricao?: boolean
+    ativo?: boolean
+    editalId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documento"]>
+
+  export type DocumentoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    tipo?: boolean
+    caminho?: boolean
+    descricao?: boolean
+    ativo?: boolean
+    editalId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documento"]>
+
+  export type DocumentoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    tipo?: boolean
+    caminho?: boolean
+    descricao?: boolean
+    ativo?: boolean
+    editalId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documento"]>
+
+  export type DocumentoSelectScalar = {
+    id?: boolean
+    nome?: boolean
+    tipo?: boolean
+    caminho?: boolean
+    descricao?: boolean
+    ativo?: boolean
+    editalId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }
+
+  export type DocumentoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "tipo" | "caminho" | "descricao" | "ativo" | "editalId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["documento"]>
+  export type DocumentoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }
+  export type DocumentoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }
+  export type DocumentoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+  }
+
+  export type $DocumentoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Documento"
+    objects: {
+      edital: Prisma.$EditalPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nome: string
+      tipo: $Enums.TipoDocumento
+      caminho: string
+      descricao: string | null
+      ativo: boolean
+      editalId: string
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+    }, ExtArgs["result"]["documento"]>
+    composites: {}
+  }
+
+  type DocumentoGetPayload<S extends boolean | null | undefined | DocumentoDefaultArgs> = $Result.GetResult<Prisma.$DocumentoPayload, S>
+
+  type DocumentoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DocumentoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DocumentoCountAggregateInputType | true
+    }
+
+  export interface DocumentoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Documento'], meta: { name: 'Documento' } }
+    /**
+     * Find zero or one Documento that matches the filter.
+     * @param {DocumentoFindUniqueArgs} args - Arguments to find a Documento
+     * @example
+     * // Get one Documento
+     * const documento = await prisma.documento.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DocumentoFindUniqueArgs>(args: SelectSubset<T, DocumentoFindUniqueArgs<ExtArgs>>): Prisma__DocumentoClient<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Documento that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DocumentoFindUniqueOrThrowArgs} args - Arguments to find a Documento
+     * @example
+     * // Get one Documento
+     * const documento = await prisma.documento.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DocumentoFindUniqueOrThrowArgs>(args: SelectSubset<T, DocumentoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DocumentoClient<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Documento that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentoFindFirstArgs} args - Arguments to find a Documento
+     * @example
+     * // Get one Documento
+     * const documento = await prisma.documento.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DocumentoFindFirstArgs>(args?: SelectSubset<T, DocumentoFindFirstArgs<ExtArgs>>): Prisma__DocumentoClient<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Documento that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentoFindFirstOrThrowArgs} args - Arguments to find a Documento
+     * @example
+     * // Get one Documento
+     * const documento = await prisma.documento.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DocumentoFindFirstOrThrowArgs>(args?: SelectSubset<T, DocumentoFindFirstOrThrowArgs<ExtArgs>>): Prisma__DocumentoClient<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Documentos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Documentos
+     * const documentos = await prisma.documento.findMany()
+     * 
+     * // Get first 10 Documentos
+     * const documentos = await prisma.documento.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const documentoWithIdOnly = await prisma.documento.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DocumentoFindManyArgs>(args?: SelectSubset<T, DocumentoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Documento.
+     * @param {DocumentoCreateArgs} args - Arguments to create a Documento.
+     * @example
+     * // Create one Documento
+     * const Documento = await prisma.documento.create({
+     *   data: {
+     *     // ... data to create a Documento
+     *   }
+     * })
+     * 
+     */
+    create<T extends DocumentoCreateArgs>(args: SelectSubset<T, DocumentoCreateArgs<ExtArgs>>): Prisma__DocumentoClient<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Documentos.
+     * @param {DocumentoCreateManyArgs} args - Arguments to create many Documentos.
+     * @example
+     * // Create many Documentos
+     * const documento = await prisma.documento.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DocumentoCreateManyArgs>(args?: SelectSubset<T, DocumentoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Documentos and returns the data saved in the database.
+     * @param {DocumentoCreateManyAndReturnArgs} args - Arguments to create many Documentos.
+     * @example
+     * // Create many Documentos
+     * const documento = await prisma.documento.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Documentos and only return the `id`
+     * const documentoWithIdOnly = await prisma.documento.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DocumentoCreateManyAndReturnArgs>(args?: SelectSubset<T, DocumentoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Documento.
+     * @param {DocumentoDeleteArgs} args - Arguments to delete one Documento.
+     * @example
+     * // Delete one Documento
+     * const Documento = await prisma.documento.delete({
+     *   where: {
+     *     // ... filter to delete one Documento
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DocumentoDeleteArgs>(args: SelectSubset<T, DocumentoDeleteArgs<ExtArgs>>): Prisma__DocumentoClient<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Documento.
+     * @param {DocumentoUpdateArgs} args - Arguments to update one Documento.
+     * @example
+     * // Update one Documento
+     * const documento = await prisma.documento.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DocumentoUpdateArgs>(args: SelectSubset<T, DocumentoUpdateArgs<ExtArgs>>): Prisma__DocumentoClient<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Documentos.
+     * @param {DocumentoDeleteManyArgs} args - Arguments to filter Documentos to delete.
+     * @example
+     * // Delete a few Documentos
+     * const { count } = await prisma.documento.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DocumentoDeleteManyArgs>(args?: SelectSubset<T, DocumentoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Documentos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Documentos
+     * const documento = await prisma.documento.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DocumentoUpdateManyArgs>(args: SelectSubset<T, DocumentoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Documentos and returns the data updated in the database.
+     * @param {DocumentoUpdateManyAndReturnArgs} args - Arguments to update many Documentos.
+     * @example
+     * // Update many Documentos
+     * const documento = await prisma.documento.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Documentos and only return the `id`
+     * const documentoWithIdOnly = await prisma.documento.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DocumentoUpdateManyAndReturnArgs>(args: SelectSubset<T, DocumentoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Documento.
+     * @param {DocumentoUpsertArgs} args - Arguments to update or create a Documento.
+     * @example
+     * // Update or create a Documento
+     * const documento = await prisma.documento.upsert({
+     *   create: {
+     *     // ... data to create a Documento
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Documento we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DocumentoUpsertArgs>(args: SelectSubset<T, DocumentoUpsertArgs<ExtArgs>>): Prisma__DocumentoClient<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Documentos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentoCountArgs} args - Arguments to filter Documentos to count.
+     * @example
+     * // Count the number of Documentos
+     * const count = await prisma.documento.count({
+     *   where: {
+     *     // ... the filter for the Documentos we want to count
+     *   }
+     * })
+    **/
+    count<T extends DocumentoCountArgs>(
+      args?: Subset<T, DocumentoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DocumentoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Documento.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DocumentoAggregateArgs>(args: Subset<T, DocumentoAggregateArgs>): Prisma.PrismaPromise<GetDocumentoAggregateType<T>>
+
+    /**
+     * Group by Documento.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DocumentoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DocumentoGroupByArgs['orderBy'] }
+        : { orderBy?: DocumentoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DocumentoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDocumentoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Documento model
+   */
+  readonly fields: DocumentoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Documento.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DocumentoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    edital<T extends EditalDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EditalDefaultArgs<ExtArgs>>): Prisma__EditalClient<$Result.GetResult<Prisma.$EditalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Documento model
+   */
+  interface DocumentoFieldRefs {
+    readonly id: FieldRef<"Documento", 'String'>
+    readonly nome: FieldRef<"Documento", 'String'>
+    readonly tipo: FieldRef<"Documento", 'TipoDocumento'>
+    readonly caminho: FieldRef<"Documento", 'String'>
+    readonly descricao: FieldRef<"Documento", 'String'>
+    readonly ativo: FieldRef<"Documento", 'Boolean'>
+    readonly editalId: FieldRef<"Documento", 'String'>
+    readonly createdAt: FieldRef<"Documento", 'DateTime'>
+    readonly updatedAt: FieldRef<"Documento", 'DateTime'>
+    readonly deletedAt: FieldRef<"Documento", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Documento findUnique
+   */
+  export type DocumentoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Documento to fetch.
+     */
+    where: DocumentoWhereUniqueInput
+  }
+
+  /**
+   * Documento findUniqueOrThrow
+   */
+  export type DocumentoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Documento to fetch.
+     */
+    where: DocumentoWhereUniqueInput
+  }
+
+  /**
+   * Documento findFirst
+   */
+  export type DocumentoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Documento to fetch.
+     */
+    where?: DocumentoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Documentos to fetch.
+     */
+    orderBy?: DocumentoOrderByWithRelationInput | DocumentoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Documentos.
+     */
+    cursor?: DocumentoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Documentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Documentos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Documentos.
+     */
+    distinct?: DocumentoScalarFieldEnum | DocumentoScalarFieldEnum[]
+  }
+
+  /**
+   * Documento findFirstOrThrow
+   */
+  export type DocumentoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Documento to fetch.
+     */
+    where?: DocumentoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Documentos to fetch.
+     */
+    orderBy?: DocumentoOrderByWithRelationInput | DocumentoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Documentos.
+     */
+    cursor?: DocumentoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Documentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Documentos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Documentos.
+     */
+    distinct?: DocumentoScalarFieldEnum | DocumentoScalarFieldEnum[]
+  }
+
+  /**
+   * Documento findMany
+   */
+  export type DocumentoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Documentos to fetch.
+     */
+    where?: DocumentoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Documentos to fetch.
+     */
+    orderBy?: DocumentoOrderByWithRelationInput | DocumentoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Documentos.
+     */
+    cursor?: DocumentoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Documentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Documentos.
+     */
+    skip?: number
+    distinct?: DocumentoScalarFieldEnum | DocumentoScalarFieldEnum[]
+  }
+
+  /**
+   * Documento create
+   */
+  export type DocumentoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Documento.
+     */
+    data: XOR<DocumentoCreateInput, DocumentoUncheckedCreateInput>
+  }
+
+  /**
+   * Documento createMany
+   */
+  export type DocumentoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Documentos.
+     */
+    data: DocumentoCreateManyInput | DocumentoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Documento createManyAndReturn
+   */
+  export type DocumentoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Documentos.
+     */
+    data: DocumentoCreateManyInput | DocumentoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Documento update
+   */
+  export type DocumentoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Documento.
+     */
+    data: XOR<DocumentoUpdateInput, DocumentoUncheckedUpdateInput>
+    /**
+     * Choose, which Documento to update.
+     */
+    where: DocumentoWhereUniqueInput
+  }
+
+  /**
+   * Documento updateMany
+   */
+  export type DocumentoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Documentos.
+     */
+    data: XOR<DocumentoUpdateManyMutationInput, DocumentoUncheckedUpdateManyInput>
+    /**
+     * Filter which Documentos to update
+     */
+    where?: DocumentoWhereInput
+    /**
+     * Limit how many Documentos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Documento updateManyAndReturn
+   */
+  export type DocumentoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * The data used to update Documentos.
+     */
+    data: XOR<DocumentoUpdateManyMutationInput, DocumentoUncheckedUpdateManyInput>
+    /**
+     * Filter which Documentos to update
+     */
+    where?: DocumentoWhereInput
+    /**
+     * Limit how many Documentos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Documento upsert
+   */
+  export type DocumentoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Documento to update in case it exists.
+     */
+    where: DocumentoWhereUniqueInput
+    /**
+     * In case the Documento found by the `where` argument doesn't exist, create a new Documento with this data.
+     */
+    create: XOR<DocumentoCreateInput, DocumentoUncheckedCreateInput>
+    /**
+     * In case the Documento was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DocumentoUpdateInput, DocumentoUncheckedUpdateInput>
+  }
+
+  /**
+   * Documento delete
+   */
+  export type DocumentoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+    /**
+     * Filter which Documento to delete.
+     */
+    where: DocumentoWhereUniqueInput
+  }
+
+  /**
+   * Documento deleteMany
+   */
+  export type DocumentoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Documentos to delete
+     */
+    where?: DocumentoWhereInput
+    /**
+     * Limit how many Documentos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Documento without action
+   */
+  export type DocumentoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Documento
+     */
+    select?: DocumentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Documento
+     */
+    omit?: DocumentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentoInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -17774,6 +19029,22 @@ export namespace Prisma {
   };
 
   export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
+
+
+  export const DocumentoScalarFieldEnum: {
+    id: 'id',
+    nome: 'nome',
+    tipo: 'tipo',
+    caminho: 'caminho',
+    descricao: 'descricao',
+    ativo: 'ativo',
+    editalId: 'editalId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
+  };
+
+  export type DocumentoScalarFieldEnum = (typeof DocumentoScalarFieldEnum)[keyof typeof DocumentoScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -18036,6 +19307,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Edital"> | Date | string
     disputas?: DisputaListRelationFilter
     documentosObrigatorios?: DocumentoObrigatorioListRelationFilter
+    documentos?: DocumentoListRelationFilter
     lotes?: LoteListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
   }
@@ -18052,6 +19324,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     disputas?: DisputaOrderByRelationAggregateInput
     documentosObrigatorios?: DocumentoObrigatorioOrderByRelationAggregateInput
+    documentos?: DocumentoOrderByRelationAggregateInput
     lotes?: LoteOrderByRelationAggregateInput
     mensagensChat?: MensagemChatOrderByRelationAggregateInput
   }
@@ -18071,6 +19344,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Edital"> | Date | string
     disputas?: DisputaListRelationFilter
     documentosObrigatorios?: DocumentoObrigatorioListRelationFilter
+    documentos?: DocumentoListRelationFilter
     lotes?: LoteListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
   }, "id" | "numero">
@@ -18975,6 +20249,86 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
   }
 
+  export type DocumentoWhereInput = {
+    AND?: DocumentoWhereInput | DocumentoWhereInput[]
+    OR?: DocumentoWhereInput[]
+    NOT?: DocumentoWhereInput | DocumentoWhereInput[]
+    id?: StringFilter<"Documento"> | string
+    nome?: StringFilter<"Documento"> | string
+    tipo?: EnumTipoDocumentoFilter<"Documento"> | $Enums.TipoDocumento
+    caminho?: StringFilter<"Documento"> | string
+    descricao?: StringNullableFilter<"Documento"> | string | null
+    ativo?: BoolFilter<"Documento"> | boolean
+    editalId?: StringFilter<"Documento"> | string
+    createdAt?: DateTimeFilter<"Documento"> | Date | string
+    updatedAt?: DateTimeFilter<"Documento"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Documento"> | Date | string | null
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+  }
+
+  export type DocumentoOrderByWithRelationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    tipo?: SortOrder
+    caminho?: SortOrder
+    descricao?: SortOrderInput | SortOrder
+    ativo?: SortOrder
+    editalId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    edital?: EditalOrderByWithRelationInput
+  }
+
+  export type DocumentoWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DocumentoWhereInput | DocumentoWhereInput[]
+    OR?: DocumentoWhereInput[]
+    NOT?: DocumentoWhereInput | DocumentoWhereInput[]
+    nome?: StringFilter<"Documento"> | string
+    tipo?: EnumTipoDocumentoFilter<"Documento"> | $Enums.TipoDocumento
+    caminho?: StringFilter<"Documento"> | string
+    descricao?: StringNullableFilter<"Documento"> | string | null
+    ativo?: BoolFilter<"Documento"> | boolean
+    editalId?: StringFilter<"Documento"> | string
+    createdAt?: DateTimeFilter<"Documento"> | Date | string
+    updatedAt?: DateTimeFilter<"Documento"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Documento"> | Date | string | null
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+  }, "id">
+
+  export type DocumentoOrderByWithAggregationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    tipo?: SortOrder
+    caminho?: SortOrder
+    descricao?: SortOrderInput | SortOrder
+    ativo?: SortOrder
+    editalId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    _count?: DocumentoCountOrderByAggregateInput
+    _max?: DocumentoMaxOrderByAggregateInput
+    _min?: DocumentoMinOrderByAggregateInput
+  }
+
+  export type DocumentoScalarWhereWithAggregatesInput = {
+    AND?: DocumentoScalarWhereWithAggregatesInput | DocumentoScalarWhereWithAggregatesInput[]
+    OR?: DocumentoScalarWhereWithAggregatesInput[]
+    NOT?: DocumentoScalarWhereWithAggregatesInput | DocumentoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Documento"> | string
+    nome?: StringWithAggregatesFilter<"Documento"> | string
+    tipo?: EnumTipoDocumentoWithAggregatesFilter<"Documento"> | $Enums.TipoDocumento
+    caminho?: StringWithAggregatesFilter<"Documento"> | string
+    descricao?: StringNullableWithAggregatesFilter<"Documento"> | string | null
+    ativo?: BoolWithAggregatesFilter<"Documento"> | boolean
+    editalId?: StringWithAggregatesFilter<"Documento"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Documento"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Documento"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Documento"> | Date | string | null
+  }
+
   export type UsuarioCreateInput = {
     id?: string
     nome: string
@@ -19057,6 +20411,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     disputas?: DisputaCreateNestedManyWithoutEditalInput
     documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoCreateNestedManyWithoutEditalInput
     lotes?: LoteCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
   }
@@ -19073,6 +20428,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
     documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   }
@@ -19089,6 +20445,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUpdateManyWithoutEditalNestedInput
     documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
   }
@@ -19105,6 +20462,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
     documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
   }
@@ -20058,6 +21416,96 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DocumentoCreateInput = {
+    id?: string
+    nome: string
+    tipo: $Enums.TipoDocumento
+    caminho: string
+    descricao?: string | null
+    ativo?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    edital: EditalCreateNestedOneWithoutDocumentosInput
+  }
+
+  export type DocumentoUncheckedCreateInput = {
+    id?: string
+    nome: string
+    tipo: $Enums.TipoDocumento
+    caminho: string
+    descricao?: string | null
+    ativo?: boolean
+    editalId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type DocumentoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoDocumentoFieldUpdateOperationsInput | $Enums.TipoDocumento
+    caminho?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    edital?: EditalUpdateOneRequiredWithoutDocumentosNestedInput
+  }
+
+  export type DocumentoUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoDocumentoFieldUpdateOperationsInput | $Enums.TipoDocumento
+    caminho?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    editalId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type DocumentoCreateManyInput = {
+    id?: string
+    nome: string
+    tipo: $Enums.TipoDocumento
+    caminho: string
+    descricao?: string | null
+    ativo?: boolean
+    editalId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type DocumentoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoDocumentoFieldUpdateOperationsInput | $Enums.TipoDocumento
+    caminho?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type DocumentoUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoDocumentoFieldUpdateOperationsInput | $Enums.TipoDocumento
+    caminho?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    editalId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -20221,6 +21669,12 @@ export namespace Prisma {
     none?: DocumentoObrigatorioWhereInput
   }
 
+  export type DocumentoListRelationFilter = {
+    every?: DocumentoWhereInput
+    some?: DocumentoWhereInput
+    none?: DocumentoWhereInput
+  }
+
   export type LoteListRelationFilter = {
     every?: LoteWhereInput
     some?: LoteWhereInput
@@ -20232,6 +21686,10 @@ export namespace Prisma {
   }
 
   export type DocumentoObrigatorioOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DocumentoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -20998,6 +22456,45 @@ export namespace Prisma {
     valorEstimado?: SortOrder
   }
 
+  export type DocumentoCountOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    tipo?: SortOrder
+    caminho?: SortOrder
+    descricao?: SortOrder
+    ativo?: SortOrder
+    editalId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type DocumentoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    tipo?: SortOrder
+    caminho?: SortOrder
+    descricao?: SortOrder
+    ativo?: SortOrder
+    editalId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type DocumentoMinOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    tipo?: SortOrder
+    caminho?: SortOrder
+    descricao?: SortOrder
+    ativo?: SortOrder
+    editalId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
   export type LogAtividadeCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<LogAtividadeCreateWithoutUsuarioInput, LogAtividadeUncheckedCreateWithoutUsuarioInput> | LogAtividadeCreateWithoutUsuarioInput[] | LogAtividadeUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: LogAtividadeCreateOrConnectWithoutUsuarioInput | LogAtividadeCreateOrConnectWithoutUsuarioInput[]
@@ -21124,6 +22621,13 @@ export namespace Prisma {
     connect?: DocumentoObrigatorioWhereUniqueInput | DocumentoObrigatorioWhereUniqueInput[]
   }
 
+  export type DocumentoCreateNestedManyWithoutEditalInput = {
+    create?: XOR<DocumentoCreateWithoutEditalInput, DocumentoUncheckedCreateWithoutEditalInput> | DocumentoCreateWithoutEditalInput[] | DocumentoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: DocumentoCreateOrConnectWithoutEditalInput | DocumentoCreateOrConnectWithoutEditalInput[]
+    createMany?: DocumentoCreateManyEditalInputEnvelope
+    connect?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
+  }
+
   export type LoteCreateNestedManyWithoutEditalInput = {
     create?: XOR<LoteCreateWithoutEditalInput, LoteUncheckedCreateWithoutEditalInput> | LoteCreateWithoutEditalInput[] | LoteUncheckedCreateWithoutEditalInput[]
     connectOrCreate?: LoteCreateOrConnectWithoutEditalInput | LoteCreateOrConnectWithoutEditalInput[]
@@ -21150,6 +22654,13 @@ export namespace Prisma {
     connectOrCreate?: DocumentoObrigatorioCreateOrConnectWithoutEditalInput | DocumentoObrigatorioCreateOrConnectWithoutEditalInput[]
     createMany?: DocumentoObrigatorioCreateManyEditalInputEnvelope
     connect?: DocumentoObrigatorioWhereUniqueInput | DocumentoObrigatorioWhereUniqueInput[]
+  }
+
+  export type DocumentoUncheckedCreateNestedManyWithoutEditalInput = {
+    create?: XOR<DocumentoCreateWithoutEditalInput, DocumentoUncheckedCreateWithoutEditalInput> | DocumentoCreateWithoutEditalInput[] | DocumentoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: DocumentoCreateOrConnectWithoutEditalInput | DocumentoCreateOrConnectWithoutEditalInput[]
+    createMany?: DocumentoCreateManyEditalInputEnvelope
+    connect?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
   }
 
   export type LoteUncheckedCreateNestedManyWithoutEditalInput = {
@@ -21196,6 +22707,20 @@ export namespace Prisma {
     update?: DocumentoObrigatorioUpdateWithWhereUniqueWithoutEditalInput | DocumentoObrigatorioUpdateWithWhereUniqueWithoutEditalInput[]
     updateMany?: DocumentoObrigatorioUpdateManyWithWhereWithoutEditalInput | DocumentoObrigatorioUpdateManyWithWhereWithoutEditalInput[]
     deleteMany?: DocumentoObrigatorioScalarWhereInput | DocumentoObrigatorioScalarWhereInput[]
+  }
+
+  export type DocumentoUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<DocumentoCreateWithoutEditalInput, DocumentoUncheckedCreateWithoutEditalInput> | DocumentoCreateWithoutEditalInput[] | DocumentoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: DocumentoCreateOrConnectWithoutEditalInput | DocumentoCreateOrConnectWithoutEditalInput[]
+    upsert?: DocumentoUpsertWithWhereUniqueWithoutEditalInput | DocumentoUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: DocumentoCreateManyEditalInputEnvelope
+    set?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
+    disconnect?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
+    delete?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
+    connect?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
+    update?: DocumentoUpdateWithWhereUniqueWithoutEditalInput | DocumentoUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: DocumentoUpdateManyWithWhereWithoutEditalInput | DocumentoUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: DocumentoScalarWhereInput | DocumentoScalarWhereInput[]
   }
 
   export type LoteUpdateManyWithoutEditalNestedInput = {
@@ -21252,6 +22777,20 @@ export namespace Prisma {
     update?: DocumentoObrigatorioUpdateWithWhereUniqueWithoutEditalInput | DocumentoObrigatorioUpdateWithWhereUniqueWithoutEditalInput[]
     updateMany?: DocumentoObrigatorioUpdateManyWithWhereWithoutEditalInput | DocumentoObrigatorioUpdateManyWithWhereWithoutEditalInput[]
     deleteMany?: DocumentoObrigatorioScalarWhereInput | DocumentoObrigatorioScalarWhereInput[]
+  }
+
+  export type DocumentoUncheckedUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<DocumentoCreateWithoutEditalInput, DocumentoUncheckedCreateWithoutEditalInput> | DocumentoCreateWithoutEditalInput[] | DocumentoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: DocumentoCreateOrConnectWithoutEditalInput | DocumentoCreateOrConnectWithoutEditalInput[]
+    upsert?: DocumentoUpsertWithWhereUniqueWithoutEditalInput | DocumentoUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: DocumentoCreateManyEditalInputEnvelope
+    set?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
+    disconnect?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
+    delete?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
+    connect?: DocumentoWhereUniqueInput | DocumentoWhereUniqueInput[]
+    update?: DocumentoUpdateWithWhereUniqueWithoutEditalInput | DocumentoUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: DocumentoUpdateManyWithWhereWithoutEditalInput | DocumentoUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: DocumentoScalarWhereInput | DocumentoScalarWhereInput[]
   }
 
   export type LoteUncheckedUpdateManyWithoutEditalNestedInput = {
@@ -22252,6 +23791,20 @@ export namespace Prisma {
     deleteMany?: PropostaScalarWhereInput | PropostaScalarWhereInput[]
   }
 
+  export type EditalCreateNestedOneWithoutDocumentosInput = {
+    create?: XOR<EditalCreateWithoutDocumentosInput, EditalUncheckedCreateWithoutDocumentosInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutDocumentosInput
+    connect?: EditalWhereUniqueInput
+  }
+
+  export type EditalUpdateOneRequiredWithoutDocumentosNestedInput = {
+    create?: XOR<EditalCreateWithoutDocumentosInput, EditalUncheckedCreateWithoutDocumentosInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutDocumentosInput
+    upsert?: EditalUpsertWithoutDocumentosInput
+    connect?: EditalWhereUniqueInput
+    update?: XOR<XOR<EditalUpdateToOneWithWhereWithoutDocumentosInput, EditalUpdateWithoutDocumentosInput>, EditalUncheckedUpdateWithoutDocumentosInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -22810,6 +24363,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DocumentoCreateWithoutEditalInput = {
+    id?: string
+    nome: string
+    tipo: $Enums.TipoDocumento
+    caminho: string
+    descricao?: string | null
+    ativo?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type DocumentoUncheckedCreateWithoutEditalInput = {
+    id?: string
+    nome: string
+    tipo: $Enums.TipoDocumento
+    caminho: string
+    descricao?: string | null
+    ativo?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type DocumentoCreateOrConnectWithoutEditalInput = {
+    where: DocumentoWhereUniqueInput
+    create: XOR<DocumentoCreateWithoutEditalInput, DocumentoUncheckedCreateWithoutEditalInput>
+  }
+
+  export type DocumentoCreateManyEditalInputEnvelope = {
+    data: DocumentoCreateManyEditalInput | DocumentoCreateManyEditalInput[]
+    skipDuplicates?: boolean
+  }
+
   export type LoteCreateWithoutEditalInput = {
     id?: string
     numero: string
@@ -22927,6 +24514,38 @@ export namespace Prisma {
     descricao?: StringFilter<"DocumentoObrigatorio"> | string
   }
 
+  export type DocumentoUpsertWithWhereUniqueWithoutEditalInput = {
+    where: DocumentoWhereUniqueInput
+    update: XOR<DocumentoUpdateWithoutEditalInput, DocumentoUncheckedUpdateWithoutEditalInput>
+    create: XOR<DocumentoCreateWithoutEditalInput, DocumentoUncheckedCreateWithoutEditalInput>
+  }
+
+  export type DocumentoUpdateWithWhereUniqueWithoutEditalInput = {
+    where: DocumentoWhereUniqueInput
+    data: XOR<DocumentoUpdateWithoutEditalInput, DocumentoUncheckedUpdateWithoutEditalInput>
+  }
+
+  export type DocumentoUpdateManyWithWhereWithoutEditalInput = {
+    where: DocumentoScalarWhereInput
+    data: XOR<DocumentoUpdateManyMutationInput, DocumentoUncheckedUpdateManyWithoutEditalInput>
+  }
+
+  export type DocumentoScalarWhereInput = {
+    AND?: DocumentoScalarWhereInput | DocumentoScalarWhereInput[]
+    OR?: DocumentoScalarWhereInput[]
+    NOT?: DocumentoScalarWhereInput | DocumentoScalarWhereInput[]
+    id?: StringFilter<"Documento"> | string
+    nome?: StringFilter<"Documento"> | string
+    tipo?: EnumTipoDocumentoFilter<"Documento"> | $Enums.TipoDocumento
+    caminho?: StringFilter<"Documento"> | string
+    descricao?: StringNullableFilter<"Documento"> | string | null
+    ativo?: BoolFilter<"Documento"> | boolean
+    editalId?: StringFilter<"Documento"> | string
+    createdAt?: DateTimeFilter<"Documento"> | Date | string
+    updatedAt?: DateTimeFilter<"Documento"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Documento"> | Date | string | null
+  }
+
   export type LoteUpsertWithWhereUniqueWithoutEditalInput = {
     where: LoteWhereUniqueInput
     update: XOR<LoteUpdateWithoutEditalInput, LoteUncheckedUpdateWithoutEditalInput>
@@ -22983,6 +24602,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoCreateNestedManyWithoutEditalInput
     lotes?: LoteCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
   }
@@ -22998,6 +24618,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   }
@@ -23262,6 +24883,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
   }
@@ -23277,6 +24899,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
   }
@@ -24353,6 +25976,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     disputas?: DisputaCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoCreateNestedManyWithoutEditalInput
     lotes?: LoteCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
   }
@@ -24368,6 +25992,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   }
@@ -24399,6 +26024,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
   }
@@ -24414,6 +26040,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
   }
@@ -24430,6 +26057,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     disputas?: DisputaCreateNestedManyWithoutEditalInput
     documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoCreateNestedManyWithoutEditalInput
     lotes?: LoteCreateNestedManyWithoutEditalInput
   }
 
@@ -24445,6 +26073,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
     documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
   }
 
@@ -24569,6 +26198,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUpdateManyWithoutEditalNestedInput
     documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     lotes?: LoteUpdateManyWithoutEditalNestedInput
   }
 
@@ -24584,6 +26214,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
     documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
   }
 
@@ -25030,6 +26661,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     disputas?: DisputaCreateNestedManyWithoutEditalInput
     documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
   }
 
@@ -25045,6 +26677,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
     documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   }
 
@@ -25108,6 +26741,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUpdateManyWithoutEditalNestedInput
     documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
   }
 
@@ -25123,6 +26757,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
     documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
   }
 
@@ -25242,6 +26877,86 @@ export namespace Prisma {
     data: XOR<PropostaUpdateManyMutationInput, PropostaUncheckedUpdateManyWithoutItemInput>
   }
 
+  export type EditalCreateWithoutDocumentosInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade: string
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    lotes?: LoteCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalUncheckedCreateWithoutDocumentosInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade: string
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalCreateOrConnectWithoutDocumentosInput = {
+    where: EditalWhereUniqueInput
+    create: XOR<EditalCreateWithoutDocumentosInput, EditalUncheckedCreateWithoutDocumentosInput>
+  }
+
+  export type EditalUpsertWithoutDocumentosInput = {
+    update: XOR<EditalUpdateWithoutDocumentosInput, EditalUncheckedUpdateWithoutDocumentosInput>
+    create: XOR<EditalCreateWithoutDocumentosInput, EditalUncheckedCreateWithoutDocumentosInput>
+    where?: EditalWhereInput
+  }
+
+  export type EditalUpdateToOneWithWhereWithoutDocumentosInput = {
+    where?: EditalWhereInput
+    data: XOR<EditalUpdateWithoutDocumentosInput, EditalUncheckedUpdateWithoutDocumentosInput>
+  }
+
+  export type EditalUpdateWithoutDocumentosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+  }
+
+  export type EditalUncheckedUpdateWithoutDocumentosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+  }
+
   export type LogAtividadeCreateManyUsuarioInput = {
     id?: string
     disputaId: string
@@ -25341,6 +27056,18 @@ export namespace Prisma {
     descricao: string
   }
 
+  export type DocumentoCreateManyEditalInput = {
+    id?: string
+    nome: string
+    tipo: $Enums.TipoDocumento
+    caminho: string
+    descricao?: string | null
+    ativo?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
   export type LoteCreateManyEditalInput = {
     id?: string
     numero: string
@@ -25418,6 +27145,42 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     tipoDocumento?: EnumTipoDocumentoFieldUpdateOperationsInput | $Enums.TipoDocumento
     descricao?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DocumentoUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoDocumentoFieldUpdateOperationsInput | $Enums.TipoDocumento
+    caminho?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type DocumentoUncheckedUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoDocumentoFieldUpdateOperationsInput | $Enums.TipoDocumento
+    caminho?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type DocumentoUncheckedUpdateManyWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoDocumentoFieldUpdateOperationsInput | $Enums.TipoDocumento
+    caminho?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type LoteUpdateWithoutEditalInput = {
