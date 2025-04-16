@@ -96,7 +96,7 @@ model Edital {
   id                     String                 @id @default(uuid())
   numero                 String                 @unique
   objeto                 String
-  modalidade             ModalidadeLicitação
+  modalidade             ModalidadeLicitação  @default(PREGÃO_ELETRÔNICO)
   status                 String
   dataAbertura           DateTime
   arquivoPdf             String?
@@ -208,7 +208,7 @@ model DocumentoObrigatorio {
   observacoes   String?
   edital        Edital        @relation(fields: [editalId], references: [id], onDelete: Cascade)
   createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  updatedAt     DateTime      @default(now()) @updatedAt
 
   @@index([editalId])
   @@index([tipoDocumento])
