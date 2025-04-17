@@ -183,6 +183,27 @@ enum StatusSancao {
   EXPIRADA
 }
 
+enum TipoPrazo {
+  ENTREGA_DOCUMENTOS
+  ENTREGA_PROPOSTA
+  RECURSO
+  RECONSIDERACAO
+  IMPUGNACAO
+  HOMOLOGACAO
+  CONTRATACAO
+  EXECUCAO
+  PAGAMENTO
+  OUTROS
+}
+
+enum StatusPrazo {
+  PENDENTE
+  EM_ANDAMENTO
+  CONCLUIDO
+  ATRASADO
+  CANCELADO
+}
+
 model Usuario {
   id                  String         @id @default(uuid())
   nome                String
@@ -197,6 +218,8 @@ model Usuario {
   recursosRespondidos Recurso[]      @relation("RecursoRespondidoPor")
   sancaoAplicada      Sancao[]       @relation("SancaoAplicadaPor")
   sancaoRevogada      Sancao[]       @relation("SancaoRevogadaPor")
+  prazosCriados       Prazo[]        @relation("PrazoCriadoPor")
+  prazosConcluidos    Prazo[]        @relation("PrazoConcluidoPor")
 }
 
 model Edital {
@@ -217,6 +240,7 @@ model Edital {
   createdAt              DateTime               @default(now())
   updatedAt              DateTime               @updatedAt
   Sancao                 Sancao[]
+  Prazo                  Prazo[]
 }
 
 model Disputa {
@@ -252,6 +276,7 @@ model Licitante {
   disputas      Disputa[]
   recursos      Recurso[]
   Sancao        Sancao[]
+  Prazo         Prazo[]
 }
 
 model Proposta {
@@ -430,6 +455,7 @@ model Item {
   propostas     Proposta[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
+  Prazo         Prazo[]
 
   @@unique([numero, loteId])
   @@index([loteId, status])
@@ -493,4 +519,36 @@ model Sancao {
   @@index([aplicadoPor])
   @@index([status])
   @@index([tipo])
+}
+
+model Prazo {
+  id            String      @id @default(uuid())
+  tipo          TipoPrazo
+  status        StatusPrazo @default(PENDENTE)
+  descricao     String
+  dataInicio    DateTime
+  dataFim       DateTime
+  dataConclusao DateTime?
+  observacoes   String?
+  editalId      String
+  licitanteId   String?
+  itemId        String?
+  criadoPor     String
+  concluidoPor  String?
+
+  edital              Edital     @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  licitante           Licitante? @relation(fields: [licitanteId], references: [id])
+  item                Item?      @relation(fields: [itemId], references: [id])
+  criadoPorUsuario    Usuario    @relation("PrazoCriadoPor", fields: [criadoPor], references: [id], onDelete: Cascade)
+  concluidoPorUsuario Usuario?   @relation("PrazoConcluidoPor", fields: [concluidoPor], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([editalId])
+  @@index([licitanteId])
+  @@index([itemId])
+  @@index([tipo])
+  @@index([status])
+  @@index([dataFim])
 }

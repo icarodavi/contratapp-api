@@ -321,6 +321,24 @@ exports.Prisma.SancaoScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PrazoScalarFieldEnum = {
+  id: 'id',
+  tipo: 'tipo',
+  status: 'status',
+  descricao: 'descricao',
+  dataInicio: 'dataInicio',
+  dataFim: 'dataFim',
+  dataConclusao: 'dataConclusao',
+  observacoes: 'observacoes',
+  editalId: 'editalId',
+  licitanteId: 'licitanteId',
+  itemId: 'itemId',
+  criadoPor: 'criadoPor',
+  concluidoPor: 'concluidoPor',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -486,6 +504,27 @@ exports.StatusSancao = exports.$Enums.StatusSancao = {
   EXPIRADA: 'EXPIRADA'
 };
 
+exports.TipoPrazo = exports.$Enums.TipoPrazo = {
+  ENTREGA_DOCUMENTOS: 'ENTREGA_DOCUMENTOS',
+  ENTREGA_PROPOSTA: 'ENTREGA_PROPOSTA',
+  RECURSO: 'RECURSO',
+  RECONSIDERACAO: 'RECONSIDERACAO',
+  IMPUGNACAO: 'IMPUGNACAO',
+  HOMOLOGACAO: 'HOMOLOGACAO',
+  CONTRATACAO: 'CONTRATACAO',
+  EXECUCAO: 'EXECUCAO',
+  PAGAMENTO: 'PAGAMENTO',
+  OUTROS: 'OUTROS'
+};
+
+exports.StatusPrazo = exports.$Enums.StatusPrazo = {
+  PENDENTE: 'PENDENTE',
+  EM_ANDAMENTO: 'EM_ANDAMENTO',
+  CONCLUIDO: 'CONCLUIDO',
+  ATRASADO: 'ATRASADO',
+  CANCELADO: 'CANCELADO'
+};
+
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
   Edital: 'Edital',
@@ -502,7 +541,8 @@ exports.Prisma.ModelName = {
   Lote: 'Lote',
   Item: 'Item',
   Recurso: 'Recurso',
-  Sancao: 'Sancao'
+  Sancao: 'Sancao',
+  Prazo: 'Prazo'
 };
 
 /**

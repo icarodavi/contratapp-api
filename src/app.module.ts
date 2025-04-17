@@ -17,6 +17,10 @@ import { LoteModule } from './lote/lote.module';
 import { ItemModule } from './item/item.module';
 import { LogAtividadeModule } from './log-atividade/log-atividade.module';
 import { SessaoModule } from './sessao/sessao.module';
+import { PrazoModule } from './prazo/prazo.module';
+import { SancaoModule } from './sancao/sancao.module';
+import { RecursoModule } from './recurso/recurso.module';
+import { DocumentoObrigatorioModule } from './documento-obrigatorio/documento-obrigatorio.module';
 // import { ChatGateway } from './chat/chat.gateway';
 
 @Module({
@@ -31,6 +35,10 @@ import { SessaoModule } from './sessao/sessao.module';
     DisputaModule,
     LicitanteModule,
     DocumentoModule,
+    PrazoModule,
+    SancaoModule,
+    RecursoModule,
+    DocumentoObrigatorioModule,
     LoteModule,
     ItemModule,
     LogAtividadeModule,

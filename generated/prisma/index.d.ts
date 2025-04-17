@@ -93,6 +93,11 @@ export type Recurso = $Result.DefaultSelection<Prisma.$RecursoPayload>
  * 
  */
 export type Sancao = $Result.DefaultSelection<Prisma.$SancaoPayload>
+/**
+ * Model Prazo
+ * 
+ */
+export type Prazo = $Result.DefaultSelection<Prisma.$PrazoPayload>
 
 /**
  * Enums
@@ -295,6 +300,33 @@ export const StatusSancao: {
 
 export type StatusSancao = (typeof StatusSancao)[keyof typeof StatusSancao]
 
+
+export const TipoPrazo: {
+  ENTREGA_DOCUMENTOS: 'ENTREGA_DOCUMENTOS',
+  ENTREGA_PROPOSTA: 'ENTREGA_PROPOSTA',
+  RECURSO: 'RECURSO',
+  RECONSIDERACAO: 'RECONSIDERACAO',
+  IMPUGNACAO: 'IMPUGNACAO',
+  HOMOLOGACAO: 'HOMOLOGACAO',
+  CONTRATACAO: 'CONTRATACAO',
+  EXECUCAO: 'EXECUCAO',
+  PAGAMENTO: 'PAGAMENTO',
+  OUTROS: 'OUTROS'
+};
+
+export type TipoPrazo = (typeof TipoPrazo)[keyof typeof TipoPrazo]
+
+
+export const StatusPrazo: {
+  PENDENTE: 'PENDENTE',
+  EM_ANDAMENTO: 'EM_ANDAMENTO',
+  CONCLUIDO: 'CONCLUIDO',
+  ATRASADO: 'ATRASADO',
+  CANCELADO: 'CANCELADO'
+};
+
+export type StatusPrazo = (typeof StatusPrazo)[keyof typeof StatusPrazo]
+
 }
 
 export type DisputaStatus = $Enums.DisputaStatus
@@ -352,6 +384,14 @@ export const TipoSancao: typeof $Enums.TipoSancao
 export type StatusSancao = $Enums.StatusSancao
 
 export const StatusSancao: typeof $Enums.StatusSancao
+
+export type TipoPrazo = $Enums.TipoPrazo
+
+export const TipoPrazo: typeof $Enums.TipoPrazo
+
+export type StatusPrazo = $Enums.StatusPrazo
+
+export const StatusPrazo: typeof $Enums.StatusPrazo
 
 /**
  * ##  Prisma Client ʲˢ
@@ -637,6 +677,16 @@ export class PrismaClient<
     * ```
     */
   get sancao(): Prisma.SancaoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.prazo`: Exposes CRUD operations for the **Prazo** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Prazos
+    * const prazos = await prisma.prazo.findMany()
+    * ```
+    */
+  get prazo(): Prisma.PrazoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1092,7 +1142,8 @@ export namespace Prisma {
     Lote: 'Lote',
     Item: 'Item',
     Recurso: 'Recurso',
-    Sancao: 'Sancao'
+    Sancao: 'Sancao',
+    Prazo: 'Prazo'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1111,7 +1162,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "usuario" | "edital" | "disputa" | "licitante" | "proposta" | "lance" | "documento" | "documentoObrigatorio" | "documentoLicitante" | "mensagemChat" | "sessao" | "logAtividade" | "lote" | "item" | "recurso" | "sancao"
+      modelProps: "usuario" | "edital" | "disputa" | "licitante" | "proposta" | "lance" | "documento" | "documentoObrigatorio" | "documentoLicitante" | "mensagemChat" | "sessao" | "logAtividade" | "lote" | "item" | "recurso" | "sancao" | "prazo"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2299,6 +2350,80 @@ export namespace Prisma {
           }
         }
       }
+      Prazo: {
+        payload: Prisma.$PrazoPayload<ExtArgs>
+        fields: Prisma.PrazoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PrazoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PrazoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload>
+          }
+          findFirst: {
+            args: Prisma.PrazoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PrazoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload>
+          }
+          findMany: {
+            args: Prisma.PrazoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload>[]
+          }
+          create: {
+            args: Prisma.PrazoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload>
+          }
+          createMany: {
+            args: Prisma.PrazoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PrazoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload>[]
+          }
+          delete: {
+            args: Prisma.PrazoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload>
+          }
+          update: {
+            args: Prisma.PrazoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload>
+          }
+          deleteMany: {
+            args: Prisma.PrazoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PrazoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PrazoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload>[]
+          }
+          upsert: {
+            args: Prisma.PrazoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrazoPayload>
+          }
+          aggregate: {
+            args: Prisma.PrazoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePrazo>
+          }
+          groupBy: {
+            args: Prisma.PrazoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PrazoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PrazoCountArgs<ExtArgs>
+            result: $Utils.Optional<PrazoCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2399,6 +2524,7 @@ export namespace Prisma {
     item?: ItemOmit
     recurso?: RecursoOmit
     sancao?: SancaoOmit
+    prazo?: PrazoOmit
   }
 
   /* Types for Logging */
@@ -2499,6 +2625,8 @@ export namespace Prisma {
     recursosRespondidos: number
     sancaoAplicada: number
     sancaoRevogada: number
+    prazosCriados: number
+    prazosConcluidos: number
   }
 
   export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2508,6 +2636,8 @@ export namespace Prisma {
     recursosRespondidos?: boolean | UsuarioCountOutputTypeCountRecursosRespondidosArgs
     sancaoAplicada?: boolean | UsuarioCountOutputTypeCountSancaoAplicadaArgs
     sancaoRevogada?: boolean | UsuarioCountOutputTypeCountSancaoRevogadaArgs
+    prazosCriados?: boolean | UsuarioCountOutputTypeCountPrazosCriadosArgs
+    prazosConcluidos?: boolean | UsuarioCountOutputTypeCountPrazosConcluidosArgs
   }
 
   // Custom InputTypes
@@ -2563,6 +2693,20 @@ export namespace Prisma {
     where?: SancaoWhereInput
   }
 
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountPrazosCriadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrazoWhereInput
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountPrazosConcluidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrazoWhereInput
+  }
+
 
   /**
    * Count Type EditalCountOutputType
@@ -2576,6 +2720,7 @@ export namespace Prisma {
     mensagensChat: number
     recursos: number
     Sancao: number
+    Prazo: number
   }
 
   export type EditalCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2586,6 +2731,7 @@ export namespace Prisma {
     mensagensChat?: boolean | EditalCountOutputTypeCountMensagensChatArgs
     recursos?: boolean | EditalCountOutputTypeCountRecursosArgs
     Sancao?: boolean | EditalCountOutputTypeCountSancaoArgs
+    Prazo?: boolean | EditalCountOutputTypeCountPrazoArgs
   }
 
   // Custom InputTypes
@@ -2646,6 +2792,13 @@ export namespace Prisma {
    */
   export type EditalCountOutputTypeCountSancaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SancaoWhereInput
+  }
+
+  /**
+   * EditalCountOutputType without action
+   */
+  export type EditalCountOutputTypeCountPrazoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrazoWhereInput
   }
 
 
@@ -2747,6 +2900,7 @@ export namespace Prisma {
     disputas: number
     recursos: number
     Sancao: number
+    Prazo: number
   }
 
   export type LicitanteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2758,6 +2912,7 @@ export namespace Prisma {
     disputas?: boolean | LicitanteCountOutputTypeCountDisputasArgs
     recursos?: boolean | LicitanteCountOutputTypeCountRecursosArgs
     Sancao?: boolean | LicitanteCountOutputTypeCountSancaoArgs
+    Prazo?: boolean | LicitanteCountOutputTypeCountPrazoArgs
   }
 
   // Custom InputTypes
@@ -2827,6 +2982,13 @@ export namespace Prisma {
     where?: SancaoWhereInput
   }
 
+  /**
+   * LicitanteCountOutputType without action
+   */
+  export type LicitanteCountOutputTypeCountPrazoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrazoWhereInput
+  }
+
 
   /**
    * Count Type LoteCountOutputType
@@ -2865,10 +3027,12 @@ export namespace Prisma {
 
   export type ItemCountOutputType = {
     propostas: number
+    Prazo: number
   }
 
   export type ItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     propostas?: boolean | ItemCountOutputTypeCountPropostasArgs
+    Prazo?: boolean | ItemCountOutputTypeCountPrazoArgs
   }
 
   // Custom InputTypes
@@ -2887,6 +3051,13 @@ export namespace Prisma {
    */
   export type ItemCountOutputTypeCountPropostasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PropostaWhereInput
+  }
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountPrazoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrazoWhereInput
   }
 
 
@@ -3073,6 +3244,8 @@ export namespace Prisma {
     recursosRespondidos?: boolean | Usuario$recursosRespondidosArgs<ExtArgs>
     sancaoAplicada?: boolean | Usuario$sancaoAplicadaArgs<ExtArgs>
     sancaoRevogada?: boolean | Usuario$sancaoRevogadaArgs<ExtArgs>
+    prazosCriados?: boolean | Usuario$prazosCriadosArgs<ExtArgs>
+    prazosConcluidos?: boolean | Usuario$prazosConcluidosArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
@@ -3114,6 +3287,8 @@ export namespace Prisma {
     recursosRespondidos?: boolean | Usuario$recursosRespondidosArgs<ExtArgs>
     sancaoAplicada?: boolean | Usuario$sancaoAplicadaArgs<ExtArgs>
     sancaoRevogada?: boolean | Usuario$sancaoRevogadaArgs<ExtArgs>
+    prazosCriados?: boolean | Usuario$prazosCriadosArgs<ExtArgs>
+    prazosConcluidos?: boolean | Usuario$prazosConcluidosArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3133,6 +3308,8 @@ export namespace Prisma {
       recursosRespondidos: Prisma.$RecursoPayload<ExtArgs>[]
       sancaoAplicada: Prisma.$SancaoPayload<ExtArgs>[]
       sancaoRevogada: Prisma.$SancaoPayload<ExtArgs>[]
+      prazosCriados: Prisma.$PrazoPayload<ExtArgs>[]
+      prazosConcluidos: Prisma.$PrazoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3542,6 +3719,8 @@ export namespace Prisma {
     recursosRespondidos<T extends Usuario$recursosRespondidosArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$recursosRespondidosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sancaoAplicada<T extends Usuario$sancaoAplicadaArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$sancaoAplicadaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sancaoRevogada<T extends Usuario$sancaoRevogadaArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$sancaoRevogadaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    prazosCriados<T extends Usuario$prazosCriadosArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$prazosCriadosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    prazosConcluidos<T extends Usuario$prazosConcluidosArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$prazosConcluidosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4136,6 +4315,54 @@ export namespace Prisma {
   }
 
   /**
+   * Usuario.prazosCriados
+   */
+  export type Usuario$prazosCriadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    where?: PrazoWhereInput
+    orderBy?: PrazoOrderByWithRelationInput | PrazoOrderByWithRelationInput[]
+    cursor?: PrazoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PrazoScalarFieldEnum | PrazoScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario.prazosConcluidos
+   */
+  export type Usuario$prazosConcluidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    where?: PrazoWhereInput
+    orderBy?: PrazoOrderByWithRelationInput | PrazoOrderByWithRelationInput[]
+    cursor?: PrazoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PrazoScalarFieldEnum | PrazoScalarFieldEnum[]
+  }
+
+  /**
    * Usuario without action
    */
   export type UsuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4365,6 +4592,7 @@ export namespace Prisma {
     mensagensChat?: boolean | Edital$mensagensChatArgs<ExtArgs>
     recursos?: boolean | Edital$recursosArgs<ExtArgs>
     Sancao?: boolean | Edital$SancaoArgs<ExtArgs>
+    Prazo?: boolean | Edital$PrazoArgs<ExtArgs>
     _count?: boolean | EditalCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["edital"]>
 
@@ -4416,6 +4644,7 @@ export namespace Prisma {
     mensagensChat?: boolean | Edital$mensagensChatArgs<ExtArgs>
     recursos?: boolean | Edital$recursosArgs<ExtArgs>
     Sancao?: boolean | Edital$SancaoArgs<ExtArgs>
+    Prazo?: boolean | Edital$PrazoArgs<ExtArgs>
     _count?: boolean | EditalCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EditalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4431,6 +4660,7 @@ export namespace Prisma {
       mensagensChat: Prisma.$MensagemChatPayload<ExtArgs>[]
       recursos: Prisma.$RecursoPayload<ExtArgs>[]
       Sancao: Prisma.$SancaoPayload<ExtArgs>[]
+      Prazo: Prisma.$PrazoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4844,6 +5074,7 @@ export namespace Prisma {
     mensagensChat<T extends Edital$mensagensChatArgs<ExtArgs> = {}>(args?: Subset<T, Edital$mensagensChatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recursos<T extends Edital$recursosArgs<ExtArgs> = {}>(args?: Subset<T, Edital$recursosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Sancao<T extends Edital$SancaoArgs<ExtArgs> = {}>(args?: Subset<T, Edital$SancaoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Prazo<T extends Edital$PrazoArgs<ExtArgs> = {}>(args?: Subset<T, Edital$PrazoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5436,6 +5667,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SancaoScalarFieldEnum | SancaoScalarFieldEnum[]
+  }
+
+  /**
+   * Edital.Prazo
+   */
+  export type Edital$PrazoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    where?: PrazoWhereInput
+    orderBy?: PrazoOrderByWithRelationInput | PrazoOrderByWithRelationInput[]
+    cursor?: PrazoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PrazoScalarFieldEnum | PrazoScalarFieldEnum[]
   }
 
   /**
@@ -6938,6 +7193,7 @@ export namespace Prisma {
     disputas?: boolean | Licitante$disputasArgs<ExtArgs>
     recursos?: boolean | Licitante$recursosArgs<ExtArgs>
     Sancao?: boolean | Licitante$SancaoArgs<ExtArgs>
+    Prazo?: boolean | Licitante$PrazoArgs<ExtArgs>
     _count?: boolean | LicitanteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["licitante"]>
 
@@ -6973,6 +7229,7 @@ export namespace Prisma {
     disputas?: boolean | Licitante$disputasArgs<ExtArgs>
     recursos?: boolean | Licitante$recursosArgs<ExtArgs>
     Sancao?: boolean | Licitante$SancaoArgs<ExtArgs>
+    Prazo?: boolean | Licitante$PrazoArgs<ExtArgs>
     _count?: boolean | LicitanteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LicitanteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6990,6 +7247,7 @@ export namespace Prisma {
       disputas: Prisma.$DisputaPayload<ExtArgs>[]
       recursos: Prisma.$RecursoPayload<ExtArgs>[]
       Sancao: Prisma.$SancaoPayload<ExtArgs>[]
+      Prazo: Prisma.$PrazoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7399,6 +7657,7 @@ export namespace Prisma {
     disputas<T extends Licitante$disputasArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$disputasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recursos<T extends Licitante$recursosArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$recursosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Sancao<T extends Licitante$SancaoArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$SancaoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Prazo<T extends Licitante$PrazoArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$PrazoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8028,6 +8287,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SancaoScalarFieldEnum | SancaoScalarFieldEnum[]
+  }
+
+  /**
+   * Licitante.Prazo
+   */
+  export type Licitante$PrazoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    where?: PrazoWhereInput
+    orderBy?: PrazoOrderByWithRelationInput | PrazoOrderByWithRelationInput[]
+    cursor?: PrazoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PrazoScalarFieldEnum | PrazoScalarFieldEnum[]
   }
 
   /**
@@ -18686,6 +18969,7 @@ export namespace Prisma {
     updatedAt?: boolean
     lote?: boolean | LoteDefaultArgs<ExtArgs>
     propostas?: boolean | Item$propostasArgs<ExtArgs>
+    Prazo?: boolean | Item$PrazoArgs<ExtArgs>
     _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["item"]>
 
@@ -18734,6 +19018,7 @@ export namespace Prisma {
   export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     lote?: boolean | LoteDefaultArgs<ExtArgs>
     propostas?: boolean | Item$propostasArgs<ExtArgs>
+    Prazo?: boolean | Item$PrazoArgs<ExtArgs>
     _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18748,6 +19033,7 @@ export namespace Prisma {
     objects: {
       lote: Prisma.$LotePayload<ExtArgs>
       propostas: Prisma.$PropostaPayload<ExtArgs>[]
+      Prazo: Prisma.$PrazoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -19156,6 +19442,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     lote<T extends LoteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LoteDefaultArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     propostas<T extends Item$propostasArgs<ExtArgs> = {}>(args?: Subset<T, Item$propostasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PropostaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Prazo<T extends Item$PrazoArgs<ExtArgs> = {}>(args?: Subset<T, Item$PrazoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19612,6 +19899,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PropostaScalarFieldEnum | PropostaScalarFieldEnum[]
+  }
+
+  /**
+   * Item.Prazo
+   */
+  export type Item$PrazoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    where?: PrazoWhereInput
+    orderBy?: PrazoOrderByWithRelationInput | PrazoOrderByWithRelationInput[]
+    cursor?: PrazoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PrazoScalarFieldEnum | PrazoScalarFieldEnum[]
   }
 
   /**
@@ -22164,6 +22475,1283 @@ export namespace Prisma {
 
 
   /**
+   * Model Prazo
+   */
+
+  export type AggregatePrazo = {
+    _count: PrazoCountAggregateOutputType | null
+    _min: PrazoMinAggregateOutputType | null
+    _max: PrazoMaxAggregateOutputType | null
+  }
+
+  export type PrazoMinAggregateOutputType = {
+    id: string | null
+    tipo: $Enums.TipoPrazo | null
+    status: $Enums.StatusPrazo | null
+    descricao: string | null
+    dataInicio: Date | null
+    dataFim: Date | null
+    dataConclusao: Date | null
+    observacoes: string | null
+    editalId: string | null
+    licitanteId: string | null
+    itemId: string | null
+    criadoPor: string | null
+    concluidoPor: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PrazoMaxAggregateOutputType = {
+    id: string | null
+    tipo: $Enums.TipoPrazo | null
+    status: $Enums.StatusPrazo | null
+    descricao: string | null
+    dataInicio: Date | null
+    dataFim: Date | null
+    dataConclusao: Date | null
+    observacoes: string | null
+    editalId: string | null
+    licitanteId: string | null
+    itemId: string | null
+    criadoPor: string | null
+    concluidoPor: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PrazoCountAggregateOutputType = {
+    id: number
+    tipo: number
+    status: number
+    descricao: number
+    dataInicio: number
+    dataFim: number
+    dataConclusao: number
+    observacoes: number
+    editalId: number
+    licitanteId: number
+    itemId: number
+    criadoPor: number
+    concluidoPor: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PrazoMinAggregateInputType = {
+    id?: true
+    tipo?: true
+    status?: true
+    descricao?: true
+    dataInicio?: true
+    dataFim?: true
+    dataConclusao?: true
+    observacoes?: true
+    editalId?: true
+    licitanteId?: true
+    itemId?: true
+    criadoPor?: true
+    concluidoPor?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PrazoMaxAggregateInputType = {
+    id?: true
+    tipo?: true
+    status?: true
+    descricao?: true
+    dataInicio?: true
+    dataFim?: true
+    dataConclusao?: true
+    observacoes?: true
+    editalId?: true
+    licitanteId?: true
+    itemId?: true
+    criadoPor?: true
+    concluidoPor?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PrazoCountAggregateInputType = {
+    id?: true
+    tipo?: true
+    status?: true
+    descricao?: true
+    dataInicio?: true
+    dataFim?: true
+    dataConclusao?: true
+    observacoes?: true
+    editalId?: true
+    licitanteId?: true
+    itemId?: true
+    criadoPor?: true
+    concluidoPor?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PrazoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Prazo to aggregate.
+     */
+    where?: PrazoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Prazos to fetch.
+     */
+    orderBy?: PrazoOrderByWithRelationInput | PrazoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PrazoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Prazos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Prazos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Prazos
+    **/
+    _count?: true | PrazoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PrazoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PrazoMaxAggregateInputType
+  }
+
+  export type GetPrazoAggregateType<T extends PrazoAggregateArgs> = {
+        [P in keyof T & keyof AggregatePrazo]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePrazo[P]>
+      : GetScalarType<T[P], AggregatePrazo[P]>
+  }
+
+
+
+
+  export type PrazoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrazoWhereInput
+    orderBy?: PrazoOrderByWithAggregationInput | PrazoOrderByWithAggregationInput[]
+    by: PrazoScalarFieldEnum[] | PrazoScalarFieldEnum
+    having?: PrazoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PrazoCountAggregateInputType | true
+    _min?: PrazoMinAggregateInputType
+    _max?: PrazoMaxAggregateInputType
+  }
+
+  export type PrazoGroupByOutputType = {
+    id: string
+    tipo: $Enums.TipoPrazo
+    status: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date
+    dataFim: Date
+    dataConclusao: Date | null
+    observacoes: string | null
+    editalId: string
+    licitanteId: string | null
+    itemId: string | null
+    criadoPor: string
+    concluidoPor: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PrazoCountAggregateOutputType | null
+    _min: PrazoMinAggregateOutputType | null
+    _max: PrazoMaxAggregateOutputType | null
+  }
+
+  type GetPrazoGroupByPayload<T extends PrazoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PrazoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PrazoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PrazoGroupByOutputType[P]>
+            : GetScalarType<T[P], PrazoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PrazoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    descricao?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    dataConclusao?: boolean
+    observacoes?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    itemId?: boolean
+    criadoPor?: boolean
+    concluidoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | Prazo$licitanteArgs<ExtArgs>
+    item?: boolean | Prazo$itemArgs<ExtArgs>
+    criadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    concluidoPorUsuario?: boolean | Prazo$concluidoPorUsuarioArgs<ExtArgs>
+  }, ExtArgs["result"]["prazo"]>
+
+  export type PrazoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    descricao?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    dataConclusao?: boolean
+    observacoes?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    itemId?: boolean
+    criadoPor?: boolean
+    concluidoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | Prazo$licitanteArgs<ExtArgs>
+    item?: boolean | Prazo$itemArgs<ExtArgs>
+    criadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    concluidoPorUsuario?: boolean | Prazo$concluidoPorUsuarioArgs<ExtArgs>
+  }, ExtArgs["result"]["prazo"]>
+
+  export type PrazoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    descricao?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    dataConclusao?: boolean
+    observacoes?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    itemId?: boolean
+    criadoPor?: boolean
+    concluidoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | Prazo$licitanteArgs<ExtArgs>
+    item?: boolean | Prazo$itemArgs<ExtArgs>
+    criadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    concluidoPorUsuario?: boolean | Prazo$concluidoPorUsuarioArgs<ExtArgs>
+  }, ExtArgs["result"]["prazo"]>
+
+  export type PrazoSelectScalar = {
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    descricao?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    dataConclusao?: boolean
+    observacoes?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    itemId?: boolean
+    criadoPor?: boolean
+    concluidoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PrazoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tipo" | "status" | "descricao" | "dataInicio" | "dataFim" | "dataConclusao" | "observacoes" | "editalId" | "licitanteId" | "itemId" | "criadoPor" | "concluidoPor" | "createdAt" | "updatedAt", ExtArgs["result"]["prazo"]>
+  export type PrazoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | Prazo$licitanteArgs<ExtArgs>
+    item?: boolean | Prazo$itemArgs<ExtArgs>
+    criadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    concluidoPorUsuario?: boolean | Prazo$concluidoPorUsuarioArgs<ExtArgs>
+  }
+  export type PrazoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | Prazo$licitanteArgs<ExtArgs>
+    item?: boolean | Prazo$itemArgs<ExtArgs>
+    criadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    concluidoPorUsuario?: boolean | Prazo$concluidoPorUsuarioArgs<ExtArgs>
+  }
+  export type PrazoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | Prazo$licitanteArgs<ExtArgs>
+    item?: boolean | Prazo$itemArgs<ExtArgs>
+    criadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    concluidoPorUsuario?: boolean | Prazo$concluidoPorUsuarioArgs<ExtArgs>
+  }
+
+  export type $PrazoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Prazo"
+    objects: {
+      edital: Prisma.$EditalPayload<ExtArgs>
+      licitante: Prisma.$LicitantePayload<ExtArgs> | null
+      item: Prisma.$ItemPayload<ExtArgs> | null
+      criadoPorUsuario: Prisma.$UsuarioPayload<ExtArgs>
+      concluidoPorUsuario: Prisma.$UsuarioPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tipo: $Enums.TipoPrazo
+      status: $Enums.StatusPrazo
+      descricao: string
+      dataInicio: Date
+      dataFim: Date
+      dataConclusao: Date | null
+      observacoes: string | null
+      editalId: string
+      licitanteId: string | null
+      itemId: string | null
+      criadoPor: string
+      concluidoPor: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["prazo"]>
+    composites: {}
+  }
+
+  type PrazoGetPayload<S extends boolean | null | undefined | PrazoDefaultArgs> = $Result.GetResult<Prisma.$PrazoPayload, S>
+
+  type PrazoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PrazoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PrazoCountAggregateInputType | true
+    }
+
+  export interface PrazoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Prazo'], meta: { name: 'Prazo' } }
+    /**
+     * Find zero or one Prazo that matches the filter.
+     * @param {PrazoFindUniqueArgs} args - Arguments to find a Prazo
+     * @example
+     * // Get one Prazo
+     * const prazo = await prisma.prazo.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PrazoFindUniqueArgs>(args: SelectSubset<T, PrazoFindUniqueArgs<ExtArgs>>): Prisma__PrazoClient<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Prazo that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PrazoFindUniqueOrThrowArgs} args - Arguments to find a Prazo
+     * @example
+     * // Get one Prazo
+     * const prazo = await prisma.prazo.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PrazoFindUniqueOrThrowArgs>(args: SelectSubset<T, PrazoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PrazoClient<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Prazo that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrazoFindFirstArgs} args - Arguments to find a Prazo
+     * @example
+     * // Get one Prazo
+     * const prazo = await prisma.prazo.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PrazoFindFirstArgs>(args?: SelectSubset<T, PrazoFindFirstArgs<ExtArgs>>): Prisma__PrazoClient<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Prazo that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrazoFindFirstOrThrowArgs} args - Arguments to find a Prazo
+     * @example
+     * // Get one Prazo
+     * const prazo = await prisma.prazo.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PrazoFindFirstOrThrowArgs>(args?: SelectSubset<T, PrazoFindFirstOrThrowArgs<ExtArgs>>): Prisma__PrazoClient<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Prazos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrazoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Prazos
+     * const prazos = await prisma.prazo.findMany()
+     * 
+     * // Get first 10 Prazos
+     * const prazos = await prisma.prazo.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const prazoWithIdOnly = await prisma.prazo.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PrazoFindManyArgs>(args?: SelectSubset<T, PrazoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Prazo.
+     * @param {PrazoCreateArgs} args - Arguments to create a Prazo.
+     * @example
+     * // Create one Prazo
+     * const Prazo = await prisma.prazo.create({
+     *   data: {
+     *     // ... data to create a Prazo
+     *   }
+     * })
+     * 
+     */
+    create<T extends PrazoCreateArgs>(args: SelectSubset<T, PrazoCreateArgs<ExtArgs>>): Prisma__PrazoClient<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Prazos.
+     * @param {PrazoCreateManyArgs} args - Arguments to create many Prazos.
+     * @example
+     * // Create many Prazos
+     * const prazo = await prisma.prazo.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PrazoCreateManyArgs>(args?: SelectSubset<T, PrazoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Prazos and returns the data saved in the database.
+     * @param {PrazoCreateManyAndReturnArgs} args - Arguments to create many Prazos.
+     * @example
+     * // Create many Prazos
+     * const prazo = await prisma.prazo.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Prazos and only return the `id`
+     * const prazoWithIdOnly = await prisma.prazo.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PrazoCreateManyAndReturnArgs>(args?: SelectSubset<T, PrazoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Prazo.
+     * @param {PrazoDeleteArgs} args - Arguments to delete one Prazo.
+     * @example
+     * // Delete one Prazo
+     * const Prazo = await prisma.prazo.delete({
+     *   where: {
+     *     // ... filter to delete one Prazo
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PrazoDeleteArgs>(args: SelectSubset<T, PrazoDeleteArgs<ExtArgs>>): Prisma__PrazoClient<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Prazo.
+     * @param {PrazoUpdateArgs} args - Arguments to update one Prazo.
+     * @example
+     * // Update one Prazo
+     * const prazo = await prisma.prazo.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PrazoUpdateArgs>(args: SelectSubset<T, PrazoUpdateArgs<ExtArgs>>): Prisma__PrazoClient<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Prazos.
+     * @param {PrazoDeleteManyArgs} args - Arguments to filter Prazos to delete.
+     * @example
+     * // Delete a few Prazos
+     * const { count } = await prisma.prazo.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PrazoDeleteManyArgs>(args?: SelectSubset<T, PrazoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Prazos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrazoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Prazos
+     * const prazo = await prisma.prazo.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PrazoUpdateManyArgs>(args: SelectSubset<T, PrazoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Prazos and returns the data updated in the database.
+     * @param {PrazoUpdateManyAndReturnArgs} args - Arguments to update many Prazos.
+     * @example
+     * // Update many Prazos
+     * const prazo = await prisma.prazo.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Prazos and only return the `id`
+     * const prazoWithIdOnly = await prisma.prazo.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PrazoUpdateManyAndReturnArgs>(args: SelectSubset<T, PrazoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Prazo.
+     * @param {PrazoUpsertArgs} args - Arguments to update or create a Prazo.
+     * @example
+     * // Update or create a Prazo
+     * const prazo = await prisma.prazo.upsert({
+     *   create: {
+     *     // ... data to create a Prazo
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Prazo we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PrazoUpsertArgs>(args: SelectSubset<T, PrazoUpsertArgs<ExtArgs>>): Prisma__PrazoClient<$Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Prazos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrazoCountArgs} args - Arguments to filter Prazos to count.
+     * @example
+     * // Count the number of Prazos
+     * const count = await prisma.prazo.count({
+     *   where: {
+     *     // ... the filter for the Prazos we want to count
+     *   }
+     * })
+    **/
+    count<T extends PrazoCountArgs>(
+      args?: Subset<T, PrazoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PrazoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Prazo.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrazoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PrazoAggregateArgs>(args: Subset<T, PrazoAggregateArgs>): Prisma.PrismaPromise<GetPrazoAggregateType<T>>
+
+    /**
+     * Group by Prazo.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrazoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PrazoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PrazoGroupByArgs['orderBy'] }
+        : { orderBy?: PrazoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PrazoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPrazoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Prazo model
+   */
+  readonly fields: PrazoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Prazo.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PrazoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    edital<T extends EditalDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EditalDefaultArgs<ExtArgs>>): Prisma__EditalClient<$Result.GetResult<Prisma.$EditalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    licitante<T extends Prazo$licitanteArgs<ExtArgs> = {}>(args?: Subset<T, Prazo$licitanteArgs<ExtArgs>>): Prisma__LicitanteClient<$Result.GetResult<Prisma.$LicitantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    item<T extends Prazo$itemArgs<ExtArgs> = {}>(args?: Subset<T, Prazo$itemArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    criadoPorUsuario<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    concluidoPorUsuario<T extends Prazo$concluidoPorUsuarioArgs<ExtArgs> = {}>(args?: Subset<T, Prazo$concluidoPorUsuarioArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Prazo model
+   */
+  interface PrazoFieldRefs {
+    readonly id: FieldRef<"Prazo", 'String'>
+    readonly tipo: FieldRef<"Prazo", 'TipoPrazo'>
+    readonly status: FieldRef<"Prazo", 'StatusPrazo'>
+    readonly descricao: FieldRef<"Prazo", 'String'>
+    readonly dataInicio: FieldRef<"Prazo", 'DateTime'>
+    readonly dataFim: FieldRef<"Prazo", 'DateTime'>
+    readonly dataConclusao: FieldRef<"Prazo", 'DateTime'>
+    readonly observacoes: FieldRef<"Prazo", 'String'>
+    readonly editalId: FieldRef<"Prazo", 'String'>
+    readonly licitanteId: FieldRef<"Prazo", 'String'>
+    readonly itemId: FieldRef<"Prazo", 'String'>
+    readonly criadoPor: FieldRef<"Prazo", 'String'>
+    readonly concluidoPor: FieldRef<"Prazo", 'String'>
+    readonly createdAt: FieldRef<"Prazo", 'DateTime'>
+    readonly updatedAt: FieldRef<"Prazo", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Prazo findUnique
+   */
+  export type PrazoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    /**
+     * Filter, which Prazo to fetch.
+     */
+    where: PrazoWhereUniqueInput
+  }
+
+  /**
+   * Prazo findUniqueOrThrow
+   */
+  export type PrazoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    /**
+     * Filter, which Prazo to fetch.
+     */
+    where: PrazoWhereUniqueInput
+  }
+
+  /**
+   * Prazo findFirst
+   */
+  export type PrazoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    /**
+     * Filter, which Prazo to fetch.
+     */
+    where?: PrazoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Prazos to fetch.
+     */
+    orderBy?: PrazoOrderByWithRelationInput | PrazoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Prazos.
+     */
+    cursor?: PrazoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Prazos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Prazos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Prazos.
+     */
+    distinct?: PrazoScalarFieldEnum | PrazoScalarFieldEnum[]
+  }
+
+  /**
+   * Prazo findFirstOrThrow
+   */
+  export type PrazoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    /**
+     * Filter, which Prazo to fetch.
+     */
+    where?: PrazoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Prazos to fetch.
+     */
+    orderBy?: PrazoOrderByWithRelationInput | PrazoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Prazos.
+     */
+    cursor?: PrazoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Prazos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Prazos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Prazos.
+     */
+    distinct?: PrazoScalarFieldEnum | PrazoScalarFieldEnum[]
+  }
+
+  /**
+   * Prazo findMany
+   */
+  export type PrazoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    /**
+     * Filter, which Prazos to fetch.
+     */
+    where?: PrazoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Prazos to fetch.
+     */
+    orderBy?: PrazoOrderByWithRelationInput | PrazoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Prazos.
+     */
+    cursor?: PrazoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Prazos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Prazos.
+     */
+    skip?: number
+    distinct?: PrazoScalarFieldEnum | PrazoScalarFieldEnum[]
+  }
+
+  /**
+   * Prazo create
+   */
+  export type PrazoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Prazo.
+     */
+    data: XOR<PrazoCreateInput, PrazoUncheckedCreateInput>
+  }
+
+  /**
+   * Prazo createMany
+   */
+  export type PrazoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Prazos.
+     */
+    data: PrazoCreateManyInput | PrazoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Prazo createManyAndReturn
+   */
+  export type PrazoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Prazos.
+     */
+    data: PrazoCreateManyInput | PrazoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Prazo update
+   */
+  export type PrazoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Prazo.
+     */
+    data: XOR<PrazoUpdateInput, PrazoUncheckedUpdateInput>
+    /**
+     * Choose, which Prazo to update.
+     */
+    where: PrazoWhereUniqueInput
+  }
+
+  /**
+   * Prazo updateMany
+   */
+  export type PrazoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Prazos.
+     */
+    data: XOR<PrazoUpdateManyMutationInput, PrazoUncheckedUpdateManyInput>
+    /**
+     * Filter which Prazos to update
+     */
+    where?: PrazoWhereInput
+    /**
+     * Limit how many Prazos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Prazo updateManyAndReturn
+   */
+  export type PrazoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * The data used to update Prazos.
+     */
+    data: XOR<PrazoUpdateManyMutationInput, PrazoUncheckedUpdateManyInput>
+    /**
+     * Filter which Prazos to update
+     */
+    where?: PrazoWhereInput
+    /**
+     * Limit how many Prazos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Prazo upsert
+   */
+  export type PrazoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Prazo to update in case it exists.
+     */
+    where: PrazoWhereUniqueInput
+    /**
+     * In case the Prazo found by the `where` argument doesn't exist, create a new Prazo with this data.
+     */
+    create: XOR<PrazoCreateInput, PrazoUncheckedCreateInput>
+    /**
+     * In case the Prazo was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PrazoUpdateInput, PrazoUncheckedUpdateInput>
+  }
+
+  /**
+   * Prazo delete
+   */
+  export type PrazoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+    /**
+     * Filter which Prazo to delete.
+     */
+    where: PrazoWhereUniqueInput
+  }
+
+  /**
+   * Prazo deleteMany
+   */
+  export type PrazoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Prazos to delete
+     */
+    where?: PrazoWhereInput
+    /**
+     * Limit how many Prazos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Prazo.licitante
+   */
+  export type Prazo$licitanteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Licitante
+     */
+    select?: LicitanteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Licitante
+     */
+    omit?: LicitanteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LicitanteInclude<ExtArgs> | null
+    where?: LicitanteWhereInput
+  }
+
+  /**
+   * Prazo.item
+   */
+  export type Prazo$itemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+  }
+
+  /**
+   * Prazo.concluidoPorUsuario
+   */
+  export type Prazo$concluidoPorUsuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    where?: UsuarioWhereInput
+  }
+
+  /**
+   * Prazo without action
+   */
+  export type PrazoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prazo
+     */
+    select?: PrazoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prazo
+     */
+    omit?: PrazoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrazoInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -22429,6 +24017,27 @@ export namespace Prisma {
   export type SancaoScalarFieldEnum = (typeof SancaoScalarFieldEnum)[keyof typeof SancaoScalarFieldEnum]
 
 
+  export const PrazoScalarFieldEnum: {
+    id: 'id',
+    tipo: 'tipo',
+    status: 'status',
+    descricao: 'descricao',
+    dataInicio: 'dataInicio',
+    dataFim: 'dataFim',
+    dataConclusao: 'dataConclusao',
+    observacoes: 'observacoes',
+    editalId: 'editalId',
+    licitanteId: 'licitanteId',
+    itemId: 'itemId',
+    criadoPor: 'criadoPor',
+    concluidoPor: 'concluidoPor',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PrazoScalarFieldEnum = (typeof PrazoScalarFieldEnum)[keyof typeof PrazoScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -22690,6 +24299,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TipoPrazo'
+   */
+  export type EnumTipoPrazoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoPrazo'>
+    
+
+
+  /**
+   * Reference to a field of type 'TipoPrazo[]'
+   */
+  export type ListEnumTipoPrazoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoPrazo[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusPrazo'
+   */
+  export type EnumStatusPrazoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusPrazo'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusPrazo[]'
+   */
+  export type ListEnumStatusPrazoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusPrazo[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -22723,6 +24360,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoListRelationFilter
     sancaoAplicada?: SancaoListRelationFilter
     sancaoRevogada?: SancaoListRelationFilter
+    prazosCriados?: PrazoListRelationFilter
+    prazosConcluidos?: PrazoListRelationFilter
   }
 
   export type UsuarioOrderByWithRelationInput = {
@@ -22739,6 +24378,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoOrderByRelationAggregateInput
     sancaoAplicada?: SancaoOrderByRelationAggregateInput
     sancaoRevogada?: SancaoOrderByRelationAggregateInput
+    prazosCriados?: PrazoOrderByRelationAggregateInput
+    prazosConcluidos?: PrazoOrderByRelationAggregateInput
   }
 
   export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -22758,6 +24399,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoListRelationFilter
     sancaoAplicada?: SancaoListRelationFilter
     sancaoRevogada?: SancaoListRelationFilter
+    prazosCriados?: PrazoListRelationFilter
+    prazosConcluidos?: PrazoListRelationFilter
   }, "id" | "email" | "licitanteId">
 
   export type UsuarioOrderByWithAggregationInput = {
@@ -22805,6 +24448,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatListRelationFilter
     recursos?: RecursoListRelationFilter
     Sancao?: SancaoListRelationFilter
+    Prazo?: PrazoListRelationFilter
   }
 
   export type EditalOrderByWithRelationInput = {
@@ -22825,6 +24469,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatOrderByRelationAggregateInput
     recursos?: RecursoOrderByRelationAggregateInput
     Sancao?: SancaoOrderByRelationAggregateInput
+    Prazo?: PrazoOrderByRelationAggregateInput
   }
 
   export type EditalWhereUniqueInput = Prisma.AtLeast<{
@@ -22848,6 +24493,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatListRelationFilter
     recursos?: RecursoListRelationFilter
     Sancao?: SancaoListRelationFilter
+    Prazo?: PrazoListRelationFilter
   }, "id" | "numero">
 
   export type EditalOrderByWithAggregationInput = {
@@ -22987,6 +24633,7 @@ export namespace Prisma {
     disputas?: DisputaListRelationFilter
     recursos?: RecursoListRelationFilter
     Sancao?: SancaoListRelationFilter
+    Prazo?: PrazoListRelationFilter
   }
 
   export type LicitanteOrderByWithRelationInput = {
@@ -23003,6 +24650,7 @@ export namespace Prisma {
     disputas?: DisputaOrderByRelationAggregateInput
     recursos?: RecursoOrderByRelationAggregateInput
     Sancao?: SancaoOrderByRelationAggregateInput
+    Prazo?: PrazoOrderByRelationAggregateInput
   }
 
   export type LicitanteWhereUniqueInput = Prisma.AtLeast<{
@@ -23022,6 +24670,7 @@ export namespace Prisma {
     disputas?: DisputaListRelationFilter
     recursos?: RecursoListRelationFilter
     Sancao?: SancaoListRelationFilter
+    Prazo?: PrazoListRelationFilter
   }, "id" | "cnpj">
 
   export type LicitanteOrderByWithAggregationInput = {
@@ -23815,6 +25464,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Item"> | Date | string
     lote?: XOR<LoteScalarRelationFilter, LoteWhereInput>
     propostas?: PropostaListRelationFilter
+    Prazo?: PrazoListRelationFilter
   }
 
   export type ItemOrderByWithRelationInput = {
@@ -23830,6 +25480,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     lote?: LoteOrderByWithRelationInput
     propostas?: PropostaOrderByRelationAggregateInput
+    Prazo?: PrazoOrderByRelationAggregateInput
   }
 
   export type ItemWhereUniqueInput = Prisma.AtLeast<{
@@ -23849,6 +25500,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Item"> | Date | string
     lote?: XOR<LoteScalarRelationFilter, LoteWhereInput>
     propostas?: PropostaListRelationFilter
+    Prazo?: PrazoListRelationFilter
   }, "id" | "numero_loteId">
 
   export type ItemOrderByWithAggregationInput = {
@@ -24117,6 +25769,123 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Sancao"> | Date | string
   }
 
+  export type PrazoWhereInput = {
+    AND?: PrazoWhereInput | PrazoWhereInput[]
+    OR?: PrazoWhereInput[]
+    NOT?: PrazoWhereInput | PrazoWhereInput[]
+    id?: StringFilter<"Prazo"> | string
+    tipo?: EnumTipoPrazoFilter<"Prazo"> | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFilter<"Prazo"> | $Enums.StatusPrazo
+    descricao?: StringFilter<"Prazo"> | string
+    dataInicio?: DateTimeFilter<"Prazo"> | Date | string
+    dataFim?: DateTimeFilter<"Prazo"> | Date | string
+    dataConclusao?: DateTimeNullableFilter<"Prazo"> | Date | string | null
+    observacoes?: StringNullableFilter<"Prazo"> | string | null
+    editalId?: StringFilter<"Prazo"> | string
+    licitanteId?: StringNullableFilter<"Prazo"> | string | null
+    itemId?: StringNullableFilter<"Prazo"> | string | null
+    criadoPor?: StringFilter<"Prazo"> | string
+    concluidoPor?: StringNullableFilter<"Prazo"> | string | null
+    createdAt?: DateTimeFilter<"Prazo"> | Date | string
+    updatedAt?: DateTimeFilter<"Prazo"> | Date | string
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+    licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
+    item?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
+    criadoPorUsuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    concluidoPorUsuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
+  }
+
+  export type PrazoOrderByWithRelationInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    descricao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    dataConclusao?: SortOrderInput | SortOrder
+    observacoes?: SortOrderInput | SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrderInput | SortOrder
+    itemId?: SortOrderInput | SortOrder
+    criadoPor?: SortOrder
+    concluidoPor?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    edital?: EditalOrderByWithRelationInput
+    licitante?: LicitanteOrderByWithRelationInput
+    item?: ItemOrderByWithRelationInput
+    criadoPorUsuario?: UsuarioOrderByWithRelationInput
+    concluidoPorUsuario?: UsuarioOrderByWithRelationInput
+  }
+
+  export type PrazoWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PrazoWhereInput | PrazoWhereInput[]
+    OR?: PrazoWhereInput[]
+    NOT?: PrazoWhereInput | PrazoWhereInput[]
+    tipo?: EnumTipoPrazoFilter<"Prazo"> | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFilter<"Prazo"> | $Enums.StatusPrazo
+    descricao?: StringFilter<"Prazo"> | string
+    dataInicio?: DateTimeFilter<"Prazo"> | Date | string
+    dataFim?: DateTimeFilter<"Prazo"> | Date | string
+    dataConclusao?: DateTimeNullableFilter<"Prazo"> | Date | string | null
+    observacoes?: StringNullableFilter<"Prazo"> | string | null
+    editalId?: StringFilter<"Prazo"> | string
+    licitanteId?: StringNullableFilter<"Prazo"> | string | null
+    itemId?: StringNullableFilter<"Prazo"> | string | null
+    criadoPor?: StringFilter<"Prazo"> | string
+    concluidoPor?: StringNullableFilter<"Prazo"> | string | null
+    createdAt?: DateTimeFilter<"Prazo"> | Date | string
+    updatedAt?: DateTimeFilter<"Prazo"> | Date | string
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+    licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
+    item?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
+    criadoPorUsuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    concluidoPorUsuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
+  }, "id">
+
+  export type PrazoOrderByWithAggregationInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    descricao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    dataConclusao?: SortOrderInput | SortOrder
+    observacoes?: SortOrderInput | SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrderInput | SortOrder
+    itemId?: SortOrderInput | SortOrder
+    criadoPor?: SortOrder
+    concluidoPor?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PrazoCountOrderByAggregateInput
+    _max?: PrazoMaxOrderByAggregateInput
+    _min?: PrazoMinOrderByAggregateInput
+  }
+
+  export type PrazoScalarWhereWithAggregatesInput = {
+    AND?: PrazoScalarWhereWithAggregatesInput | PrazoScalarWhereWithAggregatesInput[]
+    OR?: PrazoScalarWhereWithAggregatesInput[]
+    NOT?: PrazoScalarWhereWithAggregatesInput | PrazoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Prazo"> | string
+    tipo?: EnumTipoPrazoWithAggregatesFilter<"Prazo"> | $Enums.TipoPrazo
+    status?: EnumStatusPrazoWithAggregatesFilter<"Prazo"> | $Enums.StatusPrazo
+    descricao?: StringWithAggregatesFilter<"Prazo"> | string
+    dataInicio?: DateTimeWithAggregatesFilter<"Prazo"> | Date | string
+    dataFim?: DateTimeWithAggregatesFilter<"Prazo"> | Date | string
+    dataConclusao?: DateTimeNullableWithAggregatesFilter<"Prazo"> | Date | string | null
+    observacoes?: StringNullableWithAggregatesFilter<"Prazo"> | string | null
+    editalId?: StringWithAggregatesFilter<"Prazo"> | string
+    licitanteId?: StringNullableWithAggregatesFilter<"Prazo"> | string | null
+    itemId?: StringNullableWithAggregatesFilter<"Prazo"> | string | null
+    criadoPor?: StringWithAggregatesFilter<"Prazo"> | string
+    concluidoPor?: StringNullableWithAggregatesFilter<"Prazo"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Prazo"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Prazo"> | Date | string
+  }
+
   export type UsuarioCreateInput = {
     id?: string
     nome: string
@@ -24130,6 +25899,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateInput = {
@@ -24145,6 +25916,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioUpdateInput = {
@@ -24160,6 +25933,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateInput = {
@@ -24175,6 +25950,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioCreateManyInput = {
@@ -24221,6 +25998,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
     recursos?: RecursoCreateNestedManyWithoutEditalInput
     Sancao?: SancaoCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateInput = {
@@ -24241,6 +26019,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUpdateInput = {
@@ -24261,6 +26040,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateInput = {
@@ -24281,6 +26061,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalCreateManyInput = {
@@ -24433,6 +26214,7 @@ export namespace Prisma {
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateInput = {
@@ -24449,6 +26231,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUpdateInput = {
@@ -24465,6 +26248,7 @@ export namespace Prisma {
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateInput = {
@@ -24481,6 +26265,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteCreateManyInput = {
@@ -25314,6 +27099,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     lote: LoteCreateNestedOneWithoutItensInput
     propostas?: PropostaCreateNestedManyWithoutItemInput
+    Prazo?: PrazoCreateNestedManyWithoutItemInput
   }
 
   export type ItemUncheckedCreateInput = {
@@ -25328,6 +27114,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     propostas?: PropostaUncheckedCreateNestedManyWithoutItemInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemUpdateInput = {
@@ -25342,6 +27129,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lote?: LoteUpdateOneRequiredWithoutItensNestedInput
     propostas?: PropostaUpdateManyWithoutItemNestedInput
+    Prazo?: PrazoUpdateManyWithoutItemNestedInput
   }
 
   export type ItemUncheckedUpdateInput = {
@@ -25356,6 +27144,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     propostas?: PropostaUncheckedUpdateManyWithoutItemNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type ItemCreateManyInput = {
@@ -25640,6 +27429,127 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PrazoCreateInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutPrazoInput
+    licitante?: LicitanteCreateNestedOneWithoutPrazoInput
+    item?: ItemCreateNestedOneWithoutPrazoInput
+    criadoPorUsuario: UsuarioCreateNestedOneWithoutPrazosCriadosInput
+    concluidoPorUsuario?: UsuarioCreateNestedOneWithoutPrazosConcluidosInput
+  }
+
+  export type PrazoUncheckedCreateInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId?: string | null
+    itemId?: string | null
+    criadoPor: string
+    concluidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutPrazoNestedInput
+    licitante?: LicitanteUpdateOneWithoutPrazoNestedInput
+    item?: ItemUpdateOneWithoutPrazoNestedInput
+    criadoPorUsuario?: UsuarioUpdateOneRequiredWithoutPrazosCriadosNestedInput
+    concluidoPorUsuario?: UsuarioUpdateOneWithoutPrazosConcluidosNestedInput
+  }
+
+  export type PrazoUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoCreateManyInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId?: string | null
+    itemId?: string | null
+    criadoPor: string
+    concluidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -25706,6 +27616,12 @@ export namespace Prisma {
     none?: SancaoWhereInput
   }
 
+  export type PrazoListRelationFilter = {
+    every?: PrazoWhereInput
+    some?: PrazoWhereInput
+    none?: PrazoWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -25724,6 +27640,10 @@ export namespace Prisma {
   }
 
   export type SancaoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PrazoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -26930,6 +28850,99 @@ export namespace Prisma {
     _max?: NestedEnumStatusSancaoFilter<$PrismaModel>
   }
 
+  export type EnumTipoPrazoFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoPrazo | EnumTipoPrazoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoPrazo[] | ListEnumTipoPrazoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoPrazo[] | ListEnumTipoPrazoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoPrazoFilter<$PrismaModel> | $Enums.TipoPrazo
+  }
+
+  export type EnumStatusPrazoFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPrazo | EnumStatusPrazoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPrazo[] | ListEnumStatusPrazoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPrazo[] | ListEnumStatusPrazoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPrazoFilter<$PrismaModel> | $Enums.StatusPrazo
+  }
+
+  export type ItemNullableScalarRelationFilter = {
+    is?: ItemWhereInput | null
+    isNot?: ItemWhereInput | null
+  }
+
+  export type PrazoCountOrderByAggregateInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    descricao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    dataConclusao?: SortOrder
+    observacoes?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    itemId?: SortOrder
+    criadoPor?: SortOrder
+    concluidoPor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PrazoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    descricao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    dataConclusao?: SortOrder
+    observacoes?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    itemId?: SortOrder
+    criadoPor?: SortOrder
+    concluidoPor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PrazoMinOrderByAggregateInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    descricao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    dataConclusao?: SortOrder
+    observacoes?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    itemId?: SortOrder
+    criadoPor?: SortOrder
+    concluidoPor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumTipoPrazoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoPrazo | EnumTipoPrazoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoPrazo[] | ListEnumTipoPrazoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoPrazo[] | ListEnumTipoPrazoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoPrazoWithAggregatesFilter<$PrismaModel> | $Enums.TipoPrazo
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTipoPrazoFilter<$PrismaModel>
+    _max?: NestedEnumTipoPrazoFilter<$PrismaModel>
+  }
+
+  export type EnumStatusPrazoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPrazo | EnumStatusPrazoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPrazo[] | ListEnumStatusPrazoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPrazo[] | ListEnumStatusPrazoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPrazoWithAggregatesFilter<$PrismaModel> | $Enums.StatusPrazo
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusPrazoFilter<$PrismaModel>
+    _max?: NestedEnumStatusPrazoFilter<$PrismaModel>
+  }
+
   export type LogAtividadeCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<LogAtividadeCreateWithoutUsuarioInput, LogAtividadeUncheckedCreateWithoutUsuarioInput> | LogAtividadeCreateWithoutUsuarioInput[] | LogAtividadeUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: LogAtividadeCreateOrConnectWithoutUsuarioInput | LogAtividadeCreateOrConnectWithoutUsuarioInput[]
@@ -26978,6 +28991,20 @@ export namespace Prisma {
     connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
   }
 
+  export type PrazoCreateNestedManyWithoutCriadoPorUsuarioInput = {
+    create?: XOR<PrazoCreateWithoutCriadoPorUsuarioInput, PrazoUncheckedCreateWithoutCriadoPorUsuarioInput> | PrazoCreateWithoutCriadoPorUsuarioInput[] | PrazoUncheckedCreateWithoutCriadoPorUsuarioInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutCriadoPorUsuarioInput | PrazoCreateOrConnectWithoutCriadoPorUsuarioInput[]
+    createMany?: PrazoCreateManyCriadoPorUsuarioInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+  }
+
+  export type PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput = {
+    create?: XOR<PrazoCreateWithoutConcluidoPorUsuarioInput, PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput> | PrazoCreateWithoutConcluidoPorUsuarioInput[] | PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutConcluidoPorUsuarioInput | PrazoCreateOrConnectWithoutConcluidoPorUsuarioInput[]
+    createMany?: PrazoCreateManyConcluidoPorUsuarioInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+  }
+
   export type LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<LogAtividadeCreateWithoutUsuarioInput, LogAtividadeUncheckedCreateWithoutUsuarioInput> | LogAtividadeCreateWithoutUsuarioInput[] | LogAtividadeUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: LogAtividadeCreateOrConnectWithoutUsuarioInput | LogAtividadeCreateOrConnectWithoutUsuarioInput[]
@@ -27018,6 +29045,20 @@ export namespace Prisma {
     connectOrCreate?: SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput | SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput[]
     createMany?: SancaoCreateManyRevogadoPorUsuarioInputEnvelope
     connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+  }
+
+  export type PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput = {
+    create?: XOR<PrazoCreateWithoutCriadoPorUsuarioInput, PrazoUncheckedCreateWithoutCriadoPorUsuarioInput> | PrazoCreateWithoutCriadoPorUsuarioInput[] | PrazoUncheckedCreateWithoutCriadoPorUsuarioInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutCriadoPorUsuarioInput | PrazoCreateOrConnectWithoutCriadoPorUsuarioInput[]
+    createMany?: PrazoCreateManyCriadoPorUsuarioInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+  }
+
+  export type PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput = {
+    create?: XOR<PrazoCreateWithoutConcluidoPorUsuarioInput, PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput> | PrazoCreateWithoutConcluidoPorUsuarioInput[] | PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutConcluidoPorUsuarioInput | PrazoCreateOrConnectWithoutConcluidoPorUsuarioInput[]
+    createMany?: PrazoCreateManyConcluidoPorUsuarioInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -27122,6 +29163,34 @@ export namespace Prisma {
     deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
   }
 
+  export type PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput = {
+    create?: XOR<PrazoCreateWithoutCriadoPorUsuarioInput, PrazoUncheckedCreateWithoutCriadoPorUsuarioInput> | PrazoCreateWithoutCriadoPorUsuarioInput[] | PrazoUncheckedCreateWithoutCriadoPorUsuarioInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutCriadoPorUsuarioInput | PrazoCreateOrConnectWithoutCriadoPorUsuarioInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutCriadoPorUsuarioInput | PrazoUpsertWithWhereUniqueWithoutCriadoPorUsuarioInput[]
+    createMany?: PrazoCreateManyCriadoPorUsuarioInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutCriadoPorUsuarioInput | PrazoUpdateWithWhereUniqueWithoutCriadoPorUsuarioInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutCriadoPorUsuarioInput | PrazoUpdateManyWithWhereWithoutCriadoPorUsuarioInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
+  }
+
+  export type PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput = {
+    create?: XOR<PrazoCreateWithoutConcluidoPorUsuarioInput, PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput> | PrazoCreateWithoutConcluidoPorUsuarioInput[] | PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutConcluidoPorUsuarioInput | PrazoCreateOrConnectWithoutConcluidoPorUsuarioInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutConcluidoPorUsuarioInput | PrazoUpsertWithWhereUniqueWithoutConcluidoPorUsuarioInput[]
+    createMany?: PrazoCreateManyConcluidoPorUsuarioInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutConcluidoPorUsuarioInput | PrazoUpdateWithWhereUniqueWithoutConcluidoPorUsuarioInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutConcluidoPorUsuarioInput | PrazoUpdateManyWithWhereWithoutConcluidoPorUsuarioInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -27210,6 +29279,34 @@ export namespace Prisma {
     deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
   }
 
+  export type PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput = {
+    create?: XOR<PrazoCreateWithoutCriadoPorUsuarioInput, PrazoUncheckedCreateWithoutCriadoPorUsuarioInput> | PrazoCreateWithoutCriadoPorUsuarioInput[] | PrazoUncheckedCreateWithoutCriadoPorUsuarioInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutCriadoPorUsuarioInput | PrazoCreateOrConnectWithoutCriadoPorUsuarioInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutCriadoPorUsuarioInput | PrazoUpsertWithWhereUniqueWithoutCriadoPorUsuarioInput[]
+    createMany?: PrazoCreateManyCriadoPorUsuarioInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutCriadoPorUsuarioInput | PrazoUpdateWithWhereUniqueWithoutCriadoPorUsuarioInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutCriadoPorUsuarioInput | PrazoUpdateManyWithWhereWithoutCriadoPorUsuarioInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
+  }
+
+  export type PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput = {
+    create?: XOR<PrazoCreateWithoutConcluidoPorUsuarioInput, PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput> | PrazoCreateWithoutConcluidoPorUsuarioInput[] | PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutConcluidoPorUsuarioInput | PrazoCreateOrConnectWithoutConcluidoPorUsuarioInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutConcluidoPorUsuarioInput | PrazoUpsertWithWhereUniqueWithoutConcluidoPorUsuarioInput[]
+    createMany?: PrazoCreateManyConcluidoPorUsuarioInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutConcluidoPorUsuarioInput | PrazoUpdateWithWhereUniqueWithoutConcluidoPorUsuarioInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutConcluidoPorUsuarioInput | PrazoUpdateManyWithWhereWithoutConcluidoPorUsuarioInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
+  }
+
   export type DisputaCreateNestedManyWithoutEditalInput = {
     create?: XOR<DisputaCreateWithoutEditalInput, DisputaUncheckedCreateWithoutEditalInput> | DisputaCreateWithoutEditalInput[] | DisputaUncheckedCreateWithoutEditalInput[]
     connectOrCreate?: DisputaCreateOrConnectWithoutEditalInput | DisputaCreateOrConnectWithoutEditalInput[]
@@ -27259,6 +29356,13 @@ export namespace Prisma {
     connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
   }
 
+  export type PrazoCreateNestedManyWithoutEditalInput = {
+    create?: XOR<PrazoCreateWithoutEditalInput, PrazoUncheckedCreateWithoutEditalInput> | PrazoCreateWithoutEditalInput[] | PrazoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutEditalInput | PrazoCreateOrConnectWithoutEditalInput[]
+    createMany?: PrazoCreateManyEditalInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+  }
+
   export type DisputaUncheckedCreateNestedManyWithoutEditalInput = {
     create?: XOR<DisputaCreateWithoutEditalInput, DisputaUncheckedCreateWithoutEditalInput> | DisputaCreateWithoutEditalInput[] | DisputaUncheckedCreateWithoutEditalInput[]
     connectOrCreate?: DisputaCreateOrConnectWithoutEditalInput | DisputaCreateOrConnectWithoutEditalInput[]
@@ -27306,6 +29410,13 @@ export namespace Prisma {
     connectOrCreate?: SancaoCreateOrConnectWithoutEditalInput | SancaoCreateOrConnectWithoutEditalInput[]
     createMany?: SancaoCreateManyEditalInputEnvelope
     connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+  }
+
+  export type PrazoUncheckedCreateNestedManyWithoutEditalInput = {
+    create?: XOR<PrazoCreateWithoutEditalInput, PrazoUncheckedCreateWithoutEditalInput> | PrazoCreateWithoutEditalInput[] | PrazoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutEditalInput | PrazoCreateOrConnectWithoutEditalInput[]
+    createMany?: PrazoCreateManyEditalInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
   }
 
   export type EnumModalidadeLicitaçãoFieldUpdateOperationsInput = {
@@ -27418,6 +29529,20 @@ export namespace Prisma {
     deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
   }
 
+  export type PrazoUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<PrazoCreateWithoutEditalInput, PrazoUncheckedCreateWithoutEditalInput> | PrazoCreateWithoutEditalInput[] | PrazoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutEditalInput | PrazoCreateOrConnectWithoutEditalInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutEditalInput | PrazoUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: PrazoCreateManyEditalInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutEditalInput | PrazoUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutEditalInput | PrazoUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
+  }
+
   export type DisputaUncheckedUpdateManyWithoutEditalNestedInput = {
     create?: XOR<DisputaCreateWithoutEditalInput, DisputaUncheckedCreateWithoutEditalInput> | DisputaCreateWithoutEditalInput[] | DisputaUncheckedCreateWithoutEditalInput[]
     connectOrCreate?: DisputaCreateOrConnectWithoutEditalInput | DisputaCreateOrConnectWithoutEditalInput[]
@@ -27514,6 +29639,20 @@ export namespace Prisma {
     update?: SancaoUpdateWithWhereUniqueWithoutEditalInput | SancaoUpdateWithWhereUniqueWithoutEditalInput[]
     updateMany?: SancaoUpdateManyWithWhereWithoutEditalInput | SancaoUpdateManyWithWhereWithoutEditalInput[]
     deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
+  }
+
+  export type PrazoUncheckedUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<PrazoCreateWithoutEditalInput, PrazoUncheckedCreateWithoutEditalInput> | PrazoCreateWithoutEditalInput[] | PrazoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutEditalInput | PrazoCreateOrConnectWithoutEditalInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutEditalInput | PrazoUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: PrazoCreateManyEditalInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutEditalInput | PrazoUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutEditalInput | PrazoUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
   }
 
   export type EditalCreateNestedOneWithoutDisputasInput = {
@@ -27897,6 +30036,13 @@ export namespace Prisma {
     connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
   }
 
+  export type PrazoCreateNestedManyWithoutLicitanteInput = {
+    create?: XOR<PrazoCreateWithoutLicitanteInput, PrazoUncheckedCreateWithoutLicitanteInput> | PrazoCreateWithoutLicitanteInput[] | PrazoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutLicitanteInput | PrazoCreateOrConnectWithoutLicitanteInput[]
+    createMany?: PrazoCreateManyLicitanteInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+  }
+
   export type UsuarioUncheckedCreateNestedOneWithoutLicitanteInput = {
     create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
     connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
@@ -27956,6 +30102,13 @@ export namespace Prisma {
     connectOrCreate?: SancaoCreateOrConnectWithoutLicitanteInput | SancaoCreateOrConnectWithoutLicitanteInput[]
     createMany?: SancaoCreateManyLicitanteInputEnvelope
     connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+  }
+
+  export type PrazoUncheckedCreateNestedManyWithoutLicitanteInput = {
+    create?: XOR<PrazoCreateWithoutLicitanteInput, PrazoUncheckedCreateWithoutLicitanteInput> | PrazoCreateWithoutLicitanteInput[] | PrazoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutLicitanteInput | PrazoCreateOrConnectWithoutLicitanteInput[]
+    createMany?: PrazoCreateManyLicitanteInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
   }
 
   export type EnumTipoEmpresaFieldUpdateOperationsInput = {
@@ -28083,6 +30236,20 @@ export namespace Prisma {
     deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
   }
 
+  export type PrazoUpdateManyWithoutLicitanteNestedInput = {
+    create?: XOR<PrazoCreateWithoutLicitanteInput, PrazoUncheckedCreateWithoutLicitanteInput> | PrazoCreateWithoutLicitanteInput[] | PrazoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutLicitanteInput | PrazoCreateOrConnectWithoutLicitanteInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutLicitanteInput | PrazoUpsertWithWhereUniqueWithoutLicitanteInput[]
+    createMany?: PrazoCreateManyLicitanteInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutLicitanteInput | PrazoUpdateWithWhereUniqueWithoutLicitanteInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutLicitanteInput | PrazoUpdateManyWithWhereWithoutLicitanteInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
+  }
+
   export type UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput = {
     create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
     connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
@@ -28202,6 +30369,20 @@ export namespace Prisma {
     update?: SancaoUpdateWithWhereUniqueWithoutLicitanteInput | SancaoUpdateWithWhereUniqueWithoutLicitanteInput[]
     updateMany?: SancaoUpdateManyWithWhereWithoutLicitanteInput | SancaoUpdateManyWithWhereWithoutLicitanteInput[]
     deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
+  }
+
+  export type PrazoUncheckedUpdateManyWithoutLicitanteNestedInput = {
+    create?: XOR<PrazoCreateWithoutLicitanteInput, PrazoUncheckedCreateWithoutLicitanteInput> | PrazoCreateWithoutLicitanteInput[] | PrazoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutLicitanteInput | PrazoCreateOrConnectWithoutLicitanteInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutLicitanteInput | PrazoUpsertWithWhereUniqueWithoutLicitanteInput[]
+    createMany?: PrazoCreateManyLicitanteInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutLicitanteInput | PrazoUpdateWithWhereUniqueWithoutLicitanteInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutLicitanteInput | PrazoUpdateManyWithWhereWithoutLicitanteInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
   }
 
   export type DisputaCreateNestedOneWithoutPropostasInput = {
@@ -28545,11 +30726,25 @@ export namespace Prisma {
     connect?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
   }
 
+  export type PrazoCreateNestedManyWithoutItemInput = {
+    create?: XOR<PrazoCreateWithoutItemInput, PrazoUncheckedCreateWithoutItemInput> | PrazoCreateWithoutItemInput[] | PrazoUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutItemInput | PrazoCreateOrConnectWithoutItemInput[]
+    createMany?: PrazoCreateManyItemInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+  }
+
   export type PropostaUncheckedCreateNestedManyWithoutItemInput = {
     create?: XOR<PropostaCreateWithoutItemInput, PropostaUncheckedCreateWithoutItemInput> | PropostaCreateWithoutItemInput[] | PropostaUncheckedCreateWithoutItemInput[]
     connectOrCreate?: PropostaCreateOrConnectWithoutItemInput | PropostaCreateOrConnectWithoutItemInput[]
     createMany?: PropostaCreateManyItemInputEnvelope
     connect?: PropostaWhereUniqueInput | PropostaWhereUniqueInput[]
+  }
+
+  export type PrazoUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<PrazoCreateWithoutItemInput, PrazoUncheckedCreateWithoutItemInput> | PrazoCreateWithoutItemInput[] | PrazoUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutItemInput | PrazoCreateOrConnectWithoutItemInput[]
+    createMany?: PrazoCreateManyItemInputEnvelope
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
   }
 
   export type LoteUpdateOneRequiredWithoutItensNestedInput = {
@@ -28574,6 +30769,20 @@ export namespace Prisma {
     deleteMany?: PropostaScalarWhereInput | PropostaScalarWhereInput[]
   }
 
+  export type PrazoUpdateManyWithoutItemNestedInput = {
+    create?: XOR<PrazoCreateWithoutItemInput, PrazoUncheckedCreateWithoutItemInput> | PrazoCreateWithoutItemInput[] | PrazoUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutItemInput | PrazoCreateOrConnectWithoutItemInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutItemInput | PrazoUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: PrazoCreateManyItemInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutItemInput | PrazoUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutItemInput | PrazoUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
+  }
+
   export type PropostaUncheckedUpdateManyWithoutItemNestedInput = {
     create?: XOR<PropostaCreateWithoutItemInput, PropostaUncheckedCreateWithoutItemInput> | PropostaCreateWithoutItemInput[] | PropostaUncheckedCreateWithoutItemInput[]
     connectOrCreate?: PropostaCreateOrConnectWithoutItemInput | PropostaCreateOrConnectWithoutItemInput[]
@@ -28586,6 +30795,20 @@ export namespace Prisma {
     update?: PropostaUpdateWithWhereUniqueWithoutItemInput | PropostaUpdateWithWhereUniqueWithoutItemInput[]
     updateMany?: PropostaUpdateManyWithWhereWithoutItemInput | PropostaUpdateManyWithWhereWithoutItemInput[]
     deleteMany?: PropostaScalarWhereInput | PropostaScalarWhereInput[]
+  }
+
+  export type PrazoUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<PrazoCreateWithoutItemInput, PrazoUncheckedCreateWithoutItemInput> | PrazoCreateWithoutItemInput[] | PrazoUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: PrazoCreateOrConnectWithoutItemInput | PrazoCreateOrConnectWithoutItemInput[]
+    upsert?: PrazoUpsertWithWhereUniqueWithoutItemInput | PrazoUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: PrazoCreateManyItemInputEnvelope
+    set?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    disconnect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    delete?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    connect?: PrazoWhereUniqueInput | PrazoWhereUniqueInput[]
+    update?: PrazoUpdateWithWhereUniqueWithoutItemInput | PrazoUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: PrazoUpdateManyWithWhereWithoutItemInput | PrazoUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
   }
 
   export type EditalCreateNestedOneWithoutRecursosInput = {
@@ -28718,6 +30941,90 @@ export namespace Prisma {
     delete?: UsuarioWhereInput | boolean
     connect?: UsuarioWhereUniqueInput
     update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutSancaoRevogadaInput, UsuarioUpdateWithoutSancaoRevogadaInput>, UsuarioUncheckedUpdateWithoutSancaoRevogadaInput>
+  }
+
+  export type EditalCreateNestedOneWithoutPrazoInput = {
+    create?: XOR<EditalCreateWithoutPrazoInput, EditalUncheckedCreateWithoutPrazoInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutPrazoInput
+    connect?: EditalWhereUniqueInput
+  }
+
+  export type LicitanteCreateNestedOneWithoutPrazoInput = {
+    create?: XOR<LicitanteCreateWithoutPrazoInput, LicitanteUncheckedCreateWithoutPrazoInput>
+    connectOrCreate?: LicitanteCreateOrConnectWithoutPrazoInput
+    connect?: LicitanteWhereUniqueInput
+  }
+
+  export type ItemCreateNestedOneWithoutPrazoInput = {
+    create?: XOR<ItemCreateWithoutPrazoInput, ItemUncheckedCreateWithoutPrazoInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutPrazoInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutPrazosCriadosInput = {
+    create?: XOR<UsuarioCreateWithoutPrazosCriadosInput, UsuarioUncheckedCreateWithoutPrazosCriadosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutPrazosCriadosInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutPrazosConcluidosInput = {
+    create?: XOR<UsuarioCreateWithoutPrazosConcluidosInput, UsuarioUncheckedCreateWithoutPrazosConcluidosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutPrazosConcluidosInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type EnumTipoPrazoFieldUpdateOperationsInput = {
+    set?: $Enums.TipoPrazo
+  }
+
+  export type EnumStatusPrazoFieldUpdateOperationsInput = {
+    set?: $Enums.StatusPrazo
+  }
+
+  export type EditalUpdateOneRequiredWithoutPrazoNestedInput = {
+    create?: XOR<EditalCreateWithoutPrazoInput, EditalUncheckedCreateWithoutPrazoInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutPrazoInput
+    upsert?: EditalUpsertWithoutPrazoInput
+    connect?: EditalWhereUniqueInput
+    update?: XOR<XOR<EditalUpdateToOneWithWhereWithoutPrazoInput, EditalUpdateWithoutPrazoInput>, EditalUncheckedUpdateWithoutPrazoInput>
+  }
+
+  export type LicitanteUpdateOneWithoutPrazoNestedInput = {
+    create?: XOR<LicitanteCreateWithoutPrazoInput, LicitanteUncheckedCreateWithoutPrazoInput>
+    connectOrCreate?: LicitanteCreateOrConnectWithoutPrazoInput
+    upsert?: LicitanteUpsertWithoutPrazoInput
+    disconnect?: LicitanteWhereInput | boolean
+    delete?: LicitanteWhereInput | boolean
+    connect?: LicitanteWhereUniqueInput
+    update?: XOR<XOR<LicitanteUpdateToOneWithWhereWithoutPrazoInput, LicitanteUpdateWithoutPrazoInput>, LicitanteUncheckedUpdateWithoutPrazoInput>
+  }
+
+  export type ItemUpdateOneWithoutPrazoNestedInput = {
+    create?: XOR<ItemCreateWithoutPrazoInput, ItemUncheckedCreateWithoutPrazoInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutPrazoInput
+    upsert?: ItemUpsertWithoutPrazoInput
+    disconnect?: ItemWhereInput | boolean
+    delete?: ItemWhereInput | boolean
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutPrazoInput, ItemUpdateWithoutPrazoInput>, ItemUncheckedUpdateWithoutPrazoInput>
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutPrazosCriadosNestedInput = {
+    create?: XOR<UsuarioCreateWithoutPrazosCriadosInput, UsuarioUncheckedCreateWithoutPrazosCriadosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutPrazosCriadosInput
+    upsert?: UsuarioUpsertWithoutPrazosCriadosInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutPrazosCriadosInput, UsuarioUpdateWithoutPrazosCriadosInput>, UsuarioUncheckedUpdateWithoutPrazosCriadosInput>
+  }
+
+  export type UsuarioUpdateOneWithoutPrazosConcluidosNestedInput = {
+    create?: XOR<UsuarioCreateWithoutPrazosConcluidosInput, UsuarioUncheckedCreateWithoutPrazosConcluidosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutPrazosConcluidosInput
+    upsert?: UsuarioUpsertWithoutPrazosConcluidosInput
+    disconnect?: UsuarioWhereInput | boolean
+    delete?: UsuarioWhereInput | boolean
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutPrazosConcluidosInput, UsuarioUpdateWithoutPrazosConcluidosInput>, UsuarioUncheckedUpdateWithoutPrazosConcluidosInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -29142,6 +31449,40 @@ export namespace Prisma {
     _max?: NestedEnumStatusSancaoFilter<$PrismaModel>
   }
 
+  export type NestedEnumTipoPrazoFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoPrazo | EnumTipoPrazoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoPrazo[] | ListEnumTipoPrazoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoPrazo[] | ListEnumTipoPrazoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoPrazoFilter<$PrismaModel> | $Enums.TipoPrazo
+  }
+
+  export type NestedEnumStatusPrazoFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPrazo | EnumStatusPrazoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPrazo[] | ListEnumStatusPrazoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPrazo[] | ListEnumStatusPrazoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPrazoFilter<$PrismaModel> | $Enums.StatusPrazo
+  }
+
+  export type NestedEnumTipoPrazoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoPrazo | EnumTipoPrazoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoPrazo[] | ListEnumTipoPrazoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoPrazo[] | ListEnumTipoPrazoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoPrazoWithAggregatesFilter<$PrismaModel> | $Enums.TipoPrazo
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTipoPrazoFilter<$PrismaModel>
+    _max?: NestedEnumTipoPrazoFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusPrazoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPrazo | EnumStatusPrazoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPrazo[] | ListEnumStatusPrazoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPrazo[] | ListEnumStatusPrazoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPrazoWithAggregatesFilter<$PrismaModel> | $Enums.StatusPrazo
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusPrazoFilter<$PrismaModel>
+    _max?: NestedEnumStatusPrazoFilter<$PrismaModel>
+  }
+
   export type LogAtividadeCreateWithoutUsuarioInput = {
     id?: string
     acao: string
@@ -29217,6 +31558,7 @@ export namespace Prisma {
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutUsuarioInput = {
@@ -29232,6 +31574,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutUsuarioInput = {
@@ -29415,6 +31758,94 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PrazoCreateWithoutCriadoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutPrazoInput
+    licitante?: LicitanteCreateNestedOneWithoutPrazoInput
+    item?: ItemCreateNestedOneWithoutPrazoInput
+    concluidoPorUsuario?: UsuarioCreateNestedOneWithoutPrazosConcluidosInput
+  }
+
+  export type PrazoUncheckedCreateWithoutCriadoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId?: string | null
+    itemId?: string | null
+    concluidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateOrConnectWithoutCriadoPorUsuarioInput = {
+    where: PrazoWhereUniqueInput
+    create: XOR<PrazoCreateWithoutCriadoPorUsuarioInput, PrazoUncheckedCreateWithoutCriadoPorUsuarioInput>
+  }
+
+  export type PrazoCreateManyCriadoPorUsuarioInputEnvelope = {
+    data: PrazoCreateManyCriadoPorUsuarioInput | PrazoCreateManyCriadoPorUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PrazoCreateWithoutConcluidoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutPrazoInput
+    licitante?: LicitanteCreateNestedOneWithoutPrazoInput
+    item?: ItemCreateNestedOneWithoutPrazoInput
+    criadoPorUsuario: UsuarioCreateNestedOneWithoutPrazosCriadosInput
+  }
+
+  export type PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId?: string | null
+    itemId?: string | null
+    criadoPor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateOrConnectWithoutConcluidoPorUsuarioInput = {
+    where: PrazoWhereUniqueInput
+    create: XOR<PrazoCreateWithoutConcluidoPorUsuarioInput, PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput>
+  }
+
+  export type PrazoCreateManyConcluidoPorUsuarioInputEnvelope = {
+    data: PrazoCreateManyConcluidoPorUsuarioInput | PrazoCreateManyConcluidoPorUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
   export type LogAtividadeUpsertWithWhereUniqueWithoutUsuarioInput = {
     where: LogAtividadeWhereUniqueInput
     update: XOR<LogAtividadeUpdateWithoutUsuarioInput, LogAtividadeUncheckedUpdateWithoutUsuarioInput>
@@ -29500,6 +31931,7 @@ export namespace Prisma {
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutUsuarioInput = {
@@ -29515,6 +31947,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type RecursoUpsertWithWhereUniqueWithoutEnviadoPorInput = {
@@ -29621,6 +32054,59 @@ export namespace Prisma {
   export type SancaoUpdateManyWithWhereWithoutRevogadoPorUsuarioInput = {
     where: SancaoScalarWhereInput
     data: XOR<SancaoUpdateManyMutationInput, SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioInput>
+  }
+
+  export type PrazoUpsertWithWhereUniqueWithoutCriadoPorUsuarioInput = {
+    where: PrazoWhereUniqueInput
+    update: XOR<PrazoUpdateWithoutCriadoPorUsuarioInput, PrazoUncheckedUpdateWithoutCriadoPorUsuarioInput>
+    create: XOR<PrazoCreateWithoutCriadoPorUsuarioInput, PrazoUncheckedCreateWithoutCriadoPorUsuarioInput>
+  }
+
+  export type PrazoUpdateWithWhereUniqueWithoutCriadoPorUsuarioInput = {
+    where: PrazoWhereUniqueInput
+    data: XOR<PrazoUpdateWithoutCriadoPorUsuarioInput, PrazoUncheckedUpdateWithoutCriadoPorUsuarioInput>
+  }
+
+  export type PrazoUpdateManyWithWhereWithoutCriadoPorUsuarioInput = {
+    where: PrazoScalarWhereInput
+    data: XOR<PrazoUpdateManyMutationInput, PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioInput>
+  }
+
+  export type PrazoScalarWhereInput = {
+    AND?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
+    OR?: PrazoScalarWhereInput[]
+    NOT?: PrazoScalarWhereInput | PrazoScalarWhereInput[]
+    id?: StringFilter<"Prazo"> | string
+    tipo?: EnumTipoPrazoFilter<"Prazo"> | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFilter<"Prazo"> | $Enums.StatusPrazo
+    descricao?: StringFilter<"Prazo"> | string
+    dataInicio?: DateTimeFilter<"Prazo"> | Date | string
+    dataFim?: DateTimeFilter<"Prazo"> | Date | string
+    dataConclusao?: DateTimeNullableFilter<"Prazo"> | Date | string | null
+    observacoes?: StringNullableFilter<"Prazo"> | string | null
+    editalId?: StringFilter<"Prazo"> | string
+    licitanteId?: StringNullableFilter<"Prazo"> | string | null
+    itemId?: StringNullableFilter<"Prazo"> | string | null
+    criadoPor?: StringFilter<"Prazo"> | string
+    concluidoPor?: StringNullableFilter<"Prazo"> | string | null
+    createdAt?: DateTimeFilter<"Prazo"> | Date | string
+    updatedAt?: DateTimeFilter<"Prazo"> | Date | string
+  }
+
+  export type PrazoUpsertWithWhereUniqueWithoutConcluidoPorUsuarioInput = {
+    where: PrazoWhereUniqueInput
+    update: XOR<PrazoUpdateWithoutConcluidoPorUsuarioInput, PrazoUncheckedUpdateWithoutConcluidoPorUsuarioInput>
+    create: XOR<PrazoCreateWithoutConcluidoPorUsuarioInput, PrazoUncheckedCreateWithoutConcluidoPorUsuarioInput>
+  }
+
+  export type PrazoUpdateWithWhereUniqueWithoutConcluidoPorUsuarioInput = {
+    where: PrazoWhereUniqueInput
+    data: XOR<PrazoUpdateWithoutConcluidoPorUsuarioInput, PrazoUncheckedUpdateWithoutConcluidoPorUsuarioInput>
+  }
+
+  export type PrazoUpdateManyWithWhereWithoutConcluidoPorUsuarioInput = {
+    where: PrazoScalarWhereInput
+    data: XOR<PrazoUpdateManyMutationInput, PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioInput>
   }
 
   export type DisputaCreateWithoutEditalInput = {
@@ -29879,6 +32365,50 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PrazoCreateWithoutEditalInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    licitante?: LicitanteCreateNestedOneWithoutPrazoInput
+    item?: ItemCreateNestedOneWithoutPrazoInput
+    criadoPorUsuario: UsuarioCreateNestedOneWithoutPrazosCriadosInput
+    concluidoPorUsuario?: UsuarioCreateNestedOneWithoutPrazosConcluidosInput
+  }
+
+  export type PrazoUncheckedCreateWithoutEditalInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    licitanteId?: string | null
+    itemId?: string | null
+    criadoPor: string
+    concluidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateOrConnectWithoutEditalInput = {
+    where: PrazoWhereUniqueInput
+    create: XOR<PrazoCreateWithoutEditalInput, PrazoUncheckedCreateWithoutEditalInput>
+  }
+
+  export type PrazoCreateManyEditalInputEnvelope = {
+    data: PrazoCreateManyEditalInput | PrazoCreateManyEditalInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DisputaUpsertWithWhereUniqueWithoutEditalInput = {
     where: DisputaWhereUniqueInput
     update: XOR<DisputaUpdateWithoutEditalInput, DisputaUncheckedUpdateWithoutEditalInput>
@@ -30047,6 +32577,22 @@ export namespace Prisma {
     data: XOR<SancaoUpdateManyMutationInput, SancaoUncheckedUpdateManyWithoutEditalInput>
   }
 
+  export type PrazoUpsertWithWhereUniqueWithoutEditalInput = {
+    where: PrazoWhereUniqueInput
+    update: XOR<PrazoUpdateWithoutEditalInput, PrazoUncheckedUpdateWithoutEditalInput>
+    create: XOR<PrazoCreateWithoutEditalInput, PrazoUncheckedCreateWithoutEditalInput>
+  }
+
+  export type PrazoUpdateWithWhereUniqueWithoutEditalInput = {
+    where: PrazoWhereUniqueInput
+    data: XOR<PrazoUpdateWithoutEditalInput, PrazoUncheckedUpdateWithoutEditalInput>
+  }
+
+  export type PrazoUpdateManyWithWhereWithoutEditalInput = {
+    where: PrazoScalarWhereInput
+    data: XOR<PrazoUpdateManyMutationInput, PrazoUncheckedUpdateManyWithoutEditalInput>
+  }
+
   export type EditalCreateWithoutDisputasInput = {
     id?: string
     numero: string
@@ -30064,6 +32610,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
     recursos?: RecursoCreateNestedManyWithoutEditalInput
     Sancao?: SancaoCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutDisputasInput = {
@@ -30083,6 +32630,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutDisputasInput = {
@@ -30315,6 +32863,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
     recursos?: RecursoCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutDisputasInput = {
@@ -30330,6 +32879,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutDisputasInput = {
@@ -30365,6 +32915,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutDisputasInput = {
@@ -30384,6 +32935,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type PropostaUpsertWithWhereUniqueWithoutDisputaInput = {
@@ -30591,6 +33143,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutLicitanteInput = {
@@ -30605,6 +33159,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutLicitanteInput = {
@@ -30919,6 +33475,50 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PrazoCreateWithoutLicitanteInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutPrazoInput
+    item?: ItemCreateNestedOneWithoutPrazoInput
+    criadoPorUsuario: UsuarioCreateNestedOneWithoutPrazosCriadosInput
+    concluidoPorUsuario?: UsuarioCreateNestedOneWithoutPrazosConcluidosInput
+  }
+
+  export type PrazoUncheckedCreateWithoutLicitanteInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    itemId?: string | null
+    criadoPor: string
+    concluidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateOrConnectWithoutLicitanteInput = {
+    where: PrazoWhereUniqueInput
+    create: XOR<PrazoCreateWithoutLicitanteInput, PrazoUncheckedCreateWithoutLicitanteInput>
+  }
+
+  export type PrazoCreateManyLicitanteInputEnvelope = {
+    data: PrazoCreateManyLicitanteInput | PrazoCreateManyLicitanteInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UsuarioUpsertWithoutLicitanteInput = {
     update: XOR<UsuarioUpdateWithoutLicitanteInput, UsuarioUncheckedUpdateWithoutLicitanteInput>
     create: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
@@ -30942,6 +33542,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutLicitanteInput = {
@@ -30956,6 +33558,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type PropostaUpsertWithWhereUniqueWithoutLicitanteInput = {
@@ -31086,6 +33690,22 @@ export namespace Prisma {
     data: XOR<SancaoUpdateManyMutationInput, SancaoUncheckedUpdateManyWithoutLicitanteInput>
   }
 
+  export type PrazoUpsertWithWhereUniqueWithoutLicitanteInput = {
+    where: PrazoWhereUniqueInput
+    update: XOR<PrazoUpdateWithoutLicitanteInput, PrazoUncheckedUpdateWithoutLicitanteInput>
+    create: XOR<PrazoCreateWithoutLicitanteInput, PrazoUncheckedCreateWithoutLicitanteInput>
+  }
+
+  export type PrazoUpdateWithWhereUniqueWithoutLicitanteInput = {
+    where: PrazoWhereUniqueInput
+    data: XOR<PrazoUpdateWithoutLicitanteInput, PrazoUncheckedUpdateWithoutLicitanteInput>
+  }
+
+  export type PrazoUpdateManyWithWhereWithoutLicitanteInput = {
+    where: PrazoScalarWhereInput
+    data: XOR<PrazoUpdateManyMutationInput, PrazoUncheckedUpdateManyWithoutLicitanteInput>
+  }
+
   export type DisputaCreateWithoutPropostasInput = {
     id?: string
     status: $Enums.DisputaStatus
@@ -31136,6 +33756,7 @@ export namespace Prisma {
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutPropostasInput = {
@@ -31151,6 +33772,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutPropostasInput = {
@@ -31169,6 +33791,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     lote: LoteCreateNestedOneWithoutItensInput
+    Prazo?: PrazoCreateNestedManyWithoutItemInput
   }
 
   export type ItemUncheckedCreateWithoutPropostasInput = {
@@ -31182,6 +33805,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemCreateOrConnectWithoutPropostasInput = {
@@ -31256,6 +33880,7 @@ export namespace Prisma {
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutPropostasInput = {
@@ -31271,6 +33896,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type ItemUpsertWithoutPropostasInput = {
@@ -31295,6 +33921,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lote?: LoteUpdateOneRequiredWithoutItensNestedInput
+    Prazo?: PrazoUpdateManyWithoutItemNestedInput
   }
 
   export type ItemUncheckedUpdateWithoutPropostasInput = {
@@ -31308,6 +33935,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Prazo?: PrazoUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type DisputaCreateWithoutLancesInput = {
@@ -31360,6 +33988,7 @@ export namespace Prisma {
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutLancesInput = {
@@ -31375,6 +34004,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutLancesInput = {
@@ -31449,6 +34079,7 @@ export namespace Prisma {
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutLancesInput = {
@@ -31464,6 +34095,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type EditalCreateWithoutDocumentosInput = {
@@ -31483,6 +34115,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
     recursos?: RecursoCreateNestedManyWithoutEditalInput
     Sancao?: SancaoCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutDocumentosInput = {
@@ -31502,6 +34135,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutDocumentosInput = {
@@ -31537,6 +34171,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutDocumentosInput = {
@@ -31556,6 +34191,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalCreateWithoutDocumentosObrigatoriosInput = {
@@ -31575,6 +34211,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
     recursos?: RecursoCreateNestedManyWithoutEditalInput
     Sancao?: SancaoCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutDocumentosObrigatoriosInput = {
@@ -31594,6 +34231,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutDocumentosObrigatoriosInput = {
@@ -31629,6 +34267,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput = {
@@ -31648,6 +34287,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type DisputaCreateWithoutDocumentosInput = {
@@ -31700,6 +34340,7 @@ export namespace Prisma {
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutDocumentosInput = {
@@ -31715,6 +34356,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutDocumentosInput = {
@@ -31789,6 +34431,7 @@ export namespace Prisma {
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutDocumentosInput = {
@@ -31804,6 +34447,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type EditalCreateWithoutMensagensChatInput = {
@@ -31823,6 +34467,7 @@ export namespace Prisma {
     lotes?: LoteCreateNestedManyWithoutEditalInput
     recursos?: RecursoCreateNestedManyWithoutEditalInput
     Sancao?: SancaoCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutMensagensChatInput = {
@@ -31842,6 +34487,7 @@ export namespace Prisma {
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutMensagensChatInput = {
@@ -31861,6 +34507,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutMensagemChatInput = {
@@ -31875,6 +34523,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutMensagemChatInput = {
@@ -31932,6 +34582,7 @@ export namespace Prisma {
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutMensagensChatInput = {
@@ -31947,6 +34598,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutMensagensChatInput = {
@@ -31982,6 +34634,7 @@ export namespace Prisma {
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutMensagensChatInput = {
@@ -32001,6 +34654,7 @@ export namespace Prisma {
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type UsuarioUpsertWithoutMensagemChatInput = {
@@ -32026,6 +34680,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutMensagemChatInput = {
@@ -32040,6 +34696,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type DisputaUpsertWithoutMensagensChatInput = {
@@ -32109,6 +34767,7 @@ export namespace Prisma {
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutMensagensChatInput = {
@@ -32124,6 +34783,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteCreateWithoutSessoesInput = {
@@ -32139,6 +34799,7 @@ export namespace Prisma {
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutSessoesInput = {
@@ -32154,6 +34815,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutSessoesInput = {
@@ -32222,6 +34884,7 @@ export namespace Prisma {
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutSessoesInput = {
@@ -32237,6 +34900,7 @@ export namespace Prisma {
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type DisputaUpsertWithoutSessoesInput = {
@@ -32331,6 +34995,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutLogAtividadeInput = {
@@ -32345,6 +35011,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutLogAtividadeInput = {
@@ -32418,6 +35086,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutLogAtividadeInput = {
@@ -32432,6 +35102,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type ItemCreateWithoutLoteInput = {
@@ -32445,6 +35117,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     propostas?: PropostaCreateNestedManyWithoutItemInput
+    Prazo?: PrazoCreateNestedManyWithoutItemInput
   }
 
   export type ItemUncheckedCreateWithoutLoteInput = {
@@ -32458,6 +35131,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     propostas?: PropostaUncheckedCreateNestedManyWithoutItemInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemCreateOrConnectWithoutLoteInput = {
@@ -32487,6 +35161,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
     recursos?: RecursoCreateNestedManyWithoutEditalInput
     Sancao?: SancaoCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutLotesInput = {
@@ -32506,6 +35181,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutLotesInput = {
@@ -32573,6 +35249,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutLotesInput = {
@@ -32592,6 +35269,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type LoteCreateWithoutItensInput = {
@@ -32663,6 +35341,50 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PrazoCreateWithoutItemInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutPrazoInput
+    licitante?: LicitanteCreateNestedOneWithoutPrazoInput
+    criadoPorUsuario: UsuarioCreateNestedOneWithoutPrazosCriadosInput
+    concluidoPorUsuario?: UsuarioCreateNestedOneWithoutPrazosConcluidosInput
+  }
+
+  export type PrazoUncheckedCreateWithoutItemInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId?: string | null
+    criadoPor: string
+    concluidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateOrConnectWithoutItemInput = {
+    where: PrazoWhereUniqueInput
+    create: XOR<PrazoCreateWithoutItemInput, PrazoUncheckedCreateWithoutItemInput>
+  }
+
+  export type PrazoCreateManyItemInputEnvelope = {
+    data: PrazoCreateManyItemInput | PrazoCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type LoteUpsertWithoutItensInput = {
     update: XOR<LoteUpdateWithoutItensInput, LoteUncheckedUpdateWithoutItensInput>
     create: XOR<LoteCreateWithoutItensInput, LoteUncheckedCreateWithoutItensInput>
@@ -32710,6 +35432,22 @@ export namespace Prisma {
     data: XOR<PropostaUpdateManyMutationInput, PropostaUncheckedUpdateManyWithoutItemInput>
   }
 
+  export type PrazoUpsertWithWhereUniqueWithoutItemInput = {
+    where: PrazoWhereUniqueInput
+    update: XOR<PrazoUpdateWithoutItemInput, PrazoUncheckedUpdateWithoutItemInput>
+    create: XOR<PrazoCreateWithoutItemInput, PrazoUncheckedCreateWithoutItemInput>
+  }
+
+  export type PrazoUpdateWithWhereUniqueWithoutItemInput = {
+    where: PrazoWhereUniqueInput
+    data: XOR<PrazoUpdateWithoutItemInput, PrazoUncheckedUpdateWithoutItemInput>
+  }
+
+  export type PrazoUpdateManyWithWhereWithoutItemInput = {
+    where: PrazoScalarWhereInput
+    data: XOR<PrazoUpdateManyMutationInput, PrazoUncheckedUpdateManyWithoutItemInput>
+  }
+
   export type EditalCreateWithoutRecursosInput = {
     id?: string
     numero: string
@@ -32727,6 +35465,7 @@ export namespace Prisma {
     lotes?: LoteCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
     Sancao?: SancaoCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutRecursosInput = {
@@ -32746,6 +35485,7 @@ export namespace Prisma {
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutRecursosInput = {
@@ -32766,6 +35506,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
     Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutRecursosInput = {
@@ -32781,6 +35522,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
     Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutRecursosInput = {
@@ -32800,6 +35542,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutRecursosEnviadosInput = {
@@ -32814,6 +35558,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutRecursosEnviadosInput = {
@@ -32833,6 +35579,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
     sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutRecursosRespondidosInput = {
@@ -32847,6 +35595,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
     sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
     sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutRecursosRespondidosInput = {
@@ -32882,6 +35632,7 @@ export namespace Prisma {
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutRecursosInput = {
@@ -32901,6 +35652,7 @@ export namespace Prisma {
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type LicitanteUpsertWithoutRecursosInput = {
@@ -32927,6 +35679,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
     Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutRecursosInput = {
@@ -32942,6 +35695,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type UsuarioUpsertWithoutRecursosEnviadosInput = {
@@ -32967,6 +35721,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutRecursosEnviadosInput = {
@@ -32981,6 +35737,8 @@ export namespace Prisma {
     recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUpsertWithoutRecursosRespondidosInput = {
@@ -33006,6 +35764,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
     sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutRecursosRespondidosInput = {
@@ -33020,6 +35780,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
     sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type EditalCreateWithoutSancaoInput = {
@@ -33039,6 +35801,7 @@ export namespace Prisma {
     lotes?: LoteCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
     recursos?: RecursoCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutSancaoInput = {
@@ -33058,6 +35821,7 @@ export namespace Prisma {
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutSancaoInput = {
@@ -33078,6 +35842,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutSancaoInput = {
@@ -33093,6 +35858,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
     recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Prazo?: PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutSancaoInput = {
@@ -33112,6 +35878,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
     recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutSancaoAplicadaInput = {
@@ -33126,6 +35894,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
     recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutSancaoAplicadaInput = {
@@ -33145,6 +35915,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
     recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+    prazosCriados?: PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutSancaoRevogadaInput = {
@@ -33159,6 +35931,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
     recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
     sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+    prazosCriados?: PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+    prazosConcluidos?: PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutSancaoRevogadaInput = {
@@ -33194,6 +35968,7 @@ export namespace Prisma {
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutSancaoInput = {
@@ -33213,6 +35988,7 @@ export namespace Prisma {
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type LicitanteUpsertWithoutSancaoInput = {
@@ -33239,6 +36015,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutSancaoInput = {
@@ -33254,6 +36031,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type UsuarioUpsertWithoutSancaoAplicadaInput = {
@@ -33279,6 +36057,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
     recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutSancaoAplicadaInput = {
@@ -33293,6 +36073,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
     recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUpsertWithoutSancaoRevogadaInput = {
@@ -33318,6 +36100,8 @@ export namespace Prisma {
     recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
     recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutSancaoRevogadaInput = {
@@ -33332,6 +36116,416 @@ export namespace Prisma {
     recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
     recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
     sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
+  }
+
+  export type EditalCreateWithoutPrazoInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoCreateNestedManyWithoutEditalInput
+    lotes?: LoteCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+    recursos?: RecursoCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalUncheckedCreateWithoutPrazoInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
+    lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalCreateOrConnectWithoutPrazoInput = {
+    where: EditalWhereUniqueInput
+    create: XOR<EditalCreateWithoutPrazoInput, EditalUncheckedCreateWithoutPrazoInput>
+  }
+
+  export type LicitanteCreateWithoutPrazoInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
+    propostas?: PropostaCreateNestedManyWithoutLicitanteInput
+    lances?: LanceCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteUncheckedCreateWithoutPrazoInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
+    propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
+    lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteCreateOrConnectWithoutPrazoInput = {
+    where: LicitanteWhereUniqueInput
+    create: XOR<LicitanteCreateWithoutPrazoInput, LicitanteUncheckedCreateWithoutPrazoInput>
+  }
+
+  export type ItemCreateWithoutPrazoInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lote: LoteCreateNestedOneWithoutItensInput
+    propostas?: PropostaCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutPrazoInput = {
+    id?: string
+    numero: string
+    descricao: string
+    quantidade: number
+    unidade: string
+    valorEstimado?: number | null
+    loteId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    propostas?: PropostaUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutPrazoInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutPrazoInput, ItemUncheckedCreateWithoutPrazoInput>
+  }
+
+  export type UsuarioCreateWithoutPrazosCriadosInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+    licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+    recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosConcluidos?: PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutPrazosCriadosInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
+    LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+    recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosConcluidos?: PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutPrazosCriadosInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutPrazosCriadosInput, UsuarioUncheckedCreateWithoutPrazosCriadosInput>
+  }
+
+  export type UsuarioCreateWithoutPrazosConcluidosInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+    licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+    recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutPrazosConcluidosInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
+    LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+    recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+    prazosCriados?: PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutPrazosConcluidosInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutPrazosConcluidosInput, UsuarioUncheckedCreateWithoutPrazosConcluidosInput>
+  }
+
+  export type EditalUpsertWithoutPrazoInput = {
+    update: XOR<EditalUpdateWithoutPrazoInput, EditalUncheckedUpdateWithoutPrazoInput>
+    create: XOR<EditalCreateWithoutPrazoInput, EditalUncheckedCreateWithoutPrazoInput>
+    where?: EditalWhereInput
+  }
+
+  export type EditalUpdateToOneWithWhereWithoutPrazoInput = {
+    where?: EditalWhereInput
+    data: XOR<EditalUpdateWithoutPrazoInput, EditalUncheckedUpdateWithoutPrazoInput>
+  }
+
+  export type EditalUpdateWithoutPrazoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUpdateManyWithoutEditalNestedInput
+  }
+
+  export type EditalUncheckedUpdateWithoutPrazoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
+  }
+
+  export type LicitanteUpsertWithoutPrazoInput = {
+    update: XOR<LicitanteUpdateWithoutPrazoInput, LicitanteUncheckedUpdateWithoutPrazoInput>
+    create: XOR<LicitanteCreateWithoutPrazoInput, LicitanteUncheckedCreateWithoutPrazoInput>
+    where?: LicitanteWhereInput
+  }
+
+  export type LicitanteUpdateToOneWithWhereWithoutPrazoInput = {
+    where?: LicitanteWhereInput
+    data: XOR<LicitanteUpdateWithoutPrazoInput, LicitanteUncheckedUpdateWithoutPrazoInput>
+  }
+
+  export type LicitanteUpdateWithoutPrazoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
+    propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type LicitanteUncheckedUpdateWithoutPrazoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
+    propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type ItemUpsertWithoutPrazoInput = {
+    update: XOR<ItemUpdateWithoutPrazoInput, ItemUncheckedUpdateWithoutPrazoInput>
+    create: XOR<ItemCreateWithoutPrazoInput, ItemUncheckedCreateWithoutPrazoInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutPrazoInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutPrazoInput, ItemUncheckedUpdateWithoutPrazoInput>
+  }
+
+  export type ItemUpdateWithoutPrazoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lote?: LoteUpdateOneRequiredWithoutItensNestedInput
+    propostas?: PropostaUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutPrazoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    unidade?: StringFieldUpdateOperationsInput | string
+    valorEstimado?: NullableIntFieldUpdateOperationsInput | number | null
+    loteId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    propostas?: PropostaUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type UsuarioUpsertWithoutPrazosCriadosInput = {
+    update: XOR<UsuarioUpdateWithoutPrazosCriadosInput, UsuarioUncheckedUpdateWithoutPrazosCriadosInput>
+    create: XOR<UsuarioCreateWithoutPrazosCriadosInput, UsuarioUncheckedCreateWithoutPrazosCriadosInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutPrazosCriadosInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutPrazosCriadosInput, UsuarioUncheckedUpdateWithoutPrazosCriadosInput>
+  }
+
+  export type UsuarioUpdateWithoutPrazosCriadosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+    licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+    recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutPrazosCriadosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+    recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosConcluidos?: PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
+  }
+
+  export type UsuarioUpsertWithoutPrazosConcluidosInput = {
+    update: XOR<UsuarioUpdateWithoutPrazosConcluidosInput, UsuarioUncheckedUpdateWithoutPrazosConcluidosInput>
+    create: XOR<UsuarioCreateWithoutPrazosConcluidosInput, UsuarioUncheckedCreateWithoutPrazosConcluidosInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutPrazosConcluidosInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutPrazosConcluidosInput, UsuarioUncheckedUpdateWithoutPrazosConcluidosInput>
+  }
+
+  export type UsuarioUpdateWithoutPrazosConcluidosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+    licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+    recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutPrazosConcluidosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+    recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+    prazosCriados?: PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
   }
 
   export type LogAtividadeCreateManyUsuarioInput = {
@@ -33419,6 +36613,40 @@ export namespace Prisma {
     editalId: string
     licitanteId: string
     aplicadoPor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateManyCriadoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId?: string | null
+    itemId?: string | null
+    concluidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateManyConcluidoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId?: string | null
+    itemId?: string | null
+    criadoPor: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -33690,6 +36918,108 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PrazoUpdateWithoutCriadoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutPrazoNestedInput
+    licitante?: LicitanteUpdateOneWithoutPrazoNestedInput
+    item?: ItemUpdateOneWithoutPrazoNestedInput
+    concluidoPorUsuario?: UsuarioUpdateOneWithoutPrazosConcluidosNestedInput
+  }
+
+  export type PrazoUncheckedUpdateWithoutCriadoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoUpdateWithoutConcluidoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutPrazoNestedInput
+    licitante?: LicitanteUpdateOneWithoutPrazoNestedInput
+    item?: ItemUpdateOneWithoutPrazoNestedInput
+    criadoPorUsuario?: UsuarioUpdateOneRequiredWithoutPrazosCriadosNestedInput
+  }
+
+  export type PrazoUncheckedUpdateWithoutConcluidoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type DisputaCreateManyEditalInput = {
     id?: string
     status: $Enums.DisputaStatus
@@ -33771,6 +37101,23 @@ export namespace Prisma {
     licitanteId: string
     aplicadoPor: string
     revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateManyEditalInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    licitanteId?: string | null
+    itemId?: string | null
+    criadoPor: string
+    concluidoPor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -34042,6 +37389,57 @@ export namespace Prisma {
     licitanteId?: StringFieldUpdateOperationsInput | string
     aplicadoPor?: StringFieldUpdateOperationsInput | string
     revogadoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licitante?: LicitanteUpdateOneWithoutPrazoNestedInput
+    item?: ItemUpdateOneWithoutPrazoNestedInput
+    criadoPorUsuario?: UsuarioUpdateOneRequiredWithoutPrazosCriadosNestedInput
+    concluidoPorUsuario?: UsuarioUpdateOneWithoutPrazosConcluidosNestedInput
+  }
+
+  export type PrazoUncheckedUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoUncheckedUpdateManyWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34363,6 +37761,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
     recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutDisputasInput = {
@@ -34378,6 +37777,7 @@ export namespace Prisma {
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
     recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
     Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateManyWithoutDisputasInput = {
@@ -34483,6 +37883,23 @@ export namespace Prisma {
     editalId: string
     aplicadoPor: string
     revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateManyLicitanteInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    itemId?: string | null
+    criadoPor: string
+    concluidoPor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -34829,6 +38246,57 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PrazoUpdateWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutPrazoNestedInput
+    item?: ItemUpdateOneWithoutPrazoNestedInput
+    criadoPorUsuario?: UsuarioUpdateOneRequiredWithoutPrazosCriadosNestedInput
+    concluidoPorUsuario?: UsuarioUpdateOneWithoutPrazosConcluidosNestedInput
+  }
+
+  export type PrazoUncheckedUpdateWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoUncheckedUpdateManyWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ItemCreateManyLoteInput = {
     id?: string
     numero: string
@@ -34852,6 +38320,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     propostas?: PropostaUpdateManyWithoutItemNestedInput
+    Prazo?: PrazoUpdateManyWithoutItemNestedInput
   }
 
   export type ItemUncheckedUpdateWithoutLoteInput = {
@@ -34865,6 +38334,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     propostas?: PropostaUncheckedUpdateManyWithoutItemNestedInput
+    Prazo?: PrazoUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type ItemUncheckedUpdateManyWithoutLoteInput = {
@@ -34892,6 +38362,23 @@ export namespace Prisma {
     createdBy: string
     updatedBy?: string | null
     deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PrazoCreateManyItemInput = {
+    id?: string
+    tipo: $Enums.TipoPrazo
+    status?: $Enums.StatusPrazo
+    descricao: string
+    dataInicio: Date | string
+    dataFim: Date | string
+    dataConclusao?: Date | string | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId?: string | null
+    criadoPor: string
+    concluidoPor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -34943,6 +38430,57 @@ export namespace Prisma {
     createdBy?: StringFieldUpdateOperationsInput | string
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutPrazoNestedInput
+    licitante?: LicitanteUpdateOneWithoutPrazoNestedInput
+    criadoPorUsuario?: UsuarioUpdateOneRequiredWithoutPrazosCriadosNestedInput
+    concluidoPorUsuario?: UsuarioUpdateOneWithoutPrazosConcluidosNestedInput
+  }
+
+  export type PrazoUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrazoUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoPrazoFieldUpdateOperationsInput | $Enums.TipoPrazo
+    status?: EnumStatusPrazoFieldUpdateOperationsInput | $Enums.StatusPrazo
+    descricao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataConclusao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    criadoPor?: StringFieldUpdateOperationsInput | string
+    concluidoPor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
