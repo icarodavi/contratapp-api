@@ -1,6 +1,6 @@
 import { IsOptional, IsString, IsDate, IsEnum } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { ModalidadeLicitação } from '@prisma/client';
+import { ModalidadeLicitação, CritérioJulgamento } from '@generated/prisma';
 
 export class UpdateEditalDto {
     @ApiProperty({ description: 'Número do edital', required: false })
@@ -22,6 +22,16 @@ export class UpdateEditalDto {
     @IsOptional()
     @IsEnum(ModalidadeLicitação)
     modalidade?: ModalidadeLicitação;
+
+    @ApiProperty({
+        description: 'Critério de julgamento',
+        enum: CritérioJulgamento,
+        example: CritérioJulgamento.MENOR_PRECO,
+        required: false
+    })
+    @IsOptional()
+    @IsEnum(CritérioJulgamento)
+    criterioJulgamento?: CritérioJulgamento;
 
     @ApiProperty({ description: 'Status do edital', required: false })
     @IsOptional()

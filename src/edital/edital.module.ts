@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { EditalService } from './edital.service';
 import { EditalController } from './edital.controller';
-import { PrismaModule } from '../prisma/prisma.module';
+import { PrismaModule } from '@/database/database.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ModalidadeLicitaçãoPipe } from './pipes/modalidade-licitacao.pipe';
+import { CritérioJulgamentoPipe } from './pipes/criterio-julgamento.pipe';
 
 @Module({
     imports: [PrismaModule],
@@ -13,6 +14,10 @@ import { ModalidadeLicitaçãoPipe } from './pipes/modalidade-licitacao.pipe';
         {
             provide: APP_PIPE,
             useClass: ModalidadeLicitaçãoPipe,
+        },
+        {
+            provide: APP_PIPE,
+            useClass: CritérioJulgamentoPipe,
         },
     ],
     exports: [EditalService],

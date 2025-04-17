@@ -131,6 +131,7 @@ exports.Prisma.EditalScalarFieldEnum = {
   numero: 'numero',
   objeto: 'objeto',
   modalidade: 'modalidade',
+  criterioJulgamento: 'criterioJulgamento',
   status: 'status',
   dataAbertura: 'dataAbertura',
   arquivoPdf: 'arquivoPdf',
@@ -284,6 +285,42 @@ exports.Prisma.ItemScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.RecursoScalarFieldEnum = {
+  id: 'id',
+  tipo: 'tipo',
+  status: 'status',
+  motivo: 'motivo',
+  fundamentacao: 'fundamentacao',
+  resposta: 'resposta',
+  dataEnvio: 'dataEnvio',
+  dataResposta: 'dataResposta',
+  prazoResposta: 'prazoResposta',
+  editalId: 'editalId',
+  licitanteId: 'licitanteId',
+  usuarioId: 'usuarioId',
+  respondidoPor: 'respondidoPor',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SancaoScalarFieldEnum = {
+  id: 'id',
+  tipo: 'tipo',
+  status: 'status',
+  motivo: 'motivo',
+  fundamentacao: 'fundamentacao',
+  dataInicio: 'dataInicio',
+  dataFim: 'dataFim',
+  valorMulta: 'valorMulta',
+  observacoes: 'observacoes',
+  editalId: 'editalId',
+  licitanteId: 'licitanteId',
+  aplicadoPor: 'aplicadoPor',
+  revogadoPor: 'revogadoPor',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -312,6 +349,15 @@ exports.ModalidadeLicitação = exports.$Enums.ModalidadeLicitação = {
   LEILÃO: 'LEILÃO',
   DISPENSA: 'DISPENSA',
   INEXIGIBILIDADE: 'INEXIGIBILIDADE'
+};
+
+exports.CritérioJulgamento = exports.$Enums.CritérioJulgamento = {
+  MENOR_PRECO: 'MENOR_PRECO',
+  MAIOR_DESCONTO: 'MAIOR_DESCONTO',
+  TÉCNICA_E_PRECO: 'TÉCNICA_E_PRECO',
+  MAIOR_LANCE_OU_OFERTA: 'MAIOR_LANCE_OU_OFERTA',
+  MELHOR_TÉCNICA: 'MELHOR_TÉCNICA',
+  MAIOR_RETORNO_ECONÔMICO: 'MAIOR_RETORNO_ECONÔMICO'
 };
 
 exports.DisputaStatus = exports.$Enums.DisputaStatus = {
@@ -359,6 +405,36 @@ exports.TipoAutorMensagem = exports.$Enums.TipoAutorMensagem = {
   LICITANTE: 'LICITANTE'
 };
 
+exports.TipoRecurso = exports.$Enums.TipoRecurso = {
+  IMPUGNACAO: 'IMPUGNACAO',
+  RECURSO: 'RECURSO',
+  RECONSIDERACAO: 'RECONSIDERACAO',
+  APELACAO: 'APELACAO'
+};
+
+exports.StatusRecurso = exports.$Enums.StatusRecurso = {
+  PENDENTE: 'PENDENTE',
+  DEFERIDO: 'DEFERIDO',
+  INDEFERIDO: 'INDEFERIDO',
+  ARQUIVADO: 'ARQUIVADO'
+};
+
+exports.TipoSancao = exports.$Enums.TipoSancao = {
+  ADVERTENCIA: 'ADVERTENCIA',
+  SUSPENSAO: 'SUSPENSAO',
+  IMPEDIMENTO: 'IMPEDIMENTO',
+  DECLARACAO_INIDONEIDADE: 'DECLARACAO_INIDONEIDADE',
+  MULTA: 'MULTA'
+};
+
+exports.StatusSancao = exports.$Enums.StatusSancao = {
+  PENDENTE: 'PENDENTE',
+  EM_VIGOR: 'EM_VIGOR',
+  SUSPENSA: 'SUSPENSA',
+  REVOGADA: 'REVOGADA',
+  EXPIRADA: 'EXPIRADA'
+};
+
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
   Edital: 'Edital',
@@ -373,7 +449,9 @@ exports.Prisma.ModelName = {
   Sessao: 'Sessao',
   LogAtividade: 'LogAtividade',
   Lote: 'Lote',
-  Item: 'Item'
+  Item: 'Item',
+  Recurso: 'Recurso',
+  Sancao: 'Sancao'
 };
 
 /**

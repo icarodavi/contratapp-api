@@ -83,6 +83,16 @@ export type Lote = $Result.DefaultSelection<Prisma.$LotePayload>
  * 
  */
 export type Item = $Result.DefaultSelection<Prisma.$ItemPayload>
+/**
+ * Model Recurso
+ * 
+ */
+export type Recurso = $Result.DefaultSelection<Prisma.$RecursoPayload>
+/**
+ * Model Sancao
+ * 
+ */
+export type Sancao = $Result.DefaultSelection<Prisma.$SancaoPayload>
 
 /**
  * Enums
@@ -180,6 +190,60 @@ export const ModalidadeLicitação: {
 
 export type ModalidadeLicitação = (typeof ModalidadeLicitação)[keyof typeof ModalidadeLicitação]
 
+
+export const CritérioJulgamento: {
+  MENOR_PRECO: 'MENOR_PRECO',
+  MAIOR_DESCONTO: 'MAIOR_DESCONTO',
+  TÉCNICA_E_PRECO: 'TÉCNICA_E_PRECO',
+  MAIOR_LANCE_OU_OFERTA: 'MAIOR_LANCE_OU_OFERTA',
+  MELHOR_TÉCNICA: 'MELHOR_TÉCNICA',
+  MAIOR_RETORNO_ECONÔMICO: 'MAIOR_RETORNO_ECONÔMICO'
+};
+
+export type CritérioJulgamento = (typeof CritérioJulgamento)[keyof typeof CritérioJulgamento]
+
+
+export const TipoRecurso: {
+  IMPUGNACAO: 'IMPUGNACAO',
+  RECURSO: 'RECURSO',
+  RECONSIDERACAO: 'RECONSIDERACAO',
+  APELACAO: 'APELACAO'
+};
+
+export type TipoRecurso = (typeof TipoRecurso)[keyof typeof TipoRecurso]
+
+
+export const StatusRecurso: {
+  PENDENTE: 'PENDENTE',
+  DEFERIDO: 'DEFERIDO',
+  INDEFERIDO: 'INDEFERIDO',
+  ARQUIVADO: 'ARQUIVADO'
+};
+
+export type StatusRecurso = (typeof StatusRecurso)[keyof typeof StatusRecurso]
+
+
+export const TipoSancao: {
+  ADVERTENCIA: 'ADVERTENCIA',
+  SUSPENSAO: 'SUSPENSAO',
+  IMPEDIMENTO: 'IMPEDIMENTO',
+  DECLARACAO_INIDONEIDADE: 'DECLARACAO_INIDONEIDADE',
+  MULTA: 'MULTA'
+};
+
+export type TipoSancao = (typeof TipoSancao)[keyof typeof TipoSancao]
+
+
+export const StatusSancao: {
+  PENDENTE: 'PENDENTE',
+  EM_VIGOR: 'EM_VIGOR',
+  SUSPENSA: 'SUSPENSA',
+  REVOGADA: 'REVOGADA',
+  EXPIRADA: 'EXPIRADA'
+};
+
+export type StatusSancao = (typeof StatusSancao)[keyof typeof StatusSancao]
+
 }
 
 export type DisputaStatus = $Enums.DisputaStatus
@@ -217,6 +281,26 @@ export const StatusDocumento: typeof $Enums.StatusDocumento
 export type ModalidadeLicitação = $Enums.ModalidadeLicitação
 
 export const ModalidadeLicitação: typeof $Enums.ModalidadeLicitação
+
+export type CritérioJulgamento = $Enums.CritérioJulgamento
+
+export const CritérioJulgamento: typeof $Enums.CritérioJulgamento
+
+export type TipoRecurso = $Enums.TipoRecurso
+
+export const TipoRecurso: typeof $Enums.TipoRecurso
+
+export type StatusRecurso = $Enums.StatusRecurso
+
+export const StatusRecurso: typeof $Enums.StatusRecurso
+
+export type TipoSancao = $Enums.TipoSancao
+
+export const TipoSancao: typeof $Enums.TipoSancao
+
+export type StatusSancao = $Enums.StatusSancao
+
+export const StatusSancao: typeof $Enums.StatusSancao
 
 /**
  * ##  Prisma Client ʲˢ
@@ -482,6 +566,26 @@ export class PrismaClient<
     * ```
     */
   get item(): Prisma.ItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.recurso`: Exposes CRUD operations for the **Recurso** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Recursos
+    * const recursos = await prisma.recurso.findMany()
+    * ```
+    */
+  get recurso(): Prisma.RecursoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sancao`: Exposes CRUD operations for the **Sancao** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sancaos
+    * const sancaos = await prisma.sancao.findMany()
+    * ```
+    */
+  get sancao(): Prisma.SancaoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -935,7 +1039,9 @@ export namespace Prisma {
     Sessao: 'Sessao',
     LogAtividade: 'LogAtividade',
     Lote: 'Lote',
-    Item: 'Item'
+    Item: 'Item',
+    Recurso: 'Recurso',
+    Sancao: 'Sancao'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -954,7 +1060,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "usuario" | "edital" | "disputa" | "licitante" | "proposta" | "lance" | "documento" | "documentoObrigatorio" | "documentoLicitante" | "mensagemChat" | "sessao" | "logAtividade" | "lote" | "item"
+      modelProps: "usuario" | "edital" | "disputa" | "licitante" | "proposta" | "lance" | "documento" | "documentoObrigatorio" | "documentoLicitante" | "mensagemChat" | "sessao" | "logAtividade" | "lote" | "item" | "recurso" | "sancao"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1994,6 +2100,154 @@ export namespace Prisma {
           }
         }
       }
+      Recurso: {
+        payload: Prisma.$RecursoPayload<ExtArgs>
+        fields: Prisma.RecursoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RecursoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RecursoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload>
+          }
+          findFirst: {
+            args: Prisma.RecursoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RecursoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload>
+          }
+          findMany: {
+            args: Prisma.RecursoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload>[]
+          }
+          create: {
+            args: Prisma.RecursoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload>
+          }
+          createMany: {
+            args: Prisma.RecursoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RecursoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload>[]
+          }
+          delete: {
+            args: Prisma.RecursoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload>
+          }
+          update: {
+            args: Prisma.RecursoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload>
+          }
+          deleteMany: {
+            args: Prisma.RecursoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RecursoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RecursoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload>[]
+          }
+          upsert: {
+            args: Prisma.RecursoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecursoPayload>
+          }
+          aggregate: {
+            args: Prisma.RecursoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRecurso>
+          }
+          groupBy: {
+            args: Prisma.RecursoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RecursoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RecursoCountArgs<ExtArgs>
+            result: $Utils.Optional<RecursoCountAggregateOutputType> | number
+          }
+        }
+      }
+      Sancao: {
+        payload: Prisma.$SancaoPayload<ExtArgs>
+        fields: Prisma.SancaoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SancaoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SancaoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload>
+          }
+          findFirst: {
+            args: Prisma.SancaoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SancaoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload>
+          }
+          findMany: {
+            args: Prisma.SancaoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload>[]
+          }
+          create: {
+            args: Prisma.SancaoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload>
+          }
+          createMany: {
+            args: Prisma.SancaoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SancaoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload>[]
+          }
+          delete: {
+            args: Prisma.SancaoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload>
+          }
+          update: {
+            args: Prisma.SancaoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload>
+          }
+          deleteMany: {
+            args: Prisma.SancaoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SancaoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SancaoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload>[]
+          }
+          upsert: {
+            args: Prisma.SancaoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SancaoPayload>
+          }
+          aggregate: {
+            args: Prisma.SancaoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSancao>
+          }
+          groupBy: {
+            args: Prisma.SancaoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SancaoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SancaoCountArgs<ExtArgs>
+            result: $Utils.Optional<SancaoCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2092,6 +2346,8 @@ export namespace Prisma {
     logAtividade?: LogAtividadeOmit
     lote?: LoteOmit
     item?: ItemOmit
+    recurso?: RecursoOmit
+    sancao?: SancaoOmit
   }
 
   /* Types for Logging */
@@ -2188,11 +2444,19 @@ export namespace Prisma {
   export type UsuarioCountOutputType = {
     LogAtividade: number
     MensagemChat: number
+    recursosEnviados: number
+    recursosRespondidos: number
+    sancaoAplicada: number
+    sancaoRevogada: number
   }
 
   export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     LogAtividade?: boolean | UsuarioCountOutputTypeCountLogAtividadeArgs
     MensagemChat?: boolean | UsuarioCountOutputTypeCountMensagemChatArgs
+    recursosEnviados?: boolean | UsuarioCountOutputTypeCountRecursosEnviadosArgs
+    recursosRespondidos?: boolean | UsuarioCountOutputTypeCountRecursosRespondidosArgs
+    sancaoAplicada?: boolean | UsuarioCountOutputTypeCountSancaoAplicadaArgs
+    sancaoRevogada?: boolean | UsuarioCountOutputTypeCountSancaoRevogadaArgs
   }
 
   // Custom InputTypes
@@ -2220,6 +2484,34 @@ export namespace Prisma {
     where?: MensagemChatWhereInput
   }
 
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountRecursosEnviadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecursoWhereInput
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountRecursosRespondidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecursoWhereInput
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountSancaoAplicadaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SancaoWhereInput
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountSancaoRevogadaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SancaoWhereInput
+  }
+
 
   /**
    * Count Type EditalCountOutputType
@@ -2231,6 +2523,8 @@ export namespace Prisma {
     documentos: number
     lotes: number
     mensagensChat: number
+    recursos: number
+    Sancao: number
   }
 
   export type EditalCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2239,6 +2533,8 @@ export namespace Prisma {
     documentos?: boolean | EditalCountOutputTypeCountDocumentosArgs
     lotes?: boolean | EditalCountOutputTypeCountLotesArgs
     mensagensChat?: boolean | EditalCountOutputTypeCountMensagensChatArgs
+    recursos?: boolean | EditalCountOutputTypeCountRecursosArgs
+    Sancao?: boolean | EditalCountOutputTypeCountSancaoArgs
   }
 
   // Custom InputTypes
@@ -2285,6 +2581,20 @@ export namespace Prisma {
    */
   export type EditalCountOutputTypeCountMensagensChatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MensagemChatWhereInput
+  }
+
+  /**
+   * EditalCountOutputType without action
+   */
+  export type EditalCountOutputTypeCountRecursosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecursoWhereInput
+  }
+
+  /**
+   * EditalCountOutputType without action
+   */
+  export type EditalCountOutputTypeCountSancaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SancaoWhereInput
   }
 
 
@@ -2384,6 +2694,8 @@ export namespace Prisma {
     sessoes: number
     mensagensChat: number
     disputas: number
+    recursos: number
+    Sancao: number
   }
 
   export type LicitanteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2393,6 +2705,8 @@ export namespace Prisma {
     sessoes?: boolean | LicitanteCountOutputTypeCountSessoesArgs
     mensagensChat?: boolean | LicitanteCountOutputTypeCountMensagensChatArgs
     disputas?: boolean | LicitanteCountOutputTypeCountDisputasArgs
+    recursos?: boolean | LicitanteCountOutputTypeCountRecursosArgs
+    Sancao?: boolean | LicitanteCountOutputTypeCountSancaoArgs
   }
 
   // Custom InputTypes
@@ -2446,6 +2760,20 @@ export namespace Prisma {
    */
   export type LicitanteCountOutputTypeCountDisputasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DisputaWhereInput
+  }
+
+  /**
+   * LicitanteCountOutputType without action
+   */
+  export type LicitanteCountOutputTypeCountRecursosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecursoWhereInput
+  }
+
+  /**
+   * LicitanteCountOutputType without action
+   */
+  export type LicitanteCountOutputTypeCountSancaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SancaoWhereInput
   }
 
 
@@ -2690,6 +3018,10 @@ export namespace Prisma {
     LogAtividade?: boolean | Usuario$LogAtividadeArgs<ExtArgs>
     MensagemChat?: boolean | Usuario$MensagemChatArgs<ExtArgs>
     licitante?: boolean | Usuario$licitanteArgs<ExtArgs>
+    recursosEnviados?: boolean | Usuario$recursosEnviadosArgs<ExtArgs>
+    recursosRespondidos?: boolean | Usuario$recursosRespondidosArgs<ExtArgs>
+    sancaoAplicada?: boolean | Usuario$sancaoAplicadaArgs<ExtArgs>
+    sancaoRevogada?: boolean | Usuario$sancaoRevogadaArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
@@ -2727,6 +3059,10 @@ export namespace Prisma {
     LogAtividade?: boolean | Usuario$LogAtividadeArgs<ExtArgs>
     MensagemChat?: boolean | Usuario$MensagemChatArgs<ExtArgs>
     licitante?: boolean | Usuario$licitanteArgs<ExtArgs>
+    recursosEnviados?: boolean | Usuario$recursosEnviadosArgs<ExtArgs>
+    recursosRespondidos?: boolean | Usuario$recursosRespondidosArgs<ExtArgs>
+    sancaoAplicada?: boolean | Usuario$sancaoAplicadaArgs<ExtArgs>
+    sancaoRevogada?: boolean | Usuario$sancaoRevogadaArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2742,6 +3078,10 @@ export namespace Prisma {
       LogAtividade: Prisma.$LogAtividadePayload<ExtArgs>[]
       MensagemChat: Prisma.$MensagemChatPayload<ExtArgs>[]
       licitante: Prisma.$LicitantePayload<ExtArgs> | null
+      recursosEnviados: Prisma.$RecursoPayload<ExtArgs>[]
+      recursosRespondidos: Prisma.$RecursoPayload<ExtArgs>[]
+      sancaoAplicada: Prisma.$SancaoPayload<ExtArgs>[]
+      sancaoRevogada: Prisma.$SancaoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3147,6 +3487,10 @@ export namespace Prisma {
     LogAtividade<T extends Usuario$LogAtividadeArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$LogAtividadeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LogAtividadePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     MensagemChat<T extends Usuario$MensagemChatArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$MensagemChatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     licitante<T extends Usuario$licitanteArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$licitanteArgs<ExtArgs>>): Prisma__LicitanteClient<$Result.GetResult<Prisma.$LicitantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    recursosEnviados<T extends Usuario$recursosEnviadosArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$recursosEnviadosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recursosRespondidos<T extends Usuario$recursosRespondidosArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$recursosRespondidosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sancaoAplicada<T extends Usuario$sancaoAplicadaArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$sancaoAplicadaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sancaoRevogada<T extends Usuario$sancaoRevogadaArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$sancaoRevogadaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3645,6 +3989,102 @@ export namespace Prisma {
   }
 
   /**
+   * Usuario.recursosEnviados
+   */
+  export type Usuario$recursosEnviadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    where?: RecursoWhereInput
+    orderBy?: RecursoOrderByWithRelationInput | RecursoOrderByWithRelationInput[]
+    cursor?: RecursoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecursoScalarFieldEnum | RecursoScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario.recursosRespondidos
+   */
+  export type Usuario$recursosRespondidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    where?: RecursoWhereInput
+    orderBy?: RecursoOrderByWithRelationInput | RecursoOrderByWithRelationInput[]
+    cursor?: RecursoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecursoScalarFieldEnum | RecursoScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario.sancaoAplicada
+   */
+  export type Usuario$sancaoAplicadaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    where?: SancaoWhereInput
+    orderBy?: SancaoOrderByWithRelationInput | SancaoOrderByWithRelationInput[]
+    cursor?: SancaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SancaoScalarFieldEnum | SancaoScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario.sancaoRevogada
+   */
+  export type Usuario$sancaoRevogadaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    where?: SancaoWhereInput
+    orderBy?: SancaoOrderByWithRelationInput | SancaoOrderByWithRelationInput[]
+    cursor?: SancaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SancaoScalarFieldEnum | SancaoScalarFieldEnum[]
+  }
+
+  /**
    * Usuario without action
    */
   export type UsuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3678,6 +4118,7 @@ export namespace Prisma {
     numero: string | null
     objeto: string | null
     modalidade: $Enums.ModalidadeLicitação | null
+    criterioJulgamento: $Enums.CritérioJulgamento | null
     status: string | null
     dataAbertura: Date | null
     arquivoPdf: string | null
@@ -3690,6 +4131,7 @@ export namespace Prisma {
     numero: string | null
     objeto: string | null
     modalidade: $Enums.ModalidadeLicitação | null
+    criterioJulgamento: $Enums.CritérioJulgamento | null
     status: string | null
     dataAbertura: Date | null
     arquivoPdf: string | null
@@ -3702,6 +4144,7 @@ export namespace Prisma {
     numero: number
     objeto: number
     modalidade: number
+    criterioJulgamento: number
     status: number
     dataAbertura: number
     arquivoPdf: number
@@ -3716,6 +4159,7 @@ export namespace Prisma {
     numero?: true
     objeto?: true
     modalidade?: true
+    criterioJulgamento?: true
     status?: true
     dataAbertura?: true
     arquivoPdf?: true
@@ -3728,6 +4172,7 @@ export namespace Prisma {
     numero?: true
     objeto?: true
     modalidade?: true
+    criterioJulgamento?: true
     status?: true
     dataAbertura?: true
     arquivoPdf?: true
@@ -3740,6 +4185,7 @@ export namespace Prisma {
     numero?: true
     objeto?: true
     modalidade?: true
+    criterioJulgamento?: true
     status?: true
     dataAbertura?: true
     arquivoPdf?: true
@@ -3825,6 +4271,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade: $Enums.ModalidadeLicitação
+    criterioJulgamento: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date
     arquivoPdf: string | null
@@ -3854,6 +4301,7 @@ export namespace Prisma {
     numero?: boolean
     objeto?: boolean
     modalidade?: boolean
+    criterioJulgamento?: boolean
     status?: boolean
     dataAbertura?: boolean
     arquivoPdf?: boolean
@@ -3864,6 +4312,8 @@ export namespace Prisma {
     documentos?: boolean | Edital$documentosArgs<ExtArgs>
     lotes?: boolean | Edital$lotesArgs<ExtArgs>
     mensagensChat?: boolean | Edital$mensagensChatArgs<ExtArgs>
+    recursos?: boolean | Edital$recursosArgs<ExtArgs>
+    Sancao?: boolean | Edital$SancaoArgs<ExtArgs>
     _count?: boolean | EditalCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["edital"]>
 
@@ -3872,6 +4322,7 @@ export namespace Prisma {
     numero?: boolean
     objeto?: boolean
     modalidade?: boolean
+    criterioJulgamento?: boolean
     status?: boolean
     dataAbertura?: boolean
     arquivoPdf?: boolean
@@ -3884,6 +4335,7 @@ export namespace Prisma {
     numero?: boolean
     objeto?: boolean
     modalidade?: boolean
+    criterioJulgamento?: boolean
     status?: boolean
     dataAbertura?: boolean
     arquivoPdf?: boolean
@@ -3896,6 +4348,7 @@ export namespace Prisma {
     numero?: boolean
     objeto?: boolean
     modalidade?: boolean
+    criterioJulgamento?: boolean
     status?: boolean
     dataAbertura?: boolean
     arquivoPdf?: boolean
@@ -3903,13 +4356,15 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type EditalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "numero" | "objeto" | "modalidade" | "status" | "dataAbertura" | "arquivoPdf" | "createdAt" | "updatedAt", ExtArgs["result"]["edital"]>
+  export type EditalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "numero" | "objeto" | "modalidade" | "criterioJulgamento" | "status" | "dataAbertura" | "arquivoPdf" | "createdAt" | "updatedAt", ExtArgs["result"]["edital"]>
   export type EditalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     disputas?: boolean | Edital$disputasArgs<ExtArgs>
     documentosObrigatorios?: boolean | Edital$documentosObrigatoriosArgs<ExtArgs>
     documentos?: boolean | Edital$documentosArgs<ExtArgs>
     lotes?: boolean | Edital$lotesArgs<ExtArgs>
     mensagensChat?: boolean | Edital$mensagensChatArgs<ExtArgs>
+    recursos?: boolean | Edital$recursosArgs<ExtArgs>
+    Sancao?: boolean | Edital$SancaoArgs<ExtArgs>
     _count?: boolean | EditalCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EditalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3923,12 +4378,15 @@ export namespace Prisma {
       documentos: Prisma.$DocumentoPayload<ExtArgs>[]
       lotes: Prisma.$LotePayload<ExtArgs>[]
       mensagensChat: Prisma.$MensagemChatPayload<ExtArgs>[]
+      recursos: Prisma.$RecursoPayload<ExtArgs>[]
+      Sancao: Prisma.$SancaoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       numero: string
       objeto: string
       modalidade: $Enums.ModalidadeLicitação
+      criterioJulgamento: $Enums.CritérioJulgamento
       status: string
       dataAbertura: Date
       arquivoPdf: string | null
@@ -4333,6 +4791,8 @@ export namespace Prisma {
     documentos<T extends Edital$documentosArgs<ExtArgs> = {}>(args?: Subset<T, Edital$documentosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     lotes<T extends Edital$lotesArgs<ExtArgs> = {}>(args?: Subset<T, Edital$lotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mensagensChat<T extends Edital$mensagensChatArgs<ExtArgs> = {}>(args?: Subset<T, Edital$mensagensChatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recursos<T extends Edital$recursosArgs<ExtArgs> = {}>(args?: Subset<T, Edital$recursosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Sancao<T extends Edital$SancaoArgs<ExtArgs> = {}>(args?: Subset<T, Edital$SancaoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4366,6 +4826,7 @@ export namespace Prisma {
     readonly numero: FieldRef<"Edital", 'String'>
     readonly objeto: FieldRef<"Edital", 'String'>
     readonly modalidade: FieldRef<"Edital", 'ModalidadeLicitação'>
+    readonly criterioJulgamento: FieldRef<"Edital", 'CritérioJulgamento'>
     readonly status: FieldRef<"Edital", 'String'>
     readonly dataAbertura: FieldRef<"Edital", 'DateTime'>
     readonly arquivoPdf: FieldRef<"Edital", 'String'>
@@ -4876,6 +5337,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MensagemChatScalarFieldEnum | MensagemChatScalarFieldEnum[]
+  }
+
+  /**
+   * Edital.recursos
+   */
+  export type Edital$recursosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    where?: RecursoWhereInput
+    orderBy?: RecursoOrderByWithRelationInput | RecursoOrderByWithRelationInput[]
+    cursor?: RecursoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecursoScalarFieldEnum | RecursoScalarFieldEnum[]
+  }
+
+  /**
+   * Edital.Sancao
+   */
+  export type Edital$SancaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    where?: SancaoWhereInput
+    orderBy?: SancaoOrderByWithRelationInput | SancaoOrderByWithRelationInput[]
+    cursor?: SancaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SancaoScalarFieldEnum | SancaoScalarFieldEnum[]
   }
 
   /**
@@ -6376,6 +6885,8 @@ export namespace Prisma {
     sessoes?: boolean | Licitante$sessoesArgs<ExtArgs>
     mensagensChat?: boolean | Licitante$mensagensChatArgs<ExtArgs>
     disputas?: boolean | Licitante$disputasArgs<ExtArgs>
+    recursos?: boolean | Licitante$recursosArgs<ExtArgs>
+    Sancao?: boolean | Licitante$SancaoArgs<ExtArgs>
     _count?: boolean | LicitanteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["licitante"]>
 
@@ -6409,6 +6920,8 @@ export namespace Prisma {
     sessoes?: boolean | Licitante$sessoesArgs<ExtArgs>
     mensagensChat?: boolean | Licitante$mensagensChatArgs<ExtArgs>
     disputas?: boolean | Licitante$disputasArgs<ExtArgs>
+    recursos?: boolean | Licitante$recursosArgs<ExtArgs>
+    Sancao?: boolean | Licitante$SancaoArgs<ExtArgs>
     _count?: boolean | LicitanteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LicitanteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6424,6 +6937,8 @@ export namespace Prisma {
       sessoes: Prisma.$SessaoPayload<ExtArgs>[]
       mensagensChat: Prisma.$MensagemChatPayload<ExtArgs>[]
       disputas: Prisma.$DisputaPayload<ExtArgs>[]
+      recursos: Prisma.$RecursoPayload<ExtArgs>[]
+      Sancao: Prisma.$SancaoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6831,6 +7346,8 @@ export namespace Prisma {
     sessoes<T extends Licitante$sessoesArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$sessoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mensagensChat<T extends Licitante$mensagensChatArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$mensagensChatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     disputas<T extends Licitante$disputasArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$disputasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recursos<T extends Licitante$recursosArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$recursosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Sancao<T extends Licitante$SancaoArgs<ExtArgs> = {}>(args?: Subset<T, Licitante$SancaoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7412,6 +7929,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DisputaScalarFieldEnum | DisputaScalarFieldEnum[]
+  }
+
+  /**
+   * Licitante.recursos
+   */
+  export type Licitante$recursosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    where?: RecursoWhereInput
+    orderBy?: RecursoOrderByWithRelationInput | RecursoOrderByWithRelationInput[]
+    cursor?: RecursoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecursoScalarFieldEnum | RecursoScalarFieldEnum[]
+  }
+
+  /**
+   * Licitante.Sancao
+   */
+  export type Licitante$SancaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    where?: SancaoWhereInput
+    orderBy?: SancaoOrderByWithRelationInput | SancaoOrderByWithRelationInput[]
+    cursor?: SancaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SancaoScalarFieldEnum | SancaoScalarFieldEnum[]
   }
 
   /**
@@ -19018,6 +19583,2536 @@ export namespace Prisma {
 
 
   /**
+   * Model Recurso
+   */
+
+  export type AggregateRecurso = {
+    _count: RecursoCountAggregateOutputType | null
+    _avg: RecursoAvgAggregateOutputType | null
+    _sum: RecursoSumAggregateOutputType | null
+    _min: RecursoMinAggregateOutputType | null
+    _max: RecursoMaxAggregateOutputType | null
+  }
+
+  export type RecursoAvgAggregateOutputType = {
+    prazoResposta: number | null
+  }
+
+  export type RecursoSumAggregateOutputType = {
+    prazoResposta: number | null
+  }
+
+  export type RecursoMinAggregateOutputType = {
+    id: string | null
+    tipo: $Enums.TipoRecurso | null
+    status: $Enums.StatusRecurso | null
+    motivo: string | null
+    fundamentacao: string | null
+    resposta: string | null
+    dataEnvio: Date | null
+    dataResposta: Date | null
+    prazoResposta: number | null
+    editalId: string | null
+    licitanteId: string | null
+    usuarioId: string | null
+    respondidoPor: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RecursoMaxAggregateOutputType = {
+    id: string | null
+    tipo: $Enums.TipoRecurso | null
+    status: $Enums.StatusRecurso | null
+    motivo: string | null
+    fundamentacao: string | null
+    resposta: string | null
+    dataEnvio: Date | null
+    dataResposta: Date | null
+    prazoResposta: number | null
+    editalId: string | null
+    licitanteId: string | null
+    usuarioId: string | null
+    respondidoPor: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RecursoCountAggregateOutputType = {
+    id: number
+    tipo: number
+    status: number
+    motivo: number
+    fundamentacao: number
+    resposta: number
+    dataEnvio: number
+    dataResposta: number
+    prazoResposta: number
+    editalId: number
+    licitanteId: number
+    usuarioId: number
+    respondidoPor: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RecursoAvgAggregateInputType = {
+    prazoResposta?: true
+  }
+
+  export type RecursoSumAggregateInputType = {
+    prazoResposta?: true
+  }
+
+  export type RecursoMinAggregateInputType = {
+    id?: true
+    tipo?: true
+    status?: true
+    motivo?: true
+    fundamentacao?: true
+    resposta?: true
+    dataEnvio?: true
+    dataResposta?: true
+    prazoResposta?: true
+    editalId?: true
+    licitanteId?: true
+    usuarioId?: true
+    respondidoPor?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RecursoMaxAggregateInputType = {
+    id?: true
+    tipo?: true
+    status?: true
+    motivo?: true
+    fundamentacao?: true
+    resposta?: true
+    dataEnvio?: true
+    dataResposta?: true
+    prazoResposta?: true
+    editalId?: true
+    licitanteId?: true
+    usuarioId?: true
+    respondidoPor?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RecursoCountAggregateInputType = {
+    id?: true
+    tipo?: true
+    status?: true
+    motivo?: true
+    fundamentacao?: true
+    resposta?: true
+    dataEnvio?: true
+    dataResposta?: true
+    prazoResposta?: true
+    editalId?: true
+    licitanteId?: true
+    usuarioId?: true
+    respondidoPor?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RecursoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Recurso to aggregate.
+     */
+    where?: RecursoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Recursos to fetch.
+     */
+    orderBy?: RecursoOrderByWithRelationInput | RecursoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RecursoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Recursos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Recursos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Recursos
+    **/
+    _count?: true | RecursoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RecursoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RecursoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RecursoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RecursoMaxAggregateInputType
+  }
+
+  export type GetRecursoAggregateType<T extends RecursoAggregateArgs> = {
+        [P in keyof T & keyof AggregateRecurso]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRecurso[P]>
+      : GetScalarType<T[P], AggregateRecurso[P]>
+  }
+
+
+
+
+  export type RecursoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecursoWhereInput
+    orderBy?: RecursoOrderByWithAggregationInput | RecursoOrderByWithAggregationInput[]
+    by: RecursoScalarFieldEnum[] | RecursoScalarFieldEnum
+    having?: RecursoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RecursoCountAggregateInputType | true
+    _avg?: RecursoAvgAggregateInputType
+    _sum?: RecursoSumAggregateInputType
+    _min?: RecursoMinAggregateInputType
+    _max?: RecursoMaxAggregateInputType
+  }
+
+  export type RecursoGroupByOutputType = {
+    id: string
+    tipo: $Enums.TipoRecurso
+    status: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta: string | null
+    dataEnvio: Date
+    dataResposta: Date | null
+    prazoResposta: number
+    editalId: string
+    licitanteId: string
+    usuarioId: string
+    respondidoPor: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: RecursoCountAggregateOutputType | null
+    _avg: RecursoAvgAggregateOutputType | null
+    _sum: RecursoSumAggregateOutputType | null
+    _min: RecursoMinAggregateOutputType | null
+    _max: RecursoMaxAggregateOutputType | null
+  }
+
+  type GetRecursoGroupByPayload<T extends RecursoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RecursoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RecursoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RecursoGroupByOutputType[P]>
+            : GetScalarType<T[P], RecursoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RecursoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    motivo?: boolean
+    fundamentacao?: boolean
+    resposta?: boolean
+    dataEnvio?: boolean
+    dataResposta?: boolean
+    prazoResposta?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    usuarioId?: boolean
+    respondidoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    enviadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    respondidoPorUsuario?: boolean | Recurso$respondidoPorUsuarioArgs<ExtArgs>
+  }, ExtArgs["result"]["recurso"]>
+
+  export type RecursoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    motivo?: boolean
+    fundamentacao?: boolean
+    resposta?: boolean
+    dataEnvio?: boolean
+    dataResposta?: boolean
+    prazoResposta?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    usuarioId?: boolean
+    respondidoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    enviadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    respondidoPorUsuario?: boolean | Recurso$respondidoPorUsuarioArgs<ExtArgs>
+  }, ExtArgs["result"]["recurso"]>
+
+  export type RecursoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    motivo?: boolean
+    fundamentacao?: boolean
+    resposta?: boolean
+    dataEnvio?: boolean
+    dataResposta?: boolean
+    prazoResposta?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    usuarioId?: boolean
+    respondidoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    enviadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    respondidoPorUsuario?: boolean | Recurso$respondidoPorUsuarioArgs<ExtArgs>
+  }, ExtArgs["result"]["recurso"]>
+
+  export type RecursoSelectScalar = {
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    motivo?: boolean
+    fundamentacao?: boolean
+    resposta?: boolean
+    dataEnvio?: boolean
+    dataResposta?: boolean
+    prazoResposta?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    usuarioId?: boolean
+    respondidoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RecursoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tipo" | "status" | "motivo" | "fundamentacao" | "resposta" | "dataEnvio" | "dataResposta" | "prazoResposta" | "editalId" | "licitanteId" | "usuarioId" | "respondidoPor" | "createdAt" | "updatedAt", ExtArgs["result"]["recurso"]>
+  export type RecursoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    enviadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    respondidoPorUsuario?: boolean | Recurso$respondidoPorUsuarioArgs<ExtArgs>
+  }
+  export type RecursoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    enviadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    respondidoPorUsuario?: boolean | Recurso$respondidoPorUsuarioArgs<ExtArgs>
+  }
+  export type RecursoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    enviadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+    respondidoPorUsuario?: boolean | Recurso$respondidoPorUsuarioArgs<ExtArgs>
+  }
+
+  export type $RecursoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Recurso"
+    objects: {
+      edital: Prisma.$EditalPayload<ExtArgs>
+      licitante: Prisma.$LicitantePayload<ExtArgs>
+      enviadoPor: Prisma.$UsuarioPayload<ExtArgs>
+      respondidoPorUsuario: Prisma.$UsuarioPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tipo: $Enums.TipoRecurso
+      status: $Enums.StatusRecurso
+      motivo: string
+      fundamentacao: string
+      resposta: string | null
+      dataEnvio: Date
+      dataResposta: Date | null
+      prazoResposta: number
+      editalId: string
+      licitanteId: string
+      usuarioId: string
+      respondidoPor: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["recurso"]>
+    composites: {}
+  }
+
+  type RecursoGetPayload<S extends boolean | null | undefined | RecursoDefaultArgs> = $Result.GetResult<Prisma.$RecursoPayload, S>
+
+  type RecursoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RecursoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RecursoCountAggregateInputType | true
+    }
+
+  export interface RecursoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Recurso'], meta: { name: 'Recurso' } }
+    /**
+     * Find zero or one Recurso that matches the filter.
+     * @param {RecursoFindUniqueArgs} args - Arguments to find a Recurso
+     * @example
+     * // Get one Recurso
+     * const recurso = await prisma.recurso.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RecursoFindUniqueArgs>(args: SelectSubset<T, RecursoFindUniqueArgs<ExtArgs>>): Prisma__RecursoClient<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Recurso that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RecursoFindUniqueOrThrowArgs} args - Arguments to find a Recurso
+     * @example
+     * // Get one Recurso
+     * const recurso = await prisma.recurso.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RecursoFindUniqueOrThrowArgs>(args: SelectSubset<T, RecursoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RecursoClient<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Recurso that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecursoFindFirstArgs} args - Arguments to find a Recurso
+     * @example
+     * // Get one Recurso
+     * const recurso = await prisma.recurso.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RecursoFindFirstArgs>(args?: SelectSubset<T, RecursoFindFirstArgs<ExtArgs>>): Prisma__RecursoClient<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Recurso that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecursoFindFirstOrThrowArgs} args - Arguments to find a Recurso
+     * @example
+     * // Get one Recurso
+     * const recurso = await prisma.recurso.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RecursoFindFirstOrThrowArgs>(args?: SelectSubset<T, RecursoFindFirstOrThrowArgs<ExtArgs>>): Prisma__RecursoClient<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Recursos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecursoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Recursos
+     * const recursos = await prisma.recurso.findMany()
+     * 
+     * // Get first 10 Recursos
+     * const recursos = await prisma.recurso.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const recursoWithIdOnly = await prisma.recurso.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RecursoFindManyArgs>(args?: SelectSubset<T, RecursoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Recurso.
+     * @param {RecursoCreateArgs} args - Arguments to create a Recurso.
+     * @example
+     * // Create one Recurso
+     * const Recurso = await prisma.recurso.create({
+     *   data: {
+     *     // ... data to create a Recurso
+     *   }
+     * })
+     * 
+     */
+    create<T extends RecursoCreateArgs>(args: SelectSubset<T, RecursoCreateArgs<ExtArgs>>): Prisma__RecursoClient<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Recursos.
+     * @param {RecursoCreateManyArgs} args - Arguments to create many Recursos.
+     * @example
+     * // Create many Recursos
+     * const recurso = await prisma.recurso.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RecursoCreateManyArgs>(args?: SelectSubset<T, RecursoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Recursos and returns the data saved in the database.
+     * @param {RecursoCreateManyAndReturnArgs} args - Arguments to create many Recursos.
+     * @example
+     * // Create many Recursos
+     * const recurso = await prisma.recurso.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Recursos and only return the `id`
+     * const recursoWithIdOnly = await prisma.recurso.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RecursoCreateManyAndReturnArgs>(args?: SelectSubset<T, RecursoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Recurso.
+     * @param {RecursoDeleteArgs} args - Arguments to delete one Recurso.
+     * @example
+     * // Delete one Recurso
+     * const Recurso = await prisma.recurso.delete({
+     *   where: {
+     *     // ... filter to delete one Recurso
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RecursoDeleteArgs>(args: SelectSubset<T, RecursoDeleteArgs<ExtArgs>>): Prisma__RecursoClient<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Recurso.
+     * @param {RecursoUpdateArgs} args - Arguments to update one Recurso.
+     * @example
+     * // Update one Recurso
+     * const recurso = await prisma.recurso.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RecursoUpdateArgs>(args: SelectSubset<T, RecursoUpdateArgs<ExtArgs>>): Prisma__RecursoClient<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Recursos.
+     * @param {RecursoDeleteManyArgs} args - Arguments to filter Recursos to delete.
+     * @example
+     * // Delete a few Recursos
+     * const { count } = await prisma.recurso.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RecursoDeleteManyArgs>(args?: SelectSubset<T, RecursoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Recursos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecursoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Recursos
+     * const recurso = await prisma.recurso.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RecursoUpdateManyArgs>(args: SelectSubset<T, RecursoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Recursos and returns the data updated in the database.
+     * @param {RecursoUpdateManyAndReturnArgs} args - Arguments to update many Recursos.
+     * @example
+     * // Update many Recursos
+     * const recurso = await prisma.recurso.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Recursos and only return the `id`
+     * const recursoWithIdOnly = await prisma.recurso.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RecursoUpdateManyAndReturnArgs>(args: SelectSubset<T, RecursoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Recurso.
+     * @param {RecursoUpsertArgs} args - Arguments to update or create a Recurso.
+     * @example
+     * // Update or create a Recurso
+     * const recurso = await prisma.recurso.upsert({
+     *   create: {
+     *     // ... data to create a Recurso
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Recurso we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RecursoUpsertArgs>(args: SelectSubset<T, RecursoUpsertArgs<ExtArgs>>): Prisma__RecursoClient<$Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Recursos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecursoCountArgs} args - Arguments to filter Recursos to count.
+     * @example
+     * // Count the number of Recursos
+     * const count = await prisma.recurso.count({
+     *   where: {
+     *     // ... the filter for the Recursos we want to count
+     *   }
+     * })
+    **/
+    count<T extends RecursoCountArgs>(
+      args?: Subset<T, RecursoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RecursoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Recurso.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecursoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RecursoAggregateArgs>(args: Subset<T, RecursoAggregateArgs>): Prisma.PrismaPromise<GetRecursoAggregateType<T>>
+
+    /**
+     * Group by Recurso.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecursoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RecursoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RecursoGroupByArgs['orderBy'] }
+        : { orderBy?: RecursoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RecursoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRecursoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Recurso model
+   */
+  readonly fields: RecursoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Recurso.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RecursoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    edital<T extends EditalDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EditalDefaultArgs<ExtArgs>>): Prisma__EditalClient<$Result.GetResult<Prisma.$EditalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    licitante<T extends LicitanteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LicitanteDefaultArgs<ExtArgs>>): Prisma__LicitanteClient<$Result.GetResult<Prisma.$LicitantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    enviadoPor<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    respondidoPorUsuario<T extends Recurso$respondidoPorUsuarioArgs<ExtArgs> = {}>(args?: Subset<T, Recurso$respondidoPorUsuarioArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Recurso model
+   */
+  interface RecursoFieldRefs {
+    readonly id: FieldRef<"Recurso", 'String'>
+    readonly tipo: FieldRef<"Recurso", 'TipoRecurso'>
+    readonly status: FieldRef<"Recurso", 'StatusRecurso'>
+    readonly motivo: FieldRef<"Recurso", 'String'>
+    readonly fundamentacao: FieldRef<"Recurso", 'String'>
+    readonly resposta: FieldRef<"Recurso", 'String'>
+    readonly dataEnvio: FieldRef<"Recurso", 'DateTime'>
+    readonly dataResposta: FieldRef<"Recurso", 'DateTime'>
+    readonly prazoResposta: FieldRef<"Recurso", 'Int'>
+    readonly editalId: FieldRef<"Recurso", 'String'>
+    readonly licitanteId: FieldRef<"Recurso", 'String'>
+    readonly usuarioId: FieldRef<"Recurso", 'String'>
+    readonly respondidoPor: FieldRef<"Recurso", 'String'>
+    readonly createdAt: FieldRef<"Recurso", 'DateTime'>
+    readonly updatedAt: FieldRef<"Recurso", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Recurso findUnique
+   */
+  export type RecursoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    /**
+     * Filter, which Recurso to fetch.
+     */
+    where: RecursoWhereUniqueInput
+  }
+
+  /**
+   * Recurso findUniqueOrThrow
+   */
+  export type RecursoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    /**
+     * Filter, which Recurso to fetch.
+     */
+    where: RecursoWhereUniqueInput
+  }
+
+  /**
+   * Recurso findFirst
+   */
+  export type RecursoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    /**
+     * Filter, which Recurso to fetch.
+     */
+    where?: RecursoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Recursos to fetch.
+     */
+    orderBy?: RecursoOrderByWithRelationInput | RecursoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Recursos.
+     */
+    cursor?: RecursoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Recursos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Recursos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Recursos.
+     */
+    distinct?: RecursoScalarFieldEnum | RecursoScalarFieldEnum[]
+  }
+
+  /**
+   * Recurso findFirstOrThrow
+   */
+  export type RecursoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    /**
+     * Filter, which Recurso to fetch.
+     */
+    where?: RecursoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Recursos to fetch.
+     */
+    orderBy?: RecursoOrderByWithRelationInput | RecursoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Recursos.
+     */
+    cursor?: RecursoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Recursos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Recursos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Recursos.
+     */
+    distinct?: RecursoScalarFieldEnum | RecursoScalarFieldEnum[]
+  }
+
+  /**
+   * Recurso findMany
+   */
+  export type RecursoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    /**
+     * Filter, which Recursos to fetch.
+     */
+    where?: RecursoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Recursos to fetch.
+     */
+    orderBy?: RecursoOrderByWithRelationInput | RecursoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Recursos.
+     */
+    cursor?: RecursoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Recursos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Recursos.
+     */
+    skip?: number
+    distinct?: RecursoScalarFieldEnum | RecursoScalarFieldEnum[]
+  }
+
+  /**
+   * Recurso create
+   */
+  export type RecursoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Recurso.
+     */
+    data: XOR<RecursoCreateInput, RecursoUncheckedCreateInput>
+  }
+
+  /**
+   * Recurso createMany
+   */
+  export type RecursoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Recursos.
+     */
+    data: RecursoCreateManyInput | RecursoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Recurso createManyAndReturn
+   */
+  export type RecursoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Recursos.
+     */
+    data: RecursoCreateManyInput | RecursoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Recurso update
+   */
+  export type RecursoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Recurso.
+     */
+    data: XOR<RecursoUpdateInput, RecursoUncheckedUpdateInput>
+    /**
+     * Choose, which Recurso to update.
+     */
+    where: RecursoWhereUniqueInput
+  }
+
+  /**
+   * Recurso updateMany
+   */
+  export type RecursoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Recursos.
+     */
+    data: XOR<RecursoUpdateManyMutationInput, RecursoUncheckedUpdateManyInput>
+    /**
+     * Filter which Recursos to update
+     */
+    where?: RecursoWhereInput
+    /**
+     * Limit how many Recursos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Recurso updateManyAndReturn
+   */
+  export type RecursoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * The data used to update Recursos.
+     */
+    data: XOR<RecursoUpdateManyMutationInput, RecursoUncheckedUpdateManyInput>
+    /**
+     * Filter which Recursos to update
+     */
+    where?: RecursoWhereInput
+    /**
+     * Limit how many Recursos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Recurso upsert
+   */
+  export type RecursoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Recurso to update in case it exists.
+     */
+    where: RecursoWhereUniqueInput
+    /**
+     * In case the Recurso found by the `where` argument doesn't exist, create a new Recurso with this data.
+     */
+    create: XOR<RecursoCreateInput, RecursoUncheckedCreateInput>
+    /**
+     * In case the Recurso was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RecursoUpdateInput, RecursoUncheckedUpdateInput>
+  }
+
+  /**
+   * Recurso delete
+   */
+  export type RecursoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+    /**
+     * Filter which Recurso to delete.
+     */
+    where: RecursoWhereUniqueInput
+  }
+
+  /**
+   * Recurso deleteMany
+   */
+  export type RecursoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Recursos to delete
+     */
+    where?: RecursoWhereInput
+    /**
+     * Limit how many Recursos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Recurso.respondidoPorUsuario
+   */
+  export type Recurso$respondidoPorUsuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    where?: UsuarioWhereInput
+  }
+
+  /**
+   * Recurso without action
+   */
+  export type RecursoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recurso
+     */
+    select?: RecursoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recurso
+     */
+    omit?: RecursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecursoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Sancao
+   */
+
+  export type AggregateSancao = {
+    _count: SancaoCountAggregateOutputType | null
+    _avg: SancaoAvgAggregateOutputType | null
+    _sum: SancaoSumAggregateOutputType | null
+    _min: SancaoMinAggregateOutputType | null
+    _max: SancaoMaxAggregateOutputType | null
+  }
+
+  export type SancaoAvgAggregateOutputType = {
+    valorMulta: number | null
+  }
+
+  export type SancaoSumAggregateOutputType = {
+    valorMulta: number | null
+  }
+
+  export type SancaoMinAggregateOutputType = {
+    id: string | null
+    tipo: $Enums.TipoSancao | null
+    status: $Enums.StatusSancao | null
+    motivo: string | null
+    fundamentacao: string | null
+    dataInicio: Date | null
+    dataFim: Date | null
+    valorMulta: number | null
+    observacoes: string | null
+    editalId: string | null
+    licitanteId: string | null
+    aplicadoPor: string | null
+    revogadoPor: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SancaoMaxAggregateOutputType = {
+    id: string | null
+    tipo: $Enums.TipoSancao | null
+    status: $Enums.StatusSancao | null
+    motivo: string | null
+    fundamentacao: string | null
+    dataInicio: Date | null
+    dataFim: Date | null
+    valorMulta: number | null
+    observacoes: string | null
+    editalId: string | null
+    licitanteId: string | null
+    aplicadoPor: string | null
+    revogadoPor: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SancaoCountAggregateOutputType = {
+    id: number
+    tipo: number
+    status: number
+    motivo: number
+    fundamentacao: number
+    dataInicio: number
+    dataFim: number
+    valorMulta: number
+    observacoes: number
+    editalId: number
+    licitanteId: number
+    aplicadoPor: number
+    revogadoPor: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SancaoAvgAggregateInputType = {
+    valorMulta?: true
+  }
+
+  export type SancaoSumAggregateInputType = {
+    valorMulta?: true
+  }
+
+  export type SancaoMinAggregateInputType = {
+    id?: true
+    tipo?: true
+    status?: true
+    motivo?: true
+    fundamentacao?: true
+    dataInicio?: true
+    dataFim?: true
+    valorMulta?: true
+    observacoes?: true
+    editalId?: true
+    licitanteId?: true
+    aplicadoPor?: true
+    revogadoPor?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SancaoMaxAggregateInputType = {
+    id?: true
+    tipo?: true
+    status?: true
+    motivo?: true
+    fundamentacao?: true
+    dataInicio?: true
+    dataFim?: true
+    valorMulta?: true
+    observacoes?: true
+    editalId?: true
+    licitanteId?: true
+    aplicadoPor?: true
+    revogadoPor?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SancaoCountAggregateInputType = {
+    id?: true
+    tipo?: true
+    status?: true
+    motivo?: true
+    fundamentacao?: true
+    dataInicio?: true
+    dataFim?: true
+    valorMulta?: true
+    observacoes?: true
+    editalId?: true
+    licitanteId?: true
+    aplicadoPor?: true
+    revogadoPor?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SancaoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sancao to aggregate.
+     */
+    where?: SancaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sancaos to fetch.
+     */
+    orderBy?: SancaoOrderByWithRelationInput | SancaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SancaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sancaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sancaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Sancaos
+    **/
+    _count?: true | SancaoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SancaoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SancaoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SancaoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SancaoMaxAggregateInputType
+  }
+
+  export type GetSancaoAggregateType<T extends SancaoAggregateArgs> = {
+        [P in keyof T & keyof AggregateSancao]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSancao[P]>
+      : GetScalarType<T[P], AggregateSancao[P]>
+  }
+
+
+
+
+  export type SancaoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SancaoWhereInput
+    orderBy?: SancaoOrderByWithAggregationInput | SancaoOrderByWithAggregationInput[]
+    by: SancaoScalarFieldEnum[] | SancaoScalarFieldEnum
+    having?: SancaoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SancaoCountAggregateInputType | true
+    _avg?: SancaoAvgAggregateInputType
+    _sum?: SancaoSumAggregateInputType
+    _min?: SancaoMinAggregateInputType
+    _max?: SancaoMaxAggregateInputType
+  }
+
+  export type SancaoGroupByOutputType = {
+    id: string
+    tipo: $Enums.TipoSancao
+    status: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date
+    dataFim: Date | null
+    valorMulta: number | null
+    observacoes: string | null
+    editalId: string
+    licitanteId: string
+    aplicadoPor: string
+    revogadoPor: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SancaoCountAggregateOutputType | null
+    _avg: SancaoAvgAggregateOutputType | null
+    _sum: SancaoSumAggregateOutputType | null
+    _min: SancaoMinAggregateOutputType | null
+    _max: SancaoMaxAggregateOutputType | null
+  }
+
+  type GetSancaoGroupByPayload<T extends SancaoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SancaoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SancaoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SancaoGroupByOutputType[P]>
+            : GetScalarType<T[P], SancaoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SancaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    motivo?: boolean
+    fundamentacao?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    valorMulta?: boolean
+    observacoes?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    aplicadoPor?: boolean
+    revogadoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    aplicadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    revogadoPorUsuario?: boolean | Sancao$revogadoPorUsuarioArgs<ExtArgs>
+  }, ExtArgs["result"]["sancao"]>
+
+  export type SancaoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    motivo?: boolean
+    fundamentacao?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    valorMulta?: boolean
+    observacoes?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    aplicadoPor?: boolean
+    revogadoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    aplicadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    revogadoPorUsuario?: boolean | Sancao$revogadoPorUsuarioArgs<ExtArgs>
+  }, ExtArgs["result"]["sancao"]>
+
+  export type SancaoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    motivo?: boolean
+    fundamentacao?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    valorMulta?: boolean
+    observacoes?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    aplicadoPor?: boolean
+    revogadoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    aplicadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    revogadoPorUsuario?: boolean | Sancao$revogadoPorUsuarioArgs<ExtArgs>
+  }, ExtArgs["result"]["sancao"]>
+
+  export type SancaoSelectScalar = {
+    id?: boolean
+    tipo?: boolean
+    status?: boolean
+    motivo?: boolean
+    fundamentacao?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    valorMulta?: boolean
+    observacoes?: boolean
+    editalId?: boolean
+    licitanteId?: boolean
+    aplicadoPor?: boolean
+    revogadoPor?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SancaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tipo" | "status" | "motivo" | "fundamentacao" | "dataInicio" | "dataFim" | "valorMulta" | "observacoes" | "editalId" | "licitanteId" | "aplicadoPor" | "revogadoPor" | "createdAt" | "updatedAt", ExtArgs["result"]["sancao"]>
+  export type SancaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    aplicadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    revogadoPorUsuario?: boolean | Sancao$revogadoPorUsuarioArgs<ExtArgs>
+  }
+  export type SancaoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    aplicadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    revogadoPorUsuario?: boolean | Sancao$revogadoPorUsuarioArgs<ExtArgs>
+  }
+  export type SancaoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    edital?: boolean | EditalDefaultArgs<ExtArgs>
+    licitante?: boolean | LicitanteDefaultArgs<ExtArgs>
+    aplicadoPorUsuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    revogadoPorUsuario?: boolean | Sancao$revogadoPorUsuarioArgs<ExtArgs>
+  }
+
+  export type $SancaoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Sancao"
+    objects: {
+      edital: Prisma.$EditalPayload<ExtArgs>
+      licitante: Prisma.$LicitantePayload<ExtArgs>
+      aplicadoPorUsuario: Prisma.$UsuarioPayload<ExtArgs>
+      revogadoPorUsuario: Prisma.$UsuarioPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tipo: $Enums.TipoSancao
+      status: $Enums.StatusSancao
+      motivo: string
+      fundamentacao: string
+      dataInicio: Date
+      dataFim: Date | null
+      valorMulta: number | null
+      observacoes: string | null
+      editalId: string
+      licitanteId: string
+      aplicadoPor: string
+      revogadoPor: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sancao"]>
+    composites: {}
+  }
+
+  type SancaoGetPayload<S extends boolean | null | undefined | SancaoDefaultArgs> = $Result.GetResult<Prisma.$SancaoPayload, S>
+
+  type SancaoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SancaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SancaoCountAggregateInputType | true
+    }
+
+  export interface SancaoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Sancao'], meta: { name: 'Sancao' } }
+    /**
+     * Find zero or one Sancao that matches the filter.
+     * @param {SancaoFindUniqueArgs} args - Arguments to find a Sancao
+     * @example
+     * // Get one Sancao
+     * const sancao = await prisma.sancao.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SancaoFindUniqueArgs>(args: SelectSubset<T, SancaoFindUniqueArgs<ExtArgs>>): Prisma__SancaoClient<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Sancao that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SancaoFindUniqueOrThrowArgs} args - Arguments to find a Sancao
+     * @example
+     * // Get one Sancao
+     * const sancao = await prisma.sancao.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SancaoFindUniqueOrThrowArgs>(args: SelectSubset<T, SancaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SancaoClient<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Sancao that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SancaoFindFirstArgs} args - Arguments to find a Sancao
+     * @example
+     * // Get one Sancao
+     * const sancao = await prisma.sancao.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SancaoFindFirstArgs>(args?: SelectSubset<T, SancaoFindFirstArgs<ExtArgs>>): Prisma__SancaoClient<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Sancao that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SancaoFindFirstOrThrowArgs} args - Arguments to find a Sancao
+     * @example
+     * // Get one Sancao
+     * const sancao = await prisma.sancao.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SancaoFindFirstOrThrowArgs>(args?: SelectSubset<T, SancaoFindFirstOrThrowArgs<ExtArgs>>): Prisma__SancaoClient<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Sancaos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SancaoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sancaos
+     * const sancaos = await prisma.sancao.findMany()
+     * 
+     * // Get first 10 Sancaos
+     * const sancaos = await prisma.sancao.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sancaoWithIdOnly = await prisma.sancao.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SancaoFindManyArgs>(args?: SelectSubset<T, SancaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Sancao.
+     * @param {SancaoCreateArgs} args - Arguments to create a Sancao.
+     * @example
+     * // Create one Sancao
+     * const Sancao = await prisma.sancao.create({
+     *   data: {
+     *     // ... data to create a Sancao
+     *   }
+     * })
+     * 
+     */
+    create<T extends SancaoCreateArgs>(args: SelectSubset<T, SancaoCreateArgs<ExtArgs>>): Prisma__SancaoClient<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Sancaos.
+     * @param {SancaoCreateManyArgs} args - Arguments to create many Sancaos.
+     * @example
+     * // Create many Sancaos
+     * const sancao = await prisma.sancao.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SancaoCreateManyArgs>(args?: SelectSubset<T, SancaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Sancaos and returns the data saved in the database.
+     * @param {SancaoCreateManyAndReturnArgs} args - Arguments to create many Sancaos.
+     * @example
+     * // Create many Sancaos
+     * const sancao = await prisma.sancao.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Sancaos and only return the `id`
+     * const sancaoWithIdOnly = await prisma.sancao.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SancaoCreateManyAndReturnArgs>(args?: SelectSubset<T, SancaoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Sancao.
+     * @param {SancaoDeleteArgs} args - Arguments to delete one Sancao.
+     * @example
+     * // Delete one Sancao
+     * const Sancao = await prisma.sancao.delete({
+     *   where: {
+     *     // ... filter to delete one Sancao
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SancaoDeleteArgs>(args: SelectSubset<T, SancaoDeleteArgs<ExtArgs>>): Prisma__SancaoClient<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Sancao.
+     * @param {SancaoUpdateArgs} args - Arguments to update one Sancao.
+     * @example
+     * // Update one Sancao
+     * const sancao = await prisma.sancao.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SancaoUpdateArgs>(args: SelectSubset<T, SancaoUpdateArgs<ExtArgs>>): Prisma__SancaoClient<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Sancaos.
+     * @param {SancaoDeleteManyArgs} args - Arguments to filter Sancaos to delete.
+     * @example
+     * // Delete a few Sancaos
+     * const { count } = await prisma.sancao.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SancaoDeleteManyArgs>(args?: SelectSubset<T, SancaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sancaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SancaoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sancaos
+     * const sancao = await prisma.sancao.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SancaoUpdateManyArgs>(args: SelectSubset<T, SancaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sancaos and returns the data updated in the database.
+     * @param {SancaoUpdateManyAndReturnArgs} args - Arguments to update many Sancaos.
+     * @example
+     * // Update many Sancaos
+     * const sancao = await prisma.sancao.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Sancaos and only return the `id`
+     * const sancaoWithIdOnly = await prisma.sancao.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SancaoUpdateManyAndReturnArgs>(args: SelectSubset<T, SancaoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Sancao.
+     * @param {SancaoUpsertArgs} args - Arguments to update or create a Sancao.
+     * @example
+     * // Update or create a Sancao
+     * const sancao = await prisma.sancao.upsert({
+     *   create: {
+     *     // ... data to create a Sancao
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Sancao we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SancaoUpsertArgs>(args: SelectSubset<T, SancaoUpsertArgs<ExtArgs>>): Prisma__SancaoClient<$Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Sancaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SancaoCountArgs} args - Arguments to filter Sancaos to count.
+     * @example
+     * // Count the number of Sancaos
+     * const count = await prisma.sancao.count({
+     *   where: {
+     *     // ... the filter for the Sancaos we want to count
+     *   }
+     * })
+    **/
+    count<T extends SancaoCountArgs>(
+      args?: Subset<T, SancaoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SancaoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Sancao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SancaoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SancaoAggregateArgs>(args: Subset<T, SancaoAggregateArgs>): Prisma.PrismaPromise<GetSancaoAggregateType<T>>
+
+    /**
+     * Group by Sancao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SancaoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SancaoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SancaoGroupByArgs['orderBy'] }
+        : { orderBy?: SancaoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SancaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSancaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Sancao model
+   */
+  readonly fields: SancaoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Sancao.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SancaoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    edital<T extends EditalDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EditalDefaultArgs<ExtArgs>>): Prisma__EditalClient<$Result.GetResult<Prisma.$EditalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    licitante<T extends LicitanteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LicitanteDefaultArgs<ExtArgs>>): Prisma__LicitanteClient<$Result.GetResult<Prisma.$LicitantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    aplicadoPorUsuario<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    revogadoPorUsuario<T extends Sancao$revogadoPorUsuarioArgs<ExtArgs> = {}>(args?: Subset<T, Sancao$revogadoPorUsuarioArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Sancao model
+   */
+  interface SancaoFieldRefs {
+    readonly id: FieldRef<"Sancao", 'String'>
+    readonly tipo: FieldRef<"Sancao", 'TipoSancao'>
+    readonly status: FieldRef<"Sancao", 'StatusSancao'>
+    readonly motivo: FieldRef<"Sancao", 'String'>
+    readonly fundamentacao: FieldRef<"Sancao", 'String'>
+    readonly dataInicio: FieldRef<"Sancao", 'DateTime'>
+    readonly dataFim: FieldRef<"Sancao", 'DateTime'>
+    readonly valorMulta: FieldRef<"Sancao", 'Int'>
+    readonly observacoes: FieldRef<"Sancao", 'String'>
+    readonly editalId: FieldRef<"Sancao", 'String'>
+    readonly licitanteId: FieldRef<"Sancao", 'String'>
+    readonly aplicadoPor: FieldRef<"Sancao", 'String'>
+    readonly revogadoPor: FieldRef<"Sancao", 'String'>
+    readonly createdAt: FieldRef<"Sancao", 'DateTime'>
+    readonly updatedAt: FieldRef<"Sancao", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Sancao findUnique
+   */
+  export type SancaoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Sancao to fetch.
+     */
+    where: SancaoWhereUniqueInput
+  }
+
+  /**
+   * Sancao findUniqueOrThrow
+   */
+  export type SancaoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Sancao to fetch.
+     */
+    where: SancaoWhereUniqueInput
+  }
+
+  /**
+   * Sancao findFirst
+   */
+  export type SancaoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Sancao to fetch.
+     */
+    where?: SancaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sancaos to fetch.
+     */
+    orderBy?: SancaoOrderByWithRelationInput | SancaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sancaos.
+     */
+    cursor?: SancaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sancaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sancaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sancaos.
+     */
+    distinct?: SancaoScalarFieldEnum | SancaoScalarFieldEnum[]
+  }
+
+  /**
+   * Sancao findFirstOrThrow
+   */
+  export type SancaoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Sancao to fetch.
+     */
+    where?: SancaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sancaos to fetch.
+     */
+    orderBy?: SancaoOrderByWithRelationInput | SancaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sancaos.
+     */
+    cursor?: SancaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sancaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sancaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sancaos.
+     */
+    distinct?: SancaoScalarFieldEnum | SancaoScalarFieldEnum[]
+  }
+
+  /**
+   * Sancao findMany
+   */
+  export type SancaoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Sancaos to fetch.
+     */
+    where?: SancaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sancaos to fetch.
+     */
+    orderBy?: SancaoOrderByWithRelationInput | SancaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Sancaos.
+     */
+    cursor?: SancaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sancaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sancaos.
+     */
+    skip?: number
+    distinct?: SancaoScalarFieldEnum | SancaoScalarFieldEnum[]
+  }
+
+  /**
+   * Sancao create
+   */
+  export type SancaoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Sancao.
+     */
+    data: XOR<SancaoCreateInput, SancaoUncheckedCreateInput>
+  }
+
+  /**
+   * Sancao createMany
+   */
+  export type SancaoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Sancaos.
+     */
+    data: SancaoCreateManyInput | SancaoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Sancao createManyAndReturn
+   */
+  export type SancaoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Sancaos.
+     */
+    data: SancaoCreateManyInput | SancaoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Sancao update
+   */
+  export type SancaoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Sancao.
+     */
+    data: XOR<SancaoUpdateInput, SancaoUncheckedUpdateInput>
+    /**
+     * Choose, which Sancao to update.
+     */
+    where: SancaoWhereUniqueInput
+  }
+
+  /**
+   * Sancao updateMany
+   */
+  export type SancaoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Sancaos.
+     */
+    data: XOR<SancaoUpdateManyMutationInput, SancaoUncheckedUpdateManyInput>
+    /**
+     * Filter which Sancaos to update
+     */
+    where?: SancaoWhereInput
+    /**
+     * Limit how many Sancaos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Sancao updateManyAndReturn
+   */
+  export type SancaoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * The data used to update Sancaos.
+     */
+    data: XOR<SancaoUpdateManyMutationInput, SancaoUncheckedUpdateManyInput>
+    /**
+     * Filter which Sancaos to update
+     */
+    where?: SancaoWhereInput
+    /**
+     * Limit how many Sancaos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Sancao upsert
+   */
+  export type SancaoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Sancao to update in case it exists.
+     */
+    where: SancaoWhereUniqueInput
+    /**
+     * In case the Sancao found by the `where` argument doesn't exist, create a new Sancao with this data.
+     */
+    create: XOR<SancaoCreateInput, SancaoUncheckedCreateInput>
+    /**
+     * In case the Sancao was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SancaoUpdateInput, SancaoUncheckedUpdateInput>
+  }
+
+  /**
+   * Sancao delete
+   */
+  export type SancaoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+    /**
+     * Filter which Sancao to delete.
+     */
+    where: SancaoWhereUniqueInput
+  }
+
+  /**
+   * Sancao deleteMany
+   */
+  export type SancaoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sancaos to delete
+     */
+    where?: SancaoWhereInput
+    /**
+     * Limit how many Sancaos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Sancao.revogadoPorUsuario
+   */
+  export type Sancao$revogadoPorUsuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    where?: UsuarioWhereInput
+  }
+
+  /**
+   * Sancao without action
+   */
+  export type SancaoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sancao
+     */
+    select?: SancaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sancao
+     */
+    omit?: SancaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SancaoInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -19048,6 +22143,7 @@ export namespace Prisma {
     numero: 'numero',
     objeto: 'objeto',
     modalidade: 'modalidade',
+    criterioJulgamento: 'criterioJulgamento',
     status: 'status',
     dataAbertura: 'dataAbertura',
     arquivoPdf: 'arquivoPdf',
@@ -19240,6 +22336,48 @@ export namespace Prisma {
   export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
 
 
+  export const RecursoScalarFieldEnum: {
+    id: 'id',
+    tipo: 'tipo',
+    status: 'status',
+    motivo: 'motivo',
+    fundamentacao: 'fundamentacao',
+    resposta: 'resposta',
+    dataEnvio: 'dataEnvio',
+    dataResposta: 'dataResposta',
+    prazoResposta: 'prazoResposta',
+    editalId: 'editalId',
+    licitanteId: 'licitanteId',
+    usuarioId: 'usuarioId',
+    respondidoPor: 'respondidoPor',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RecursoScalarFieldEnum = (typeof RecursoScalarFieldEnum)[keyof typeof RecursoScalarFieldEnum]
+
+
+  export const SancaoScalarFieldEnum: {
+    id: 'id',
+    tipo: 'tipo',
+    status: 'status',
+    motivo: 'motivo',
+    fundamentacao: 'fundamentacao',
+    dataInicio: 'dataInicio',
+    dataFim: 'dataFim',
+    valorMulta: 'valorMulta',
+    observacoes: 'observacoes',
+    editalId: 'editalId',
+    licitanteId: 'licitanteId',
+    aplicadoPor: 'aplicadoPor',
+    revogadoPor: 'revogadoPor',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SancaoScalarFieldEnum = (typeof SancaoScalarFieldEnum)[keyof typeof SancaoScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -19308,6 +22446,20 @@ export namespace Prisma {
    * Reference to a field of type 'ModalidadeLicitação[]'
    */
   export type ListEnumModalidadeLicitaçãoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModalidadeLicitação[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CritérioJulgamento'
+   */
+  export type EnumCritérioJulgamentoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CritérioJulgamento'>
+    
+
+
+  /**
+   * Reference to a field of type 'CritérioJulgamento[]'
+   */
+  export type ListEnumCritérioJulgamentoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CritérioJulgamento[]'>
     
 
 
@@ -19431,6 +22583,62 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TipoRecurso'
+   */
+  export type EnumTipoRecursoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoRecurso'>
+    
+
+
+  /**
+   * Reference to a field of type 'TipoRecurso[]'
+   */
+  export type ListEnumTipoRecursoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoRecurso[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusRecurso'
+   */
+  export type EnumStatusRecursoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusRecurso'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusRecurso[]'
+   */
+  export type ListEnumStatusRecursoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusRecurso[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TipoSancao'
+   */
+  export type EnumTipoSancaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoSancao'>
+    
+
+
+  /**
+   * Reference to a field of type 'TipoSancao[]'
+   */
+  export type ListEnumTipoSancaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoSancao[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusSancao'
+   */
+  export type EnumStatusSancaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusSancao'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusSancao[]'
+   */
+  export type ListEnumStatusSancaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusSancao[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -19460,6 +22668,10 @@ export namespace Prisma {
     LogAtividade?: LogAtividadeListRelationFilter
     MensagemChat?: MensagemChatListRelationFilter
     licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
+    recursosEnviados?: RecursoListRelationFilter
+    recursosRespondidos?: RecursoListRelationFilter
+    sancaoAplicada?: SancaoListRelationFilter
+    sancaoRevogada?: SancaoListRelationFilter
   }
 
   export type UsuarioOrderByWithRelationInput = {
@@ -19472,6 +22684,10 @@ export namespace Prisma {
     LogAtividade?: LogAtividadeOrderByRelationAggregateInput
     MensagemChat?: MensagemChatOrderByRelationAggregateInput
     licitante?: LicitanteOrderByWithRelationInput
+    recursosEnviados?: RecursoOrderByRelationAggregateInput
+    recursosRespondidos?: RecursoOrderByRelationAggregateInput
+    sancaoAplicada?: SancaoOrderByRelationAggregateInput
+    sancaoRevogada?: SancaoOrderByRelationAggregateInput
   }
 
   export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -19487,6 +22703,10 @@ export namespace Prisma {
     LogAtividade?: LogAtividadeListRelationFilter
     MensagemChat?: MensagemChatListRelationFilter
     licitante?: XOR<LicitanteNullableScalarRelationFilter, LicitanteWhereInput> | null
+    recursosEnviados?: RecursoListRelationFilter
+    recursosRespondidos?: RecursoListRelationFilter
+    sancaoAplicada?: SancaoListRelationFilter
+    sancaoRevogada?: SancaoListRelationFilter
   }, "id" | "email" | "licitanteId">
 
   export type UsuarioOrderByWithAggregationInput = {
@@ -19521,6 +22741,7 @@ export namespace Prisma {
     numero?: StringFilter<"Edital"> | string
     objeto?: StringFilter<"Edital"> | string
     modalidade?: EnumModalidadeLicitaçãoFilter<"Edital"> | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFilter<"Edital"> | $Enums.CritérioJulgamento
     status?: StringFilter<"Edital"> | string
     dataAbertura?: DateTimeFilter<"Edital"> | Date | string
     arquivoPdf?: StringNullableFilter<"Edital"> | string | null
@@ -19531,6 +22752,8 @@ export namespace Prisma {
     documentos?: DocumentoListRelationFilter
     lotes?: LoteListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
+    recursos?: RecursoListRelationFilter
+    Sancao?: SancaoListRelationFilter
   }
 
   export type EditalOrderByWithRelationInput = {
@@ -19538,6 +22761,7 @@ export namespace Prisma {
     numero?: SortOrder
     objeto?: SortOrder
     modalidade?: SortOrder
+    criterioJulgamento?: SortOrder
     status?: SortOrder
     dataAbertura?: SortOrder
     arquivoPdf?: SortOrderInput | SortOrder
@@ -19548,6 +22772,8 @@ export namespace Prisma {
     documentos?: DocumentoOrderByRelationAggregateInput
     lotes?: LoteOrderByRelationAggregateInput
     mensagensChat?: MensagemChatOrderByRelationAggregateInput
+    recursos?: RecursoOrderByRelationAggregateInput
+    Sancao?: SancaoOrderByRelationAggregateInput
   }
 
   export type EditalWhereUniqueInput = Prisma.AtLeast<{
@@ -19558,6 +22784,7 @@ export namespace Prisma {
     NOT?: EditalWhereInput | EditalWhereInput[]
     objeto?: StringFilter<"Edital"> | string
     modalidade?: EnumModalidadeLicitaçãoFilter<"Edital"> | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFilter<"Edital"> | $Enums.CritérioJulgamento
     status?: StringFilter<"Edital"> | string
     dataAbertura?: DateTimeFilter<"Edital"> | Date | string
     arquivoPdf?: StringNullableFilter<"Edital"> | string | null
@@ -19568,6 +22795,8 @@ export namespace Prisma {
     documentos?: DocumentoListRelationFilter
     lotes?: LoteListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
+    recursos?: RecursoListRelationFilter
+    Sancao?: SancaoListRelationFilter
   }, "id" | "numero">
 
   export type EditalOrderByWithAggregationInput = {
@@ -19575,6 +22804,7 @@ export namespace Prisma {
     numero?: SortOrder
     objeto?: SortOrder
     modalidade?: SortOrder
+    criterioJulgamento?: SortOrder
     status?: SortOrder
     dataAbertura?: SortOrder
     arquivoPdf?: SortOrderInput | SortOrder
@@ -19593,6 +22823,7 @@ export namespace Prisma {
     numero?: StringWithAggregatesFilter<"Edital"> | string
     objeto?: StringWithAggregatesFilter<"Edital"> | string
     modalidade?: EnumModalidadeLicitaçãoWithAggregatesFilter<"Edital"> | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoWithAggregatesFilter<"Edital"> | $Enums.CritérioJulgamento
     status?: StringWithAggregatesFilter<"Edital"> | string
     dataAbertura?: DateTimeWithAggregatesFilter<"Edital"> | Date | string
     arquivoPdf?: StringNullableWithAggregatesFilter<"Edital"> | string | null
@@ -19703,6 +22934,8 @@ export namespace Prisma {
     sessoes?: SessaoListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
     disputas?: DisputaListRelationFilter
+    recursos?: RecursoListRelationFilter
+    Sancao?: SancaoListRelationFilter
   }
 
   export type LicitanteOrderByWithRelationInput = {
@@ -19717,6 +22950,8 @@ export namespace Prisma {
     sessoes?: SessaoOrderByRelationAggregateInput
     mensagensChat?: MensagemChatOrderByRelationAggregateInput
     disputas?: DisputaOrderByRelationAggregateInput
+    recursos?: RecursoOrderByRelationAggregateInput
+    Sancao?: SancaoOrderByRelationAggregateInput
   }
 
   export type LicitanteWhereUniqueInput = Prisma.AtLeast<{
@@ -19734,6 +22969,8 @@ export namespace Prisma {
     sessoes?: SessaoListRelationFilter
     mensagensChat?: MensagemChatListRelationFilter
     disputas?: DisputaListRelationFilter
+    recursos?: RecursoListRelationFilter
+    Sancao?: SancaoListRelationFilter
   }, "id" | "cnpj">
 
   export type LicitanteOrderByWithAggregationInput = {
@@ -20597,6 +23834,238 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
   }
 
+  export type RecursoWhereInput = {
+    AND?: RecursoWhereInput | RecursoWhereInput[]
+    OR?: RecursoWhereInput[]
+    NOT?: RecursoWhereInput | RecursoWhereInput[]
+    id?: StringFilter<"Recurso"> | string
+    tipo?: EnumTipoRecursoFilter<"Recurso"> | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFilter<"Recurso"> | $Enums.StatusRecurso
+    motivo?: StringFilter<"Recurso"> | string
+    fundamentacao?: StringFilter<"Recurso"> | string
+    resposta?: StringNullableFilter<"Recurso"> | string | null
+    dataEnvio?: DateTimeFilter<"Recurso"> | Date | string
+    dataResposta?: DateTimeNullableFilter<"Recurso"> | Date | string | null
+    prazoResposta?: IntFilter<"Recurso"> | number
+    editalId?: StringFilter<"Recurso"> | string
+    licitanteId?: StringFilter<"Recurso"> | string
+    usuarioId?: StringFilter<"Recurso"> | string
+    respondidoPor?: StringNullableFilter<"Recurso"> | string | null
+    createdAt?: DateTimeFilter<"Recurso"> | Date | string
+    updatedAt?: DateTimeFilter<"Recurso"> | Date | string
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+    licitante?: XOR<LicitanteScalarRelationFilter, LicitanteWhereInput>
+    enviadoPor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    respondidoPorUsuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
+  }
+
+  export type RecursoOrderByWithRelationInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    resposta?: SortOrderInput | SortOrder
+    dataEnvio?: SortOrder
+    dataResposta?: SortOrderInput | SortOrder
+    prazoResposta?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    usuarioId?: SortOrder
+    respondidoPor?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    edital?: EditalOrderByWithRelationInput
+    licitante?: LicitanteOrderByWithRelationInput
+    enviadoPor?: UsuarioOrderByWithRelationInput
+    respondidoPorUsuario?: UsuarioOrderByWithRelationInput
+  }
+
+  export type RecursoWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RecursoWhereInput | RecursoWhereInput[]
+    OR?: RecursoWhereInput[]
+    NOT?: RecursoWhereInput | RecursoWhereInput[]
+    tipo?: EnumTipoRecursoFilter<"Recurso"> | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFilter<"Recurso"> | $Enums.StatusRecurso
+    motivo?: StringFilter<"Recurso"> | string
+    fundamentacao?: StringFilter<"Recurso"> | string
+    resposta?: StringNullableFilter<"Recurso"> | string | null
+    dataEnvio?: DateTimeFilter<"Recurso"> | Date | string
+    dataResposta?: DateTimeNullableFilter<"Recurso"> | Date | string | null
+    prazoResposta?: IntFilter<"Recurso"> | number
+    editalId?: StringFilter<"Recurso"> | string
+    licitanteId?: StringFilter<"Recurso"> | string
+    usuarioId?: StringFilter<"Recurso"> | string
+    respondidoPor?: StringNullableFilter<"Recurso"> | string | null
+    createdAt?: DateTimeFilter<"Recurso"> | Date | string
+    updatedAt?: DateTimeFilter<"Recurso"> | Date | string
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+    licitante?: XOR<LicitanteScalarRelationFilter, LicitanteWhereInput>
+    enviadoPor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    respondidoPorUsuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
+  }, "id">
+
+  export type RecursoOrderByWithAggregationInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    resposta?: SortOrderInput | SortOrder
+    dataEnvio?: SortOrder
+    dataResposta?: SortOrderInput | SortOrder
+    prazoResposta?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    usuarioId?: SortOrder
+    respondidoPor?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RecursoCountOrderByAggregateInput
+    _avg?: RecursoAvgOrderByAggregateInput
+    _max?: RecursoMaxOrderByAggregateInput
+    _min?: RecursoMinOrderByAggregateInput
+    _sum?: RecursoSumOrderByAggregateInput
+  }
+
+  export type RecursoScalarWhereWithAggregatesInput = {
+    AND?: RecursoScalarWhereWithAggregatesInput | RecursoScalarWhereWithAggregatesInput[]
+    OR?: RecursoScalarWhereWithAggregatesInput[]
+    NOT?: RecursoScalarWhereWithAggregatesInput | RecursoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Recurso"> | string
+    tipo?: EnumTipoRecursoWithAggregatesFilter<"Recurso"> | $Enums.TipoRecurso
+    status?: EnumStatusRecursoWithAggregatesFilter<"Recurso"> | $Enums.StatusRecurso
+    motivo?: StringWithAggregatesFilter<"Recurso"> | string
+    fundamentacao?: StringWithAggregatesFilter<"Recurso"> | string
+    resposta?: StringNullableWithAggregatesFilter<"Recurso"> | string | null
+    dataEnvio?: DateTimeWithAggregatesFilter<"Recurso"> | Date | string
+    dataResposta?: DateTimeNullableWithAggregatesFilter<"Recurso"> | Date | string | null
+    prazoResposta?: IntWithAggregatesFilter<"Recurso"> | number
+    editalId?: StringWithAggregatesFilter<"Recurso"> | string
+    licitanteId?: StringWithAggregatesFilter<"Recurso"> | string
+    usuarioId?: StringWithAggregatesFilter<"Recurso"> | string
+    respondidoPor?: StringNullableWithAggregatesFilter<"Recurso"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Recurso"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Recurso"> | Date | string
+  }
+
+  export type SancaoWhereInput = {
+    AND?: SancaoWhereInput | SancaoWhereInput[]
+    OR?: SancaoWhereInput[]
+    NOT?: SancaoWhereInput | SancaoWhereInput[]
+    id?: StringFilter<"Sancao"> | string
+    tipo?: EnumTipoSancaoFilter<"Sancao"> | $Enums.TipoSancao
+    status?: EnumStatusSancaoFilter<"Sancao"> | $Enums.StatusSancao
+    motivo?: StringFilter<"Sancao"> | string
+    fundamentacao?: StringFilter<"Sancao"> | string
+    dataInicio?: DateTimeFilter<"Sancao"> | Date | string
+    dataFim?: DateTimeNullableFilter<"Sancao"> | Date | string | null
+    valorMulta?: IntNullableFilter<"Sancao"> | number | null
+    observacoes?: StringNullableFilter<"Sancao"> | string | null
+    editalId?: StringFilter<"Sancao"> | string
+    licitanteId?: StringFilter<"Sancao"> | string
+    aplicadoPor?: StringFilter<"Sancao"> | string
+    revogadoPor?: StringNullableFilter<"Sancao"> | string | null
+    createdAt?: DateTimeFilter<"Sancao"> | Date | string
+    updatedAt?: DateTimeFilter<"Sancao"> | Date | string
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+    licitante?: XOR<LicitanteScalarRelationFilter, LicitanteWhereInput>
+    aplicadoPorUsuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    revogadoPorUsuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
+  }
+
+  export type SancaoOrderByWithRelationInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrderInput | SortOrder
+    valorMulta?: SortOrderInput | SortOrder
+    observacoes?: SortOrderInput | SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    aplicadoPor?: SortOrder
+    revogadoPor?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    edital?: EditalOrderByWithRelationInput
+    licitante?: LicitanteOrderByWithRelationInput
+    aplicadoPorUsuario?: UsuarioOrderByWithRelationInput
+    revogadoPorUsuario?: UsuarioOrderByWithRelationInput
+  }
+
+  export type SancaoWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SancaoWhereInput | SancaoWhereInput[]
+    OR?: SancaoWhereInput[]
+    NOT?: SancaoWhereInput | SancaoWhereInput[]
+    tipo?: EnumTipoSancaoFilter<"Sancao"> | $Enums.TipoSancao
+    status?: EnumStatusSancaoFilter<"Sancao"> | $Enums.StatusSancao
+    motivo?: StringFilter<"Sancao"> | string
+    fundamentacao?: StringFilter<"Sancao"> | string
+    dataInicio?: DateTimeFilter<"Sancao"> | Date | string
+    dataFim?: DateTimeNullableFilter<"Sancao"> | Date | string | null
+    valorMulta?: IntNullableFilter<"Sancao"> | number | null
+    observacoes?: StringNullableFilter<"Sancao"> | string | null
+    editalId?: StringFilter<"Sancao"> | string
+    licitanteId?: StringFilter<"Sancao"> | string
+    aplicadoPor?: StringFilter<"Sancao"> | string
+    revogadoPor?: StringNullableFilter<"Sancao"> | string | null
+    createdAt?: DateTimeFilter<"Sancao"> | Date | string
+    updatedAt?: DateTimeFilter<"Sancao"> | Date | string
+    edital?: XOR<EditalScalarRelationFilter, EditalWhereInput>
+    licitante?: XOR<LicitanteScalarRelationFilter, LicitanteWhereInput>
+    aplicadoPorUsuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    revogadoPorUsuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
+  }, "id">
+
+  export type SancaoOrderByWithAggregationInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrderInput | SortOrder
+    valorMulta?: SortOrderInput | SortOrder
+    observacoes?: SortOrderInput | SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    aplicadoPor?: SortOrder
+    revogadoPor?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SancaoCountOrderByAggregateInput
+    _avg?: SancaoAvgOrderByAggregateInput
+    _max?: SancaoMaxOrderByAggregateInput
+    _min?: SancaoMinOrderByAggregateInput
+    _sum?: SancaoSumOrderByAggregateInput
+  }
+
+  export type SancaoScalarWhereWithAggregatesInput = {
+    AND?: SancaoScalarWhereWithAggregatesInput | SancaoScalarWhereWithAggregatesInput[]
+    OR?: SancaoScalarWhereWithAggregatesInput[]
+    NOT?: SancaoScalarWhereWithAggregatesInput | SancaoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Sancao"> | string
+    tipo?: EnumTipoSancaoWithAggregatesFilter<"Sancao"> | $Enums.TipoSancao
+    status?: EnumStatusSancaoWithAggregatesFilter<"Sancao"> | $Enums.StatusSancao
+    motivo?: StringWithAggregatesFilter<"Sancao"> | string
+    fundamentacao?: StringWithAggregatesFilter<"Sancao"> | string
+    dataInicio?: DateTimeWithAggregatesFilter<"Sancao"> | Date | string
+    dataFim?: DateTimeNullableWithAggregatesFilter<"Sancao"> | Date | string | null
+    valorMulta?: IntNullableWithAggregatesFilter<"Sancao"> | number | null
+    observacoes?: StringNullableWithAggregatesFilter<"Sancao"> | string | null
+    editalId?: StringWithAggregatesFilter<"Sancao"> | string
+    licitanteId?: StringWithAggregatesFilter<"Sancao"> | string
+    aplicadoPor?: StringWithAggregatesFilter<"Sancao"> | string
+    revogadoPor?: StringNullableWithAggregatesFilter<"Sancao"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Sancao"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Sancao"> | Date | string
+  }
+
   export type UsuarioCreateInput = {
     id?: string
     nome: string
@@ -20606,6 +24075,10 @@ export namespace Prisma {
     LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
     MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
     licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+    recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateInput = {
@@ -20617,6 +24090,10 @@ export namespace Prisma {
     licitanteId?: string | null
     LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
     MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+    recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
   }
 
   export type UsuarioUpdateInput = {
@@ -20628,6 +24105,10 @@ export namespace Prisma {
     LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
     MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
     licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+    recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateInput = {
@@ -20639,6 +24120,10 @@ export namespace Prisma {
     licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
     LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
     MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+    recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
   }
 
   export type UsuarioCreateManyInput = {
@@ -20672,6 +24157,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -20682,6 +24168,8 @@ export namespace Prisma {
     documentos?: DocumentoCreateNestedManyWithoutEditalInput
     lotes?: LoteCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+    recursos?: RecursoCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateInput = {
@@ -20689,6 +24177,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -20699,6 +24188,8 @@ export namespace Prisma {
     documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUpdateInput = {
@@ -20706,6 +24197,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20716,6 +24208,8 @@ export namespace Prisma {
     documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateInput = {
@@ -20723,6 +24217,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20733,6 +24228,8 @@ export namespace Prisma {
     documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalCreateManyInput = {
@@ -20740,6 +24237,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -20752,6 +24250,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20764,6 +24263,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20880,6 +24380,8 @@ export namespace Prisma {
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateInput = {
@@ -20894,6 +24396,8 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUpdateInput = {
@@ -20908,6 +24412,8 @@ export namespace Prisma {
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateInput = {
@@ -20922,6 +24428,8 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteCreateManyInput = {
@@ -21837,6 +25345,250 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RecursoCreateInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutRecursosInput
+    licitante: LicitanteCreateNestedOneWithoutRecursosInput
+    enviadoPor: UsuarioCreateNestedOneWithoutRecursosEnviadosInput
+    respondidoPorUsuario?: UsuarioCreateNestedOneWithoutRecursosRespondidosInput
+  }
+
+  export type RecursoUncheckedCreateInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    editalId: string
+    licitanteId: string
+    usuarioId: string
+    respondidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecursoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutRecursosNestedInput
+    licitante?: LicitanteUpdateOneRequiredWithoutRecursosNestedInput
+    enviadoPor?: UsuarioUpdateOneRequiredWithoutRecursosEnviadosNestedInput
+    respondidoPorUsuario?: UsuarioUpdateOneWithoutRecursosRespondidosNestedInput
+  }
+
+  export type RecursoUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    respondidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecursoCreateManyInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    editalId: string
+    licitanteId: string
+    usuarioId: string
+    respondidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecursoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecursoUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    respondidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoCreateInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutSancaoInput
+    licitante: LicitanteCreateNestedOneWithoutSancaoInput
+    aplicadoPorUsuario: UsuarioCreateNestedOneWithoutSancaoAplicadaInput
+    revogadoPorUsuario?: UsuarioCreateNestedOneWithoutSancaoRevogadaInput
+  }
+
+  export type SancaoUncheckedCreateInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId: string
+    aplicadoPor: string
+    revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutSancaoNestedInput
+    licitante?: LicitanteUpdateOneRequiredWithoutSancaoNestedInput
+    aplicadoPorUsuario?: UsuarioUpdateOneRequiredWithoutSancaoAplicadaNestedInput
+    revogadoPorUsuario?: UsuarioUpdateOneWithoutSancaoRevogadaNestedInput
+  }
+
+  export type SancaoUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    aplicadoPor?: StringFieldUpdateOperationsInput | string
+    revogadoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoCreateManyInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId: string
+    aplicadoPor: string
+    revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    aplicadoPor?: StringFieldUpdateOperationsInput | string
+    revogadoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -21891,6 +25643,18 @@ export namespace Prisma {
     isNot?: LicitanteWhereInput | null
   }
 
+  export type RecursoListRelationFilter = {
+    every?: RecursoWhereInput
+    some?: RecursoWhereInput
+    none?: RecursoWhereInput
+  }
+
+  export type SancaoListRelationFilter = {
+    every?: SancaoWhereInput
+    some?: SancaoWhereInput
+    none?: SancaoWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -21901,6 +25665,14 @@ export namespace Prisma {
   }
 
   export type MensagemChatOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RecursoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SancaoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -21984,6 +25756,13 @@ export namespace Prisma {
     not?: NestedEnumModalidadeLicitaçãoFilter<$PrismaModel> | $Enums.ModalidadeLicitação
   }
 
+  export type EnumCritérioJulgamentoFilter<$PrismaModel = never> = {
+    equals?: $Enums.CritérioJulgamento | EnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    in?: $Enums.CritérioJulgamento[] | ListEnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CritérioJulgamento[] | ListEnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    not?: NestedEnumCritérioJulgamentoFilter<$PrismaModel> | $Enums.CritérioJulgamento
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -22040,6 +25819,7 @@ export namespace Prisma {
     numero?: SortOrder
     objeto?: SortOrder
     modalidade?: SortOrder
+    criterioJulgamento?: SortOrder
     status?: SortOrder
     dataAbertura?: SortOrder
     arquivoPdf?: SortOrder
@@ -22052,6 +25832,7 @@ export namespace Prisma {
     numero?: SortOrder
     objeto?: SortOrder
     modalidade?: SortOrder
+    criterioJulgamento?: SortOrder
     status?: SortOrder
     dataAbertura?: SortOrder
     arquivoPdf?: SortOrder
@@ -22064,6 +25845,7 @@ export namespace Prisma {
     numero?: SortOrder
     objeto?: SortOrder
     modalidade?: SortOrder
+    criterioJulgamento?: SortOrder
     status?: SortOrder
     dataAbertura?: SortOrder
     arquivoPdf?: SortOrder
@@ -22079,6 +25861,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumModalidadeLicitaçãoFilter<$PrismaModel>
     _max?: NestedEnumModalidadeLicitaçãoFilter<$PrismaModel>
+  }
+
+  export type EnumCritérioJulgamentoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CritérioJulgamento | EnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    in?: $Enums.CritérioJulgamento[] | ListEnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CritérioJulgamento[] | ListEnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    not?: NestedEnumCritérioJulgamentoWithAggregatesFilter<$PrismaModel> | $Enums.CritérioJulgamento
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCritérioJulgamentoFilter<$PrismaModel>
+    _max?: NestedEnumCritérioJulgamentoFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -22895,6 +26687,198 @@ export namespace Prisma {
     valorEstimado?: SortOrder
   }
 
+  export type EnumTipoRecursoFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoRecurso | EnumTipoRecursoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoRecurso[] | ListEnumTipoRecursoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoRecurso[] | ListEnumTipoRecursoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoRecursoFilter<$PrismaModel> | $Enums.TipoRecurso
+  }
+
+  export type EnumStatusRecursoFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusRecurso | EnumStatusRecursoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusRecurso[] | ListEnumStatusRecursoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusRecurso[] | ListEnumStatusRecursoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusRecursoFilter<$PrismaModel> | $Enums.StatusRecurso
+  }
+
+  export type RecursoCountOrderByAggregateInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    resposta?: SortOrder
+    dataEnvio?: SortOrder
+    dataResposta?: SortOrder
+    prazoResposta?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    usuarioId?: SortOrder
+    respondidoPor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecursoAvgOrderByAggregateInput = {
+    prazoResposta?: SortOrder
+  }
+
+  export type RecursoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    resposta?: SortOrder
+    dataEnvio?: SortOrder
+    dataResposta?: SortOrder
+    prazoResposta?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    usuarioId?: SortOrder
+    respondidoPor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecursoMinOrderByAggregateInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    resposta?: SortOrder
+    dataEnvio?: SortOrder
+    dataResposta?: SortOrder
+    prazoResposta?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    usuarioId?: SortOrder
+    respondidoPor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecursoSumOrderByAggregateInput = {
+    prazoResposta?: SortOrder
+  }
+
+  export type EnumTipoRecursoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoRecurso | EnumTipoRecursoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoRecurso[] | ListEnumTipoRecursoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoRecurso[] | ListEnumTipoRecursoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoRecursoWithAggregatesFilter<$PrismaModel> | $Enums.TipoRecurso
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTipoRecursoFilter<$PrismaModel>
+    _max?: NestedEnumTipoRecursoFilter<$PrismaModel>
+  }
+
+  export type EnumStatusRecursoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusRecurso | EnumStatusRecursoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusRecurso[] | ListEnumStatusRecursoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusRecurso[] | ListEnumStatusRecursoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusRecursoWithAggregatesFilter<$PrismaModel> | $Enums.StatusRecurso
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusRecursoFilter<$PrismaModel>
+    _max?: NestedEnumStatusRecursoFilter<$PrismaModel>
+  }
+
+  export type EnumTipoSancaoFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoSancao | EnumTipoSancaoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoSancao[] | ListEnumTipoSancaoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoSancao[] | ListEnumTipoSancaoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoSancaoFilter<$PrismaModel> | $Enums.TipoSancao
+  }
+
+  export type EnumStatusSancaoFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusSancao | EnumStatusSancaoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusSancao[] | ListEnumStatusSancaoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusSancao[] | ListEnumStatusSancaoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusSancaoFilter<$PrismaModel> | $Enums.StatusSancao
+  }
+
+  export type SancaoCountOrderByAggregateInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    valorMulta?: SortOrder
+    observacoes?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    aplicadoPor?: SortOrder
+    revogadoPor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SancaoAvgOrderByAggregateInput = {
+    valorMulta?: SortOrder
+  }
+
+  export type SancaoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    valorMulta?: SortOrder
+    observacoes?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    aplicadoPor?: SortOrder
+    revogadoPor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SancaoMinOrderByAggregateInput = {
+    id?: SortOrder
+    tipo?: SortOrder
+    status?: SortOrder
+    motivo?: SortOrder
+    fundamentacao?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    valorMulta?: SortOrder
+    observacoes?: SortOrder
+    editalId?: SortOrder
+    licitanteId?: SortOrder
+    aplicadoPor?: SortOrder
+    revogadoPor?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SancaoSumOrderByAggregateInput = {
+    valorMulta?: SortOrder
+  }
+
+  export type EnumTipoSancaoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoSancao | EnumTipoSancaoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoSancao[] | ListEnumTipoSancaoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoSancao[] | ListEnumTipoSancaoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoSancaoWithAggregatesFilter<$PrismaModel> | $Enums.TipoSancao
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTipoSancaoFilter<$PrismaModel>
+    _max?: NestedEnumTipoSancaoFilter<$PrismaModel>
+  }
+
+  export type EnumStatusSancaoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusSancao | EnumStatusSancaoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusSancao[] | ListEnumStatusSancaoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusSancao[] | ListEnumStatusSancaoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusSancaoWithAggregatesFilter<$PrismaModel> | $Enums.StatusSancao
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusSancaoFilter<$PrismaModel>
+    _max?: NestedEnumStatusSancaoFilter<$PrismaModel>
+  }
+
   export type LogAtividadeCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<LogAtividadeCreateWithoutUsuarioInput, LogAtividadeUncheckedCreateWithoutUsuarioInput> | LogAtividadeCreateWithoutUsuarioInput[] | LogAtividadeUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: LogAtividadeCreateOrConnectWithoutUsuarioInput | LogAtividadeCreateOrConnectWithoutUsuarioInput[]
@@ -22915,6 +26899,34 @@ export namespace Prisma {
     connect?: LicitanteWhereUniqueInput
   }
 
+  export type RecursoCreateNestedManyWithoutEnviadoPorInput = {
+    create?: XOR<RecursoCreateWithoutEnviadoPorInput, RecursoUncheckedCreateWithoutEnviadoPorInput> | RecursoCreateWithoutEnviadoPorInput[] | RecursoUncheckedCreateWithoutEnviadoPorInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutEnviadoPorInput | RecursoCreateOrConnectWithoutEnviadoPorInput[]
+    createMany?: RecursoCreateManyEnviadoPorInputEnvelope
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+  }
+
+  export type RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput = {
+    create?: XOR<RecursoCreateWithoutRespondidoPorUsuarioInput, RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput> | RecursoCreateWithoutRespondidoPorUsuarioInput[] | RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutRespondidoPorUsuarioInput | RecursoCreateOrConnectWithoutRespondidoPorUsuarioInput[]
+    createMany?: RecursoCreateManyRespondidoPorUsuarioInputEnvelope
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+  }
+
+  export type SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput = {
+    create?: XOR<SancaoCreateWithoutAplicadoPorUsuarioInput, SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput> | SancaoCreateWithoutAplicadoPorUsuarioInput[] | SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutAplicadoPorUsuarioInput | SancaoCreateOrConnectWithoutAplicadoPorUsuarioInput[]
+    createMany?: SancaoCreateManyAplicadoPorUsuarioInputEnvelope
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+  }
+
+  export type SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput = {
+    create?: XOR<SancaoCreateWithoutRevogadoPorUsuarioInput, SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput> | SancaoCreateWithoutRevogadoPorUsuarioInput[] | SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput | SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput[]
+    createMany?: SancaoCreateManyRevogadoPorUsuarioInputEnvelope
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+  }
+
   export type LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<LogAtividadeCreateWithoutUsuarioInput, LogAtividadeUncheckedCreateWithoutUsuarioInput> | LogAtividadeCreateWithoutUsuarioInput[] | LogAtividadeUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: LogAtividadeCreateOrConnectWithoutUsuarioInput | LogAtividadeCreateOrConnectWithoutUsuarioInput[]
@@ -22927,6 +26939,34 @@ export namespace Prisma {
     connectOrCreate?: MensagemChatCreateOrConnectWithoutAutorInput | MensagemChatCreateOrConnectWithoutAutorInput[]
     createMany?: MensagemChatCreateManyAutorInputEnvelope
     connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
+  }
+
+  export type RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput = {
+    create?: XOR<RecursoCreateWithoutEnviadoPorInput, RecursoUncheckedCreateWithoutEnviadoPorInput> | RecursoCreateWithoutEnviadoPorInput[] | RecursoUncheckedCreateWithoutEnviadoPorInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutEnviadoPorInput | RecursoCreateOrConnectWithoutEnviadoPorInput[]
+    createMany?: RecursoCreateManyEnviadoPorInputEnvelope
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+  }
+
+  export type RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput = {
+    create?: XOR<RecursoCreateWithoutRespondidoPorUsuarioInput, RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput> | RecursoCreateWithoutRespondidoPorUsuarioInput[] | RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutRespondidoPorUsuarioInput | RecursoCreateOrConnectWithoutRespondidoPorUsuarioInput[]
+    createMany?: RecursoCreateManyRespondidoPorUsuarioInputEnvelope
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+  }
+
+  export type SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput = {
+    create?: XOR<SancaoCreateWithoutAplicadoPorUsuarioInput, SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput> | SancaoCreateWithoutAplicadoPorUsuarioInput[] | SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutAplicadoPorUsuarioInput | SancaoCreateOrConnectWithoutAplicadoPorUsuarioInput[]
+    createMany?: SancaoCreateManyAplicadoPorUsuarioInputEnvelope
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+  }
+
+  export type SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput = {
+    create?: XOR<SancaoCreateWithoutRevogadoPorUsuarioInput, SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput> | SancaoCreateWithoutRevogadoPorUsuarioInput[] | SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput | SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput[]
+    createMany?: SancaoCreateManyRevogadoPorUsuarioInputEnvelope
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -22975,6 +27015,62 @@ export namespace Prisma {
     update?: XOR<XOR<LicitanteUpdateToOneWithWhereWithoutUsuarioInput, LicitanteUpdateWithoutUsuarioInput>, LicitanteUncheckedUpdateWithoutUsuarioInput>
   }
 
+  export type RecursoUpdateManyWithoutEnviadoPorNestedInput = {
+    create?: XOR<RecursoCreateWithoutEnviadoPorInput, RecursoUncheckedCreateWithoutEnviadoPorInput> | RecursoCreateWithoutEnviadoPorInput[] | RecursoUncheckedCreateWithoutEnviadoPorInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutEnviadoPorInput | RecursoCreateOrConnectWithoutEnviadoPorInput[]
+    upsert?: RecursoUpsertWithWhereUniqueWithoutEnviadoPorInput | RecursoUpsertWithWhereUniqueWithoutEnviadoPorInput[]
+    createMany?: RecursoCreateManyEnviadoPorInputEnvelope
+    set?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    disconnect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    delete?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    update?: RecursoUpdateWithWhereUniqueWithoutEnviadoPorInput | RecursoUpdateWithWhereUniqueWithoutEnviadoPorInput[]
+    updateMany?: RecursoUpdateManyWithWhereWithoutEnviadoPorInput | RecursoUpdateManyWithWhereWithoutEnviadoPorInput[]
+    deleteMany?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+  }
+
+  export type RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput = {
+    create?: XOR<RecursoCreateWithoutRespondidoPorUsuarioInput, RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput> | RecursoCreateWithoutRespondidoPorUsuarioInput[] | RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutRespondidoPorUsuarioInput | RecursoCreateOrConnectWithoutRespondidoPorUsuarioInput[]
+    upsert?: RecursoUpsertWithWhereUniqueWithoutRespondidoPorUsuarioInput | RecursoUpsertWithWhereUniqueWithoutRespondidoPorUsuarioInput[]
+    createMany?: RecursoCreateManyRespondidoPorUsuarioInputEnvelope
+    set?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    disconnect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    delete?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    update?: RecursoUpdateWithWhereUniqueWithoutRespondidoPorUsuarioInput | RecursoUpdateWithWhereUniqueWithoutRespondidoPorUsuarioInput[]
+    updateMany?: RecursoUpdateManyWithWhereWithoutRespondidoPorUsuarioInput | RecursoUpdateManyWithWhereWithoutRespondidoPorUsuarioInput[]
+    deleteMany?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+  }
+
+  export type SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput = {
+    create?: XOR<SancaoCreateWithoutAplicadoPorUsuarioInput, SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput> | SancaoCreateWithoutAplicadoPorUsuarioInput[] | SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutAplicadoPorUsuarioInput | SancaoCreateOrConnectWithoutAplicadoPorUsuarioInput[]
+    upsert?: SancaoUpsertWithWhereUniqueWithoutAplicadoPorUsuarioInput | SancaoUpsertWithWhereUniqueWithoutAplicadoPorUsuarioInput[]
+    createMany?: SancaoCreateManyAplicadoPorUsuarioInputEnvelope
+    set?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    disconnect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    delete?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    update?: SancaoUpdateWithWhereUniqueWithoutAplicadoPorUsuarioInput | SancaoUpdateWithWhereUniqueWithoutAplicadoPorUsuarioInput[]
+    updateMany?: SancaoUpdateManyWithWhereWithoutAplicadoPorUsuarioInput | SancaoUpdateManyWithWhereWithoutAplicadoPorUsuarioInput[]
+    deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
+  }
+
+  export type SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput = {
+    create?: XOR<SancaoCreateWithoutRevogadoPorUsuarioInput, SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput> | SancaoCreateWithoutRevogadoPorUsuarioInput[] | SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput | SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput[]
+    upsert?: SancaoUpsertWithWhereUniqueWithoutRevogadoPorUsuarioInput | SancaoUpsertWithWhereUniqueWithoutRevogadoPorUsuarioInput[]
+    createMany?: SancaoCreateManyRevogadoPorUsuarioInputEnvelope
+    set?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    disconnect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    delete?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    update?: SancaoUpdateWithWhereUniqueWithoutRevogadoPorUsuarioInput | SancaoUpdateWithWhereUniqueWithoutRevogadoPorUsuarioInput[]
+    updateMany?: SancaoUpdateManyWithWhereWithoutRevogadoPorUsuarioInput | SancaoUpdateManyWithWhereWithoutRevogadoPorUsuarioInput[]
+    deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -23005,6 +27101,62 @@ export namespace Prisma {
     update?: MensagemChatUpdateWithWhereUniqueWithoutAutorInput | MensagemChatUpdateWithWhereUniqueWithoutAutorInput[]
     updateMany?: MensagemChatUpdateManyWithWhereWithoutAutorInput | MensagemChatUpdateManyWithWhereWithoutAutorInput[]
     deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
+  }
+
+  export type RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput = {
+    create?: XOR<RecursoCreateWithoutEnviadoPorInput, RecursoUncheckedCreateWithoutEnviadoPorInput> | RecursoCreateWithoutEnviadoPorInput[] | RecursoUncheckedCreateWithoutEnviadoPorInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutEnviadoPorInput | RecursoCreateOrConnectWithoutEnviadoPorInput[]
+    upsert?: RecursoUpsertWithWhereUniqueWithoutEnviadoPorInput | RecursoUpsertWithWhereUniqueWithoutEnviadoPorInput[]
+    createMany?: RecursoCreateManyEnviadoPorInputEnvelope
+    set?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    disconnect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    delete?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    update?: RecursoUpdateWithWhereUniqueWithoutEnviadoPorInput | RecursoUpdateWithWhereUniqueWithoutEnviadoPorInput[]
+    updateMany?: RecursoUpdateManyWithWhereWithoutEnviadoPorInput | RecursoUpdateManyWithWhereWithoutEnviadoPorInput[]
+    deleteMany?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+  }
+
+  export type RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput = {
+    create?: XOR<RecursoCreateWithoutRespondidoPorUsuarioInput, RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput> | RecursoCreateWithoutRespondidoPorUsuarioInput[] | RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutRespondidoPorUsuarioInput | RecursoCreateOrConnectWithoutRespondidoPorUsuarioInput[]
+    upsert?: RecursoUpsertWithWhereUniqueWithoutRespondidoPorUsuarioInput | RecursoUpsertWithWhereUniqueWithoutRespondidoPorUsuarioInput[]
+    createMany?: RecursoCreateManyRespondidoPorUsuarioInputEnvelope
+    set?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    disconnect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    delete?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    update?: RecursoUpdateWithWhereUniqueWithoutRespondidoPorUsuarioInput | RecursoUpdateWithWhereUniqueWithoutRespondidoPorUsuarioInput[]
+    updateMany?: RecursoUpdateManyWithWhereWithoutRespondidoPorUsuarioInput | RecursoUpdateManyWithWhereWithoutRespondidoPorUsuarioInput[]
+    deleteMany?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+  }
+
+  export type SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput = {
+    create?: XOR<SancaoCreateWithoutAplicadoPorUsuarioInput, SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput> | SancaoCreateWithoutAplicadoPorUsuarioInput[] | SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutAplicadoPorUsuarioInput | SancaoCreateOrConnectWithoutAplicadoPorUsuarioInput[]
+    upsert?: SancaoUpsertWithWhereUniqueWithoutAplicadoPorUsuarioInput | SancaoUpsertWithWhereUniqueWithoutAplicadoPorUsuarioInput[]
+    createMany?: SancaoCreateManyAplicadoPorUsuarioInputEnvelope
+    set?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    disconnect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    delete?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    update?: SancaoUpdateWithWhereUniqueWithoutAplicadoPorUsuarioInput | SancaoUpdateWithWhereUniqueWithoutAplicadoPorUsuarioInput[]
+    updateMany?: SancaoUpdateManyWithWhereWithoutAplicadoPorUsuarioInput | SancaoUpdateManyWithWhereWithoutAplicadoPorUsuarioInput[]
+    deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
+  }
+
+  export type SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput = {
+    create?: XOR<SancaoCreateWithoutRevogadoPorUsuarioInput, SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput> | SancaoCreateWithoutRevogadoPorUsuarioInput[] | SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput | SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput[]
+    upsert?: SancaoUpsertWithWhereUniqueWithoutRevogadoPorUsuarioInput | SancaoUpsertWithWhereUniqueWithoutRevogadoPorUsuarioInput[]
+    createMany?: SancaoCreateManyRevogadoPorUsuarioInputEnvelope
+    set?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    disconnect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    delete?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    update?: SancaoUpdateWithWhereUniqueWithoutRevogadoPorUsuarioInput | SancaoUpdateWithWhereUniqueWithoutRevogadoPorUsuarioInput[]
+    updateMany?: SancaoUpdateManyWithWhereWithoutRevogadoPorUsuarioInput | SancaoUpdateManyWithWhereWithoutRevogadoPorUsuarioInput[]
+    deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
   }
 
   export type DisputaCreateNestedManyWithoutEditalInput = {
@@ -23042,6 +27194,20 @@ export namespace Prisma {
     connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
   }
 
+  export type RecursoCreateNestedManyWithoutEditalInput = {
+    create?: XOR<RecursoCreateWithoutEditalInput, RecursoUncheckedCreateWithoutEditalInput> | RecursoCreateWithoutEditalInput[] | RecursoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutEditalInput | RecursoCreateOrConnectWithoutEditalInput[]
+    createMany?: RecursoCreateManyEditalInputEnvelope
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+  }
+
+  export type SancaoCreateNestedManyWithoutEditalInput = {
+    create?: XOR<SancaoCreateWithoutEditalInput, SancaoUncheckedCreateWithoutEditalInput> | SancaoCreateWithoutEditalInput[] | SancaoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutEditalInput | SancaoCreateOrConnectWithoutEditalInput[]
+    createMany?: SancaoCreateManyEditalInputEnvelope
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+  }
+
   export type DisputaUncheckedCreateNestedManyWithoutEditalInput = {
     create?: XOR<DisputaCreateWithoutEditalInput, DisputaUncheckedCreateWithoutEditalInput> | DisputaCreateWithoutEditalInput[] | DisputaUncheckedCreateWithoutEditalInput[]
     connectOrCreate?: DisputaCreateOrConnectWithoutEditalInput | DisputaCreateOrConnectWithoutEditalInput[]
@@ -23077,8 +27243,26 @@ export namespace Prisma {
     connect?: MensagemChatWhereUniqueInput | MensagemChatWhereUniqueInput[]
   }
 
+  export type RecursoUncheckedCreateNestedManyWithoutEditalInput = {
+    create?: XOR<RecursoCreateWithoutEditalInput, RecursoUncheckedCreateWithoutEditalInput> | RecursoCreateWithoutEditalInput[] | RecursoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutEditalInput | RecursoCreateOrConnectWithoutEditalInput[]
+    createMany?: RecursoCreateManyEditalInputEnvelope
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+  }
+
+  export type SancaoUncheckedCreateNestedManyWithoutEditalInput = {
+    create?: XOR<SancaoCreateWithoutEditalInput, SancaoUncheckedCreateWithoutEditalInput> | SancaoCreateWithoutEditalInput[] | SancaoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutEditalInput | SancaoCreateOrConnectWithoutEditalInput[]
+    createMany?: SancaoCreateManyEditalInputEnvelope
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+  }
+
   export type EnumModalidadeLicitaçãoFieldUpdateOperationsInput = {
     set?: $Enums.ModalidadeLicitação
+  }
+
+  export type EnumCritérioJulgamentoFieldUpdateOperationsInput = {
+    set?: $Enums.CritérioJulgamento
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -23155,6 +27339,34 @@ export namespace Prisma {
     deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
   }
 
+  export type RecursoUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<RecursoCreateWithoutEditalInput, RecursoUncheckedCreateWithoutEditalInput> | RecursoCreateWithoutEditalInput[] | RecursoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutEditalInput | RecursoCreateOrConnectWithoutEditalInput[]
+    upsert?: RecursoUpsertWithWhereUniqueWithoutEditalInput | RecursoUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: RecursoCreateManyEditalInputEnvelope
+    set?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    disconnect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    delete?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    update?: RecursoUpdateWithWhereUniqueWithoutEditalInput | RecursoUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: RecursoUpdateManyWithWhereWithoutEditalInput | RecursoUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+  }
+
+  export type SancaoUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<SancaoCreateWithoutEditalInput, SancaoUncheckedCreateWithoutEditalInput> | SancaoCreateWithoutEditalInput[] | SancaoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutEditalInput | SancaoCreateOrConnectWithoutEditalInput[]
+    upsert?: SancaoUpsertWithWhereUniqueWithoutEditalInput | SancaoUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: SancaoCreateManyEditalInputEnvelope
+    set?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    disconnect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    delete?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    update?: SancaoUpdateWithWhereUniqueWithoutEditalInput | SancaoUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: SancaoUpdateManyWithWhereWithoutEditalInput | SancaoUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
+  }
+
   export type DisputaUncheckedUpdateManyWithoutEditalNestedInput = {
     create?: XOR<DisputaCreateWithoutEditalInput, DisputaUncheckedCreateWithoutEditalInput> | DisputaCreateWithoutEditalInput[] | DisputaUncheckedCreateWithoutEditalInput[]
     connectOrCreate?: DisputaCreateOrConnectWithoutEditalInput | DisputaCreateOrConnectWithoutEditalInput[]
@@ -23223,6 +27435,34 @@ export namespace Prisma {
     update?: MensagemChatUpdateWithWhereUniqueWithoutEditalInput | MensagemChatUpdateWithWhereUniqueWithoutEditalInput[]
     updateMany?: MensagemChatUpdateManyWithWhereWithoutEditalInput | MensagemChatUpdateManyWithWhereWithoutEditalInput[]
     deleteMany?: MensagemChatScalarWhereInput | MensagemChatScalarWhereInput[]
+  }
+
+  export type RecursoUncheckedUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<RecursoCreateWithoutEditalInput, RecursoUncheckedCreateWithoutEditalInput> | RecursoCreateWithoutEditalInput[] | RecursoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutEditalInput | RecursoCreateOrConnectWithoutEditalInput[]
+    upsert?: RecursoUpsertWithWhereUniqueWithoutEditalInput | RecursoUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: RecursoCreateManyEditalInputEnvelope
+    set?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    disconnect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    delete?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    update?: RecursoUpdateWithWhereUniqueWithoutEditalInput | RecursoUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: RecursoUpdateManyWithWhereWithoutEditalInput | RecursoUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+  }
+
+  export type SancaoUncheckedUpdateManyWithoutEditalNestedInput = {
+    create?: XOR<SancaoCreateWithoutEditalInput, SancaoUncheckedCreateWithoutEditalInput> | SancaoCreateWithoutEditalInput[] | SancaoUncheckedCreateWithoutEditalInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutEditalInput | SancaoCreateOrConnectWithoutEditalInput[]
+    upsert?: SancaoUpsertWithWhereUniqueWithoutEditalInput | SancaoUpsertWithWhereUniqueWithoutEditalInput[]
+    createMany?: SancaoCreateManyEditalInputEnvelope
+    set?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    disconnect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    delete?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    update?: SancaoUpdateWithWhereUniqueWithoutEditalInput | SancaoUpdateWithWhereUniqueWithoutEditalInput[]
+    updateMany?: SancaoUpdateManyWithWhereWithoutEditalInput | SancaoUpdateManyWithWhereWithoutEditalInput[]
+    deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
   }
 
   export type EditalCreateNestedOneWithoutDisputasInput = {
@@ -23592,6 +27832,20 @@ export namespace Prisma {
     connect?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
   }
 
+  export type RecursoCreateNestedManyWithoutLicitanteInput = {
+    create?: XOR<RecursoCreateWithoutLicitanteInput, RecursoUncheckedCreateWithoutLicitanteInput> | RecursoCreateWithoutLicitanteInput[] | RecursoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutLicitanteInput | RecursoCreateOrConnectWithoutLicitanteInput[]
+    createMany?: RecursoCreateManyLicitanteInputEnvelope
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+  }
+
+  export type SancaoCreateNestedManyWithoutLicitanteInput = {
+    create?: XOR<SancaoCreateWithoutLicitanteInput, SancaoUncheckedCreateWithoutLicitanteInput> | SancaoCreateWithoutLicitanteInput[] | SancaoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutLicitanteInput | SancaoCreateOrConnectWithoutLicitanteInput[]
+    createMany?: SancaoCreateManyLicitanteInputEnvelope
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+  }
+
   export type UsuarioUncheckedCreateNestedOneWithoutLicitanteInput = {
     create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
     connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
@@ -23637,6 +27891,20 @@ export namespace Prisma {
     create?: XOR<DisputaCreateWithoutLicitantesInput, DisputaUncheckedCreateWithoutLicitantesInput> | DisputaCreateWithoutLicitantesInput[] | DisputaUncheckedCreateWithoutLicitantesInput[]
     connectOrCreate?: DisputaCreateOrConnectWithoutLicitantesInput | DisputaCreateOrConnectWithoutLicitantesInput[]
     connect?: DisputaWhereUniqueInput | DisputaWhereUniqueInput[]
+  }
+
+  export type RecursoUncheckedCreateNestedManyWithoutLicitanteInput = {
+    create?: XOR<RecursoCreateWithoutLicitanteInput, RecursoUncheckedCreateWithoutLicitanteInput> | RecursoCreateWithoutLicitanteInput[] | RecursoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutLicitanteInput | RecursoCreateOrConnectWithoutLicitanteInput[]
+    createMany?: RecursoCreateManyLicitanteInputEnvelope
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+  }
+
+  export type SancaoUncheckedCreateNestedManyWithoutLicitanteInput = {
+    create?: XOR<SancaoCreateWithoutLicitanteInput, SancaoUncheckedCreateWithoutLicitanteInput> | SancaoCreateWithoutLicitanteInput[] | SancaoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutLicitanteInput | SancaoCreateOrConnectWithoutLicitanteInput[]
+    createMany?: SancaoCreateManyLicitanteInputEnvelope
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
   }
 
   export type EnumTipoEmpresaFieldUpdateOperationsInput = {
@@ -23736,6 +28004,34 @@ export namespace Prisma {
     deleteMany?: DisputaScalarWhereInput | DisputaScalarWhereInput[]
   }
 
+  export type RecursoUpdateManyWithoutLicitanteNestedInput = {
+    create?: XOR<RecursoCreateWithoutLicitanteInput, RecursoUncheckedCreateWithoutLicitanteInput> | RecursoCreateWithoutLicitanteInput[] | RecursoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutLicitanteInput | RecursoCreateOrConnectWithoutLicitanteInput[]
+    upsert?: RecursoUpsertWithWhereUniqueWithoutLicitanteInput | RecursoUpsertWithWhereUniqueWithoutLicitanteInput[]
+    createMany?: RecursoCreateManyLicitanteInputEnvelope
+    set?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    disconnect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    delete?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    update?: RecursoUpdateWithWhereUniqueWithoutLicitanteInput | RecursoUpdateWithWhereUniqueWithoutLicitanteInput[]
+    updateMany?: RecursoUpdateManyWithWhereWithoutLicitanteInput | RecursoUpdateManyWithWhereWithoutLicitanteInput[]
+    deleteMany?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+  }
+
+  export type SancaoUpdateManyWithoutLicitanteNestedInput = {
+    create?: XOR<SancaoCreateWithoutLicitanteInput, SancaoUncheckedCreateWithoutLicitanteInput> | SancaoCreateWithoutLicitanteInput[] | SancaoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutLicitanteInput | SancaoCreateOrConnectWithoutLicitanteInput[]
+    upsert?: SancaoUpsertWithWhereUniqueWithoutLicitanteInput | SancaoUpsertWithWhereUniqueWithoutLicitanteInput[]
+    createMany?: SancaoCreateManyLicitanteInputEnvelope
+    set?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    disconnect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    delete?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    update?: SancaoUpdateWithWhereUniqueWithoutLicitanteInput | SancaoUpdateWithWhereUniqueWithoutLicitanteInput[]
+    updateMany?: SancaoUpdateManyWithWhereWithoutLicitanteInput | SancaoUpdateManyWithWhereWithoutLicitanteInput[]
+    deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
+  }
+
   export type UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput = {
     create?: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
     connectOrCreate?: UsuarioCreateOrConnectWithoutLicitanteInput
@@ -23827,6 +28123,34 @@ export namespace Prisma {
     update?: DisputaUpdateWithWhereUniqueWithoutLicitantesInput | DisputaUpdateWithWhereUniqueWithoutLicitantesInput[]
     updateMany?: DisputaUpdateManyWithWhereWithoutLicitantesInput | DisputaUpdateManyWithWhereWithoutLicitantesInput[]
     deleteMany?: DisputaScalarWhereInput | DisputaScalarWhereInput[]
+  }
+
+  export type RecursoUncheckedUpdateManyWithoutLicitanteNestedInput = {
+    create?: XOR<RecursoCreateWithoutLicitanteInput, RecursoUncheckedCreateWithoutLicitanteInput> | RecursoCreateWithoutLicitanteInput[] | RecursoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: RecursoCreateOrConnectWithoutLicitanteInput | RecursoCreateOrConnectWithoutLicitanteInput[]
+    upsert?: RecursoUpsertWithWhereUniqueWithoutLicitanteInput | RecursoUpsertWithWhereUniqueWithoutLicitanteInput[]
+    createMany?: RecursoCreateManyLicitanteInputEnvelope
+    set?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    disconnect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    delete?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    connect?: RecursoWhereUniqueInput | RecursoWhereUniqueInput[]
+    update?: RecursoUpdateWithWhereUniqueWithoutLicitanteInput | RecursoUpdateWithWhereUniqueWithoutLicitanteInput[]
+    updateMany?: RecursoUpdateManyWithWhereWithoutLicitanteInput | RecursoUpdateManyWithWhereWithoutLicitanteInput[]
+    deleteMany?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+  }
+
+  export type SancaoUncheckedUpdateManyWithoutLicitanteNestedInput = {
+    create?: XOR<SancaoCreateWithoutLicitanteInput, SancaoUncheckedCreateWithoutLicitanteInput> | SancaoCreateWithoutLicitanteInput[] | SancaoUncheckedCreateWithoutLicitanteInput[]
+    connectOrCreate?: SancaoCreateOrConnectWithoutLicitanteInput | SancaoCreateOrConnectWithoutLicitanteInput[]
+    upsert?: SancaoUpsertWithWhereUniqueWithoutLicitanteInput | SancaoUpsertWithWhereUniqueWithoutLicitanteInput[]
+    createMany?: SancaoCreateManyLicitanteInputEnvelope
+    set?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    disconnect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    delete?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    connect?: SancaoWhereUniqueInput | SancaoWhereUniqueInput[]
+    update?: SancaoUpdateWithWhereUniqueWithoutLicitanteInput | SancaoUpdateWithWhereUniqueWithoutLicitanteInput[]
+    updateMany?: SancaoUpdateManyWithWhereWithoutLicitanteInput | SancaoUpdateManyWithWhereWithoutLicitanteInput[]
+    deleteMany?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
   }
 
   export type DisputaCreateNestedOneWithoutPropostasInput = {
@@ -24213,6 +28537,138 @@ export namespace Prisma {
     deleteMany?: PropostaScalarWhereInput | PropostaScalarWhereInput[]
   }
 
+  export type EditalCreateNestedOneWithoutRecursosInput = {
+    create?: XOR<EditalCreateWithoutRecursosInput, EditalUncheckedCreateWithoutRecursosInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutRecursosInput
+    connect?: EditalWhereUniqueInput
+  }
+
+  export type LicitanteCreateNestedOneWithoutRecursosInput = {
+    create?: XOR<LicitanteCreateWithoutRecursosInput, LicitanteUncheckedCreateWithoutRecursosInput>
+    connectOrCreate?: LicitanteCreateOrConnectWithoutRecursosInput
+    connect?: LicitanteWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutRecursosEnviadosInput = {
+    create?: XOR<UsuarioCreateWithoutRecursosEnviadosInput, UsuarioUncheckedCreateWithoutRecursosEnviadosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutRecursosEnviadosInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutRecursosRespondidosInput = {
+    create?: XOR<UsuarioCreateWithoutRecursosRespondidosInput, UsuarioUncheckedCreateWithoutRecursosRespondidosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutRecursosRespondidosInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type EnumTipoRecursoFieldUpdateOperationsInput = {
+    set?: $Enums.TipoRecurso
+  }
+
+  export type EnumStatusRecursoFieldUpdateOperationsInput = {
+    set?: $Enums.StatusRecurso
+  }
+
+  export type EditalUpdateOneRequiredWithoutRecursosNestedInput = {
+    create?: XOR<EditalCreateWithoutRecursosInput, EditalUncheckedCreateWithoutRecursosInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutRecursosInput
+    upsert?: EditalUpsertWithoutRecursosInput
+    connect?: EditalWhereUniqueInput
+    update?: XOR<XOR<EditalUpdateToOneWithWhereWithoutRecursosInput, EditalUpdateWithoutRecursosInput>, EditalUncheckedUpdateWithoutRecursosInput>
+  }
+
+  export type LicitanteUpdateOneRequiredWithoutRecursosNestedInput = {
+    create?: XOR<LicitanteCreateWithoutRecursosInput, LicitanteUncheckedCreateWithoutRecursosInput>
+    connectOrCreate?: LicitanteCreateOrConnectWithoutRecursosInput
+    upsert?: LicitanteUpsertWithoutRecursosInput
+    connect?: LicitanteWhereUniqueInput
+    update?: XOR<XOR<LicitanteUpdateToOneWithWhereWithoutRecursosInput, LicitanteUpdateWithoutRecursosInput>, LicitanteUncheckedUpdateWithoutRecursosInput>
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutRecursosEnviadosNestedInput = {
+    create?: XOR<UsuarioCreateWithoutRecursosEnviadosInput, UsuarioUncheckedCreateWithoutRecursosEnviadosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutRecursosEnviadosInput
+    upsert?: UsuarioUpsertWithoutRecursosEnviadosInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutRecursosEnviadosInput, UsuarioUpdateWithoutRecursosEnviadosInput>, UsuarioUncheckedUpdateWithoutRecursosEnviadosInput>
+  }
+
+  export type UsuarioUpdateOneWithoutRecursosRespondidosNestedInput = {
+    create?: XOR<UsuarioCreateWithoutRecursosRespondidosInput, UsuarioUncheckedCreateWithoutRecursosRespondidosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutRecursosRespondidosInput
+    upsert?: UsuarioUpsertWithoutRecursosRespondidosInput
+    disconnect?: UsuarioWhereInput | boolean
+    delete?: UsuarioWhereInput | boolean
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutRecursosRespondidosInput, UsuarioUpdateWithoutRecursosRespondidosInput>, UsuarioUncheckedUpdateWithoutRecursosRespondidosInput>
+  }
+
+  export type EditalCreateNestedOneWithoutSancaoInput = {
+    create?: XOR<EditalCreateWithoutSancaoInput, EditalUncheckedCreateWithoutSancaoInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutSancaoInput
+    connect?: EditalWhereUniqueInput
+  }
+
+  export type LicitanteCreateNestedOneWithoutSancaoInput = {
+    create?: XOR<LicitanteCreateWithoutSancaoInput, LicitanteUncheckedCreateWithoutSancaoInput>
+    connectOrCreate?: LicitanteCreateOrConnectWithoutSancaoInput
+    connect?: LicitanteWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutSancaoAplicadaInput = {
+    create?: XOR<UsuarioCreateWithoutSancaoAplicadaInput, UsuarioUncheckedCreateWithoutSancaoAplicadaInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutSancaoAplicadaInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutSancaoRevogadaInput = {
+    create?: XOR<UsuarioCreateWithoutSancaoRevogadaInput, UsuarioUncheckedCreateWithoutSancaoRevogadaInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutSancaoRevogadaInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type EnumTipoSancaoFieldUpdateOperationsInput = {
+    set?: $Enums.TipoSancao
+  }
+
+  export type EnumStatusSancaoFieldUpdateOperationsInput = {
+    set?: $Enums.StatusSancao
+  }
+
+  export type EditalUpdateOneRequiredWithoutSancaoNestedInput = {
+    create?: XOR<EditalCreateWithoutSancaoInput, EditalUncheckedCreateWithoutSancaoInput>
+    connectOrCreate?: EditalCreateOrConnectWithoutSancaoInput
+    upsert?: EditalUpsertWithoutSancaoInput
+    connect?: EditalWhereUniqueInput
+    update?: XOR<XOR<EditalUpdateToOneWithWhereWithoutSancaoInput, EditalUpdateWithoutSancaoInput>, EditalUncheckedUpdateWithoutSancaoInput>
+  }
+
+  export type LicitanteUpdateOneRequiredWithoutSancaoNestedInput = {
+    create?: XOR<LicitanteCreateWithoutSancaoInput, LicitanteUncheckedCreateWithoutSancaoInput>
+    connectOrCreate?: LicitanteCreateOrConnectWithoutSancaoInput
+    upsert?: LicitanteUpsertWithoutSancaoInput
+    connect?: LicitanteWhereUniqueInput
+    update?: XOR<XOR<LicitanteUpdateToOneWithWhereWithoutSancaoInput, LicitanteUpdateWithoutSancaoInput>, LicitanteUncheckedUpdateWithoutSancaoInput>
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutSancaoAplicadaNestedInput = {
+    create?: XOR<UsuarioCreateWithoutSancaoAplicadaInput, UsuarioUncheckedCreateWithoutSancaoAplicadaInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutSancaoAplicadaInput
+    upsert?: UsuarioUpsertWithoutSancaoAplicadaInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutSancaoAplicadaInput, UsuarioUpdateWithoutSancaoAplicadaInput>, UsuarioUncheckedUpdateWithoutSancaoAplicadaInput>
+  }
+
+  export type UsuarioUpdateOneWithoutSancaoRevogadaNestedInput = {
+    create?: XOR<UsuarioCreateWithoutSancaoRevogadaInput, UsuarioUncheckedCreateWithoutSancaoRevogadaInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutSancaoRevogadaInput
+    upsert?: UsuarioUpsertWithoutSancaoRevogadaInput
+    disconnect?: UsuarioWhereInput | boolean
+    delete?: UsuarioWhereInput | boolean
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutSancaoRevogadaInput, UsuarioUpdateWithoutSancaoRevogadaInput>, UsuarioUncheckedUpdateWithoutSancaoRevogadaInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -24321,6 +28777,13 @@ export namespace Prisma {
     not?: NestedEnumModalidadeLicitaçãoFilter<$PrismaModel> | $Enums.ModalidadeLicitação
   }
 
+  export type NestedEnumCritérioJulgamentoFilter<$PrismaModel = never> = {
+    equals?: $Enums.CritérioJulgamento | EnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    in?: $Enums.CritérioJulgamento[] | ListEnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CritérioJulgamento[] | ListEnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    not?: NestedEnumCritérioJulgamentoFilter<$PrismaModel> | $Enums.CritérioJulgamento
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -24340,6 +28803,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumModalidadeLicitaçãoFilter<$PrismaModel>
     _max?: NestedEnumModalidadeLicitaçãoFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCritérioJulgamentoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CritérioJulgamento | EnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    in?: $Enums.CritérioJulgamento[] | ListEnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CritérioJulgamento[] | ListEnumCritérioJulgamentoFieldRefInput<$PrismaModel>
+    not?: NestedEnumCritérioJulgamentoWithAggregatesFilter<$PrismaModel> | $Enums.CritérioJulgamento
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCritérioJulgamentoFilter<$PrismaModel>
+    _max?: NestedEnumCritérioJulgamentoFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -24550,6 +29023,74 @@ export namespace Prisma {
     _max?: NestedEnumTipoAutorMensagemFilter<$PrismaModel>
   }
 
+  export type NestedEnumTipoRecursoFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoRecurso | EnumTipoRecursoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoRecurso[] | ListEnumTipoRecursoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoRecurso[] | ListEnumTipoRecursoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoRecursoFilter<$PrismaModel> | $Enums.TipoRecurso
+  }
+
+  export type NestedEnumStatusRecursoFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusRecurso | EnumStatusRecursoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusRecurso[] | ListEnumStatusRecursoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusRecurso[] | ListEnumStatusRecursoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusRecursoFilter<$PrismaModel> | $Enums.StatusRecurso
+  }
+
+  export type NestedEnumTipoRecursoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoRecurso | EnumTipoRecursoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoRecurso[] | ListEnumTipoRecursoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoRecurso[] | ListEnumTipoRecursoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoRecursoWithAggregatesFilter<$PrismaModel> | $Enums.TipoRecurso
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTipoRecursoFilter<$PrismaModel>
+    _max?: NestedEnumTipoRecursoFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusRecursoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusRecurso | EnumStatusRecursoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusRecurso[] | ListEnumStatusRecursoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusRecurso[] | ListEnumStatusRecursoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusRecursoWithAggregatesFilter<$PrismaModel> | $Enums.StatusRecurso
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusRecursoFilter<$PrismaModel>
+    _max?: NestedEnumStatusRecursoFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTipoSancaoFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoSancao | EnumTipoSancaoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoSancao[] | ListEnumTipoSancaoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoSancao[] | ListEnumTipoSancaoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoSancaoFilter<$PrismaModel> | $Enums.TipoSancao
+  }
+
+  export type NestedEnumStatusSancaoFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusSancao | EnumStatusSancaoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusSancao[] | ListEnumStatusSancaoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusSancao[] | ListEnumStatusSancaoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusSancaoFilter<$PrismaModel> | $Enums.StatusSancao
+  }
+
+  export type NestedEnumTipoSancaoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoSancao | EnumTipoSancaoFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoSancao[] | ListEnumTipoSancaoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoSancao[] | ListEnumTipoSancaoFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoSancaoWithAggregatesFilter<$PrismaModel> | $Enums.TipoSancao
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTipoSancaoFilter<$PrismaModel>
+    _max?: NestedEnumTipoSancaoFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusSancaoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusSancao | EnumStatusSancaoFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusSancao[] | ListEnumStatusSancaoFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusSancao[] | ListEnumStatusSancaoFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusSancaoWithAggregatesFilter<$PrismaModel> | $Enums.StatusSancao
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusSancaoFilter<$PrismaModel>
+    _max?: NestedEnumStatusSancaoFilter<$PrismaModel>
+  }
+
   export type LogAtividadeCreateWithoutUsuarioInput = {
     id?: string
     acao: string
@@ -24623,6 +29164,8 @@ export namespace Prisma {
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutUsuarioInput = {
@@ -24636,11 +29179,189 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutUsuarioInput = {
     where: LicitanteWhereUniqueInput
     create: XOR<LicitanteCreateWithoutUsuarioInput, LicitanteUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type RecursoCreateWithoutEnviadoPorInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutRecursosInput
+    licitante: LicitanteCreateNestedOneWithoutRecursosInput
+    respondidoPorUsuario?: UsuarioCreateNestedOneWithoutRecursosRespondidosInput
+  }
+
+  export type RecursoUncheckedCreateWithoutEnviadoPorInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    editalId: string
+    licitanteId: string
+    respondidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecursoCreateOrConnectWithoutEnviadoPorInput = {
+    where: RecursoWhereUniqueInput
+    create: XOR<RecursoCreateWithoutEnviadoPorInput, RecursoUncheckedCreateWithoutEnviadoPorInput>
+  }
+
+  export type RecursoCreateManyEnviadoPorInputEnvelope = {
+    data: RecursoCreateManyEnviadoPorInput | RecursoCreateManyEnviadoPorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RecursoCreateWithoutRespondidoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutRecursosInput
+    licitante: LicitanteCreateNestedOneWithoutRecursosInput
+    enviadoPor: UsuarioCreateNestedOneWithoutRecursosEnviadosInput
+  }
+
+  export type RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    editalId: string
+    licitanteId: string
+    usuarioId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecursoCreateOrConnectWithoutRespondidoPorUsuarioInput = {
+    where: RecursoWhereUniqueInput
+    create: XOR<RecursoCreateWithoutRespondidoPorUsuarioInput, RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput>
+  }
+
+  export type RecursoCreateManyRespondidoPorUsuarioInputEnvelope = {
+    data: RecursoCreateManyRespondidoPorUsuarioInput | RecursoCreateManyRespondidoPorUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SancaoCreateWithoutAplicadoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutSancaoInput
+    licitante: LicitanteCreateNestedOneWithoutSancaoInput
+    revogadoPorUsuario?: UsuarioCreateNestedOneWithoutSancaoRevogadaInput
+  }
+
+  export type SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId: string
+    revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoCreateOrConnectWithoutAplicadoPorUsuarioInput = {
+    where: SancaoWhereUniqueInput
+    create: XOR<SancaoCreateWithoutAplicadoPorUsuarioInput, SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput>
+  }
+
+  export type SancaoCreateManyAplicadoPorUsuarioInputEnvelope = {
+    data: SancaoCreateManyAplicadoPorUsuarioInput | SancaoCreateManyAplicadoPorUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SancaoCreateWithoutRevogadoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutSancaoInput
+    licitante: LicitanteCreateNestedOneWithoutSancaoInput
+    aplicadoPorUsuario: UsuarioCreateNestedOneWithoutSancaoAplicadaInput
+  }
+
+  export type SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId: string
+    aplicadoPor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoCreateOrConnectWithoutRevogadoPorUsuarioInput = {
+    where: SancaoWhereUniqueInput
+    create: XOR<SancaoCreateWithoutRevogadoPorUsuarioInput, SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput>
+  }
+
+  export type SancaoCreateManyRevogadoPorUsuarioInputEnvelope = {
+    data: SancaoCreateManyRevogadoPorUsuarioInput | SancaoCreateManyRevogadoPorUsuarioInput[]
+    skipDuplicates?: boolean
   }
 
   export type LogAtividadeUpsertWithWhereUniqueWithoutUsuarioInput = {
@@ -24726,6 +29447,8 @@ export namespace Prisma {
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutUsuarioInput = {
@@ -24739,6 +29462,114 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type RecursoUpsertWithWhereUniqueWithoutEnviadoPorInput = {
+    where: RecursoWhereUniqueInput
+    update: XOR<RecursoUpdateWithoutEnviadoPorInput, RecursoUncheckedUpdateWithoutEnviadoPorInput>
+    create: XOR<RecursoCreateWithoutEnviadoPorInput, RecursoUncheckedCreateWithoutEnviadoPorInput>
+  }
+
+  export type RecursoUpdateWithWhereUniqueWithoutEnviadoPorInput = {
+    where: RecursoWhereUniqueInput
+    data: XOR<RecursoUpdateWithoutEnviadoPorInput, RecursoUncheckedUpdateWithoutEnviadoPorInput>
+  }
+
+  export type RecursoUpdateManyWithWhereWithoutEnviadoPorInput = {
+    where: RecursoScalarWhereInput
+    data: XOR<RecursoUpdateManyMutationInput, RecursoUncheckedUpdateManyWithoutEnviadoPorInput>
+  }
+
+  export type RecursoScalarWhereInput = {
+    AND?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+    OR?: RecursoScalarWhereInput[]
+    NOT?: RecursoScalarWhereInput | RecursoScalarWhereInput[]
+    id?: StringFilter<"Recurso"> | string
+    tipo?: EnumTipoRecursoFilter<"Recurso"> | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFilter<"Recurso"> | $Enums.StatusRecurso
+    motivo?: StringFilter<"Recurso"> | string
+    fundamentacao?: StringFilter<"Recurso"> | string
+    resposta?: StringNullableFilter<"Recurso"> | string | null
+    dataEnvio?: DateTimeFilter<"Recurso"> | Date | string
+    dataResposta?: DateTimeNullableFilter<"Recurso"> | Date | string | null
+    prazoResposta?: IntFilter<"Recurso"> | number
+    editalId?: StringFilter<"Recurso"> | string
+    licitanteId?: StringFilter<"Recurso"> | string
+    usuarioId?: StringFilter<"Recurso"> | string
+    respondidoPor?: StringNullableFilter<"Recurso"> | string | null
+    createdAt?: DateTimeFilter<"Recurso"> | Date | string
+    updatedAt?: DateTimeFilter<"Recurso"> | Date | string
+  }
+
+  export type RecursoUpsertWithWhereUniqueWithoutRespondidoPorUsuarioInput = {
+    where: RecursoWhereUniqueInput
+    update: XOR<RecursoUpdateWithoutRespondidoPorUsuarioInput, RecursoUncheckedUpdateWithoutRespondidoPorUsuarioInput>
+    create: XOR<RecursoCreateWithoutRespondidoPorUsuarioInput, RecursoUncheckedCreateWithoutRespondidoPorUsuarioInput>
+  }
+
+  export type RecursoUpdateWithWhereUniqueWithoutRespondidoPorUsuarioInput = {
+    where: RecursoWhereUniqueInput
+    data: XOR<RecursoUpdateWithoutRespondidoPorUsuarioInput, RecursoUncheckedUpdateWithoutRespondidoPorUsuarioInput>
+  }
+
+  export type RecursoUpdateManyWithWhereWithoutRespondidoPorUsuarioInput = {
+    where: RecursoScalarWhereInput
+    data: XOR<RecursoUpdateManyMutationInput, RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioInput>
+  }
+
+  export type SancaoUpsertWithWhereUniqueWithoutAplicadoPorUsuarioInput = {
+    where: SancaoWhereUniqueInput
+    update: XOR<SancaoUpdateWithoutAplicadoPorUsuarioInput, SancaoUncheckedUpdateWithoutAplicadoPorUsuarioInput>
+    create: XOR<SancaoCreateWithoutAplicadoPorUsuarioInput, SancaoUncheckedCreateWithoutAplicadoPorUsuarioInput>
+  }
+
+  export type SancaoUpdateWithWhereUniqueWithoutAplicadoPorUsuarioInput = {
+    where: SancaoWhereUniqueInput
+    data: XOR<SancaoUpdateWithoutAplicadoPorUsuarioInput, SancaoUncheckedUpdateWithoutAplicadoPorUsuarioInput>
+  }
+
+  export type SancaoUpdateManyWithWhereWithoutAplicadoPorUsuarioInput = {
+    where: SancaoScalarWhereInput
+    data: XOR<SancaoUpdateManyMutationInput, SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioInput>
+  }
+
+  export type SancaoScalarWhereInput = {
+    AND?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
+    OR?: SancaoScalarWhereInput[]
+    NOT?: SancaoScalarWhereInput | SancaoScalarWhereInput[]
+    id?: StringFilter<"Sancao"> | string
+    tipo?: EnumTipoSancaoFilter<"Sancao"> | $Enums.TipoSancao
+    status?: EnumStatusSancaoFilter<"Sancao"> | $Enums.StatusSancao
+    motivo?: StringFilter<"Sancao"> | string
+    fundamentacao?: StringFilter<"Sancao"> | string
+    dataInicio?: DateTimeFilter<"Sancao"> | Date | string
+    dataFim?: DateTimeNullableFilter<"Sancao"> | Date | string | null
+    valorMulta?: IntNullableFilter<"Sancao"> | number | null
+    observacoes?: StringNullableFilter<"Sancao"> | string | null
+    editalId?: StringFilter<"Sancao"> | string
+    licitanteId?: StringFilter<"Sancao"> | string
+    aplicadoPor?: StringFilter<"Sancao"> | string
+    revogadoPor?: StringNullableFilter<"Sancao"> | string | null
+    createdAt?: DateTimeFilter<"Sancao"> | Date | string
+    updatedAt?: DateTimeFilter<"Sancao"> | Date | string
+  }
+
+  export type SancaoUpsertWithWhereUniqueWithoutRevogadoPorUsuarioInput = {
+    where: SancaoWhereUniqueInput
+    update: XOR<SancaoUpdateWithoutRevogadoPorUsuarioInput, SancaoUncheckedUpdateWithoutRevogadoPorUsuarioInput>
+    create: XOR<SancaoCreateWithoutRevogadoPorUsuarioInput, SancaoUncheckedCreateWithoutRevogadoPorUsuarioInput>
+  }
+
+  export type SancaoUpdateWithWhereUniqueWithoutRevogadoPorUsuarioInput = {
+    where: SancaoWhereUniqueInput
+    data: XOR<SancaoUpdateWithoutRevogadoPorUsuarioInput, SancaoUncheckedUpdateWithoutRevogadoPorUsuarioInput>
+  }
+
+  export type SancaoUpdateManyWithWhereWithoutRevogadoPorUsuarioInput = {
+    where: SancaoScalarWhereInput
+    data: XOR<SancaoUpdateManyMutationInput, SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioInput>
   }
 
   export type DisputaCreateWithoutEditalInput = {
@@ -24909,6 +29740,94 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RecursoCreateWithoutEditalInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    licitante: LicitanteCreateNestedOneWithoutRecursosInput
+    enviadoPor: UsuarioCreateNestedOneWithoutRecursosEnviadosInput
+    respondidoPorUsuario?: UsuarioCreateNestedOneWithoutRecursosRespondidosInput
+  }
+
+  export type RecursoUncheckedCreateWithoutEditalInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    licitanteId: string
+    usuarioId: string
+    respondidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecursoCreateOrConnectWithoutEditalInput = {
+    where: RecursoWhereUniqueInput
+    create: XOR<RecursoCreateWithoutEditalInput, RecursoUncheckedCreateWithoutEditalInput>
+  }
+
+  export type RecursoCreateManyEditalInputEnvelope = {
+    data: RecursoCreateManyEditalInput | RecursoCreateManyEditalInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SancaoCreateWithoutEditalInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    licitante: LicitanteCreateNestedOneWithoutSancaoInput
+    aplicadoPorUsuario: UsuarioCreateNestedOneWithoutSancaoAplicadaInput
+    revogadoPorUsuario?: UsuarioCreateNestedOneWithoutSancaoRevogadaInput
+  }
+
+  export type SancaoUncheckedCreateWithoutEditalInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    licitanteId: string
+    aplicadoPor: string
+    revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoCreateOrConnectWithoutEditalInput = {
+    where: SancaoWhereUniqueInput
+    create: XOR<SancaoCreateWithoutEditalInput, SancaoUncheckedCreateWithoutEditalInput>
+  }
+
+  export type SancaoCreateManyEditalInputEnvelope = {
+    data: SancaoCreateManyEditalInput | SancaoCreateManyEditalInput[]
+    skipDuplicates?: boolean
+  }
+
   export type DisputaUpsertWithWhereUniqueWithoutEditalInput = {
     where: DisputaWhereUniqueInput
     update: XOR<DisputaUpdateWithoutEditalInput, DisputaUncheckedUpdateWithoutEditalInput>
@@ -25045,11 +29964,44 @@ export namespace Prisma {
     data: XOR<MensagemChatUpdateManyMutationInput, MensagemChatUncheckedUpdateManyWithoutEditalInput>
   }
 
+  export type RecursoUpsertWithWhereUniqueWithoutEditalInput = {
+    where: RecursoWhereUniqueInput
+    update: XOR<RecursoUpdateWithoutEditalInput, RecursoUncheckedUpdateWithoutEditalInput>
+    create: XOR<RecursoCreateWithoutEditalInput, RecursoUncheckedCreateWithoutEditalInput>
+  }
+
+  export type RecursoUpdateWithWhereUniqueWithoutEditalInput = {
+    where: RecursoWhereUniqueInput
+    data: XOR<RecursoUpdateWithoutEditalInput, RecursoUncheckedUpdateWithoutEditalInput>
+  }
+
+  export type RecursoUpdateManyWithWhereWithoutEditalInput = {
+    where: RecursoScalarWhereInput
+    data: XOR<RecursoUpdateManyMutationInput, RecursoUncheckedUpdateManyWithoutEditalInput>
+  }
+
+  export type SancaoUpsertWithWhereUniqueWithoutEditalInput = {
+    where: SancaoWhereUniqueInput
+    update: XOR<SancaoUpdateWithoutEditalInput, SancaoUncheckedUpdateWithoutEditalInput>
+    create: XOR<SancaoCreateWithoutEditalInput, SancaoUncheckedCreateWithoutEditalInput>
+  }
+
+  export type SancaoUpdateWithWhereUniqueWithoutEditalInput = {
+    where: SancaoWhereUniqueInput
+    data: XOR<SancaoUpdateWithoutEditalInput, SancaoUncheckedUpdateWithoutEditalInput>
+  }
+
+  export type SancaoUpdateManyWithWhereWithoutEditalInput = {
+    where: SancaoScalarWhereInput
+    data: XOR<SancaoUpdateManyMutationInput, SancaoUncheckedUpdateManyWithoutEditalInput>
+  }
+
   export type EditalCreateWithoutDisputasInput = {
     id?: string
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -25059,6 +30011,8 @@ export namespace Prisma {
     documentos?: DocumentoCreateNestedManyWithoutEditalInput
     lotes?: LoteCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+    recursos?: RecursoCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutDisputasInput = {
@@ -25066,6 +30020,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -25075,6 +30030,8 @@ export namespace Prisma {
     documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutDisputasInput = {
@@ -25305,6 +30262,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutDisputasInput = {
@@ -25318,6 +30277,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutDisputasInput = {
@@ -25341,6 +30302,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25350,6 +30312,8 @@ export namespace Prisma {
     documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutDisputasInput = {
@@ -25357,6 +30321,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25366,6 +30331,8 @@ export namespace Prisma {
     documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type PropostaUpsertWithWhereUniqueWithoutDisputaInput = {
@@ -25569,6 +30536,10 @@ export namespace Prisma {
     perfil: $Enums.PerfilUsuario
     LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
     MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+    recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutLicitanteInput = {
@@ -25579,6 +30550,10 @@ export namespace Prisma {
     perfil: $Enums.PerfilUsuario
     LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
     MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+    recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutLicitanteInput = {
@@ -25805,6 +30780,94 @@ export namespace Prisma {
     create: XOR<DisputaCreateWithoutLicitantesInput, DisputaUncheckedCreateWithoutLicitantesInput>
   }
 
+  export type RecursoCreateWithoutLicitanteInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutRecursosInput
+    enviadoPor: UsuarioCreateNestedOneWithoutRecursosEnviadosInput
+    respondidoPorUsuario?: UsuarioCreateNestedOneWithoutRecursosRespondidosInput
+  }
+
+  export type RecursoUncheckedCreateWithoutLicitanteInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    editalId: string
+    usuarioId: string
+    respondidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecursoCreateOrConnectWithoutLicitanteInput = {
+    where: RecursoWhereUniqueInput
+    create: XOR<RecursoCreateWithoutLicitanteInput, RecursoUncheckedCreateWithoutLicitanteInput>
+  }
+
+  export type RecursoCreateManyLicitanteInputEnvelope = {
+    data: RecursoCreateManyLicitanteInput | RecursoCreateManyLicitanteInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SancaoCreateWithoutLicitanteInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    edital: EditalCreateNestedOneWithoutSancaoInput
+    aplicadoPorUsuario: UsuarioCreateNestedOneWithoutSancaoAplicadaInput
+    revogadoPorUsuario?: UsuarioCreateNestedOneWithoutSancaoRevogadaInput
+  }
+
+  export type SancaoUncheckedCreateWithoutLicitanteInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    editalId: string
+    aplicadoPor: string
+    revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoCreateOrConnectWithoutLicitanteInput = {
+    where: SancaoWhereUniqueInput
+    create: XOR<SancaoCreateWithoutLicitanteInput, SancaoUncheckedCreateWithoutLicitanteInput>
+  }
+
+  export type SancaoCreateManyLicitanteInputEnvelope = {
+    data: SancaoCreateManyLicitanteInput | SancaoCreateManyLicitanteInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UsuarioUpsertWithoutLicitanteInput = {
     update: XOR<UsuarioUpdateWithoutLicitanteInput, UsuarioUncheckedUpdateWithoutLicitanteInput>
     create: XOR<UsuarioCreateWithoutLicitanteInput, UsuarioUncheckedCreateWithoutLicitanteInput>
@@ -25824,6 +30887,10 @@ export namespace Prisma {
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
     LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
     MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+    recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutLicitanteInput = {
@@ -25834,6 +30901,10 @@ export namespace Prisma {
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
     LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
     MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+    recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
   }
 
   export type PropostaUpsertWithWhereUniqueWithoutLicitanteInput = {
@@ -25932,6 +31003,38 @@ export namespace Prisma {
     data: XOR<DisputaUpdateManyMutationInput, DisputaUncheckedUpdateManyWithoutLicitantesInput>
   }
 
+  export type RecursoUpsertWithWhereUniqueWithoutLicitanteInput = {
+    where: RecursoWhereUniqueInput
+    update: XOR<RecursoUpdateWithoutLicitanteInput, RecursoUncheckedUpdateWithoutLicitanteInput>
+    create: XOR<RecursoCreateWithoutLicitanteInput, RecursoUncheckedCreateWithoutLicitanteInput>
+  }
+
+  export type RecursoUpdateWithWhereUniqueWithoutLicitanteInput = {
+    where: RecursoWhereUniqueInput
+    data: XOR<RecursoUpdateWithoutLicitanteInput, RecursoUncheckedUpdateWithoutLicitanteInput>
+  }
+
+  export type RecursoUpdateManyWithWhereWithoutLicitanteInput = {
+    where: RecursoScalarWhereInput
+    data: XOR<RecursoUpdateManyMutationInput, RecursoUncheckedUpdateManyWithoutLicitanteInput>
+  }
+
+  export type SancaoUpsertWithWhereUniqueWithoutLicitanteInput = {
+    where: SancaoWhereUniqueInput
+    update: XOR<SancaoUpdateWithoutLicitanteInput, SancaoUncheckedUpdateWithoutLicitanteInput>
+    create: XOR<SancaoCreateWithoutLicitanteInput, SancaoUncheckedCreateWithoutLicitanteInput>
+  }
+
+  export type SancaoUpdateWithWhereUniqueWithoutLicitanteInput = {
+    where: SancaoWhereUniqueInput
+    data: XOR<SancaoUpdateWithoutLicitanteInput, SancaoUncheckedUpdateWithoutLicitanteInput>
+  }
+
+  export type SancaoUpdateManyWithWhereWithoutLicitanteInput = {
+    where: SancaoScalarWhereInput
+    data: XOR<SancaoUpdateManyMutationInput, SancaoUncheckedUpdateManyWithoutLicitanteInput>
+  }
+
   export type DisputaCreateWithoutPropostasInput = {
     id?: string
     status: $Enums.DisputaStatus
@@ -25980,6 +31083,8 @@ export namespace Prisma {
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutPropostasInput = {
@@ -25993,6 +31098,8 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutPropostasInput = {
@@ -26096,6 +31203,8 @@ export namespace Prisma {
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutPropostasInput = {
@@ -26109,6 +31218,8 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type ItemUpsertWithoutPropostasInput = {
@@ -26196,6 +31307,8 @@ export namespace Prisma {
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutLancesInput = {
@@ -26209,6 +31322,8 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutLancesInput = {
@@ -26281,6 +31396,8 @@ export namespace Prisma {
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutLancesInput = {
@@ -26294,6 +31411,8 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type EditalCreateWithoutDocumentosInput = {
@@ -26301,6 +31420,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -26310,6 +31430,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
     lotes?: LoteCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+    recursos?: RecursoCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutDocumentosInput = {
@@ -26317,6 +31439,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -26326,6 +31449,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutDocumentosInput = {
@@ -26349,6 +31474,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26358,6 +31484,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutDocumentosInput = {
@@ -26365,6 +31493,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26374,6 +31503,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalCreateWithoutDocumentosObrigatoriosInput = {
@@ -26381,6 +31512,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -26390,6 +31522,8 @@ export namespace Prisma {
     documentos?: DocumentoCreateNestedManyWithoutEditalInput
     lotes?: LoteCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+    recursos?: RecursoCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutDocumentosObrigatoriosInput = {
@@ -26397,6 +31531,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -26406,6 +31541,8 @@ export namespace Prisma {
     documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutDocumentosObrigatoriosInput = {
@@ -26429,6 +31566,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26438,6 +31576,8 @@ export namespace Prisma {
     documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     lotes?: LoteUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput = {
@@ -26445,6 +31585,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26454,6 +31595,8 @@ export namespace Prisma {
     documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type DisputaCreateWithoutDocumentosInput = {
@@ -26504,6 +31647,8 @@ export namespace Prisma {
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutDocumentosInput = {
@@ -26517,6 +31662,8 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutDocumentosInput = {
@@ -26589,6 +31736,8 @@ export namespace Prisma {
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutDocumentosInput = {
@@ -26602,6 +31751,8 @@ export namespace Prisma {
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type EditalCreateWithoutMensagensChatInput = {
@@ -26609,6 +31760,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -26618,6 +31770,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
     documentos?: DocumentoCreateNestedManyWithoutEditalInput
     lotes?: LoteCreateNestedManyWithoutEditalInput
+    recursos?: RecursoCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutMensagensChatInput = {
@@ -26625,6 +31779,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -26634,6 +31789,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
     documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutMensagensChatInput = {
@@ -26649,6 +31806,10 @@ export namespace Prisma {
     perfil: $Enums.PerfilUsuario
     LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
     licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+    recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutMensagemChatInput = {
@@ -26659,6 +31820,10 @@ export namespace Prisma {
     perfil: $Enums.PerfilUsuario
     licitanteId?: string | null
     LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+    recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutMensagemChatInput = {
@@ -26714,6 +31879,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutMensagensChatInput = {
@@ -26727,6 +31894,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutMensagensChatInput = {
@@ -26750,6 +31919,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26759,6 +31929,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
     documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     lotes?: LoteUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutMensagensChatInput = {
@@ -26766,6 +31938,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26775,6 +31948,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
     documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type UsuarioUpsertWithoutMensagemChatInput = {
@@ -26796,6 +31971,10 @@ export namespace Prisma {
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
     LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
     licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+    recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutMensagemChatInput = {
@@ -26806,6 +31985,10 @@ export namespace Prisma {
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
     licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
     LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+    recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
   }
 
   export type DisputaUpsertWithoutMensagensChatInput = {
@@ -26873,6 +32056,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutMensagensChatInput = {
@@ -26886,6 +32071,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteCreateWithoutSessoesInput = {
@@ -26899,6 +32086,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteUncheckedCreateWithoutSessoesInput = {
@@ -26912,6 +32101,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
     disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   }
 
   export type LicitanteCreateOrConnectWithoutSessoesInput = {
@@ -26978,6 +32169,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutSessoesInput = {
@@ -26991,6 +32184,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
     disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type DisputaUpsertWithoutSessoesInput = {
@@ -27081,6 +32276,10 @@ export namespace Prisma {
     perfil: $Enums.PerfilUsuario
     MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
     licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+    recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutLogAtividadeInput = {
@@ -27091,6 +32290,10 @@ export namespace Prisma {
     perfil: $Enums.PerfilUsuario
     licitanteId?: string | null
     MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+    recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutLogAtividadeInput = {
@@ -27160,6 +32363,10 @@ export namespace Prisma {
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
     MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
     licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+    recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutLogAtividadeInput = {
@@ -27170,6 +32377,10 @@ export namespace Prisma {
     perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
     licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
     MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+    recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
   }
 
   export type ItemCreateWithoutLoteInput = {
@@ -27213,6 +32424,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -27222,6 +32434,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
     documentos?: DocumentoCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+    recursos?: RecursoCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoCreateNestedManyWithoutEditalInput
   }
 
   export type EditalUncheckedCreateWithoutLotesInput = {
@@ -27229,6 +32443,7 @@ export namespace Prisma {
     numero: string
     objeto: string
     modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
     status: string
     dataAbertura: Date | string
     arquivoPdf?: string | null
@@ -27238,6 +32453,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
     documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
     mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
   }
 
   export type EditalCreateOrConnectWithoutLotesInput = {
@@ -27293,6 +32510,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27302,6 +32520,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
     documentos?: DocumentoUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUpdateManyWithoutEditalNestedInput
   }
 
   export type EditalUncheckedUpdateWithoutLotesInput = {
@@ -27309,6 +32529,7 @@ export namespace Prisma {
     numero?: StringFieldUpdateOperationsInput | string
     objeto?: StringFieldUpdateOperationsInput | string
     modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
     status?: StringFieldUpdateOperationsInput | string
     dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
     arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27318,6 +32539,8 @@ export namespace Prisma {
     documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
     documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
   }
 
   export type LoteCreateWithoutItensInput = {
@@ -27436,6 +32659,630 @@ export namespace Prisma {
     data: XOR<PropostaUpdateManyMutationInput, PropostaUncheckedUpdateManyWithoutItemInput>
   }
 
+  export type EditalCreateWithoutRecursosInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoCreateNestedManyWithoutEditalInput
+    lotes?: LoteCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalUncheckedCreateWithoutRecursosInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
+    lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalCreateOrConnectWithoutRecursosInput = {
+    where: EditalWhereUniqueInput
+    create: XOR<EditalCreateWithoutRecursosInput, EditalUncheckedCreateWithoutRecursosInput>
+  }
+
+  export type LicitanteCreateWithoutRecursosInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
+    propostas?: PropostaCreateNestedManyWithoutLicitanteInput
+    lances?: LanceCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    Sancao?: SancaoCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteUncheckedCreateWithoutRecursosInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
+    propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
+    lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    Sancao?: SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteCreateOrConnectWithoutRecursosInput = {
+    where: LicitanteWhereUniqueInput
+    create: XOR<LicitanteCreateWithoutRecursosInput, LicitanteUncheckedCreateWithoutRecursosInput>
+  }
+
+  export type UsuarioCreateWithoutRecursosEnviadosInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+    licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+    recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutRecursosEnviadosInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
+    LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+    recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutRecursosEnviadosInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutRecursosEnviadosInput, UsuarioUncheckedCreateWithoutRecursosEnviadosInput>
+  }
+
+  export type UsuarioCreateWithoutRecursosRespondidosInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+    licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+    recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
+    sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutRecursosRespondidosInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
+    LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+    recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+    sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+    sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutRecursosRespondidosInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutRecursosRespondidosInput, UsuarioUncheckedCreateWithoutRecursosRespondidosInput>
+  }
+
+  export type EditalUpsertWithoutRecursosInput = {
+    update: XOR<EditalUpdateWithoutRecursosInput, EditalUncheckedUpdateWithoutRecursosInput>
+    create: XOR<EditalCreateWithoutRecursosInput, EditalUncheckedCreateWithoutRecursosInput>
+    where?: EditalWhereInput
+  }
+
+  export type EditalUpdateToOneWithWhereWithoutRecursosInput = {
+    where?: EditalWhereInput
+    data: XOR<EditalUpdateWithoutRecursosInput, EditalUncheckedUpdateWithoutRecursosInput>
+  }
+
+  export type EditalUpdateWithoutRecursosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUpdateManyWithoutEditalNestedInput
+  }
+
+  export type EditalUncheckedUpdateWithoutRecursosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutEditalNestedInput
+  }
+
+  export type LicitanteUpsertWithoutRecursosInput = {
+    update: XOR<LicitanteUpdateWithoutRecursosInput, LicitanteUncheckedUpdateWithoutRecursosInput>
+    create: XOR<LicitanteCreateWithoutRecursosInput, LicitanteUncheckedCreateWithoutRecursosInput>
+    where?: LicitanteWhereInput
+  }
+
+  export type LicitanteUpdateToOneWithWhereWithoutRecursosInput = {
+    where?: LicitanteWhereInput
+    data: XOR<LicitanteUpdateWithoutRecursosInput, LicitanteUncheckedUpdateWithoutRecursosInput>
+  }
+
+  export type LicitanteUpdateWithoutRecursosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
+    propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type LicitanteUncheckedUpdateWithoutRecursosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
+    propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type UsuarioUpsertWithoutRecursosEnviadosInput = {
+    update: XOR<UsuarioUpdateWithoutRecursosEnviadosInput, UsuarioUncheckedUpdateWithoutRecursosEnviadosInput>
+    create: XOR<UsuarioCreateWithoutRecursosEnviadosInput, UsuarioUncheckedCreateWithoutRecursosEnviadosInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutRecursosEnviadosInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutRecursosEnviadosInput, UsuarioUncheckedUpdateWithoutRecursosEnviadosInput>
+  }
+
+  export type UsuarioUpdateWithoutRecursosEnviadosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+    licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+    recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutRecursosEnviadosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+    recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+  }
+
+  export type UsuarioUpsertWithoutRecursosRespondidosInput = {
+    update: XOR<UsuarioUpdateWithoutRecursosRespondidosInput, UsuarioUncheckedUpdateWithoutRecursosRespondidosInput>
+    create: XOR<UsuarioCreateWithoutRecursosRespondidosInput, UsuarioUncheckedCreateWithoutRecursosRespondidosInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutRecursosRespondidosInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutRecursosRespondidosInput, UsuarioUncheckedUpdateWithoutRecursosRespondidosInput>
+  }
+
+  export type UsuarioUpdateWithoutRecursosRespondidosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+    licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+    recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
+    sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutRecursosRespondidosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+    recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+    sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+  }
+
+  export type EditalCreateWithoutSancaoInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoCreateNestedManyWithoutEditalInput
+    lotes?: LoteCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutEditalInput
+    recursos?: RecursoCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalUncheckedCreateWithoutSancaoInput = {
+    id?: string
+    numero: string
+    objeto: string
+    modalidade?: $Enums.ModalidadeLicitação
+    criterioJulgamento?: $Enums.CritérioJulgamento
+    status: string
+    dataAbertura: Date | string
+    arquivoPdf?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disputas?: DisputaUncheckedCreateNestedManyWithoutEditalInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+    documentos?: DocumentoUncheckedCreateNestedManyWithoutEditalInput
+    lotes?: LoteUncheckedCreateNestedManyWithoutEditalInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutEditalInput
+  }
+
+  export type EditalCreateOrConnectWithoutSancaoInput = {
+    where: EditalWhereUniqueInput
+    create: XOR<EditalCreateWithoutSancaoInput, EditalUncheckedCreateWithoutSancaoInput>
+  }
+
+  export type LicitanteCreateWithoutSancaoInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioCreateNestedOneWithoutLicitanteInput
+    propostas?: PropostaCreateNestedManyWithoutLicitanteInput
+    lances?: LanceCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteUncheckedCreateWithoutSancaoInput = {
+    id?: string
+    razaoSocial: string
+    cnpj: string
+    tipoEmpresa: $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
+    propostas?: PropostaUncheckedCreateNestedManyWithoutLicitanteInput
+    lances?: LanceUncheckedCreateNestedManyWithoutLicitanteInput
+    documentos?: DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
+    sessoes?: SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+    mensagensChat?: MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+    disputas?: DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+    recursos?: RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+  }
+
+  export type LicitanteCreateOrConnectWithoutSancaoInput = {
+    where: LicitanteWhereUniqueInput
+    create: XOR<LicitanteCreateWithoutSancaoInput, LicitanteUncheckedCreateWithoutSancaoInput>
+  }
+
+  export type UsuarioCreateWithoutSancaoAplicadaInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+    licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+    recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoRevogada?: SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutSancaoAplicadaInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
+    LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+    recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoRevogada?: SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutSancaoAplicadaInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutSancaoAplicadaInput, UsuarioUncheckedCreateWithoutSancaoAplicadaInput>
+  }
+
+  export type UsuarioCreateWithoutSancaoRevogadaInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatCreateNestedManyWithoutAutorInput
+    licitante?: LicitanteCreateNestedOneWithoutUsuarioInput
+    recursosEnviados?: RecursoCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutSancaoRevogadaInput = {
+    id?: string
+    nome: string
+    email: string
+    senha: string
+    perfil: $Enums.PerfilUsuario
+    licitanteId?: string | null
+    LogAtividade?: LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+    MensagemChat?: MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+    recursosEnviados?: RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+    recursosRespondidos?: RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+    sancaoAplicada?: SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutSancaoRevogadaInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutSancaoRevogadaInput, UsuarioUncheckedCreateWithoutSancaoRevogadaInput>
+  }
+
+  export type EditalUpsertWithoutSancaoInput = {
+    update: XOR<EditalUpdateWithoutSancaoInput, EditalUncheckedUpdateWithoutSancaoInput>
+    create: XOR<EditalCreateWithoutSancaoInput, EditalUncheckedCreateWithoutSancaoInput>
+    where?: EditalWhereInput
+  }
+
+  export type EditalUpdateToOneWithWhereWithoutSancaoInput = {
+    where?: EditalWhereInput
+    data: XOR<EditalUpdateWithoutSancaoInput, EditalUncheckedUpdateWithoutSancaoInput>
+  }
+
+  export type EditalUpdateWithoutSancaoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUpdateManyWithoutEditalNestedInput
+  }
+
+  export type EditalUncheckedUpdateWithoutSancaoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    objeto?: StringFieldUpdateOperationsInput | string
+    modalidade?: EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+    criterioJulgamento?: EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+    status?: StringFieldUpdateOperationsInput | string
+    dataAbertura?: DateTimeFieldUpdateOperationsInput | Date | string
+    arquivoPdf?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disputas?: DisputaUncheckedUpdateManyWithoutEditalNestedInput
+    documentosObrigatorios?: DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+    documentos?: DocumentoUncheckedUpdateManyWithoutEditalNestedInput
+    lotes?: LoteUncheckedUpdateManyWithoutEditalNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutEditalNestedInput
+  }
+
+  export type LicitanteUpsertWithoutSancaoInput = {
+    update: XOR<LicitanteUpdateWithoutSancaoInput, LicitanteUncheckedUpdateWithoutSancaoInput>
+    create: XOR<LicitanteCreateWithoutSancaoInput, LicitanteUncheckedCreateWithoutSancaoInput>
+    where?: LicitanteWhereInput
+  }
+
+  export type LicitanteUpdateToOneWithWhereWithoutSancaoInput = {
+    where?: LicitanteWhereInput
+    data: XOR<LicitanteUpdateWithoutSancaoInput, LicitanteUncheckedUpdateWithoutSancaoInput>
+  }
+
+  export type LicitanteUpdateWithoutSancaoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUpdateOneWithoutLicitanteNestedInput
+    propostas?: PropostaUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type LicitanteUncheckedUpdateWithoutSancaoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    razaoSocial?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    tipoEmpresa?: EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+    usuario?: UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
+    propostas?: PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
+    lances?: LanceUncheckedUpdateManyWithoutLicitanteNestedInput
+    documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
+    sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+    mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    disputas?: DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+  }
+
+  export type UsuarioUpsertWithoutSancaoAplicadaInput = {
+    update: XOR<UsuarioUpdateWithoutSancaoAplicadaInput, UsuarioUncheckedUpdateWithoutSancaoAplicadaInput>
+    create: XOR<UsuarioCreateWithoutSancaoAplicadaInput, UsuarioUncheckedCreateWithoutSancaoAplicadaInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutSancaoAplicadaInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutSancaoAplicadaInput, UsuarioUncheckedUpdateWithoutSancaoAplicadaInput>
+  }
+
+  export type UsuarioUpdateWithoutSancaoAplicadaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+    licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+    recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutSancaoAplicadaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+    recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoRevogada?: SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+  }
+
+  export type UsuarioUpsertWithoutSancaoRevogadaInput = {
+    update: XOR<UsuarioUpdateWithoutSancaoRevogadaInput, UsuarioUncheckedUpdateWithoutSancaoRevogadaInput>
+    create: XOR<UsuarioCreateWithoutSancaoRevogadaInput, UsuarioUncheckedCreateWithoutSancaoRevogadaInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutSancaoRevogadaInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutSancaoRevogadaInput, UsuarioUncheckedUpdateWithoutSancaoRevogadaInput>
+  }
+
+  export type UsuarioUpdateWithoutSancaoRevogadaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    LogAtividade?: LogAtividadeUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUpdateManyWithoutAutorNestedInput
+    licitante?: LicitanteUpdateOneWithoutUsuarioNestedInput
+    recursosEnviados?: RecursoUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutSancaoRevogadaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    perfil?: EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+    licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+    LogAtividade?: LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+    MensagemChat?: MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
+    recursosEnviados?: RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+    recursosRespondidos?: RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+    sancaoAplicada?: SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+  }
+
   export type LogAtividadeCreateManyUsuarioInput = {
     id?: string
     disputaId: string
@@ -27455,6 +33302,74 @@ export namespace Prisma {
     updatedAt?: Date | string
     disputaId?: string | null
     licitanteId?: string | null
+  }
+
+  export type RecursoCreateManyEnviadoPorInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    editalId: string
+    licitanteId: string
+    respondidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecursoCreateManyRespondidoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    editalId: string
+    licitanteId: string
+    usuarioId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoCreateManyAplicadoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId: string
+    revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoCreateManyRevogadoPorUsuarioInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    editalId: string
+    licitanteId: string
+    aplicadoPor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LogAtividadeUpdateWithoutUsuarioInput = {
@@ -27520,6 +33435,210 @@ export namespace Prisma {
     licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type RecursoUpdateWithoutEnviadoPorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutRecursosNestedInput
+    licitante?: LicitanteUpdateOneRequiredWithoutRecursosNestedInput
+    respondidoPorUsuario?: UsuarioUpdateOneWithoutRecursosRespondidosNestedInput
+  }
+
+  export type RecursoUncheckedUpdateWithoutEnviadoPorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    respondidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecursoUncheckedUpdateManyWithoutEnviadoPorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    respondidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecursoUpdateWithoutRespondidoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutRecursosNestedInput
+    licitante?: LicitanteUpdateOneRequiredWithoutRecursosNestedInput
+    enviadoPor?: UsuarioUpdateOneRequiredWithoutRecursosEnviadosNestedInput
+  }
+
+  export type RecursoUncheckedUpdateWithoutRespondidoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoUpdateWithoutAplicadoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutSancaoNestedInput
+    licitante?: LicitanteUpdateOneRequiredWithoutSancaoNestedInput
+    revogadoPorUsuario?: UsuarioUpdateOneWithoutSancaoRevogadaNestedInput
+  }
+
+  export type SancaoUncheckedUpdateWithoutAplicadoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    revogadoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    revogadoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoUpdateWithoutRevogadoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutSancaoNestedInput
+    licitante?: LicitanteUpdateOneRequiredWithoutSancaoNestedInput
+    aplicadoPorUsuario?: UsuarioUpdateOneRequiredWithoutSancaoAplicadaNestedInput
+  }
+
+  export type SancaoUncheckedUpdateWithoutRevogadoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    aplicadoPor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    aplicadoPor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type DisputaCreateManyEditalInput = {
     id?: string
     status: $Enums.DisputaStatus
@@ -27569,6 +33688,40 @@ export namespace Prisma {
     updatedAt?: Date | string
     disputaId?: string | null
     licitanteId?: string | null
+  }
+
+  export type RecursoCreateManyEditalInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    licitanteId: string
+    usuarioId: string
+    respondidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoCreateManyEditalInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    licitanteId: string
+    aplicadoPor: string
+    revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DisputaUpdateWithoutEditalInput = {
@@ -27738,6 +33891,108 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     disputaId?: NullableStringFieldUpdateOperationsInput | string | null
     licitanteId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type RecursoUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licitante?: LicitanteUpdateOneRequiredWithoutRecursosNestedInput
+    enviadoPor?: UsuarioUpdateOneRequiredWithoutRecursosEnviadosNestedInput
+    respondidoPorUsuario?: UsuarioUpdateOneWithoutRecursosRespondidosNestedInput
+  }
+
+  export type RecursoUncheckedUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    respondidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecursoUncheckedUpdateManyWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    respondidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licitante?: LicitanteUpdateOneRequiredWithoutSancaoNestedInput
+    aplicadoPorUsuario?: UsuarioUpdateOneRequiredWithoutSancaoAplicadaNestedInput
+    revogadoPorUsuario?: UsuarioUpdateOneWithoutSancaoRevogadaNestedInput
+  }
+
+  export type SancaoUncheckedUpdateWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    aplicadoPor?: StringFieldUpdateOperationsInput | string
+    revogadoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoUncheckedUpdateManyWithoutEditalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    licitanteId?: StringFieldUpdateOperationsInput | string
+    aplicadoPor?: StringFieldUpdateOperationsInput | string
+    revogadoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PropostaCreateManyDisputaInput = {
@@ -28055,6 +34310,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUpdateManyWithoutLicitanteNestedInput
+    recursos?: RecursoUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateWithoutDisputasInput = {
@@ -28068,6 +34325,8 @@ export namespace Prisma {
     documentos?: DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
     sessoes?: SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
     mensagensChat?: MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+    recursos?: RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+    Sancao?: SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   }
 
   export type LicitanteUncheckedUpdateManyWithoutDisputasInput = {
@@ -28141,6 +34400,40 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     disputaId?: string | null
+  }
+
+  export type RecursoCreateManyLicitanteInput = {
+    id?: string
+    tipo: $Enums.TipoRecurso
+    status?: $Enums.StatusRecurso
+    motivo: string
+    fundamentacao: string
+    resposta?: string | null
+    dataEnvio?: Date | string
+    dataResposta?: Date | string | null
+    prazoResposta: number
+    editalId: string
+    usuarioId: string
+    respondidoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SancaoCreateManyLicitanteInput = {
+    id?: string
+    tipo: $Enums.TipoSancao
+    status?: $Enums.StatusSancao
+    motivo: string
+    fundamentacao: string
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    valorMulta?: number | null
+    observacoes?: string | null
+    editalId: string
+    aplicadoPor: string
+    revogadoPor?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PropostaUpdateWithoutLicitanteInput = {
@@ -28381,6 +34674,108 @@ export namespace Prisma {
     fimPrevisto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     encerramento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tempoRestante?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type RecursoUpdateWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutRecursosNestedInput
+    enviadoPor?: UsuarioUpdateOneRequiredWithoutRecursosEnviadosNestedInput
+    respondidoPorUsuario?: UsuarioUpdateOneWithoutRecursosRespondidosNestedInput
+  }
+
+  export type RecursoUncheckedUpdateWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    editalId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    respondidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecursoUncheckedUpdateManyWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoRecursoFieldUpdateOperationsInput | $Enums.TipoRecurso
+    status?: EnumStatusRecursoFieldUpdateOperationsInput | $Enums.StatusRecurso
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    resposta?: NullableStringFieldUpdateOperationsInput | string | null
+    dataEnvio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataResposta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prazoResposta?: IntFieldUpdateOperationsInput | number
+    editalId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    respondidoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoUpdateWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    edital?: EditalUpdateOneRequiredWithoutSancaoNestedInput
+    aplicadoPorUsuario?: UsuarioUpdateOneRequiredWithoutSancaoAplicadaNestedInput
+    revogadoPorUsuario?: UsuarioUpdateOneWithoutSancaoRevogadaNestedInput
+  }
+
+  export type SancaoUncheckedUpdateWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    aplicadoPor?: StringFieldUpdateOperationsInput | string
+    revogadoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SancaoUncheckedUpdateManyWithoutLicitanteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoSancaoFieldUpdateOperationsInput | $Enums.TipoSancao
+    status?: EnumStatusSancaoFieldUpdateOperationsInput | $Enums.StatusSancao
+    motivo?: StringFieldUpdateOperationsInput | string
+    fundamentacao?: StringFieldUpdateOperationsInput | string
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorMulta?: NullableIntFieldUpdateOperationsInput | number | null
+    observacoes?: NullableStringFieldUpdateOperationsInput | string | null
+    editalId?: StringFieldUpdateOperationsInput | string
+    aplicadoPor?: StringFieldUpdateOperationsInput | string
+    revogadoPor?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ItemCreateManyLoteInput = {

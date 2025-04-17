@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "CritérioJulgamento" AS ENUM ('MENOR_PRECO', 'MAIOR_DESCONTO', 'TÉCNICA_E_PRECO', 'MAIOR_LANCE_OU_OFERTA', 'MELHOR_TÉCNICA', 'MAIOR_RETORNO_ECONÔMICO');
+
+-- AlterTable
+ALTER TABLE "Edital" ADD COLUMN     "criterioJulgamento" "CritérioJulgamento" NOT NULL DEFAULT 'MENOR_PRECO';

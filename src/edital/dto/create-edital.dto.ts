@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsNotEmpty, IsOptional, IsString, IsEnum } from 'class-validator';
-import { ModalidadeLicitação } from '@prisma/client';
+import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
 
 export class CreateEditalDto {
     @ApiProperty({
@@ -27,6 +27,15 @@ export class CreateEditalDto {
     @IsNotEmpty()
     @IsEnum(ModalidadeLicitação)
     modalidade: ModalidadeLicitação;
+
+    @ApiProperty({
+        description: 'Critério de julgamento',
+        enum: CritérioJulgamento,
+        example: CritérioJulgamento.MENOR_PRECO
+    })
+    @IsNotEmpty()
+    @IsEnum(CritérioJulgamento)
+    criterioJulgamento: CritérioJulgamento;
 
     @ApiProperty({
         description: 'Status do edital',

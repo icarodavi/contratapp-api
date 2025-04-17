@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '@/database/database.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { ModalidadeLicitação } from '@prisma/client';
+import { ModalidadeLicitação, CritérioJulgamento } from '@generated/prisma';
 
 @ApiTags('Editais')
 @Injectable()
@@ -15,6 +15,7 @@ export class EditalService {
             data: {
                 ...createEditalDto,
                 modalidade: createEditalDto.modalidade as ModalidadeLicitação,
+                criterioJulgamento: createEditalDto.criterioJulgamento as CritérioJulgamento,
             },
         });
     }
@@ -72,6 +73,7 @@ export class EditalService {
             data: {
                 ...updateEditalDto,
                 modalidade: updateEditalDto.modalidade as ModalidadeLicitação,
+                criterioJulgamento: updateEditalDto.criterioJulgamento as CritérioJulgamento,
             },
         });
     }

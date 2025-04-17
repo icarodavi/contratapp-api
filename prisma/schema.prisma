@@ -80,16 +80,59 @@ enum ModalidadeLicitação {
   INEXIGIBILIDADE
 }
 
+enum CritérioJulgamento {
+  MENOR_PRECO
+  MAIOR_DESCONTO
+  TÉCNICA_E_PRECO
+  MAIOR_LANCE_OU_OFERTA
+  MELHOR_TÉCNICA
+  MAIOR_RETORNO_ECONÔMICO
+}
+
+enum TipoRecurso {
+  IMPUGNACAO
+  RECURSO
+  RECONSIDERACAO
+  APELACAO
+}
+
+enum StatusRecurso {
+  PENDENTE
+  DEFERIDO
+  INDEFERIDO
+  ARQUIVADO
+}
+
+enum TipoSancao {
+  ADVERTENCIA
+  SUSPENSAO
+  IMPEDIMENTO
+  DECLARACAO_INIDONEIDADE
+  MULTA
+}
+
+enum StatusSancao {
+  PENDENTE
+  EM_VIGOR
+  SUSPENSA
+  REVOGADA
+  EXPIRADA
+}
+
 model Usuario {
-  id           String         @id @default(uuid())
-  nome         String
-  email        String         @unique
-  senha        String
-  perfil       PerfilUsuario
-  LogAtividade LogAtividade[]
-  MensagemChat MensagemChat[]
-  licitante    Licitante?     @relation(fields: [licitanteId], references: [id])
-  licitanteId  String?        @unique
+  id                  String         @id @default(uuid())
+  nome                String
+  email               String         @unique
+  senha               String
+  perfil              PerfilUsuario
+  LogAtividade        LogAtividade[]
+  MensagemChat        MensagemChat[]
+  licitante           Licitante?     @relation(fields: [licitanteId], references: [id])
+  licitanteId         String?        @unique
+  recursosEnviados    Recurso[]      @relation("RecursoEnviadoPor")
+  recursosRespondidos Recurso[]      @relation("RecursoRespondidoPor")
+  sancaoAplicada      Sancao[]       @relation("SancaoAplicadaPor")
+  sancaoRevogada      Sancao[]       @relation("SancaoRevogadaPor")
 }
 
 model Edital {
@@ -97,6 +140,7 @@ model Edital {
   numero                 String                 @unique
   objeto                 String
   modalidade             ModalidadeLicitação  @default(PREGÃO_ELETRÔNICO)
+  criterioJulgamento     CritérioJulgamento    @default(MENOR_PRECO)
   status                 String
   dataAbertura           DateTime
   arquivoPdf             String?
@@ -105,8 +149,10 @@ model Edital {
   documentos             Documento[]
   lotes                  Lote[]
   mensagensChat          MensagemChat[]
+  recursos               Recurso[]
   createdAt              DateTime               @default(now())
   updatedAt              DateTime               @updatedAt
+  Sancao                 Sancao[]
 }
 
 model Disputa {
@@ -140,6 +186,8 @@ model Licitante {
   sessoes       Sessao[]
   mensagensChat MensagemChat[]
   disputas      Disputa[]
+  recursos      Recurso[]
+  Sancao        Sancao[]
 }
 
 model Proposta {
@@ -321,4 +369,64 @@ model Item {
 
   @@unique([numero, loteId])
   @@index([loteId, status])
+}
+
+model Recurso {
+  id            String        @id @default(uuid())
+  tipo          TipoRecurso
+  status        StatusRecurso @default(PENDENTE)
+  motivo        String
+  fundamentacao String
+  resposta      String?
+  dataEnvio     DateTime      @default(now())
+  dataResposta  DateTime?
+  prazoResposta Int // dias para resposta
+  editalId      String
+  licitanteId   String
+  usuarioId     String // usuário que enviou o recurso
+  respondidoPor String? // usuário que respondeu o recurso
+
+  edital               Edital    @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  licitante            Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
+  enviadoPor           Usuario   @relation("RecursoEnviadoPor", fields: [usuarioId], references: [id], onDelete: Cascade)
+  respondidoPorUsuario Usuario?  @relation("RecursoRespondidoPor", fields: [respondidoPor], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([editalId])
+  @@index([licitanteId])
+  @@index([usuarioId])
+  @@index([status])
+  @@index([tipo])
+}
+
+model Sancao {
+  id            String       @id @default(uuid())
+  tipo          TipoSancao
+  status        StatusSancao @default(PENDENTE)
+  motivo        String
+  fundamentacao String
+  dataInicio    DateTime
+  dataFim       DateTime?
+  valorMulta    Int? // valor em centavos
+  observacoes   String?
+  editalId      String
+  licitanteId   String
+  aplicadoPor   String // usuário que aplicou a sanção
+  revogadoPor   String? // usuário que revogou a sanção
+
+  edital             Edital    @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  licitante          Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
+  aplicadoPorUsuario Usuario   @relation("SancaoAplicadaPor", fields: [aplicadoPor], references: [id], onDelete: Cascade)
+  revogadoPorUsuario Usuario?  @relation("SancaoRevogadaPor", fields: [revogadoPor], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([editalId])
+  @@index([licitanteId])
+  @@index([aplicadoPor])
+  @@index([status])
+  @@index([tipo])
 }
