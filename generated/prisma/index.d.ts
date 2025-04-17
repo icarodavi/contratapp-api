@@ -327,6 +327,57 @@ export const StatusPrazo: {
 
 export type StatusPrazo = (typeof StatusPrazo)[keyof typeof StatusPrazo]
 
+
+export const TipoAtividade: {
+  DISPUTA_ABERTA: 'DISPUTA_ABERTA',
+  DISPUTA_SUSPENSA: 'DISPUTA_SUSPENSA',
+  DISPUTA_RETOMADA: 'DISPUTA_RETOMADA',
+  DISPUTA_ENCERRADA: 'DISPUTA_ENCERRADA',
+  DISPUTA_CANCELADA: 'DISPUTA_CANCELADA',
+  DOCUMENTO_ENVIADO: 'DOCUMENTO_ENVIADO',
+  DOCUMENTO_VALIDADO: 'DOCUMENTO_VALIDADO',
+  DOCUMENTO_INVALIDADO: 'DOCUMENTO_INVALIDADO',
+  DOCUMENTO_EXCLUIDO: 'DOCUMENTO_EXCLUIDO',
+  DOCUMENTO_ATUALIZADO: 'DOCUMENTO_ATUALIZADO',
+  LANCE_REALIZADO: 'LANCE_REALIZADO',
+  LANCE_CANCELADO: 'LANCE_CANCELADO',
+  LANCE_INVALIDADO: 'LANCE_INVALIDADO',
+  PROPOSTA_ENVIADA: 'PROPOSTA_ENVIADA',
+  PROPOSTA_ATUALIZADA: 'PROPOSTA_ATUALIZADA',
+  PROPOSTA_CANCELADA: 'PROPOSTA_CANCELADA',
+  PROPOSTA_ACEITA: 'PROPOSTA_ACEITA',
+  PROPOSTA_REJEITADA: 'PROPOSTA_REJEITADA',
+  RECURSO_ENVIADO: 'RECURSO_ENVIADO',
+  RECURSO_RESPONDIDO: 'RECURSO_RESPONDIDO',
+  RECURSO_DEFERIDO: 'RECURSO_DEFERIDO',
+  RECURSO_INDEFERIDO: 'RECURSO_INDEFERIDO',
+  SANCAO_APLICADA: 'SANCAO_APLICADA',
+  SANCAO_REVOGADA: 'SANCAO_REVOGADA',
+  SANCAO_SUSPENSA: 'SANCAO_SUSPENSA',
+  SANCAO_EXPIRADA: 'SANCAO_EXPIRADA',
+  PRAZO_CRIADO: 'PRAZO_CRIADO',
+  PRAZO_ATUALIZADO: 'PRAZO_ATUALIZADO',
+  PRAZO_CONCLUIDO: 'PRAZO_CONCLUIDO',
+  PRAZO_ATRASADO: 'PRAZO_ATRASADO',
+  PRAZO_CANCELADO: 'PRAZO_CANCELADO',
+  MENSAGEM_ENVIADA: 'MENSAGEM_ENVIADA',
+  MENSAGEM_EDITADA: 'MENSAGEM_EDITADA',
+  MENSAGEM_EXCLUIDA: 'MENSAGEM_EXCLUIDA',
+  USUARIO_LOGIN: 'USUARIO_LOGIN',
+  USUARIO_LOGOUT: 'USUARIO_LOGOUT',
+  USUARIO_BLOQUEADO: 'USUARIO_BLOQUEADO',
+  USUARIO_DESBLOQUEADO: 'USUARIO_DESBLOQUEADO',
+  SENHA_ALTERADA: 'SENHA_ALTERADA',
+  PERFIL_ATUALIZADO: 'PERFIL_ATUALIZADO',
+  SISTEMA_BACKUP: 'SISTEMA_BACKUP',
+  SISTEMA_RESTAURACAO: 'SISTEMA_RESTAURACAO',
+  SISTEMA_ATUALIZACAO: 'SISTEMA_ATUALIZACAO',
+  SISTEMA_MANUTENCAO: 'SISTEMA_MANUTENCAO',
+  SISTEMA_ERRO: 'SISTEMA_ERRO'
+};
+
+export type TipoAtividade = (typeof TipoAtividade)[keyof typeof TipoAtividade]
+
 }
 
 export type DisputaStatus = $Enums.DisputaStatus
@@ -392,6 +443,10 @@ export const TipoPrazo: typeof $Enums.TipoPrazo
 export type StatusPrazo = $Enums.StatusPrazo
 
 export const StatusPrazo: typeof $Enums.StatusPrazo
+
+export type TipoAtividade = $Enums.TipoAtividade
+
+export const TipoAtividade: typeof $Enums.TipoAtividade
 
 /**
  * ##  Prisma Client ʲˢ
@@ -16499,70 +16554,120 @@ export namespace Prisma {
 
   export type LogAtividadeMinAggregateOutputType = {
     id: string | null
-    disputaId: string | null
-    usuarioId: string | null
+    tipo: $Enums.TipoAtividade | null
     acao: string | null
     detalhes: string | null
     data: Date | null
     ip: string | null
     userAgent: string | null
+    sessaoId: string | null
+    hashSessao: string | null
+    status: string | null
+    nivel: string | null
+    modulo: string | null
+    entidadeId: string | null
+    entidadeTipo: string | null
+    disputaId: string | null
+    usuarioId: string | null
   }
 
   export type LogAtividadeMaxAggregateOutputType = {
     id: string | null
-    disputaId: string | null
-    usuarioId: string | null
+    tipo: $Enums.TipoAtividade | null
     acao: string | null
     detalhes: string | null
     data: Date | null
     ip: string | null
     userAgent: string | null
+    sessaoId: string | null
+    hashSessao: string | null
+    status: string | null
+    nivel: string | null
+    modulo: string | null
+    entidadeId: string | null
+    entidadeTipo: string | null
+    disputaId: string | null
+    usuarioId: string | null
   }
 
   export type LogAtividadeCountAggregateOutputType = {
     id: number
-    disputaId: number
-    usuarioId: number
+    tipo: number
     acao: number
     detalhes: number
     data: number
     ip: number
     userAgent: number
+    sessaoId: number
+    hashSessao: number
+    status: number
+    nivel: number
+    modulo: number
+    entidadeId: number
+    entidadeTipo: number
+    metadata: number
+    disputaId: number
+    usuarioId: number
     _all: number
   }
 
 
   export type LogAtividadeMinAggregateInputType = {
     id?: true
-    disputaId?: true
-    usuarioId?: true
+    tipo?: true
     acao?: true
     detalhes?: true
     data?: true
     ip?: true
     userAgent?: true
+    sessaoId?: true
+    hashSessao?: true
+    status?: true
+    nivel?: true
+    modulo?: true
+    entidadeId?: true
+    entidadeTipo?: true
+    disputaId?: true
+    usuarioId?: true
   }
 
   export type LogAtividadeMaxAggregateInputType = {
     id?: true
-    disputaId?: true
-    usuarioId?: true
+    tipo?: true
     acao?: true
     detalhes?: true
     data?: true
     ip?: true
     userAgent?: true
+    sessaoId?: true
+    hashSessao?: true
+    status?: true
+    nivel?: true
+    modulo?: true
+    entidadeId?: true
+    entidadeTipo?: true
+    disputaId?: true
+    usuarioId?: true
   }
 
   export type LogAtividadeCountAggregateInputType = {
     id?: true
-    disputaId?: true
-    usuarioId?: true
+    tipo?: true
     acao?: true
     detalhes?: true
     data?: true
     ip?: true
     userAgent?: true
+    sessaoId?: true
+    hashSessao?: true
+    status?: true
+    nivel?: true
+    modulo?: true
+    entidadeId?: true
+    entidadeTipo?: true
+    metadata?: true
+    disputaId?: true
+    usuarioId?: true
     _all?: true
   }
 
@@ -16640,13 +16745,22 @@ export namespace Prisma {
 
   export type LogAtividadeGroupByOutputType = {
     id: string
-    disputaId: string
-    usuarioId: string | null
+    tipo: $Enums.TipoAtividade
     acao: string
     detalhes: string | null
     data: Date
     ip: string | null
     userAgent: string | null
+    sessaoId: string | null
+    hashSessao: string | null
+    status: string
+    nivel: string
+    modulo: string
+    entidadeId: string | null
+    entidadeTipo: string | null
+    metadata: JsonValue | null
+    disputaId: string | null
+    usuarioId: string | null
     _count: LogAtividadeCountAggregateOutputType | null
     _min: LogAtividadeMinAggregateOutputType | null
     _max: LogAtividadeMaxAggregateOutputType | null
@@ -16668,83 +16782,128 @@ export namespace Prisma {
 
   export type LogAtividadeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    disputaId?: boolean
-    usuarioId?: boolean
+    tipo?: boolean
     acao?: boolean
     detalhes?: boolean
     data?: boolean
     ip?: boolean
     userAgent?: boolean
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
+    sessaoId?: boolean
+    hashSessao?: boolean
+    status?: boolean
+    nivel?: boolean
+    modulo?: boolean
+    entidadeId?: boolean
+    entidadeTipo?: boolean
+    metadata?: boolean
+    disputaId?: boolean
+    usuarioId?: boolean
+    disputa?: boolean | LogAtividade$disputaArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
   }, ExtArgs["result"]["logAtividade"]>
 
   export type LogAtividadeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    disputaId?: boolean
-    usuarioId?: boolean
+    tipo?: boolean
     acao?: boolean
     detalhes?: boolean
     data?: boolean
     ip?: boolean
     userAgent?: boolean
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
+    sessaoId?: boolean
+    hashSessao?: boolean
+    status?: boolean
+    nivel?: boolean
+    modulo?: boolean
+    entidadeId?: boolean
+    entidadeTipo?: boolean
+    metadata?: boolean
+    disputaId?: boolean
+    usuarioId?: boolean
+    disputa?: boolean | LogAtividade$disputaArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
   }, ExtArgs["result"]["logAtividade"]>
 
   export type LogAtividadeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    disputaId?: boolean
-    usuarioId?: boolean
+    tipo?: boolean
     acao?: boolean
     detalhes?: boolean
     data?: boolean
     ip?: boolean
     userAgent?: boolean
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
+    sessaoId?: boolean
+    hashSessao?: boolean
+    status?: boolean
+    nivel?: boolean
+    modulo?: boolean
+    entidadeId?: boolean
+    entidadeTipo?: boolean
+    metadata?: boolean
+    disputaId?: boolean
+    usuarioId?: boolean
+    disputa?: boolean | LogAtividade$disputaArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
   }, ExtArgs["result"]["logAtividade"]>
 
   export type LogAtividadeSelectScalar = {
     id?: boolean
-    disputaId?: boolean
-    usuarioId?: boolean
+    tipo?: boolean
     acao?: boolean
     detalhes?: boolean
     data?: boolean
     ip?: boolean
     userAgent?: boolean
+    sessaoId?: boolean
+    hashSessao?: boolean
+    status?: boolean
+    nivel?: boolean
+    modulo?: boolean
+    entidadeId?: boolean
+    entidadeTipo?: boolean
+    metadata?: boolean
+    disputaId?: boolean
+    usuarioId?: boolean
   }
 
-  export type LogAtividadeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "disputaId" | "usuarioId" | "acao" | "detalhes" | "data" | "ip" | "userAgent", ExtArgs["result"]["logAtividade"]>
+  export type LogAtividadeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tipo" | "acao" | "detalhes" | "data" | "ip" | "userAgent" | "sessaoId" | "hashSessao" | "status" | "nivel" | "modulo" | "entidadeId" | "entidadeTipo" | "metadata" | "disputaId" | "usuarioId", ExtArgs["result"]["logAtividade"]>
   export type LogAtividadeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
+    disputa?: boolean | LogAtividade$disputaArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
   }
   export type LogAtividadeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
+    disputa?: boolean | LogAtividade$disputaArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
   }
   export type LogAtividadeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    disputa?: boolean | DisputaDefaultArgs<ExtArgs>
+    disputa?: boolean | LogAtividade$disputaArgs<ExtArgs>
     usuario?: boolean | LogAtividade$usuarioArgs<ExtArgs>
   }
 
   export type $LogAtividadePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "LogAtividade"
     objects: {
-      disputa: Prisma.$DisputaPayload<ExtArgs>
+      disputa: Prisma.$DisputaPayload<ExtArgs> | null
       usuario: Prisma.$UsuarioPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      disputaId: string
-      usuarioId: string | null
+      tipo: $Enums.TipoAtividade
       acao: string
       detalhes: string | null
       data: Date
       ip: string | null
       userAgent: string | null
+      sessaoId: string | null
+      hashSessao: string | null
+      status: string
+      nivel: string
+      modulo: string
+      entidadeId: string | null
+      entidadeTipo: string | null
+      metadata: Prisma.JsonValue | null
+      disputaId: string | null
+      usuarioId: string | null
     }, ExtArgs["result"]["logAtividade"]>
     composites: {}
   }
@@ -17139,7 +17298,7 @@ export namespace Prisma {
    */
   export interface Prisma__LogAtividadeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    disputa<T extends DisputaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DisputaDefaultArgs<ExtArgs>>): Prisma__DisputaClient<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    disputa<T extends LogAtividade$disputaArgs<ExtArgs> = {}>(args?: Subset<T, LogAtividade$disputaArgs<ExtArgs>>): Prisma__DisputaClient<$Result.GetResult<Prisma.$DisputaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     usuario<T extends LogAtividade$usuarioArgs<ExtArgs> = {}>(args?: Subset<T, LogAtividade$usuarioArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17171,13 +17330,22 @@ export namespace Prisma {
    */
   interface LogAtividadeFieldRefs {
     readonly id: FieldRef<"LogAtividade", 'String'>
-    readonly disputaId: FieldRef<"LogAtividade", 'String'>
-    readonly usuarioId: FieldRef<"LogAtividade", 'String'>
+    readonly tipo: FieldRef<"LogAtividade", 'TipoAtividade'>
     readonly acao: FieldRef<"LogAtividade", 'String'>
     readonly detalhes: FieldRef<"LogAtividade", 'String'>
     readonly data: FieldRef<"LogAtividade", 'DateTime'>
     readonly ip: FieldRef<"LogAtividade", 'String'>
     readonly userAgent: FieldRef<"LogAtividade", 'String'>
+    readonly sessaoId: FieldRef<"LogAtividade", 'String'>
+    readonly hashSessao: FieldRef<"LogAtividade", 'String'>
+    readonly status: FieldRef<"LogAtividade", 'String'>
+    readonly nivel: FieldRef<"LogAtividade", 'String'>
+    readonly modulo: FieldRef<"LogAtividade", 'String'>
+    readonly entidadeId: FieldRef<"LogAtividade", 'String'>
+    readonly entidadeTipo: FieldRef<"LogAtividade", 'String'>
+    readonly metadata: FieldRef<"LogAtividade", 'Json'>
+    readonly disputaId: FieldRef<"LogAtividade", 'String'>
+    readonly usuarioId: FieldRef<"LogAtividade", 'String'>
   }
     
 
@@ -17571,6 +17739,25 @@ export namespace Prisma {
      * Limit how many LogAtividades to delete.
      */
     limit?: number
+  }
+
+  /**
+   * LogAtividade.disputa
+   */
+  export type LogAtividade$disputaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disputa
+     */
+    select?: DisputaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disputa
+     */
+    omit?: DisputaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputaInclude<ExtArgs> | null
+    where?: DisputaWhereInput
   }
 
   /**
@@ -23934,13 +24121,22 @@ export namespace Prisma {
 
   export const LogAtividadeScalarFieldEnum: {
     id: 'id',
-    disputaId: 'disputaId',
-    usuarioId: 'usuarioId',
+    tipo: 'tipo',
     acao: 'acao',
     detalhes: 'detalhes',
     data: 'data',
     ip: 'ip',
-    userAgent: 'userAgent'
+    userAgent: 'userAgent',
+    sessaoId: 'sessaoId',
+    hashSessao: 'hashSessao',
+    status: 'status',
+    nivel: 'nivel',
+    modulo: 'modulo',
+    entidadeId: 'entidadeId',
+    entidadeTipo: 'entidadeTipo',
+    metadata: 'metadata',
+    disputaId: 'disputaId',
+    usuarioId: 'usuarioId'
   };
 
   export type LogAtividadeScalarFieldEnum = (typeof LogAtividadeScalarFieldEnum)[keyof typeof LogAtividadeScalarFieldEnum]
@@ -24046,6 +24242,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -24060,6 +24264,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -24239,6 +24452,34 @@ export namespace Prisma {
    * Reference to a field of type 'TipoAutorMensagem[]'
    */
   export type ListEnumTipoAutorMensagemFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoAutorMensagem[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TipoAtividade'
+   */
+  export type EnumTipoAtividadeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoAtividade'>
+    
+
+
+  /**
+   * Reference to a field of type 'TipoAtividade[]'
+   */
+  export type ListEnumTipoAtividadeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoAtividade[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -25311,26 +25552,44 @@ export namespace Prisma {
     OR?: LogAtividadeWhereInput[]
     NOT?: LogAtividadeWhereInput | LogAtividadeWhereInput[]
     id?: StringFilter<"LogAtividade"> | string
-    disputaId?: StringFilter<"LogAtividade"> | string
-    usuarioId?: StringNullableFilter<"LogAtividade"> | string | null
+    tipo?: EnumTipoAtividadeFilter<"LogAtividade"> | $Enums.TipoAtividade
     acao?: StringFilter<"LogAtividade"> | string
     detalhes?: StringNullableFilter<"LogAtividade"> | string | null
     data?: DateTimeFilter<"LogAtividade"> | Date | string
     ip?: StringNullableFilter<"LogAtividade"> | string | null
     userAgent?: StringNullableFilter<"LogAtividade"> | string | null
-    disputa?: XOR<DisputaScalarRelationFilter, DisputaWhereInput>
+    sessaoId?: StringNullableFilter<"LogAtividade"> | string | null
+    hashSessao?: StringNullableFilter<"LogAtividade"> | string | null
+    status?: StringFilter<"LogAtividade"> | string
+    nivel?: StringFilter<"LogAtividade"> | string
+    modulo?: StringFilter<"LogAtividade"> | string
+    entidadeId?: StringNullableFilter<"LogAtividade"> | string | null
+    entidadeTipo?: StringNullableFilter<"LogAtividade"> | string | null
+    metadata?: JsonNullableFilter<"LogAtividade">
+    disputaId?: StringNullableFilter<"LogAtividade"> | string | null
+    usuarioId?: StringNullableFilter<"LogAtividade"> | string | null
+    disputa?: XOR<DisputaNullableScalarRelationFilter, DisputaWhereInput> | null
     usuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
   }
 
   export type LogAtividadeOrderByWithRelationInput = {
     id?: SortOrder
-    disputaId?: SortOrder
-    usuarioId?: SortOrderInput | SortOrder
+    tipo?: SortOrder
     acao?: SortOrder
     detalhes?: SortOrderInput | SortOrder
     data?: SortOrder
     ip?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
+    sessaoId?: SortOrderInput | SortOrder
+    hashSessao?: SortOrderInput | SortOrder
+    status?: SortOrder
+    nivel?: SortOrder
+    modulo?: SortOrder
+    entidadeId?: SortOrderInput | SortOrder
+    entidadeTipo?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    disputaId?: SortOrderInput | SortOrder
+    usuarioId?: SortOrderInput | SortOrder
     disputa?: DisputaOrderByWithRelationInput
     usuario?: UsuarioOrderByWithRelationInput
   }
@@ -25340,26 +25599,44 @@ export namespace Prisma {
     AND?: LogAtividadeWhereInput | LogAtividadeWhereInput[]
     OR?: LogAtividadeWhereInput[]
     NOT?: LogAtividadeWhereInput | LogAtividadeWhereInput[]
-    disputaId?: StringFilter<"LogAtividade"> | string
-    usuarioId?: StringNullableFilter<"LogAtividade"> | string | null
+    tipo?: EnumTipoAtividadeFilter<"LogAtividade"> | $Enums.TipoAtividade
     acao?: StringFilter<"LogAtividade"> | string
     detalhes?: StringNullableFilter<"LogAtividade"> | string | null
     data?: DateTimeFilter<"LogAtividade"> | Date | string
     ip?: StringNullableFilter<"LogAtividade"> | string | null
     userAgent?: StringNullableFilter<"LogAtividade"> | string | null
-    disputa?: XOR<DisputaScalarRelationFilter, DisputaWhereInput>
+    sessaoId?: StringNullableFilter<"LogAtividade"> | string | null
+    hashSessao?: StringNullableFilter<"LogAtividade"> | string | null
+    status?: StringFilter<"LogAtividade"> | string
+    nivel?: StringFilter<"LogAtividade"> | string
+    modulo?: StringFilter<"LogAtividade"> | string
+    entidadeId?: StringNullableFilter<"LogAtividade"> | string | null
+    entidadeTipo?: StringNullableFilter<"LogAtividade"> | string | null
+    metadata?: JsonNullableFilter<"LogAtividade">
+    disputaId?: StringNullableFilter<"LogAtividade"> | string | null
+    usuarioId?: StringNullableFilter<"LogAtividade"> | string | null
+    disputa?: XOR<DisputaNullableScalarRelationFilter, DisputaWhereInput> | null
     usuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
   }, "id">
 
   export type LogAtividadeOrderByWithAggregationInput = {
     id?: SortOrder
-    disputaId?: SortOrder
-    usuarioId?: SortOrderInput | SortOrder
+    tipo?: SortOrder
     acao?: SortOrder
     detalhes?: SortOrderInput | SortOrder
     data?: SortOrder
     ip?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
+    sessaoId?: SortOrderInput | SortOrder
+    hashSessao?: SortOrderInput | SortOrder
+    status?: SortOrder
+    nivel?: SortOrder
+    modulo?: SortOrder
+    entidadeId?: SortOrderInput | SortOrder
+    entidadeTipo?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    disputaId?: SortOrderInput | SortOrder
+    usuarioId?: SortOrderInput | SortOrder
     _count?: LogAtividadeCountOrderByAggregateInput
     _max?: LogAtividadeMaxOrderByAggregateInput
     _min?: LogAtividadeMinOrderByAggregateInput
@@ -25370,13 +25647,22 @@ export namespace Prisma {
     OR?: LogAtividadeScalarWhereWithAggregatesInput[]
     NOT?: LogAtividadeScalarWhereWithAggregatesInput | LogAtividadeScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"LogAtividade"> | string
-    disputaId?: StringWithAggregatesFilter<"LogAtividade"> | string
-    usuarioId?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
+    tipo?: EnumTipoAtividadeWithAggregatesFilter<"LogAtividade"> | $Enums.TipoAtividade
     acao?: StringWithAggregatesFilter<"LogAtividade"> | string
     detalhes?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
     data?: DateTimeWithAggregatesFilter<"LogAtividade"> | Date | string
     ip?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
     userAgent?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
+    sessaoId?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
+    hashSessao?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
+    status?: StringWithAggregatesFilter<"LogAtividade"> | string
+    nivel?: StringWithAggregatesFilter<"LogAtividade"> | string
+    modulo?: StringWithAggregatesFilter<"LogAtividade"> | string
+    entidadeId?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
+    entidadeTipo?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
+    metadata?: JsonNullableWithAggregatesFilter<"LogAtividade">
+    disputaId?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
+    usuarioId?: StringNullableWithAggregatesFilter<"LogAtividade"> | string | null
   }
 
   export type LoteWhereInput = {
@@ -26941,77 +27227,140 @@ export namespace Prisma {
 
   export type LogAtividadeCreateInput = {
     id?: string
+    tipo?: $Enums.TipoAtividade
     acao: string
     detalhes?: string | null
     data?: Date | string
     ip?: string | null
     userAgent?: string | null
-    disputa: DisputaCreateNestedOneWithoutLogsInput
+    sessaoId?: string | null
+    hashSessao?: string | null
+    status?: string
+    nivel?: string
+    modulo?: string
+    entidadeId?: string | null
+    entidadeTipo?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputa?: DisputaCreateNestedOneWithoutLogsInput
     usuario?: UsuarioCreateNestedOneWithoutLogAtividadeInput
   }
 
   export type LogAtividadeUncheckedCreateInput = {
     id?: string
-    disputaId: string
-    usuarioId?: string | null
+    tipo?: $Enums.TipoAtividade
     acao: string
     detalhes?: string | null
     data?: Date | string
     ip?: string | null
     userAgent?: string | null
+    sessaoId?: string | null
+    hashSessao?: string | null
+    status?: string
+    nivel?: string
+    modulo?: string
+    entidadeId?: string | null
+    entidadeTipo?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputaId?: string | null
+    usuarioId?: string | null
   }
 
   export type LogAtividadeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    disputa?: DisputaUpdateOneRequiredWithoutLogsNestedInput
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputa?: DisputaUpdateOneWithoutLogsNestedInput
     usuario?: UsuarioUpdateOneWithoutLogAtividadeNestedInput
   }
 
   export type LogAtividadeUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    disputaId?: StringFieldUpdateOperationsInput | string
-    usuarioId?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuarioId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LogAtividadeCreateManyInput = {
     id?: string
-    disputaId: string
-    usuarioId?: string | null
+    tipo?: $Enums.TipoAtividade
     acao: string
     detalhes?: string | null
     data?: Date | string
     ip?: string | null
     userAgent?: string | null
+    sessaoId?: string | null
+    hashSessao?: string | null
+    status?: string
+    nivel?: string
+    modulo?: string
+    entidadeId?: string | null
+    entidadeTipo?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputaId?: string | null
+    usuarioId?: string | null
   }
 
   export type LogAtividadeUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type LogAtividadeUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    disputaId?: StringFieldUpdateOperationsInput | string
-    usuarioId?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuarioId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LoteCreateInput = {
@@ -28521,37 +28870,128 @@ export namespace Prisma {
     hash?: SortOrder
   }
 
+  export type EnumTipoAtividadeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoAtividade | EnumTipoAtividadeFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoAtividade[] | ListEnumTipoAtividadeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoAtividade[] | ListEnumTipoAtividadeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoAtividadeFilter<$PrismaModel> | $Enums.TipoAtividade
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type LogAtividadeCountOrderByAggregateInput = {
     id?: SortOrder
-    disputaId?: SortOrder
-    usuarioId?: SortOrder
+    tipo?: SortOrder
     acao?: SortOrder
     detalhes?: SortOrder
     data?: SortOrder
     ip?: SortOrder
     userAgent?: SortOrder
+    sessaoId?: SortOrder
+    hashSessao?: SortOrder
+    status?: SortOrder
+    nivel?: SortOrder
+    modulo?: SortOrder
+    entidadeId?: SortOrder
+    entidadeTipo?: SortOrder
+    metadata?: SortOrder
+    disputaId?: SortOrder
+    usuarioId?: SortOrder
   }
 
   export type LogAtividadeMaxOrderByAggregateInput = {
     id?: SortOrder
-    disputaId?: SortOrder
-    usuarioId?: SortOrder
+    tipo?: SortOrder
     acao?: SortOrder
     detalhes?: SortOrder
     data?: SortOrder
     ip?: SortOrder
     userAgent?: SortOrder
+    sessaoId?: SortOrder
+    hashSessao?: SortOrder
+    status?: SortOrder
+    nivel?: SortOrder
+    modulo?: SortOrder
+    entidadeId?: SortOrder
+    entidadeTipo?: SortOrder
+    disputaId?: SortOrder
+    usuarioId?: SortOrder
   }
 
   export type LogAtividadeMinOrderByAggregateInput = {
     id?: SortOrder
-    disputaId?: SortOrder
-    usuarioId?: SortOrder
+    tipo?: SortOrder
     acao?: SortOrder
     detalhes?: SortOrder
     data?: SortOrder
     ip?: SortOrder
     userAgent?: SortOrder
+    sessaoId?: SortOrder
+    hashSessao?: SortOrder
+    status?: SortOrder
+    nivel?: SortOrder
+    modulo?: SortOrder
+    entidadeId?: SortOrder
+    entidadeTipo?: SortOrder
+    disputaId?: SortOrder
+    usuarioId?: SortOrder
+  }
+
+  export type EnumTipoAtividadeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoAtividade | EnumTipoAtividadeFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoAtividade[] | ListEnumTipoAtividadeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoAtividade[] | ListEnumTipoAtividadeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoAtividadeWithAggregatesFilter<$PrismaModel> | $Enums.TipoAtividade
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTipoAtividadeFilter<$PrismaModel>
+    _max?: NestedEnumTipoAtividadeFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type ItemListRelationFilter = {
@@ -30639,10 +31079,16 @@ export namespace Prisma {
     connect?: UsuarioWhereUniqueInput
   }
 
-  export type DisputaUpdateOneRequiredWithoutLogsNestedInput = {
+  export type EnumTipoAtividadeFieldUpdateOperationsInput = {
+    set?: $Enums.TipoAtividade
+  }
+
+  export type DisputaUpdateOneWithoutLogsNestedInput = {
     create?: XOR<DisputaCreateWithoutLogsInput, DisputaUncheckedCreateWithoutLogsInput>
     connectOrCreate?: DisputaCreateOrConnectWithoutLogsInput
     upsert?: DisputaUpsertWithoutLogsInput
+    disconnect?: DisputaWhereInput | boolean
+    delete?: DisputaWhereInput | boolean
     connect?: DisputaWhereUniqueInput
     update?: XOR<XOR<DisputaUpdateToOneWithWhereWithoutLogsInput, DisputaUpdateWithoutLogsInput>, DisputaUncheckedUpdateWithoutLogsInput>
   }
@@ -31381,6 +31827,46 @@ export namespace Prisma {
     _max?: NestedEnumTipoAutorMensagemFilter<$PrismaModel>
   }
 
+  export type NestedEnumTipoAtividadeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoAtividade | EnumTipoAtividadeFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoAtividade[] | ListEnumTipoAtividadeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoAtividade[] | ListEnumTipoAtividadeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoAtividadeFilter<$PrismaModel> | $Enums.TipoAtividade
+  }
+
+  export type NestedEnumTipoAtividadeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TipoAtividade | EnumTipoAtividadeFieldRefInput<$PrismaModel>
+    in?: $Enums.TipoAtividade[] | ListEnumTipoAtividadeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TipoAtividade[] | ListEnumTipoAtividadeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTipoAtividadeWithAggregatesFilter<$PrismaModel> | $Enums.TipoAtividade
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTipoAtividadeFilter<$PrismaModel>
+    _max?: NestedEnumTipoAtividadeFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type NestedEnumTipoRecursoFilter<$PrismaModel = never> = {
     equals?: $Enums.TipoRecurso | EnumTipoRecursoFieldRefInput<$PrismaModel>
     in?: $Enums.TipoRecurso[] | ListEnumTipoRecursoFieldRefInput<$PrismaModel>
@@ -31485,22 +31971,40 @@ export namespace Prisma {
 
   export type LogAtividadeCreateWithoutUsuarioInput = {
     id?: string
+    tipo?: $Enums.TipoAtividade
     acao: string
     detalhes?: string | null
     data?: Date | string
     ip?: string | null
     userAgent?: string | null
-    disputa: DisputaCreateNestedOneWithoutLogsInput
+    sessaoId?: string | null
+    hashSessao?: string | null
+    status?: string
+    nivel?: string
+    modulo?: string
+    entidadeId?: string | null
+    entidadeTipo?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputa?: DisputaCreateNestedOneWithoutLogsInput
   }
 
   export type LogAtividadeUncheckedCreateWithoutUsuarioInput = {
     id?: string
-    disputaId: string
+    tipo?: $Enums.TipoAtividade
     acao: string
     detalhes?: string | null
     data?: Date | string
     ip?: string | null
     userAgent?: string | null
+    sessaoId?: string | null
+    hashSessao?: string | null
+    status?: string
+    nivel?: string
+    modulo?: string
+    entidadeId?: string | null
+    entidadeTipo?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputaId?: string | null
   }
 
   export type LogAtividadeCreateOrConnectWithoutUsuarioInput = {
@@ -31867,13 +32371,22 @@ export namespace Prisma {
     OR?: LogAtividadeScalarWhereInput[]
     NOT?: LogAtividadeScalarWhereInput | LogAtividadeScalarWhereInput[]
     id?: StringFilter<"LogAtividade"> | string
-    disputaId?: StringFilter<"LogAtividade"> | string
-    usuarioId?: StringNullableFilter<"LogAtividade"> | string | null
+    tipo?: EnumTipoAtividadeFilter<"LogAtividade"> | $Enums.TipoAtividade
     acao?: StringFilter<"LogAtividade"> | string
     detalhes?: StringNullableFilter<"LogAtividade"> | string | null
     data?: DateTimeFilter<"LogAtividade"> | Date | string
     ip?: StringNullableFilter<"LogAtividade"> | string | null
     userAgent?: StringNullableFilter<"LogAtividade"> | string | null
+    sessaoId?: StringNullableFilter<"LogAtividade"> | string | null
+    hashSessao?: StringNullableFilter<"LogAtividade"> | string | null
+    status?: StringFilter<"LogAtividade"> | string
+    nivel?: StringFilter<"LogAtividade"> | string
+    modulo?: StringFilter<"LogAtividade"> | string
+    entidadeId?: StringNullableFilter<"LogAtividade"> | string | null
+    entidadeTipo?: StringNullableFilter<"LogAtividade"> | string | null
+    metadata?: JsonNullableFilter<"LogAtividade">
+    disputaId?: StringNullableFilter<"LogAtividade"> | string | null
+    usuarioId?: StringNullableFilter<"LogAtividade"> | string | null
   }
 
   export type MensagemChatUpsertWithWhereUniqueWithoutAutorInput = {
@@ -32794,22 +33307,40 @@ export namespace Prisma {
 
   export type LogAtividadeCreateWithoutDisputaInput = {
     id?: string
+    tipo?: $Enums.TipoAtividade
     acao: string
     detalhes?: string | null
     data?: Date | string
     ip?: string | null
     userAgent?: string | null
+    sessaoId?: string | null
+    hashSessao?: string | null
+    status?: string
+    nivel?: string
+    modulo?: string
+    entidadeId?: string | null
+    entidadeTipo?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     usuario?: UsuarioCreateNestedOneWithoutLogAtividadeInput
   }
 
   export type LogAtividadeUncheckedCreateWithoutDisputaInput = {
     id?: string
-    usuarioId?: string | null
+    tipo?: $Enums.TipoAtividade
     acao: string
     detalhes?: string | null
     data?: Date | string
     ip?: string | null
     userAgent?: string | null
+    sessaoId?: string | null
+    hashSessao?: string | null
+    status?: string
+    nivel?: string
+    modulo?: string
+    entidadeId?: string | null
+    entidadeTipo?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    usuarioId?: string | null
   }
 
   export type LogAtividadeCreateOrConnectWithoutDisputaInput = {
@@ -36530,12 +37061,21 @@ export namespace Prisma {
 
   export type LogAtividadeCreateManyUsuarioInput = {
     id?: string
-    disputaId: string
+    tipo?: $Enums.TipoAtividade
     acao: string
     detalhes?: string | null
     data?: Date | string
     ip?: string | null
     userAgent?: string | null
+    sessaoId?: string | null
+    hashSessao?: string | null
+    status?: string
+    nivel?: string
+    modulo?: string
+    entidadeId?: string | null
+    entidadeTipo?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputaId?: string | null
   }
 
   export type MensagemChatCreateManyAutorInput = {
@@ -36653,32 +37193,59 @@ export namespace Prisma {
 
   export type LogAtividadeUpdateWithoutUsuarioInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    disputa?: DisputaUpdateOneRequiredWithoutLogsNestedInput
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputa?: DisputaUpdateOneWithoutLogsNestedInput
   }
 
   export type LogAtividadeUncheckedUpdateWithoutUsuarioInput = {
     id?: StringFieldUpdateOperationsInput | string
-    disputaId?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LogAtividadeUncheckedUpdateManyWithoutUsuarioInput = {
     id?: StringFieldUpdateOperationsInput | string
-    disputaId?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    disputaId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MensagemChatUpdateWithoutAutorInput = {
@@ -37503,12 +38070,21 @@ export namespace Prisma {
 
   export type LogAtividadeCreateManyDisputaInput = {
     id?: string
-    usuarioId?: string | null
+    tipo?: $Enums.TipoAtividade
     acao: string
     detalhes?: string | null
     data?: Date | string
     ip?: string | null
     userAgent?: string | null
+    sessaoId?: string | null
+    hashSessao?: string | null
+    status?: string
+    nivel?: string
+    modulo?: string
+    entidadeId?: string | null
+    entidadeTipo?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    usuarioId?: string | null
   }
 
   export type SessaoCreateManyDisputaInput = {
@@ -37693,32 +38269,59 @@ export namespace Prisma {
 
   export type LogAtividadeUpdateWithoutDisputaInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     usuario?: UsuarioUpdateOneWithoutLogAtividadeNestedInput
   }
 
   export type LogAtividadeUncheckedUpdateWithoutDisputaInput = {
     id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    usuarioId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LogAtividadeUncheckedUpdateManyWithoutDisputaInput = {
     id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: NullableStringFieldUpdateOperationsInput | string | null
+    tipo?: EnumTipoAtividadeFieldUpdateOperationsInput | $Enums.TipoAtividade
     acao?: StringFieldUpdateOperationsInput | string
     detalhes?: NullableStringFieldUpdateOperationsInput | string | null
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    sessaoId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashSessao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    nivel?: StringFieldUpdateOperationsInput | string
+    modulo?: StringFieldUpdateOperationsInput | string
+    entidadeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entidadeTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    usuarioId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessaoUpdateWithoutDisputaInput = {

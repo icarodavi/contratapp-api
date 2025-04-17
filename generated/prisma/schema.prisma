@@ -204,6 +204,73 @@ enum StatusPrazo {
   CANCELADO
 }
 
+enum TipoAtividade {
+  // Ações de Disputa
+  DISPUTA_ABERTA
+  DISPUTA_SUSPENSA
+  DISPUTA_RETOMADA
+  DISPUTA_ENCERRADA
+  DISPUTA_CANCELADA
+
+  // Ações de Documentos
+  DOCUMENTO_ENVIADO
+  DOCUMENTO_VALIDADO
+  DOCUMENTO_INVALIDADO
+  DOCUMENTO_EXCLUIDO
+  DOCUMENTO_ATUALIZADO
+
+  // Ações de Lances
+  LANCE_REALIZADO
+  LANCE_CANCELADO
+  LANCE_INVALIDADO
+
+  // Ações de Propostas
+  PROPOSTA_ENVIADA
+  PROPOSTA_ATUALIZADA
+  PROPOSTA_CANCELADA
+  PROPOSTA_ACEITA
+  PROPOSTA_REJEITADA
+
+  // Ações de Recursos
+  RECURSO_ENVIADO
+  RECURSO_RESPONDIDO
+  RECURSO_DEFERIDO
+  RECURSO_INDEFERIDO
+
+  // Ações de Sanções
+  SANCAO_APLICADA
+  SANCAO_REVOGADA
+  SANCAO_SUSPENSA
+  SANCAO_EXPIRADA
+
+  // Ações de Prazos
+  PRAZO_CRIADO
+  PRAZO_ATUALIZADO
+  PRAZO_CONCLUIDO
+  PRAZO_ATRASADO
+  PRAZO_CANCELADO
+
+  // Ações de Chat
+  MENSAGEM_ENVIADA
+  MENSAGEM_EDITADA
+  MENSAGEM_EXCLUIDA
+
+  // Ações de Usuários
+  USUARIO_LOGIN
+  USUARIO_LOGOUT
+  USUARIO_BLOQUEADO
+  USUARIO_DESBLOQUEADO
+  SENHA_ALTERADA
+  PERFIL_ATUALIZADO
+
+  // Ações de Sistema
+  SISTEMA_BACKUP
+  SISTEMA_RESTAURACAO
+  SISTEMA_ATUALIZACAO
+  SISTEMA_MANUTENCAO
+  SISTEMA_ERRO
+}
+
 model Usuario {
   id                  String         @id @default(uuid())
   nome                String
@@ -414,17 +481,37 @@ model Sessao {
 }
 
 model LogAtividade {
-  id        String   @id @default(uuid())
-  disputaId String
-  usuarioId String?
-  acao      String
-  detalhes  String?
-  data      DateTime @default(now())
-  ip        String?
-  userAgent String?
+  id           String        @id @default(uuid())
+  tipo         TipoAtividade @default(SISTEMA_ERRO)
+  acao         String
+  detalhes     String?
+  data         DateTime      @default(now())
+  ip           String?
+  userAgent    String?
+  sessaoId     String?
+  hashSessao   String?
+  status       String        @default("SUCESSO") // SUCESSO, ERRO, ALERTA
+  nivel        String        @default("INFO") // DEBUG, INFO, WARN, ERROR
+  modulo       String        @default("NONE") // Nome do módulo que gerou o log
+  entidadeId   String? // ID da entidade relacionada (se aplicável)
+  entidadeTipo String? // Tipo da entidade relacionada (se aplicável)
+  metadata     Json? // Dados adicionais em formato JSON
 
-  disputa Disputa  @relation(fields: [disputaId], references: [id])
-  usuario Usuario? @relation(fields: [usuarioId], references: [id])
+  // Relacionamentos
+  disputa   Disputa? @relation(fields: [disputaId], references: [id])
+  disputaId String?
+  usuario   Usuario? @relation(fields: [usuarioId], references: [id])
+  usuarioId String?
+
+  // Índices para consultas frequentes
+  @@index([tipo])
+  @@index([data])
+  @@index([usuarioId])
+  @@index([disputaId])
+  @@index([modulo])
+  @@index([status])
+  @@index([nivel])
+  @@index([entidadeId, entidadeTipo])
 }
 
 model Lote {

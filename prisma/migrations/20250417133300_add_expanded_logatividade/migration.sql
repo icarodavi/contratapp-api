@@ -1,0 +1,44 @@
+-- CreateEnum
+CREATE TYPE "TipoAtividade" AS ENUM ('DISPUTA_ABERTA', 'DISPUTA_SUSPENSA', 'DISPUTA_RETOMADA', 'DISPUTA_ENCERRADA', 'DISPUTA_CANCELADA', 'DOCUMENTO_ENVIADO', 'DOCUMENTO_VALIDADO', 'DOCUMENTO_INVALIDADO', 'DOCUMENTO_EXCLUIDO', 'DOCUMENTO_ATUALIZADO', 'LANCE_REALIZADO', 'LANCE_CANCELADO', 'LANCE_INVALIDADO', 'PROPOSTA_ENVIADA', 'PROPOSTA_ATUALIZADA', 'PROPOSTA_CANCELADA', 'PROPOSTA_ACEITA', 'PROPOSTA_REJEITADA', 'RECURSO_ENVIADO', 'RECURSO_RESPONDIDO', 'RECURSO_DEFERIDO', 'RECURSO_INDEFERIDO', 'SANCAO_APLICADA', 'SANCAO_REVOGADA', 'SANCAO_SUSPENSA', 'SANCAO_EXPIRADA', 'PRAZO_CRIADO', 'PRAZO_ATUALIZADO', 'PRAZO_CONCLUIDO', 'PRAZO_ATRASADO', 'PRAZO_CANCELADO', 'MENSAGEM_ENVIADA', 'MENSAGEM_EDITADA', 'MENSAGEM_EXCLUIDA', 'USUARIO_LOGIN', 'USUARIO_LOGOUT', 'USUARIO_BLOQUEADO', 'USUARIO_DESBLOQUEADO', 'SENHA_ALTERADA', 'PERFIL_ATUALIZADO', 'SISTEMA_BACKUP', 'SISTEMA_RESTAURACAO', 'SISTEMA_ATUALIZACAO', 'SISTEMA_MANUTENCAO', 'SISTEMA_ERRO');
+
+-- DropForeignKey
+ALTER TABLE "LogAtividade" DROP CONSTRAINT "LogAtividade_disputaId_fkey";
+
+-- AlterTable
+ALTER TABLE "LogAtividade" ADD COLUMN     "entidadeId" TEXT,
+ADD COLUMN     "entidadeTipo" TEXT,
+ADD COLUMN     "hashSessao" TEXT,
+ADD COLUMN     "metadata" JSONB,
+ADD COLUMN     "modulo" TEXT NOT NULL DEFAULT 'NONE',
+ADD COLUMN     "nivel" TEXT NOT NULL DEFAULT 'INFO',
+ADD COLUMN     "sessaoId" TEXT,
+ADD COLUMN     "status" TEXT NOT NULL DEFAULT 'SUCESSO',
+ADD COLUMN     "tipo" "TipoAtividade" NOT NULL DEFAULT 'SISTEMA_ERRO',
+ALTER COLUMN "disputaId" DROP NOT NULL;
+
+-- CreateIndex
+CREATE INDEX "LogAtividade_tipo_idx" ON "LogAtividade"("tipo");
+
+-- CreateIndex
+CREATE INDEX "LogAtividade_data_idx" ON "LogAtividade"("data");
+
+-- CreateIndex
+CREATE INDEX "LogAtividade_usuarioId_idx" ON "LogAtividade"("usuarioId");
+
+-- CreateIndex
+CREATE INDEX "LogAtividade_disputaId_idx" ON "LogAtividade"("disputaId");
+
+-- CreateIndex
+CREATE INDEX "LogAtividade_modulo_idx" ON "LogAtividade"("modulo");
+
+-- CreateIndex
+CREATE INDEX "LogAtividade_status_idx" ON "LogAtividade"("status");
+
+-- CreateIndex
+CREATE INDEX "LogAtividade_nivel_idx" ON "LogAtividade"("nivel");
+
+-- CreateIndex
+CREATE INDEX "LogAtividade_entidadeId_entidadeTipo_idx" ON "LogAtividade"("entidadeId", "entidadeTipo");
+
+-- AddForeignKey
+ALTER TABLE "LogAtividade" ADD CONSTRAINT "LogAtividade_disputaId_fkey" FOREIGN KEY ("disputaId") REFERENCES "Disputa"("id") ON DELETE SET NULL ON UPDATE CASCADE;

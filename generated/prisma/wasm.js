@@ -253,13 +253,22 @@ exports.Prisma.SessaoScalarFieldEnum = {
 
 exports.Prisma.LogAtividadeScalarFieldEnum = {
   id: 'id',
-  disputaId: 'disputaId',
-  usuarioId: 'usuarioId',
+  tipo: 'tipo',
   acao: 'acao',
   detalhes: 'detalhes',
   data: 'data',
   ip: 'ip',
-  userAgent: 'userAgent'
+  userAgent: 'userAgent',
+  sessaoId: 'sessaoId',
+  hashSessao: 'hashSessao',
+  status: 'status',
+  nivel: 'nivel',
+  modulo: 'modulo',
+  entidadeId: 'entidadeId',
+  entidadeTipo: 'entidadeTipo',
+  metadata: 'metadata',
+  disputaId: 'disputaId',
+  usuarioId: 'usuarioId'
 };
 
 exports.Prisma.LoteScalarFieldEnum = {
@@ -344,6 +353,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -352,6 +366,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.PerfilUsuario = exports.$Enums.PerfilUsuario = {
   ADMIN: 'ADMIN',
@@ -473,6 +493,54 @@ exports.StatusDocumento = exports.$Enums.StatusDocumento = {
 exports.TipoAutorMensagem = exports.$Enums.TipoAutorMensagem = {
   PREGOEIRO: 'PREGOEIRO',
   LICITANTE: 'LICITANTE'
+};
+
+exports.TipoAtividade = exports.$Enums.TipoAtividade = {
+  DISPUTA_ABERTA: 'DISPUTA_ABERTA',
+  DISPUTA_SUSPENSA: 'DISPUTA_SUSPENSA',
+  DISPUTA_RETOMADA: 'DISPUTA_RETOMADA',
+  DISPUTA_ENCERRADA: 'DISPUTA_ENCERRADA',
+  DISPUTA_CANCELADA: 'DISPUTA_CANCELADA',
+  DOCUMENTO_ENVIADO: 'DOCUMENTO_ENVIADO',
+  DOCUMENTO_VALIDADO: 'DOCUMENTO_VALIDADO',
+  DOCUMENTO_INVALIDADO: 'DOCUMENTO_INVALIDADO',
+  DOCUMENTO_EXCLUIDO: 'DOCUMENTO_EXCLUIDO',
+  DOCUMENTO_ATUALIZADO: 'DOCUMENTO_ATUALIZADO',
+  LANCE_REALIZADO: 'LANCE_REALIZADO',
+  LANCE_CANCELADO: 'LANCE_CANCELADO',
+  LANCE_INVALIDADO: 'LANCE_INVALIDADO',
+  PROPOSTA_ENVIADA: 'PROPOSTA_ENVIADA',
+  PROPOSTA_ATUALIZADA: 'PROPOSTA_ATUALIZADA',
+  PROPOSTA_CANCELADA: 'PROPOSTA_CANCELADA',
+  PROPOSTA_ACEITA: 'PROPOSTA_ACEITA',
+  PROPOSTA_REJEITADA: 'PROPOSTA_REJEITADA',
+  RECURSO_ENVIADO: 'RECURSO_ENVIADO',
+  RECURSO_RESPONDIDO: 'RECURSO_RESPONDIDO',
+  RECURSO_DEFERIDO: 'RECURSO_DEFERIDO',
+  RECURSO_INDEFERIDO: 'RECURSO_INDEFERIDO',
+  SANCAO_APLICADA: 'SANCAO_APLICADA',
+  SANCAO_REVOGADA: 'SANCAO_REVOGADA',
+  SANCAO_SUSPENSA: 'SANCAO_SUSPENSA',
+  SANCAO_EXPIRADA: 'SANCAO_EXPIRADA',
+  PRAZO_CRIADO: 'PRAZO_CRIADO',
+  PRAZO_ATUALIZADO: 'PRAZO_ATUALIZADO',
+  PRAZO_CONCLUIDO: 'PRAZO_CONCLUIDO',
+  PRAZO_ATRASADO: 'PRAZO_ATRASADO',
+  PRAZO_CANCELADO: 'PRAZO_CANCELADO',
+  MENSAGEM_ENVIADA: 'MENSAGEM_ENVIADA',
+  MENSAGEM_EDITADA: 'MENSAGEM_EDITADA',
+  MENSAGEM_EXCLUIDA: 'MENSAGEM_EXCLUIDA',
+  USUARIO_LOGIN: 'USUARIO_LOGIN',
+  USUARIO_LOGOUT: 'USUARIO_LOGOUT',
+  USUARIO_BLOQUEADO: 'USUARIO_BLOQUEADO',
+  USUARIO_DESBLOQUEADO: 'USUARIO_DESBLOQUEADO',
+  SENHA_ALTERADA: 'SENHA_ALTERADA',
+  PERFIL_ATUALIZADO: 'PERFIL_ATUALIZADO',
+  SISTEMA_BACKUP: 'SISTEMA_BACKUP',
+  SISTEMA_RESTAURACAO: 'SISTEMA_RESTAURACAO',
+  SISTEMA_ATUALIZACAO: 'SISTEMA_ATUALIZACAO',
+  SISTEMA_MANUTENCAO: 'SISTEMA_MANUTENCAO',
+  SISTEMA_ERRO: 'SISTEMA_ERRO'
 };
 
 exports.TipoRecurso = exports.$Enums.TipoRecurso = {
