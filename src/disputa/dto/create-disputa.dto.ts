@@ -1,13 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsDate, IsEnum, IsNotEmpty, IsUUID } from 'class-validator';
-
-export enum StatusDisputa {
-    AGUARDANDO = 'AGUARDANDO',
-    EM_ANDAMENTO = 'EM_ANDAMENTO',
-    PAUSADA = 'PAUSADA',
-    FINALIZADA = 'FINALIZADA',
-    CANCELADA = 'CANCELADA'
-}
+import { DisputaStatus } from '@generated/prisma';
 
 export class CreateDisputaDto {
     @ApiProperty({ description: 'ID do edital relacionado à disputa' })
@@ -27,12 +20,12 @@ export class CreateDisputaDto {
 
     @ApiProperty({
         description: 'Status da disputa',
-        enum: StatusDisputa,
-        default: StatusDisputa.AGUARDANDO
+        enum: DisputaStatus,
+        default: DisputaStatus.AGUARDANDO
     })
-    @IsEnum(StatusDisputa)
+    @IsEnum(DisputaStatus)
     @IsNotEmpty()
-    status: StatusDisputa;
+    status: DisputaStatus;
 
     @ApiProperty({ description: 'Observações sobre a disputa', required: false })
     @IsString()

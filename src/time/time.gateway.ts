@@ -15,7 +15,10 @@ interface Contador {
 
 @WebSocketGateway({
     cors: {
-        origin: '*',
+        origin: true,
+        methods: ['GET', 'POST'],
+        credentials: true,
+        allowedHeaders: ['Content-Type', 'Accept', 'Authorization']
     },
     namespace: 'time'
 })
@@ -37,7 +40,7 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
             const editalId = client.handshake.query.editalId as string;
             const tipoAutor = client.handshake.query.tipoAutor as string;
 
-            this.logger.debug(`Debug handleConnection - Cliente conectado:`, {
+            this.logger.debug(`Cliente conectado:`, {
                 clientId: client.id,
                 editalId,
                 tipoAutor
@@ -68,14 +71,14 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
             // Se houver um contador ativo para este edital, envia o estado atual para o novo cliente
             const contador = this.contadores.get(editalId);
             if (contador) {
-                this.logger.debug(`Debug handleConnection - Enviando estado atual do contador:`, {
+                this.logger.debug(`Enviando estado atual do contador:`, {
                     clientId: client.id,
                     editalId,
                     contador
                 });
 
                 const agora = Date.now();
-                const tempoDecorrido = contador.pausado ? 0 : agora - contador.inicio;
+                const tempoDecorrido = contador.pausado ? 0 : agora - contador.ultimaAtualizacao;
                 const tempoRestante = Math.max(0, contador.tempoRestante - tempoDecorrido);
 
                 client.emit('contagemIniciada', {
@@ -118,38 +121,24 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         @ConnectedSocket() client: Socket,
         @MessageBody() data: { tempoInicial: number },
     ) {
-        console.log('Debug: Evento iniciarContagem recebido', {
-            clientId: client.id,
-            data,
-            handshake: client.handshake,
-            rooms: Array.from(client.rooms)
-        });
-
         const editalId = client.handshake.query.editalId as string;
         const tipoAutor = client.handshake.query.tipoAutor as string;
 
         if (!editalId || !tipoAutor) {
-            const error = 'EditalId ou tipoAutor não fornecidos';
-            console.error('Debug: ' + error, { editalId, tipoAutor });
-            return { error };
+            return { error: 'EditalId ou tipoAutor não fornecidos' };
         }
 
         if (tipoAutor !== 'PREGOEIRO') {
-            const error = 'Apenas o pregoeiro pode iniciar a contagem';
-            console.error('Debug: ' + error, { tipoAutor });
-            return { error };
+            return { error: 'Apenas o pregoeiro pode iniciar a contagem' };
         }
 
         if (!data?.tempoInicial || isNaN(data.tempoInicial) || data.tempoInicial <= 0) {
-            const error = 'Tempo inicial inválido';
-            console.error('Debug: ' + error, { tempoInicial: data?.tempoInicial });
-            return { error };
+            return { error: 'Tempo inicial inválido' };
         }
 
         // Limpa contador anterior se existir
         const contadorAnterior = this.contadores.get(editalId);
         if (contadorAnterior?.intervalo) {
-            console.log('Debug: Limpando contador anterior', { editalId });
             clearInterval(contadorAnterior.intervalo);
             this.contadores.delete(editalId);
         }
@@ -175,18 +164,12 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
                 contador.tempoRestante = Math.max(0, contador.tempoRestante - tempoDecorrido);
                 contador.ultimaAtualizacao = tempoAtual;
 
-                console.log('Debug: Atualizando contador', {
-                    editalId,
-                    tempoRestante: contador.tempoRestante,
-                    tempoDecorrido
-                });
-
                 this.server.to(editalId).emit('atualizacaoContagem', {
-                    tempoRestante: contador.tempoRestante
+                    tempoRestante: contador.tempoRestante,
+                    timestamp: tempoAtual
                 });
 
                 if (contador.tempoRestante <= 0) {
-                    console.log('Debug: Contador finalizado', { editalId });
                     if (contador.intervalo) {
                         clearInterval(contador.intervalo);
                     }
@@ -197,13 +180,6 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         }, 100);
 
         this.contadores.set(editalId, contador);
-
-        const clientesNaSala = await this.server.in(editalId).allSockets();
-        console.log('Debug: Contagem iniciada', {
-            editalId,
-            clientesNaSala: Array.from(clientesNaSala).length,
-            totalClientes: this.server.sockets.sockets.size
-        });
 
         this.server.to(editalId).emit('contagemIniciada', {
             tempoRestante: contador.tempoRestante,
@@ -219,7 +195,6 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         const tipoAutor = client.handshake.query.tipoAutor as string;
 
         if (tipoAutor !== 'PREGOEIRO') {
-            this.logger.warn(`Tentativa de pausar contagem por não pregoeiro: ${client.id}`);
             return { error: 'Apenas o pregoeiro pode pausar a contagem' };
         }
 
@@ -227,18 +202,18 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         if (!contador || contador.pausado) return;
 
         const agora = Date.now();
-        const tempoDecorrido = agora - contador.inicio;
+        const tempoDecorrido = agora - contador.ultimaAtualizacao;
         const tempoRestante = Math.max(0, contador.tempoRestante - tempoDecorrido);
 
         contador.tempoRestante = tempoRestante;
         contador.pausado = true;
+        contador.ultimaAtualizacao = agora;
 
-        // Envia o evento de pausa para todos os clientes
         this.server.to(editalId).emit('contagemPausada', {
-            tempoRestante: tempoRestante
+            tempoRestante: tempoRestante,
+            timestamp: agora
         });
 
-        this.logger.log(`Contagem pausada para edital ${editalId} com ${tempoRestante}ms restantes`);
         return { success: true };
     }
 
@@ -248,7 +223,6 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         const tipoAutor = client.handshake.query.tipoAutor as string;
 
         if (tipoAutor !== 'PREGOEIRO') {
-            this.logger.warn(`Tentativa de retomar contagem por não pregoeiro: ${client.id}`);
             return { error: 'Apenas o pregoeiro pode retomar a contagem' };
         }
 
@@ -256,19 +230,14 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         if (!contador || !contador.pausado) return;
 
         const agora = Date.now();
-        const tempoDecorrido = agora - contador.inicio;
-        const tempoRestante = Math.max(0, contador.tempoRestante - tempoDecorrido);
-
-        contador.tempoRestante = tempoRestante;
         contador.pausado = false;
+        contador.ultimaAtualizacao = agora;
 
-        // Envia o evento de retomada para todos os clientes
         this.server.to(editalId).emit('contagemRetomada', {
-            timestampInicio: contador.inicio,
-            tempoRestante: contador.tempoRestante
+            tempoRestante: contador.tempoRestante,
+            timestampInicio: agora
         });
 
-        this.logger.log(`Contagem retomada para edital ${editalId} com ${tempoRestante}ms restantes`);
         return { success: true };
     }
 

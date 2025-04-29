@@ -1,0 +1,226 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 📦 Módulos do Sistema - Regras e Diretrizes
+
+## Visão Geral
+O sistema segue uma arquitetura modular usando NestJS, com cada módulo representando uma funcionalidade específica do sistema de licitações.
+
+## Estrutura Base dos Módulos
+
+### Padrão de Nomenclatura
+1. Arquivos:
+   - `nome.module.ts` - Definição do módulo
+   - `nome.controller.ts` - Controlador
+   - `nome.service.ts` - Serviço
+   - `nome.gateway.ts` - Gateway (para WebSocket)
+   - `nome.dto.ts` - DTOs
+   - `nome.entity.ts` - Entidades
+   - `nome.pipe.ts` - Pipes de transformação
+   - `nome.guard.ts` - Guards de autenticação/autorização
+
+2. Diretórios:
+   - `/src/nome-modulo/` - Raiz do módulo
+   - `/src/nome-modulo/dto/` - DTOs do módulo
+   - `/src/nome-modulo/entities/` - Entidades
+   - `/src/nome-modulo/pipes/` - Pipes customizados
+   - `/src/nome-modulo/guards/` - Guards específicos
+
+## Módulos do Sistema
+
+### 1. Módulo Principal (AppModule)
+```typescript
+@Module({
+  imports: [
+    PrismaModule,
+    PropostaModule,
+    UsuarioModule,
+    EditalModule,
+    AuthModule,
+    ChatModule,
+    TimeModule,
+    DisputaModule,
+    LicitanteModule,
+    DocumentoModule,
+    PrazoModule,
+    SancaoModule,
+    RecursoModule,
+    DocumentoObrigatorioModule,
+    LoteModule,
+    ItemModule,
+    LogAtividadeModule,
+    SessaoModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
+```
+
+### 2. Módulo de Banco de Dados (PrismaModule)
+- Global para toda a aplicação
+- Fornece o PrismaService
+- Gerencia conexão com PostgreSQL
+
+### 3. Módulo de Autenticação (AuthModule)
+- Gerencia JWT e autenticação
+- Integra PassportJS
+- Fornece guards de proteção
+
+### 4. Módulos de Negócio
+1. **EditalModule**:
+   - Gerencia editais
+   - Modalidades de licitação
+   - Critérios de julgamento
+
+2. **DisputaModule**:
+   - Controle de disputas
+   - Fases da licitação
+   - Integração com lances
+
+3. **LicitanteModule**:
+   - Gestão de participantes
+   - Propostas
+   - Documentação
+
+4. **DocumentoModule**:
+   - Upload de arquivos
+   - Validação de documentos
+   - Armazenamento seguro
+
+5. **ChatModule**:
+   - Comunicação em tempo real
+   - Integração com WebSocket
+   - Histórico de mensagens
+
+6. **TimeModule**:
+   - Controle de tempo das disputas
+   - Sincronização via WebSocket
+   - Eventos temporais
+
+7. **LoteModule** e **ItemModule**:
+   - Gestão de lotes
+   - Itens da licitação
+   - Valores e quantidades
+
+8. **PrazoModule**:
+   - Controle de prazos
+   - Notificações
+   - Calendário de eventos
+
+9. **SancaoModule**:
+   - Registro de penalidades
+   - Impedimentos
+   - Histórico de sanções
+
+10. **RecursoModule**:
+    - Gestão de recursos
+    - Prazos recursais
+    - Decisões
+
+11. **LogAtividadeModule**:
+    - Registro de ações
+    - Auditoria
+    - Rastreabilidade
+
+12. **SessaoModule**:
+    - Controle de sessões
+    - Estado da disputa
+    - Participantes ativos
+
+## Regras de Implementação
+
+### 1. Estrutura dos Módulos
+```typescript
+@Module({
+    imports: [PrismaModule, /* outros módulos necessários */],
+    controllers: [ModuloController],
+    providers: [ModuloService],
+    exports: [ModuloService] // quando necessário
+})
+```
+
+### 2. Injeção de Dependências
+1. Usar constructor injection
+2. Declarar dependências como readonly
+3. Usar interfaces quando possível
+
+### 3. Controladores
+1. Usar decorators do NestJS
+2. Implementar validação de DTOs
+3. Documentar com Swagger
+4. Usar guards apropriados
+
+### 4. Serviços
+1. Implementar lógica de negócio
+2. Usar PrismaService para banco
+3. Tratar erros adequadamente
+4. Manter métodos puros
+
+### 5. DTOs
+1. Usar class-validator
+2. Documentar com Swagger
+3. Versionar quando necessário
+4. Manter imutabilidade
+
+## Boas Práticas
+
+### 1. Organização
+1. Um módulo por funcionalidade
+2. Separar responsabilidades
+3. Manter coesão
+4. Baixo acoplamento
+
+### 2. Código
+1. Seguir Clean Code
+2. Aplicar SOLID
+3. Documentar adequadamente
+4. Usar tipos explícitos
+
+### 3. Testes
+1. Testes unitários por módulo
+2. Testes e2e para fluxos
+3. Mocks quando necessário
+4. Cobertura mínima de 80%
+
+### 4. Segurança
+1. Validar inputs
+2. Usar guards
+3. Sanitizar dados
+4. Proteger rotas sensíveis
+
+### 5. Performance
+1. Usar cache quando possível
+2. Otimizar queries
+3. Lazy loading
+4. Pagination
+
+## Documentação
+
+### 1. Swagger
+1. Documentar todos endpoints
+2. Incluir exemplos
+3. Descrever respostas
+4. Marcar segurança
+
+### 2. README
+1. Descrição do módulo
+2. Dependências
+3. Configuração
+4. Exemplos de uso
+
+## Monitoramento
+
+### 1. Logs
+1. Usar logger do NestJS
+2. Níveis apropriados
+3. Contexto adequado
+4. Rotação de logs
+
+### 2. Métricas
+1. Tempo de resposta
+2. Taxa de erro
+3. Uso de recursos
+4. Alertas configurados
+

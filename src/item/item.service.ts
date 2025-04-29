@@ -36,7 +36,7 @@ export class ItemService {
             },
             include: {
                 propostas: true,
-                prazos: true
+                Prazo: true
             }
         });
     }
@@ -45,7 +45,7 @@ export class ItemService {
         return this.prisma.item.findMany({
             include: {
                 propostas: true,
-                prazos: true
+                Prazo: true
             }
         });
     }
@@ -55,7 +55,7 @@ export class ItemService {
             where: { id },
             include: {
                 propostas: true,
-                prazos: true
+                Prazo: true
             }
         });
 
@@ -71,7 +71,7 @@ export class ItemService {
             where: { loteId },
             include: {
                 propostas: true,
-                prazos: true
+                Prazo: true
             }
         });
     }
@@ -105,7 +105,7 @@ export class ItemService {
             data: updateItemDto,
             include: {
                 propostas: true,
-                prazos: true
+                Prazo: true
             }
         });
     }

@@ -1,0 +1,135 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 💬 Chat em Tempo Real - Regras e Diretrizes
+
+## Visão Geral
+O sistema de chat em tempo real é um componente crítico da fase de disputa, permitindo comunicação transparente entre pregoeiro e licitantes.
+
+## Estrutura Técnica
+
+### Backend (NestJS)
+- Gateway WebSocket usando Socket.IO
+- Namespace dedicado: `/chat-disputa`
+- Eventos principais:
+  - `join_room`: Entrar na sala da disputa
+  - `leave_room`: Sair da sala
+  - `send_message`: Enviar mensagem
+  - `receive_message`: Receber mensagem
+  - `user_joined`: Notificar entrada de usuário
+  - `user_left`: Notificar saída de usuário
+
+### Modelo de Dados (Prisma)
+```prisma
+model MensagemChat {
+  id          String      @id @default(uuid())
+  texto       String
+  tipo        TipoMensagem
+  disputaId   String
+  autorId     String
+  disputa     Disputa     @relation(fields: [disputaId], references: [id])
+  autor       Usuario     @relation(fields: [autorId], references: [id])
+  criadoEm    DateTime    @default(now())
+}
+
+enum TipoMensagem {
+  PREGOEIRO
+  LICITANTE
+  SISTEMA
+}
+```
+
+## Regras de Negócio
+
+### Autenticação e Autorização
+1. Somente usuários autenticados podem enviar mensagens
+2. Validar perfil do usuário (PREGOEIRO ou LICITANTE)
+3. Licitantes só podem enviar mensagens em disputas que participam
+4. Pregoeiro só pode enviar mensagens em disputas que gerencia
+
+### Mensagens
+1. Todas as mensagens devem ser persistidas no banco
+2. Campos obrigatórios:
+   - Texto da mensagem
+   - Tipo de mensagem (PREGOEIRO/LICITANTE/SISTEMA)
+   - ID da disputa
+   - ID do autor
+   - Timestamp
+
+### Eventos do Sistema
+1. Registrar automaticamente eventos importantes:
+   - Início da disputa
+   - Pausas e retomadas
+   - Entrada/saída de participantes
+   - Encerramento da disputa
+
+### Validações
+1. Tamanho máximo da mensagem: 500 caracteres
+2. Filtrar conteúdo impróprio
+3. Rate limiting: máximo 1 mensagem por segundo por usuário
+4. Bloquear envio de mensagens quando disputa estiver pausada
+
+### Armazenamento e Histórico
+1. Manter histórico completo das mensagens
+2. Permitir exportação do histórico em PDF
+3. Incluir chat log na ata da disputa
+
+## Implementação
+
+### Gateway
+```typescript
+@WebSocketGateway({
+  namespace: 'chat-disputa',
+  cors: true
+})
+export class ChatGateway {
+  @WebSocketServer()
+  server: Server;
+
+  @UseGuards(WsAuthGuard)
+  @SubscribeMessage('send_message')
+  async handleMessage(
+    @MessageBody() data: { texto: string, disputaId: string },
+    @ConnectedSocket() client: Socket
+  ) {
+    // Validações e persistência
+    // Broadcast para sala
+  }
+}
+```
+
+### Serviço
+```typescript
+@Injectable()
+export class ChatService {
+  constructor(private prisma: PrismaService) {}
+
+  async salvarMensagem(dados: {
+    texto: string;
+    tipo: TipoMensagem;
+    disputaId: string;
+    autorId: string;
+  }) {
+    return this.prisma.mensagemChat.create({
+      data: dados
+    });
+  }
+}
+```
+
+## Considerações de Segurança
+1. Validar tokens JWT em cada conexão WebSocket
+2. Sanitizar input de mensagens
+3. Implementar rate limiting por IP/usuário
+4. Manter logs de auditoria de todas as ações
+5. Implementar reconnect automático em caso de queda
+
+## Monitoramento
+1. Métricas de conexões ativas
+2. Latência de mensagens
+3. Taxa de erros
+4. Uso de memória/CPU
+5. Alertas para comportamentos anômalos
+

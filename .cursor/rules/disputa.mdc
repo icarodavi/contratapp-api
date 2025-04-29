@@ -1,0 +1,208 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 🎯 Disputa Eletrônica - Regras e Diretrizes
+
+## Visão Geral
+O módulo de disputa é o núcleo do sistema de licitações, gerenciando todo o processo de disputa eletrônica conforme a Lei 14.133/21.
+
+## Estrutura do Módulo
+
+### Modelo de Dados (Prisma)
+```prisma
+model Disputa {
+  id              String          @id @default(uuid())
+  editalId        String
+  status          StatusDisputa
+  dataInicio      DateTime?
+  dataFim         DateTime?
+  dataPausa       DateTime?
+  motivoPausa     String?
+  valorReferencia Int            // em centavos
+  lances          Lance[]
+  propostas       Proposta[]
+  documentos      DocumentoLicitante[]
+  mensagens       MensagemChat[]
+  licitantes      LicitanteDisputa[]
+  logs            LogAtividade[]
+  edital          Edital          @relation(fields: [editalId], references: [id])
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+enum StatusDisputa {
+  AGUARDANDO_INICIO
+  EM_ANDAMENTO
+  PAUSADA
+  SUSPENSA
+  ENCERRADA
+  FRACASSADA
+  DESERTA
+  REVOGADA
+  ANULADA
+}
+```
+
+## Estados e Transições
+
+### Diagrama de Estados
+```
+AGUARDANDO_INICIO -> EM_ANDAMENTO -> ENCERRADA
+                  -> DESERTA
+EM_ANDAMENTO -> PAUSADA -> EM_ANDAMENTO
+             -> SUSPENSA -> EM_ANDAMENTO
+             -> FRACASSADA
+             -> REVOGADA
+             -> ANULADA
+```
+
+### Regras de Transição
+1. Somente PREGOEIRO pode alterar estados
+2. Cada transição deve ser registrada em `LogAtividade`
+3. Transições inválidas devem ser bloqueadas
+4. Notificar todos os participantes via WebSocket
+
+## Regras de Negócio
+
+### Início da Disputa
+1. Verificar documentação obrigatória dos licitantes
+2. Confirmar presença mínima de participantes
+3. Validar propostas iniciais
+4. Iniciar cronômetro oficial
+
+### Durante a Disputa
+1. Controle de tempo pelo servidor
+2. Validação de lances:
+   - Valor menor que lance anterior
+   - Dentro do tempo permitido
+   - Licitante habilitado
+3. Empate ficto (ME/EPP):
+   - Diferença até 5% do menor lance
+   - Prioridade para ME/EPP
+4. Chat em tempo real moderado
+
+### Encerramento
+1. Verificar condições de encerramento
+2. Gerar ata da sessão
+3. Exportar histórico de lances
+4. Notificar vencedor e demais participantes
+
+## Implementação
+
+### Controller
+```typescript
+@Controller('disputas')
+@ApiTags('Disputas')
+export class DisputaController {
+  @Post()
+  @Roles(PerfilUsuario.PREGOEIRO)
+  async create(@Body() createDisputaDto: CreateDisputaDto) {
+    // Criar nova disputa
+  }
+
+  @Patch(':id/status')
+  @Roles(PerfilUsuario.PREGOEIRO)
+  async updateStatus(
+    @Param('id') id: string,
+    @Body() updateStatusDto: UpdateStatusDisputaDto
+  ) {
+    // Atualizar status
+  }
+
+  @Get(':id/lances')
+  async getLances(@Param('id') id: string) {
+    // Listar lances
+  }
+}
+```
+
+### Service
+```typescript
+@Injectable()
+export class DisputaService {
+  async iniciarDisputa(id: string) {
+    // Validações
+    // Atualizar status
+    // Notificar participantes
+    // Iniciar cronômetro
+  }
+
+  async validarLance(lance: CreateLanceDto) {
+    // Validar valor
+    // Verificar tempo
+    // Checar habilitação
+  }
+
+  async verificarEmpateFicto(disputaId: string) {
+    // Calcular diferença
+    // Identificar ME/EPP
+    // Notificar direito de preferência
+  }
+}
+```
+
+### Gateway
+```typescript
+@WebSocketGateway({
+  namespace: 'disputa'
+})
+export class DisputaGateway {
+  @SubscribeMessage('lance')
+  async handleLance(
+    @MessageBody() data: CreateLanceDto,
+    @ConnectedSocket() client: Socket
+  ) {
+    // Processar lance
+    // Broadcast atualização
+  }
+}
+```
+
+## Validações e Segurança
+
+### Validações
+1. Valores monetários sempre em centavos
+2. Datas UTC para evitar problemas de timezone
+3. Validar documentos obrigatórios
+4. Verificar integridade dos lances
+5. Controlar tempo de forma precisa
+
+### Segurança
+1. Autenticação via JWT
+2. Autorização por perfil
+3. Rate limiting em lances
+4. Logs de auditoria
+5. Backup em tempo real
+
+## Monitoramento
+
+### Métricas Principais
+1. Número de disputas ativas
+2. Tempo médio de disputa
+3. Volume de lances
+4. Taxa de sucesso
+5. Latência de operações
+
+### Alertas
+1. Falhas em transições
+2. Erros em lances
+3. Problemas de conexão
+4. Sobrecarga do sistema
+5. Tentativas de violação
+
+## Integrações
+1. Sistema de documentos
+2. Módulo de chat
+3. Geração de atas
+4. Notificações por email
+5. Exportação de dados
+
+## Conformidade Legal
+1. Lei 14.133/21
+2. LC 123/2006 (ME/EPP)
+3. LGPD
+4. Normas de segurança digital
+5. Requisitos de transparência
+

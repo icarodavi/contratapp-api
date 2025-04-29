@@ -1,0 +1,250 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 👥 Usuários - Regras e Diretrizes
+
+## Visão Geral
+O módulo de usuários gerencia o acesso e autenticação no sistema de licitações, seguindo os princípios de segurança e conformidade com a Lei 14.133/21.
+
+## Estrutura do Módulo
+
+### Modelo de Dados (Prisma)
+```prisma
+model Usuario {
+  id            String         @id @default(uuid())
+  nome          String
+  email         String         @unique
+  senha         String
+  perfil        PerfilUsuario
+  ativo         Boolean        @default(true)
+  ultimoAcesso  DateTime?
+  mensagens     MensagemChat[]
+  logs          LogAtividade[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@map("usuarios")
+}
+
+enum PerfilUsuario {
+  ADMIN
+  PREGOEIRO
+  LICITANTE
+  VISUALIZADOR
+}
+```
+
+## DTOs e Validações
+
+### CreateUsuarioDto
+```typescript
+export class CreateUsuarioDto {
+  @IsString()
+  @MinLength(3)
+  @MaxLength(100)
+  nome: string;
+
+  @IsEmail()
+  @MaxLength(100)
+  email: string;
+
+  @IsString()
+  @MinLength(8)
+  @Matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+  senha: string;
+
+  @IsEnum(PerfilUsuario)
+  perfil: PerfilUsuario;
+}
+```
+
+### LoginDto
+```typescript
+export class LoginDto {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  senha: string;
+}
+```
+
+### UpdateSenhaDto
+```typescript
+export class UpdateSenhaDto {
+  @IsString()
+  senhaAtual: string;
+
+  @IsString()
+  @MinLength(8)
+  @Matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+  novaSenha: string;
+}
+```
+
+## Regras de Negócio
+
+### Cadastro
+1. Email deve ser único
+2. Senha deve conter:
+   - Mínimo 8 caracteres
+   - Letras e números
+   - Sem caracteres especiais
+3. Nome completo obrigatório
+4. Perfil deve ser válido
+
+### Autenticação
+1. Utilizar JWT para tokens
+2. Expiração do token em 8 horas
+3. Refresh token permitido
+4. Bloquear após 5 tentativas falhas
+5. Registrar data do último acesso
+
+### Perfis e Permissões
+1. **ADMIN**:
+   - Acesso total ao sistema
+   - Gerenciamento de usuários
+   - Configurações do sistema
+
+2. **PREGOEIRO**:
+   - Gerenciar disputas
+   - Moderar chat
+   - Validar documentos
+   - Controlar tempo
+
+3. **LICITANTE**:
+   - Participar de disputas
+   - Enviar lances
+   - Enviar documentos
+   - Chat público
+
+4. **VISUALIZADOR**:
+   - Visualizar disputas
+   - Acompanhar lances
+   - Sem interação
+
+## Implementação
+
+### Controller
+```typescript
+@Controller('usuarios')
+@ApiTags('Usuários')
+export class UsuarioController {
+  @Post('register')
+  async register(@Body() createUsuarioDto: CreateUsuarioDto) {
+    // Criar novo usuário
+  }
+
+  @Post('login')
+  async login(@Body() loginDto: LoginDto) {
+    // Autenticar usuário
+  }
+
+  @Get()
+  @Roles(PerfilUsuario.ADMIN)
+  async findAll() {
+    // Listar usuários
+  }
+
+  @Patch(':id/senha')
+  async updateSenha(
+    @Param('id') id: string,
+    @Body() updateSenhaDto: UpdateSenhaDto
+  ) {
+    // Atualizar senha
+  }
+}
+```
+
+### Service
+```typescript
+@Injectable()
+export class UsuarioService {
+  async create(createUsuarioDto: CreateUsuarioDto) {
+    // Validar email único
+    // Hash da senha
+    // Criar usuário
+  }
+
+  async login(loginDto: LoginDto) {
+    // Validar credenciais
+    // Gerar token
+    // Atualizar último acesso
+  }
+
+  async updateSenha(id: string, updateSenhaDto: UpdateSenhaDto) {
+    // Validar senha atual
+    // Hash nova senha
+    // Atualizar registro
+  }
+}
+```
+
+## Segurança
+
+### Hash e Criptografia
+1. Usar bcrypt para hash de senhas
+2. Salt rounds: 10
+3. Nunca armazenar senhas em texto plano
+4. Tokens JWT com chave segura
+
+### Validações de Segurança
+1. Sanitizar inputs
+2. Validar formatos de email
+3. Prevenir injection
+4. Rate limiting em login
+5. Logs de tentativas falhas
+
+### Proteção de Dados
+1. Conformidade com LGPD
+2. Mascaramento de dados sensíveis
+3. Logs de auditoria
+4. Backup criptografado
+5. Política de retenção
+
+## Monitoramento
+
+### Métricas
+1. Usuários ativos
+2. Taxa de login
+3. Tentativas falhas
+4. Tempo de resposta
+5. Uso de recursos
+
+### Logs
+1. Criação de usuários
+2. Tentativas de login
+3. Alterações de senha
+4. Bloqueios de conta
+5. Ações administrativas
+
+## Testes
+
+### Testes Unitários
+1. Validação de DTOs
+2. Lógica de serviço
+3. Hash de senha
+4. Geração de token
+
+### Testes de Integração
+1. Fluxo de registro
+2. Autenticação
+3. Atualização de senha
+4. Permissões
+
+## Documentação
+
+### Swagger
+1. Endpoints documentados
+2. DTOs com exemplos
+3. Respostas de erro
+4. Autenticação
+
+### Postman
+1. Coleção de endpoints
+2. Variáveis de ambiente
+3. Testes automatizados
+4. Exemplos de uso
+

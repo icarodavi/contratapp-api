@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { PrismaService } from '../database/database.service';
 import { CreateDisputaDto } from './dto/create-disputa.dto';
 import { UpdateDisputaDto } from './dto/update-disputa.dto';
-import { StatusDisputa } from './dto/create-disputa.dto';
+import { DisputaStatus } from '@generated/prisma';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Disputas')
@@ -23,7 +23,7 @@ export class DisputaService {
         return this.prisma.disputa.create({
             data: {
                 ...createDisputaDto,
-                status: createDisputaDto.status || StatusDisputa.AGUARDANDO
+                status: createDisputaDto.status || DisputaStatus.AGUARDANDO
             },
             include: {
                 edital: true,
@@ -94,7 +94,7 @@ export class DisputaService {
         const disputa = await this.findOne(id);
 
         // Não permite remover disputa em andamento
-        if (disputa.status === StatusDisputa.EM_ANDAMENTO) {
+        if (disputa.status === DisputaStatus.AGUARDANDO) {
             throw new BadRequestException('Não é possível remover uma disputa em andamento');
         }
 
@@ -103,13 +103,12 @@ export class DisputaService {
         });
     }
 
-    private validarTransicaoStatus(statusAtual: StatusDisputa, novoStatus: StatusDisputa) {
-        const transicoesValidas = {
-            [StatusDisputa.AGUARDANDO]: [StatusDisputa.EM_ANDAMENTO, StatusDisputa.CANCELADA],
-            [StatusDisputa.EM_ANDAMENTO]: [StatusDisputa.PAUSADA, StatusDisputa.FINALIZADA],
-            [StatusDisputa.PAUSADA]: [StatusDisputa.EM_ANDAMENTO, StatusDisputa.FINALIZADA],
-            [StatusDisputa.FINALIZADA]: [],
-            [StatusDisputa.CANCELADA]: []
+    private validarTransicaoStatus(statusAtual: DisputaStatus, novoStatus: DisputaStatus) {
+        const transicoesValidas: Record<DisputaStatus, DisputaStatus[]> = {
+            [DisputaStatus.AGUARDANDO]: [DisputaStatus.ABERTA, DisputaStatus.ENCERRADA],
+            [DisputaStatus.ABERTA]: [DisputaStatus.SUSPENSA, DisputaStatus.ENCERRADA],
+            [DisputaStatus.SUSPENSA]: [DisputaStatus.ABERTA, DisputaStatus.ENCERRADA],
+            [DisputaStatus.ENCERRADA]: []
         };
 
         if (!transicoesValidas[statusAtual].includes(novoStatus)) {

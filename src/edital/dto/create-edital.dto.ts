@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsNotEmpty, IsOptional, IsString, IsEnum } from 'class-validator';
-import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
+import { ModalidadeLicitação, CritérioJulgamento } from '@generated/prisma';
 
 export class CreateEditalDto {
     @ApiProperty({

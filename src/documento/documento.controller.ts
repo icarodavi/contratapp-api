@@ -4,7 +4,6 @@ import { DocumentoService } from './documento.service';
 import { CreateDocumentoDto } from './dto/create-documento.dto';
 import { UpdateDocumentoDto } from './dto/update-documento.dto';
 import { DocumentoDto } from './dto/documento.dto';
-
 @ApiTags('documentos')
 @Controller('documentos')
 export class DocumentoController {
