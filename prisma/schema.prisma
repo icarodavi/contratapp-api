@@ -277,6 +277,9 @@ model Usuario {
   email               String         @unique
   senha               String
   perfil              PerfilUsuario
+  ativo               Boolean        @default(true)
+  ultimoAcesso        DateTime?
+  refreshToken        String?
   LogAtividade        LogAtividade[]
   MensagemChat        MensagemChat[]
   licitante           Licitante?     @relation(fields: [licitanteId], references: [id])
@@ -287,6 +290,8 @@ model Usuario {
   sancaoRevogada      Sancao[]       @relation("SancaoRevogadaPor")
   prazosCriados       Prazo[]        @relation("PrazoCriadoPor")
   prazosConcluidos    Prazo[]        @relation("PrazoConcluidoPor")
+
+  @@map("usuarios")
 }
 
 model Edital {
