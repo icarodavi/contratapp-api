@@ -41,7 +41,7 @@ import { DocumentoObrigatorioModule } from './documento-obrigatorio/documento-ob
     LoteModule,
     ItemModule,
     LogAtividadeModule,
-    SessaoModule,
+    SessaoModule
   ],
   controllers: [AppController],
   providers: [AppService],

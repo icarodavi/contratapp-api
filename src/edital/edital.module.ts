@@ -11,14 +11,14 @@ import { CritérioJulgamentoPipe } from './pipes/criterio-julgamento.pipe';
     controllers: [EditalController],
     providers: [
         EditalService,
-        {
-            provide: APP_PIPE,
-            useClass: ModalidadeLicitaçãoPipe,
-        },
-        {
-            provide: APP_PIPE,
-            useClass: CritérioJulgamentoPipe,
-        },
+        // {
+        //     provide: APP_PIPE,
+        //     useClass: ModalidadeLicitaçãoPipe,
+        // },
+        // {
+        //     provide: APP_PIPE,
+        //     useClass: CritérioJulgamentoPipe,
+        // },
     ],
     exports: [EditalService],
 })

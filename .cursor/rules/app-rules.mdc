@@ -32,8 +32,7 @@ Este documento define as regras obrigatórias para o desenvolvimento do sistema 
 - É obrigatório sempre seguir as diretrizes de Clean Code
 - É obrigatório sempre seguir o S.O.L.I.D.
 - Todos os arquivos e comentários devem sempre seguir Português do Brasil.
-- Sempre que for utilizar o PrismaORM sempre se atentar a utilizar a pasta /generated/prisma
-
+- Sempre que for utilizar o PrismaORM sempre se atentar a utilizar a pasta `@prisma/client`
 ---
 
 ## 📂 Estrutura do Banco de Dados

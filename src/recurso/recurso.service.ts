@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@/database/database.service';
 import { CreateRecursoDto } from './dto/create-recurso.dto';
 import { UpdateRecursoDto } from './dto/update-recurso.dto';
-import { TipoRecurso, StatusRecurso } from '@generated/prisma';
+import { TipoRecurso, StatusRecurso } from '@prisma/client';
 
 @Injectable()
 export class RecursoService {

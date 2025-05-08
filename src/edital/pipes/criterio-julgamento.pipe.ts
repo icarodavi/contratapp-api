@@ -1,5 +1,5 @@
 import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
-import { CritérioJulgamento } from '@generated/prisma';
+import { CritérioJulgamento } from '@prisma/client';
 
 @Injectable()
 export class CritérioJulgamentoPipe implements PipeTransform {

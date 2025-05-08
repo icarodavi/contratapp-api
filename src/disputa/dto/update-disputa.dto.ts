@@ -1,7 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateDisputaDto } from './create-disputa.dto';
 import { IsString, IsDate, IsEnum, IsOptional } from 'class-validator';
-import { DisputaStatus } from '@generated/prisma';
+import { DisputaStatus } from '@prisma/client';
 
 export class UpdateDisputaDto extends PartialType(CreateDisputaDto) {
     @ApiProperty({ description: 'Data e hora de início da disputa', required: false })

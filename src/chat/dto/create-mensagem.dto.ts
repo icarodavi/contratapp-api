@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsUUID, IsEnum } from 'class-validator';
-import { TipoAutorMensagem } from '@generated/prisma';
+import { TipoAutorMensagem } from '@prisma/client';
 
 export class CreateMensagemDto {
     @IsUUID()

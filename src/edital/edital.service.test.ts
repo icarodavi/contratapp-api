@@ -3,7 +3,7 @@ import { PrismaService } from '@/database/database.service';
 import { EditalService } from './edital.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { ModalidadeLicitação, CritérioJulgamento } from '@generated/prisma';
+import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
 
 describe('EditalService', () => {
     let service: EditalService;

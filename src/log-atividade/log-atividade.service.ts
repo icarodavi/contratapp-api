@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@/database/database.service';
-import { TipoAtividade } from '@generated/prisma';
+import { TipoAtividade } from '@prisma/client';
 
 @Injectable()
 export class LogAtividadeService {

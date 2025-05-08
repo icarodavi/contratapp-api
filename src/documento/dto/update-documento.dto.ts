@@ -1,6 +1,6 @@
 import { IsString, IsOptional, IsEnum, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { TipoDocumento } from 'generated/prisma';
+import { TipoDocumento } from '@prisma/client';
 
 export class UpdateDocumentoDto {
     @ApiProperty({ description: 'Nome do documento', required: false })

@@ -8,7 +8,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { UseGuards } from '@nestjs/common';
 import { ChatService } from './chat.service';
-import { PerfilUsuario } from '@generated/prisma';
+import { PerfilUsuario } from '@prisma/client';
 
 @WebSocketGateway({
     cors: {

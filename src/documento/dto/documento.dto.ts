@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { TipoDocumento } from '@generated/prisma';
+import { TipoDocumento } from '@prisma/client';
 
 export class DocumentoDto {
     @ApiProperty({ description: 'ID do documento' })

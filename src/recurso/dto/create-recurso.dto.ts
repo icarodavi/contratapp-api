@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsEnum, IsInt, IsOptional, IsUUID } from 'class-validator';
-import { TipoRecurso } from '@generated/prisma';
+import { TipoRecurso } from '@prisma/client';
 
 export class CreateRecursoDto {
     @ApiProperty({

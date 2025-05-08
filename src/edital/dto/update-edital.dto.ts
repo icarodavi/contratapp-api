@@ -1,6 +1,6 @@
 import { IsOptional, IsString, IsDate, IsEnum } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { ModalidadeLicitação, CritérioJulgamento } from '@generated/prisma';
+import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
 
 export class UpdateEditalDto {
     @ApiProperty({ description: 'Número do edital', required: false })

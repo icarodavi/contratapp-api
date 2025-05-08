@@ -3,7 +3,7 @@ import { PrismaService } from '../database/database.service';
 import { CreateLicitanteDto } from './dto/create-licitante.dto';
 import { UpdateLicitanteDto } from './dto/update-licitante.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { DisputaStatus } from 'generated/prisma';
+import { DisputaStatus } from '@prisma/client';
 
 @ApiTags('Licitantes')
 @Injectable()

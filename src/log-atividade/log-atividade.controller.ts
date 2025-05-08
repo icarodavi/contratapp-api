@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { LogAtividadeService } from './log-atividade.service';
-import { TipoAtividade } from '@generated/prisma';
+import { TipoAtividade } from '@prisma/client';
 
 @ApiTags('logs-atividade')
 @Controller('logs-atividade')

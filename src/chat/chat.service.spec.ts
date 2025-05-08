@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ChatService } from './chat.service';
 import { ChatGateway } from './chat.gateway';
 import { PrismaService } from '../database/database.service';
-import { PerfilUsuario } from '@generated/prisma';
+import { PerfilUsuario } from '@prisma/client';
 
 describe('ChatService', () => {
     let service: ChatService;

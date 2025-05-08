@@ -3,7 +3,7 @@ import { PrismaService } from '@/database/database.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { ModalidadeLicitação, CritérioJulgamento } from '@generated/prisma';
+import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
 
 @ApiTags('Editais')
 @Injectable()

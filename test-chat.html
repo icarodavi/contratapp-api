@@ -6,201 +6,72 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Teste de Chat - Sistema de Licitação</title>
         <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 20px;
-            }
-
-            .chat-container {
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                padding: 20px;
-                margin-bottom: 20px;
-                height: 400px;
-                overflow-y: auto;
-            }
-
-            .message {
-                margin-bottom: 10px;
-                padding: 10px;
-                border-radius: 5px;
-            }
-
-            .pregoeiro {
-                background-color: #e3f2fd;
-                margin-right: 20%;
-            }
-
-            .licitante {
-                background-color: #f1f1f1;
-                margin-left: 20%;
-            }
-
-            .message-header {
-                font-weight: bold;
-                margin-bottom: 5px;
-            }
-
-            .message-content {
-                margin-bottom: 5px;
-            }
-
-            .message-time {
-                font-size: 0.8em;
-                color: #666;
-            }
-
-            .input-container {
-                display: flex;
-                gap: 10px;
-            }
-
-            #messageInput {
-                flex: 1;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-
-            button {
-                padding: 10px 20px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            button:hover {
-                background-color: #45a049;
-            }
-
-            .status {
-                margin-bottom: 10px;
-                padding: 10px;
-                border-radius: 5px;
-                background-color: #f8f9fa;
-            }
-
-            .connected {
-                color: #28a745;
-            }
-
-            .disconnected {
-                color: #dc3545;
-            }
-
-            .login-container {
-                margin-bottom: 20px;
-                padding: 20px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-
-            .login-form {
-                display: flex;
-                gap: 10px;
-                margin-bottom: 10px;
-            }
-
-            .login-form input {
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-
-            .user-info {
-                font-weight: bold;
-                color: #333;
-            }
-
-            .contador-container {
-                text-align: center;
-                margin: 20px 0;
-                padding: 10px;
-                background-color: #f8f9fa;
-                border-radius: 5px;
-            }
-
-            #contador {
-                font-size: 2em;
-                font-weight: bold;
-                margin: 10px 0;
-                color: #333;
-            }
-
-            .controles-contador {
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-                margin-top: 10px;
-            }
-
-            .controles-contador button {
-                padding: 8px 16px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 0.9em;
-            }
-
-            .controles-contador button:hover {
-                background-color: #45a049;
-            }
-
-            .controles-contador button:disabled {
-                background-color: #cccccc;
-                cursor: not-allowed;
-            }
-
-            .contador-status {
-                font-size: 0.9em;
-                color: #666;
-                margin-top: 5px;
-            }
-        </style>
+        <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
         <script>eruda.init();</script>
     </head>
 
-    <body>
-        <h1>Teste de Chat - Sistema de Licitação</h1>
-        <pre id="pre"></pre>
+    <body class="bg-gray-100 min-h-screen">
+        <div class="container mx-auto px-4 py-8 max-w-4xl">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Teste de Chat - Sistema de Licitação</h1>
+            <pre id="pre" class="hidden"></pre>
 
-        <div class="login-container" id="loginContainer">
-            <div class="login-form">
-                <input type="email" id="emailInput" placeholder="Email">
-                <input type="text" id="passwordInput" placeholder="Senha">
-                <button id="loginButton">Entrar</button>
+            <div id="loginContainer" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex gap-4">
+                    <input type="email" id="emailInput" placeholder="Email"
+                        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="passwordInput" placeholder="Senha"
+                        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button id="loginButton"
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Entrar
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <div class="status" id="connectionStatus">
-            Status: Desconectado
-        </div>
-
-        <div class="contador-container" id="contadorContainer" style="display: none;">
-            <div id="contador">00:00</div>
-            <div class="controles-contador" id="controlesContador">
-                <button id="iniciar5min">Iniciar 5 minutos</button>
-                <button id="pausarContagem" disabled>Pausar</button>
-                <button id="retomarContagem" disabled>Retomar</button>
+            <div id="connectionStatus" class="bg-white rounded-lg shadow-md p-4 mb-6">
+                <div class="flex justify-between items-center">
+                    <div id="statusContent">
+                        Status: Desconectado
+                    </div>
+                    <button id="logoutButton"
+                        class="hidden px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        Sair
+                    </button>
+                </div>
             </div>
-            <div class="contador-status" id="contadorStatus"></div>
-        </div>
 
-        <div class="chat-container" id="chatContainer">
-            <!-- Mensagens serão inseridas aqui -->
-        </div>
+            <div id="contadorContainer" class="bg-white rounded-lg shadow-md p-6 mb-6 text-center hidden">
+                <div id="contador" class="text-4xl font-bold text-gray-800 my-4">00:00</div>
+                <div id="controlesContador" class="flex justify-center gap-4">
+                    <button id="iniciar5min"
+                        class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                        Iniciar 5 minutos
+                    </button>
+                    <button id="pausarContagem" disabled
+                        class="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Pausar
+                    </button>
+                    <button id="retomarContagem" disabled
+                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Retomar
+                    </button>
+                </div>
+                <div id="contadorStatus" class="text-sm text-gray-600 mt-2"></div>
+            </div>
 
-        <div class="input-container">
-            <input type="text" id="messageInput" placeholder="Digite sua mensagem..." disabled>
-            <button id="sendButton" disabled>Enviar</button>
+            <div id="chatContainer" class="bg-white rounded-lg shadow-md p-6 mb-6 h-[500px] overflow-y-auto">
+                <!-- Mensagens serão inseridas aqui -->
+            </div>
+
+            <div class="flex gap-4">
+                <input type="text" id="messageInput" placeholder="Digite sua mensagem..." disabled
+                    class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50">
+                <button id="sendButton" disabled
+                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                    Enviar
+                </button>
+            </div>
         </div>
 
         <script>
@@ -270,8 +141,24 @@
                 });
 
                 // Inicia o intervalo e força a primeira atualização
-                contadorIntervalo = setInterval(atualizarContador, 100);
-                atualizarContador();
+                contadorIntervalo = setInterval(() => {
+                    const agora = Date.now();
+                    const tempoDecorrido = agora - timestampInicio;
+                    const novoTempoRestante = Math.max(0, tempoRestante - tempoDecorrido);
+                    atualizarContador(novoTempoRestante);
+
+                    if (novoTempoRestante <= 0) {
+                        clearInterval(contadorIntervalo);
+                        contadorAtivo = false;
+                        document.getElementById('contadorStatus').textContent = 'Contagem finalizada';
+                        if (tipoAutor === 'PREGOEIRO') {
+                            document.getElementById('pausarContagem').disabled = true;
+                            document.getElementById('retomarContagem').disabled = true;
+                        }
+                    }
+                }, 100);
+
+                atualizarContador(tempoRestante);
 
                 // Atualiza a interface
                 document.getElementById('contadorStatus').textContent = 'Contagem em andamento';
@@ -300,20 +187,32 @@
             }
 
             function updateConnectionStatus() {
-                const statusElement = document.getElementById('connectionStatus');
+                const statusElement = document.getElementById('statusContent');
+                const logoutButton = document.getElementById('logoutButton');
+
                 if (socket?.connected) {
-                    let statusHtml =
-                        `Status: <span class="connected">Conectado</span> | 
-                         Usuário: <span class="user-info">${nomeUsuario || 'Não identificado'}</span> | 
-                         Perfil: <span class="user-info">${tipoAutor || 'Não definido'}</span>`;
+                    let statusHtml = `
+                        <div class="flex items-center gap-4">
+                            <span class="text-green-600 font-semibold">Conectado</span>
+                            <span class="text-gray-600">|</span>
+                            <span class="font-semibold">Usuário: ${nomeUsuario || 'Não identificado'}</span>
+                            <span class="text-gray-600">|</span>
+                            <span class="font-semibold">Perfil: ${tipoAutor || 'Não definido'}</span>
+                    `;
 
                     if (tipoAutor === 'PREGOEIRO') {
-                        statusHtml += ` | Usuários Online: <span id="usuariosOnlineCount" class="user-info">0</span>`;
+                        statusHtml += `
+                            <span class="text-gray-600">|</span>
+                            <span class="font-semibold">Usuários Online: <span id="usuariosOnlineCount" class="text-blue-600">0</span></span>
+                        `;
                     }
 
+                    statusHtml += '</div>';
                     statusElement.innerHTML = statusHtml;
+                    logoutButton.classList.remove('hidden');
                 } else {
-                    statusElement.innerHTML = 'Status: <span class="disconnected">Desconectado</span>';
+                    statusElement.innerHTML = '<span class="text-red-600 font-semibold">Desconectado</span>';
+                    logoutButton.classList.add('hidden');
                 }
             }
 
@@ -328,7 +227,7 @@
 
             async function login(email, senha) {
                 try {
-                    console.log('Iniciando login com:', { email, senha });
+                    console.log('Iniciando login com:', { email, senha }, `http://${window.location.hostname}:3001/auth/login`);
 
                     const response = await fetch(`http://${window.location.hostname}:3001/auth/login`, {
                         method: 'POST',
@@ -609,18 +508,23 @@
             function appendMessage(message) {
                 const container = document.getElementById('chatContainer');
                 const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${message.tipoAutor.toLowerCase()}`;
+                const isPregoeiro = message.tipoAutor === 'PREGOEIRO';
+
+                messageDiv.className = `mb-4 p-4 rounded-lg ${isPregoeiro
+                    ? 'bg-blue-50 ml-20'
+                    : 'bg-gray-50 mr-20'
+                    }`;
 
                 const header = document.createElement('div');
-                header.className = 'message-header';
-                header.textContent = `${message.tipoAutor === 'PREGOEIRO' ? 'Pregoeiro' : 'Licitante'} - ${message.autor.nome}`;
+                header.className = 'font-bold text-gray-800 mb-2';
+                header.textContent = `${isPregoeiro ? 'Pregoeiro' : 'Licitante'} - ${message.autor.nome}`;
 
                 const content = document.createElement('div');
-                content.className = 'message-content';
+                content.className = 'text-gray-700 mb-2';
                 content.textContent = message.conteudo;
 
                 const time = document.createElement('div');
-                time.className = 'message-time';
+                time.className = 'text-sm text-gray-500';
                 time.textContent = new Date(message.createdAt).toLocaleString();
 
                 messageDiv.appendChild(header);
@@ -628,6 +532,28 @@
                 messageDiv.appendChild(time);
                 container.appendChild(messageDiv);
                 container.scrollTop = container.scrollHeight;
+            }
+
+            function logout() {
+                if (socket) {
+                    socket.disconnect();
+                }
+                if (timeSocket) {
+                    timeSocket.disconnect();
+                }
+
+                token = '';
+                usuarioId = '';
+                tipoAutor = '';
+                nomeUsuario = '';
+
+                document.getElementById('loginContainer').style.display = 'block';
+                document.getElementById('messageInput').disabled = true;
+                document.getElementById('sendButton').disabled = true;
+                document.getElementById('contadorContainer').style.display = 'none';
+                document.getElementById('chatContainer').innerHTML = '';
+
+                updateConnectionStatus();
             }
 
             document.addEventListener('DOMContentLoaded', () => {
@@ -640,6 +566,8 @@
                         alert('Por favor, preencha email e senha.');
                     }
                 });
+
+                document.getElementById('logoutButton').addEventListener('click', logout);
 
                 document.getElementById('sendButton').addEventListener('click', sendMessage);
 
@@ -670,7 +598,10 @@
                         return;
                     }
 
-                    const payload = { tempoInicial: 300000 }; // 5 minutos
+                    const payload = {
+                        tempoInicial: 300000, // 5 minutos em milissegundos
+                        editalId: editalId
+                    };
                     console.log('Debug: Enviando evento iniciarContagem:', payload);
 
                     timeSocket.emit('iniciarContagem', payload, (response) => {
@@ -678,6 +609,8 @@
                         if (response?.error) {
                             console.error('Erro ao iniciar contagem:', response.error);
                             document.getElementById('contadorStatus').textContent = `Erro: ${response.error}`;
+                        } else if (response?.tempoRestante) {
+                            iniciarContador(response.tempoRestante, response.timestampInicio);
                         }
                     });
                 });

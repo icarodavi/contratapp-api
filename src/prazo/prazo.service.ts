@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@/database/database.service';
 import { CreatePrazoDto } from './dto/create-prazo.dto';
 import { UpdatePrazoDto } from './dto/update-prazo.dto';
-import { TipoPrazo, StatusPrazo } from '@generated/prisma';
+import { TipoPrazo, StatusPrazo } from '@prisma/client';
 
 @Injectable()
 export class PrazoService {

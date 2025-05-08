@@ -10,26 +10,17 @@ import { rateLimit } from 'express-rate-limit';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Configuração do Helmet para headers de segurança
-  app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'", "http://localhost:*", "http://127.0.0.1:*"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.socket.io", "https://cdn.jsdelivr.net"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
-        imgSrc: ["'self'", "data:", "https:", "http:"],
-        connectSrc: ["'self'", "http://localhost:*", "http://127.0.0.1:*", "ws://localhost:*", "ws://127.0.0.1:*"],
-        fontSrc: ["'self'", "https:", "data:"],
-        objectSrc: ["'none'"],
-        mediaSrc: ["'self'"],
-        frameSrc: ["'self'"],
-        upgradeInsecureRequests: null
-      },
-    },
-    crossOriginEmbedderPolicy: false,
-    crossOriginResourcePolicy: { policy: "cross-origin" },
-    crossOriginOpenerPolicy: false,
-  }));
+  // Configuração do CORS
+  app.enableCors({
+    // origin: ['http://localhost:5500', 'http://127.0.0.1:5500', '*'],
+    origin: ['*', 'http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500', 'http://192.168.22.39:5500'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+
+  });
 
   // Configuração do Rate Limiting
   app.use(
@@ -42,15 +33,30 @@ async function bootstrap() {
     }),
   );
 
-  // Configuração do CORS
-  app.enableCors({
-    origin: ['http://localhost:5500', 'http://127.0.0.1:5500', '*'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
-    credentials: true,
-    preflightContinue: false,
-    optionsSuccessStatus: 204
-  });
+  // Configuração do Helmet para headers de segurança
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'", "http://localhost:*", "http://127.0.0.1:*", 'http://192.168.22.39:5500', "*"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.socket.io", "https://cdn.jsdelivr.net"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:", "https:", "http:"],
+        connectSrc: ["'self'", "http://localhost:*", "http://127.0.0.1:*", "ws://localhost:*", "ws://127.0.0.1:*"],
+        fontSrc: ["'self'", "https:", "data:"],
+        objectSrc: ["'none'"],
+        mediaSrc: ["'self'"],
+        frameSrc: ["'self'"],
+        upgradeInsecureRequests: null
+      },
+    },
+
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    // crossOriginResourcePolicy: false,
+    // permittedCrossDomainPolicies: true,
+    // crossOriginOpenerPolicy: false,
+  }));
+
 
   // Compressão de respostas
   app.use(compression());
@@ -66,15 +72,6 @@ async function bootstrap() {
     .setTitle('API de Licitações')
     .setDescription('API para gerenciamento de licitações públicas')
     .setVersion('1.0')
-    // .addTag('usuarios')
-    // .addTag('editais')
-    // .addTag('disputas')
-    // .addTag('licitantes')
-    // .addTag('lances')
-    // .addTag('documentos')
-    // .addTag('chat')
-    // .addTag('sessoes')
-    // .addTag('logs')
     .addBearerAuth()
     .build();
 
