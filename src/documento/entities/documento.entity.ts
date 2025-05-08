@@ -8,4 +8,12 @@ export class Documento {
     createdAt: Date;
     updatedAt: Date;
     deletedAt: Date | null;
+    nomeOriginal: string;
+    descricao?: string;
+    versao: number;
+    hash: string;
+    assinatura?: string;
+    validade?: Date;
+    licitanteId: string;
+    tipoDocumento: string;
 } 

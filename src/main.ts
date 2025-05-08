@@ -6,9 +6,13 @@ import helmet from 'helmet';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import { rateLimit } from 'express-rate-limit';
+import { Logger, LogLevel } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const logLevels: LogLevel[] = ['log', 'error', 'warn', 'debug', 'verbose'];
+  const app = await NestFactory.create(AppModule, {
+    logger: logLevels
+  });
 
   // Configuração do CORS
   app.enableCors({

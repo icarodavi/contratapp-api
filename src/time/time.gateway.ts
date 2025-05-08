@@ -40,12 +40,6 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
             const editalId = client.handshake.query.editalId as string;
             const tipoAutor = client.handshake.query.tipoAutor as string;
 
-            this.logger.debug(`Cliente conectado:`, {
-                clientId: client.id,
-                editalId,
-                tipoAutor
-            });
-
             if (!editalId) {
                 this.logger.warn(`Tentativa de conexão sem editalId: ${client.id}`);
                 client.disconnect();
@@ -71,11 +65,6 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
             // Se houver um contador ativo para este edital, envia o estado atual para o novo cliente
             const contador = this.contadores.get(editalId);
             if (contador) {
-                this.logger.debug(`Enviando estado atual do contador:`, {
-                    clientId: client.id,
-                    editalId,
-                    contador
-                });
 
                 const agora = Date.now();
                 const tempoDecorrido = contador.pausado ? 0 : agora - contador.ultimaAtualizacao;
@@ -121,12 +110,9 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         @ConnectedSocket() client: Socket,
         @MessageBody() data: { tempoInicial: number },
     ) {
+
         const editalId = client.handshake.query.editalId as string;
         const tipoAutor = client.handshake.query.tipoAutor as string;
-
-        if (!editalId || !tipoAutor) {
-            return { error: 'EditalId ou tipoAutor não fornecidos' };
-        }
 
         if (tipoAutor !== 'PREGOEIRO') {
             return { error: 'Apenas o pregoeiro pode iniciar a contagem' };

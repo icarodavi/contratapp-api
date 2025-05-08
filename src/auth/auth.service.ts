@@ -14,11 +14,11 @@ export class AuthService {
     ) {}
 
     async login(loginDto: { email: string; senha: string }) {
-        console.log('login', loginDto);
+
         const usuario = await this.prisma.usuario.findUnique({
             where: { email: loginDto.email },
         });
-        console.log('login', loginDto, usuario);
+
         if (!usuario) {
             throw new UnauthorizedException('Credenciais inválidas');
         }

@@ -21,6 +21,7 @@ import { PrazoModule } from './prazo/prazo.module';
 import { SancaoModule } from './sancao/sancao.module';
 import { RecursoModule } from './recurso/recurso.module';
 import { DocumentoObrigatorioModule } from './documento-obrigatorio/documento-obrigatorio.module';
+import { WsJwtAuthGuard } from './auth/guards/ws-jwt-auth.guard';
 
 @Module({
   imports: [

@@ -110,6 +110,16 @@
 
                 const tempoFormatado = formatarTempo(tempoRestante);
                 document.getElementById('contador').textContent = tempoFormatado;
+
+                if (tempoRestante <= 0) {
+                    clearInterval(contadorIntervalo);
+                    contadorAtivo = false;
+                    document.getElementById('contadorStatus').textContent = 'Contagem finalizada';
+                    if (tipoAutor === 'PREGOEIRO') {
+                        document.getElementById('pausarContagem').disabled = true;
+                        document.getElementById('retomarContagem').disabled = true;
+                    }
+                }
             }
 
             function iniciarContador(tempoInicial, timestampInicial) {
@@ -384,7 +394,7 @@
             function setupContadorEventos() {
                 // Remove listeners anteriores para evitar duplicação
                 timeSocket.off('contagemIniciada');
-                timeSocket.off('atualizarTempo');
+                timeSocket.off('atualizacaoContagem');
                 timeSocket.off('contagemPausada');
                 timeSocket.off('contagemRetomada');
                 timeSocket.off('contagemFinalizada');
@@ -416,32 +426,32 @@
                     atualizarContador(data.tempoRestante);
                 });
 
-                timeSocket.on('atualizarTempo', (data) => {
-                    console.log('Debug atualizarTempo - Dados recebidos:', data);
+                timeSocket.on('atualizacaoContagem', (data) => {
+                    console.log('Debug atualizacaoContagem - Dados recebidos:', data);
 
-                    if (!data || typeof data.tempoRestante !== 'number' || typeof data.timestampInicio !== 'number') {
-                        console.error('Dados inválidos em atualizarTempo:', data);
+                    if (!data || typeof data.tempoRestante !== 'number' || typeof data.timestamp !== 'number') {
+                        console.error('Dados inválidos em atualizacaoContagem:', data);
                         return;
                     }
 
-                    console.log('Debug atualizarTempo - Atualizando valores:', {
+                    console.log('Debug atualizacaoContagem - Atualizando valores:', {
                         tempoRestanteAtual: tempoRestante,
                         tempoRestanteNovo: data.tempoRestante,
-                        timestampInicioAtual: timestampInicio,
-                        timestampInicioNovo: data.timestampInicio,
+                        timestampAtual: timestampInicio,
+                        timestampNovo: data.timestamp,
                         contadorAtivo,
                         formatadoNovo: formatarTempo(data.tempoRestante)
                     });
 
                     tempoRestante = data.tempoRestante;
-                    timestampInicio = data.timestampInicio;
+                    timestampInicio = data.timestamp;
 
                     if (!contadorAtivo) {
                         console.log('Debug: Reativando contador após atualização');
                         contadorAtivo = true;
                         if (!contadorIntervalo) {
-                            contadorIntervalo = setInterval(atualizarContador, 100);
-                            atualizarContador();
+                            contadorIntervalo = setInterval(() => atualizarContador(tempoRestante), 100);
+                            atualizarContador(tempoRestante);
                         }
                     }
                 });
@@ -462,7 +472,17 @@
                 timeSocket.on('contagemRetomada', (data) => {
                     console.log('Evento contagemRetomada recebido:', data);
                     if (data && typeof data.timestampInicio === 'number' && typeof data.tempoRestante === 'number') {
-                        retomarContador(data.tempoRestante, data.timestampInicio);
+                        // Atualiza as variáveis globais
+                        tempoRestante = data.tempoRestante;
+                        timestampInicio = data.timestampInicio;
+                        contadorAtivo = true;
+
+                        // Limpa o intervalo anterior, se existir
+                        clearInterval(contadorIntervalo);
+
+                        // Inicia um novo intervalo
+                        contadorIntervalo = setInterval(() => atualizarContador(tempoRestante), 100);
+                        atualizarContador(tempoRestante);
 
                         document.getElementById('contadorStatus').textContent = 'Contagem em andamento';
                         if (tipoAutor === 'PREGOEIRO') {
@@ -605,7 +625,6 @@
                     console.log('Debug: Enviando evento iniciarContagem:', payload);
 
                     timeSocket.emit('iniciarContagem', payload, (response) => {
-                        console.log('Debug: Resposta do evento iniciarContagem:', response);
                         if (response?.error) {
                             console.error('Erro ao iniciar contagem:', response.error);
                             document.getElementById('contadorStatus').textContent = `Erro: ${response.error}`;
@@ -616,20 +635,18 @@
                 });
 
                 document.getElementById('pausarContagem').addEventListener('click', () => {
-                    console.log('Botão pausar clicado');
                     if (timeSocket && timeSocket.connected) {
                         timeSocket.emit('pausarContagem');
-                        console.log('Evento pausarContagem enviado');
                     } else {
                         console.error('Socket não está conectado');
                     }
                 });
 
                 document.getElementById('retomarContagem').addEventListener('click', () => {
-                    console.log('Botão retomar clicado');
+
                     if (timeSocket && timeSocket.connected) {
                         timeSocket.emit('retomarContagem');
-                        console.log('Evento retomarContagem enviado');
+
                     } else {
                         console.error('Socket não está conectado');
                     }

@@ -1,12 +1,13 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../auth.service';
-import { ConfigService } from '@nestjs/config';
+
 
 @Injectable()
 export class WsJwtAuthGuard implements CanActivate {
+    private logger = new Logger(WsJwtAuthGuard.name)
     constructor(
         private authService: AuthService,
-        private configService: ConfigService,
+
     ) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -27,7 +28,14 @@ export class WsJwtAuthGuard implements CanActivate {
     }
 
     private extractTokenFromHeader(client: any): string | undefined {
+        // Primeiro tenta pegar do header
         const [type, token] = client.handshake.headers.authorization?.split(' ') ?? [];
-        return type === 'Bearer' ? token : undefined;
+        if (type === 'Bearer' && token) return token;
+
+        // Depois tenta pegar do campo auth (padrão do socket.io)
+        if (client.handshake.auth && client.handshake.auth.token) {
+            return client.handshake.auth.token;
+        }
+        return undefined;
     }
 } 
