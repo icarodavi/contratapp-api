@@ -78,7 +78,7 @@ Este projeto é acompanhado de documentação completa:
 
 | Tipo | Caminho |
 |------|---------|
-| 📄 Documento de Requisitos (PRD) | [`docs/pdr/product-requirements-document.md`](docs/pdr/product-requirements-document.md) |
+| 📄 Documento de Requisitos (PRD) | [`docs/prd/product-requirements-document.md`](docs/prd/product-requirements-document.md) |
 | 🧠 Decisões Arquiteturais (ADR) | [`docs/adr/`](docs/adr/) |
 | 🛣️ Roadmap de Desenvolvimento | [`docs/roadmap.md`](docs/roadmap.md) |
 | 📑 Regras de Negócio e Domínio | [`/.cursor/rules/`](.cursor/rules/) |

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LanceService } from './lance.service';
-import { PrismaService } from '../database/prisma.service';
+import { PrismaService } from '../database/database.service';
 import { LogAtividadeService } from '../log-atividade/log-atividade.service';
 import { DisputaService } from '../disputa/disputa.service';
 import { LicitanteService } from '../licitante/licitante.service';
