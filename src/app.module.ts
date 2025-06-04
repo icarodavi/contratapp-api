@@ -8,6 +8,7 @@ import { EditalModule } from './edital/edital.module';
 import { DisputaModule } from './disputa/disputa.module';
 import { LicitanteModule } from './licitante/licitante.module';
 import { DocumentoModule } from './documento/documento.module';
+import { DocumentoLicitanteModule } from './documento-licitante/documento-licitante.module';
 import { DocumentoObrigatorioModule } from './documento-obrigatorio/documento-obrigatorio.module';
 import { LogAtividadeModule } from './log-atividade/log-atividade.module';
 import { LoteModule } from './lote/lote.module';
@@ -28,6 +29,7 @@ import { LanceModule } from './lance/lance.module';
     DisputaModule,
     LicitanteModule,
     DocumentoModule,
+    DocumentoLicitanteModule,
     DocumentoObrigatorioModule,
     LogAtividadeModule,
     LoteModule,
