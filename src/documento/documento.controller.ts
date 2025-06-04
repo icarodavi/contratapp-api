@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, HttpCode, HttpStatus, UseGuards, UploadedFile, UseInterceptors, Req } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { DocumentoService } from './documento.service';
+import { DocumentoLicitanteService } from '../documento-licitante/documento-licitante.service';
 import { CreateDocumentoDto } from './dto/create-documento.dto';
 import { UpdateDocumentoDto } from './dto/update-documento.dto';
 import { DocumentoDto } from './dto/documento.dto';
@@ -12,12 +13,14 @@ import * as fs from 'fs';
 import { LogAtividadeService } from '../log-atividade/log-atividade.service';
 import { DocumentoObrigatorioService } from '../documento-obrigatorio/documento-obrigatorio.service';
 import { TipoAtividade } from '@prisma/client';
+import { CreateDocumentoLicitanteDto } from '../documento-licitante/dto/create-documento-licitante.dto';
 
 @ApiTags('documentos')
 @Controller('documentos')
 export class DocumentoController {
     constructor(
         private readonly documentoService: DocumentoService,
+        private readonly documentoLicitanteService: DocumentoLicitanteService,
         private readonly logAtividadeService: LogAtividadeService,
         private readonly documentoObrigatorioService: DocumentoObrigatorioService
     ) {}
@@ -124,22 +127,21 @@ export class DocumentoController {
         // Calcula hash do arquivo
         const hash = crypto.createHash('sha256').update(file.buffer).digest('hex');
         // Monta DTO para salvar no banco
-        const createDto = {
-            nome: file.filename,
-            nomeOriginal: file.originalname,
-            tipo: tipoDocumento,
-            caminho: file.path,
-            descricao,
-            versao: Number(versao),
-            hash,
-            assinatura,
-            validade: validade ? new Date(validade) : undefined,
+        const createDto: CreateDocumentoLicitanteDto = {
+            disputaId,
             licitanteId,
             tipoDocumento,
-            editalId
+            nomeOriginal: file.originalname,
+            descricao,
+            arquivoPath: file.path,
+            versao: Number(versao),
+            hashDocumento: hash,
+            assinaturaBase64: assinatura,
+            assinadoPor: req.user?.id || licitanteId,
+            dataValidade: validade ? new Date(validade) : undefined,
         };
         // Salva no banco
-        const documento = await this.documentoService.create(createDto);
+        const documento = await this.documentoLicitanteService.create(createDto);
         // Registra no LogAtividade
         await this.logAtividadeService.criarLog({
             tipo: TipoAtividade.DOCUMENTO_ENVIADO,
