@@ -9,7 +9,6 @@ export class ModalidadeLicitaçãoPipe implements PipeTransform {
         }
 
         if (!Object.values(ModalidadeLicitação).includes(value)) {
-            console.log(value);
             throw new BadRequestException(
                 `Modalidade de licitação inválida. Valores aceitos: ${Object.values(ModalidadeLicitação).join(', ')}`
             );
