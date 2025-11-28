@@ -8,6 +8,11 @@ import { UpdateSenhaDto } from './dto/update-senha.dto';
 import { NotFoundException, UnauthorizedException, ConflictException } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 
+jest.mock('bcryptjs', () => ({
+    hash: jest.fn(),
+    compare: jest.fn(),
+}));
+
 describe('UsuarioService', () => {
     let service: UsuarioService;
     let prismaService: PrismaService;
@@ -67,7 +72,7 @@ describe('UsuarioService', () => {
 
             mockPrismaService.usuario.findUnique.mockResolvedValue(null);
             mockPrismaService.usuario.create.mockResolvedValue(usuarioCriado);
-            jest.spyOn(bcrypt, 'hash').mockResolvedValue('hashedPassword');
+            (bcrypt.hash as jest.Mock).mockResolvedValue('hashedPassword');
 
             const result = await service.create(createUsuarioDto);
 
@@ -157,7 +162,7 @@ describe('UsuarioService', () => {
             };
 
             mockPrismaService.usuario.findUnique.mockResolvedValue(usuario);
-            jest.spyOn(bcrypt, 'compare').mockResolvedValue(true);
+            (bcrypt.compare as jest.Mock).mockResolvedValue(true);
             mockJwtService.sign.mockReturnValue('jwtToken');
 
             const result = await service.login(loginDto);
@@ -198,8 +203,8 @@ describe('UsuarioService', () => {
             };
 
             mockPrismaService.usuario.findUnique.mockResolvedValue(usuario);
-            jest.spyOn(bcrypt, 'compare').mockResolvedValue(true);
-            jest.spyOn(bcrypt, 'hash').mockResolvedValue('newHashedPassword');
+            (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+            (bcrypt.hash as jest.Mock).mockResolvedValue('newHashedPassword');
             mockPrismaService.usuario.update.mockResolvedValue({
                 ...usuario,
                 senha: 'newHashedPassword',
@@ -229,9 +234,9 @@ describe('UsuarioService', () => {
             };
 
             mockPrismaService.usuario.findUnique.mockResolvedValue(usuario);
-            jest.spyOn(bcrypt, 'compare').mockResolvedValue(false);
+            (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
             await expect(service.updateSenha('1', updateSenhaDto)).rejects.toThrow(UnauthorizedException);
         });
     });
-}); 
+});

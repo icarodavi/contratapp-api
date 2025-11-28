@@ -55,7 +55,7 @@ export class AuthService {
     async refreshToken(refreshToken: string) {
         try {
             const payload = await this.jwtService.verifyAsync(refreshToken, {
-                secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
+                secret: this.configService.get<string>('JWT_REFRESH_SECRET') || 'contratapp-super-secret-refresh-jwt-key-2024-development',
             });
 
             const usuario = await this.prisma.usuario.findUnique({
@@ -87,7 +87,7 @@ export class AuthService {
             perfil: usuario.perfil,
         };
         return this.jwtService.signAsync(payload, {
-            secret: this.configService.get<string>('JWT_SECRET'),
+            secret: this.configService.get<string>('JWT_SECRET') || 'contratapp-super-secret-jwt-key-2024-development',
             expiresIn: '15m',
         });
     }
@@ -95,7 +95,7 @@ export class AuthService {
     private async generateRefreshToken(usuario: Usuario) {
         const payload = { sub: usuario.id };
         return this.jwtService.signAsync(payload, {
-            secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
+            secret: this.configService.get<string>('JWT_REFRESH_SECRET') || 'contratapp-super-secret-refresh-jwt-key-2024-development',
             expiresIn: '7d',
         });
     }

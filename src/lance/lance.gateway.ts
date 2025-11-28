@@ -100,7 +100,7 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
                 licitanteId,
                 data.valorCentavos,
                 ip,
-                userAgent,
+                userAgent || '',
             );
 
             // Emite o novo lance para todos os participantes da disputa

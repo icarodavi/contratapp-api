@@ -117,4 +117,81 @@ export class DisputaService {
             );
         }
     }
-} 
+
+    async encerrarDisputa(id: string) {
+        const disputa = await this.findOne(id);
+
+        if (disputa.status === DisputaStatus.ENCERRADA) {
+            return disputa;
+        }
+
+        // Verifica empate ficto antes de encerrar
+        const empate = await this.verificarEmpateFicto(id);
+
+        // Atualiza status para ENCERRADA
+        const disputaEncerrada = await this.prisma.disputa.update({
+            where: { id },
+            data: {
+                status: DisputaStatus.ENCERRADA,
+                encerramento: new Date(),
+                tempoRestante: 0
+            },
+            include: {
+                edital: true,
+                propostas: true,
+                documentos: true
+            }
+        });
+
+        return {
+            disputa: disputaEncerrada,
+            empateFicto: empate
+        };
+    }
+
+    async verificarEmpateFicto(disputaId: string) {
+        // Busca o menor lance (vencedor provisório)
+        const menorLance = await this.prisma.lance.findFirst({
+            where: { disputaId },
+            orderBy: { valorCentavos: 'asc' },
+            include: { licitante: true }
+        });
+
+        if (!menorLance) return null;
+
+        // Se o vencedor já é ME/EPP, não há empate ficto (LC 123/2006)
+        // Nota: A regra pode variar, mas geralmente o benefício é para ME/EPP quando o vencedor NÃO é.
+        // Mas o PRD diz "Aplicação automática". Vamos listar todos os ME/EPP no intervalo.
+
+        // Intervalo de 5%
+        const valorLimite = menorLance.valorCentavos * 1.05;
+
+        const lancesEmpatados = await this.prisma.lance.findMany({
+            where: {
+                disputaId,
+                valorCentavos: {
+                    gt: menorLance.valorCentavos,
+                    lte: valorLimite
+                },
+                licitante: {
+                    tipoEmpresa: {
+                        in: ['ME', 'EPP']
+                    }
+                }
+            },
+            include: { licitante: true },
+            orderBy: { valorCentavos: 'asc' }
+        });
+
+        // Filtra para pegar apenas o melhor lance de cada licitante empatado
+        // (caso o mesmo licitante tenha dado vários lances no intervalo)
+        const licitantesEmpatados = new Map();
+        for (const lance of lancesEmpatados) {
+            if (!licitantesEmpatados.has(lance.licitanteId)) {
+                licitantesEmpatados.set(lance.licitanteId, lance);
+            }
+        }
+
+        return Array.from(licitantesEmpatados.values());
+    }
+}

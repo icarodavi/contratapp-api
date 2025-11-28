@@ -3,7 +3,7 @@ import { PrismaService } from '../database/database.service';
 import { LogAtividadeService } from '../log-atividade/log-atividade.service';
 import { DisputaService } from '../disputa/disputa.service';
 import { LicitanteService } from '../licitante/licitante.service';
-import { TipoEmpresa } from '@prisma/client';
+import { TipoEmpresa, DisputaStatus, TipoAtividade } from '@prisma/client';
 
 @Injectable()
 export class LanceService {
@@ -22,17 +22,17 @@ export class LanceService {
         userAgent: string,
     ) {
         // Verifica se a disputa existe e está aberta
-        const disputa = await this.disputaService.buscarPorId(disputaId);
+        const disputa = await this.disputaService.findOne(disputaId);
         if (!disputa) {
             throw new NotFoundException('Disputa não encontrada');
         }
 
-        if (disputa.status !== 'ABERTA') {
+        if (disputa.status !== DisputaStatus.ABERTA) {
             throw new BadRequestException('A disputa não está aberta para receber lances');
         }
 
         // Verifica se o licitante existe e está habilitado
-        const licitante = await this.licitanteService.buscarPorId(licitanteId);
+        const licitante = await this.licitanteService.findOne(licitanteId);
         if (!licitante) {
             throw new NotFoundException('Licitante não encontrado');
         }
@@ -50,7 +50,7 @@ export class LanceService {
 
         // Aplica a regra de empate ficto para ME/EPP
         if (ultimoLance) {
-            const licitanteAnterior = await this.licitanteService.buscarPorId(ultimoLance.licitanteId);
+            const licitanteAnterior = await this.licitanteService.findOne(ultimoLance.licitanteId);
 
             if (
                 (licitante.tipoEmpresa === TipoEmpresa.ME || licitante.tipoEmpresa === TipoEmpresa.EPP) &&
@@ -78,12 +78,17 @@ export class LanceService {
         });
 
         // Registra a atividade
-        await this.logAtividadeService.registrar({
-            tipo: 'LANCE_REALIZADO',
-            descricao: `Lance de ${valorCentavos / 100} reais registrado`,
+        await this.logAtividadeService.criarLog({
+            tipo: TipoAtividade.LANCE_REALIZADO,
+            acao: `Lance de ${valorCentavos / 100} reais registrado`,
+            detalhes: `Lance registrado pelo licitante ${licitante.razaoSocial}`,
+            ip,
+            userAgent,
+            modulo: 'LANCE',
+            entidadeId: licitanteId,
+            entidadeTipo: 'LICITANTE',
             disputaId,
-            licitanteId,
-            dados: {
+            metadata: {
                 valorCentavos,
                 ip,
                 userAgent,
@@ -101,7 +106,7 @@ export class LanceService {
                 licitante: {
                     select: {
                         id: true,
-                        nome: true,
+                        razaoSocial: true,
                         tipoEmpresa: true,
                     },
                 },
@@ -117,7 +122,7 @@ export class LanceService {
                 licitante: {
                     select: {
                         id: true,
-                        nome: true,
+                        razaoSocial: true,
                         tipoEmpresa: true,
                     },
                 },

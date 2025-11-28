@@ -4,14 +4,14 @@ import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { PrismaModule } from '../database/database.module';
+import { DatabaseModule } from '../database/database.module';
 import { WsJwtAuthGuard } from './guards/ws-jwt-auth.guard';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
     imports: [
-        PrismaModule,
+        DatabaseModule,
         PassportModule,
         ConfigModule,
         ThrottlerModule.forRoot([{
@@ -21,7 +21,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
         JwtModule.registerAsync({
             imports: [ConfigModule],
             useFactory: async (configService: ConfigService) => ({
-                secret: configService.get<string>('JWT_SECRET'),
+                secret: configService.get<string>('JWT_SECRET') || 'contratapp-super-secret-jwt-key-2024-development',
                 signOptions: { expiresIn: '15m' },
             }),
             inject: [ConfigService],

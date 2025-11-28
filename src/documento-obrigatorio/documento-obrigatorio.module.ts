@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { DocumentoObrigatorioService } from './documento-obrigatorio.service';
 import { DocumentoObrigatorioController } from './documento-obrigatorio.controller';
-import { PrismaModule } from '../database/database.module';
+import { DatabaseModule } from '../database/database.module';
 
 @Module({
-    imports: [PrismaModule],
+    imports: [DatabaseModule],
     controllers: [DocumentoObrigatorioController],
     providers: [DocumentoObrigatorioService],
     exports: [DocumentoObrigatorioService]

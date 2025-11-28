@@ -6,8 +6,10 @@ import { PrismaService } from '../database/database.service';
 import { LogAtividadeService } from '../log-atividade/log-atividade.service';
 import { DisputaService } from '../disputa/disputa.service';
 import { LicitanteService } from '../licitante/licitante.service';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
+    imports: [AuthModule],
     controllers: [LanceController],
     providers: [
         LanceService,

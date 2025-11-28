@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '@/database/database.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
@@ -11,13 +11,20 @@ export class EditalService {
     constructor(private prisma: PrismaService) {}
 
     async create(createEditalDto: CreateEditalDto) {
-        return this.prisma.edital.create({
-            data: {
-                ...createEditalDto,
-                modalidade: createEditalDto.modalidade as ModalidadeLicitação,
-                criterioJulgamento: createEditalDto.criterioJulgamento as CritérioJulgamento,
-            },
-        });
+        try {
+            return await this.prisma.edital.create({
+                data: {
+                    ...createEditalDto,
+                    modalidade: createEditalDto.modalidade as ModalidadeLicitação,
+                    criterioJulgamento: createEditalDto.criterioJulgamento as CritérioJulgamento,
+                },
+            });
+        } catch (error) {
+            if (error.code === 'P2002') {
+                throw new BadRequestException('Edital com este número já existe');
+            }
+            throw error;
+        }
     }
 
     async findAll() {
@@ -91,4 +98,4 @@ export class EditalService {
             where: { id },
         });
     }
-} 
+}

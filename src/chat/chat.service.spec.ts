@@ -1,104 +1,84 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ChatService } from './chat.service';
-import { ChatGateway } from './chat.gateway';
-import { PrismaService } from '../database/database.service';
+import { PrismaService } from '@/database/database.service';
 import { PerfilUsuario } from '@prisma/client';
+
+const mockPrismaService = {
+    mensagemChat: {
+        findMany: jest.fn(),
+        create: jest.fn(),
+    },
+};
 
 describe('ChatService', () => {
     let service: ChatService;
-    let prismaService: PrismaService;
-
-    const mockPrismaService = {
-        mensagemChat: {
-            create: jest.fn(),
-            findMany: jest.fn(),
-        },
-    };
+    let prisma: typeof mockPrismaService;
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 ChatService,
-                ChatGateway,
-                {
-                    provide: PrismaService,
-                    useValue: mockPrismaService,
-                },
+                { provide: PrismaService, useValue: mockPrismaService },
             ],
         }).compile();
 
         service = module.get<ChatService>(ChatService);
-        prismaService = module.get<PrismaService>(PrismaService);
+        prisma = module.get(PrismaService);
     });
 
-    it('deve ser definido', () => {
-        expect(service).toBeDefined();
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 
-    describe('criarMensagem', () => {
-        it('deve criar uma nova mensagem', async () => {
-            const mensagemData = {
-                conteudo: 'Olá, mundo!',
-                usuarioId: '1',
-                editalId: '1',
-                perfil: 'LICITANTE' as PerfilUsuario
-            };
-
-            const mensagemCriada = {
-                id: '1',
-                conteudo: mensagemData.conteudo,
-                editalId: mensagemData.editalId,
-                autorId: mensagemData.usuarioId,
-                tipoAutor: 'LICITANTE',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            };
-
-            mockPrismaService.mensagemChat.create.mockResolvedValue(mensagemCriada);
-
-            const resultado = await service.criarMensagem(
-                mensagemData.editalId,
-                mensagemData.usuarioId,
-                mensagemData.perfil,
-                mensagemData.conteudo
-            );
-
-            expect(resultado).toEqual(mensagemCriada);
-            expect(mockPrismaService.mensagemChat.create).toHaveBeenCalledWith({
-                data: mensagemData,
-            });
+    describe('verificarAcessoEdital', () => {
+        it('should return true (stubbed behavior)', async () => {
+            const result = await service.verificarAcessoEdital('e1', 'u1', PerfilUsuario.PREGOEIRO);
+            expect(result).toBe(true);
         });
     });
 
     describe('obterHistoricoMensagens', () => {
-        it('deve retornar o histórico de mensagens', async () => {
-            const disputaId = '1';
-            const mensagens = [
-                {
-                    id: '1',
-                    conteudo: 'Mensagem 1',
-                    usuarioId: '1',
-                    disputaId: '1',
-                    dataEnvio: new Date(),
-                },
-                {
-                    id: '2',
-                    conteudo: 'Mensagem 2',
-                    usuarioId: '2',
-                    disputaId: '1',
-                    dataEnvio: new Date(),
-                },
-            ];
+        it('should return message history', async () => {
+            const messages = [{ id: 'm1', conteudo: 'Hello' }];
+            prisma.mensagemChat.findMany.mockResolvedValue(messages);
 
-            mockPrismaService.mensagemChat.findMany.mockResolvedValue(mensagens);
-
-            const resultado = await service.obterHistoricoMensagens(disputaId, '1');
-
-            expect(resultado).toEqual(mensagens);
-            expect(mockPrismaService.mensagemChat.findMany).toHaveBeenCalledWith({
-                where: { disputaId },
-                orderBy: { dataEnvio: 'asc' },
-            });
+            const result = await service.obterHistoricoMensagens('e1', 'u1');
+            expect(result).toEqual(messages);
+            expect(prisma.mensagemChat.findMany).toHaveBeenCalledWith(expect.objectContaining({
+                where: { editalId: 'e1' },
+                orderBy: { createdAt: 'asc' }
+            }));
         });
     });
-}); 
+
+    describe('criarMensagem', () => {
+        it('should create a message', async () => {
+            const message = { id: 'm1', conteudo: 'Hello' };
+            prisma.mensagemChat.create.mockResolvedValue(message);
+
+            const result = await service.criarMensagem('e1', 'u1', PerfilUsuario.PREGOEIRO, 'Hello');
+            expect(result).toEqual(message);
+            expect(prisma.mensagemChat.create).toHaveBeenCalledWith(expect.objectContaining({
+                data: expect.objectContaining({
+                    conteudo: 'Hello',
+                    editalId: 'e1',
+                    autorId: 'u1',
+                    tipoAutor: 'PREGOEIRO'
+                })
+            }));
+        });
+
+        it('should create a message for LICITANTE', async () => {
+            const message = { id: 'm1', conteudo: 'Hello' };
+            prisma.mensagemChat.create.mockResolvedValue(message);
+
+            const result = await service.criarMensagem('e1', 'u1', PerfilUsuario.LICITANTE, 'Hello');
+            expect(result).toEqual(message);
+            expect(prisma.mensagemChat.create).toHaveBeenCalledWith(expect.objectContaining({
+                data: expect.objectContaining({
+                    tipoAutor: 'LICITANTE'
+                })
+            }));
+        });
+    });
+});

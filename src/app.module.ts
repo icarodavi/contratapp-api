@@ -20,9 +20,25 @@ import { PropostaModule } from './proposta/proposta.module';
 import { TimeModule } from './time/time.module';
 import { ChatModule } from './chat/chat.module';
 import { LanceModule } from './lance/lance.module';
+import { ConfigModule } from '@nestjs/config';
+import { RelatorioModule } from './relatorio/relatorio.module';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 10,
+      },
+    ]),
+    DatabaseModule,
     AuthModule,
     UsuarioModule,
     EditalModule,
@@ -41,8 +57,16 @@ import { LanceModule } from './lance/lance.module';
     TimeModule,
     ChatModule,
     LanceModule,
+    RelatorioModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [
+    AppService,
+    PrismaService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}

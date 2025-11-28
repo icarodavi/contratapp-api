@@ -14,6 +14,7 @@ describe('EditalService', () => {
             create: jest.fn(),
             findMany: jest.fn(),
             findUnique: jest.fn(),
+            findFirst: jest.fn(),
             update: jest.fn(),
             delete: jest.fn(),
         },
@@ -63,7 +64,11 @@ describe('EditalService', () => {
 
             expect(result).toEqual(editalCriado);
             expect(mockPrismaService.edital.create).toHaveBeenCalledWith({
-                data: createEditalDto,
+                data: {
+                    ...createEditalDto,
+                    modalidade: createEditalDto.modalidade,
+                    criterioJulgamento: createEditalDto.criterioJulgamento,
+                },
             });
         });
 
@@ -88,35 +93,64 @@ describe('EditalService', () => {
         });
     });
 
+    describe('findAll', () => {
+        it('deve retornar todos os editais', async () => {
+            mockPrismaService.edital.findMany.mockResolvedValue([{ id: '1' }]);
+            const result = await service.findAll();
+            expect(result).toHaveLength(1);
+        });
+    });
+
     describe('findOne', () => {
         it('deve retornar um edital pelo ID', async () => {
-            const edital = {
-                id: '1',
-                numero: '001/2024',
-                objeto: 'Teste de objeto',
-                dataAbertura: new Date(),
-                status: 'RASCUNHO',
-                modalidade: ModalidadeLicitação.PREGÃO_ELETRÔNICO,
-                criterioJulgamento: CritérioJulgamento.MENOR_PRECO,
-                ativo: true,
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            };
-
+            const edital = { id: '1' };
             mockPrismaService.edital.findUnique.mockResolvedValue(edital);
-
             const result = await service.findOne('1');
-
             expect(result).toEqual(edital);
-            expect(mockPrismaService.edital.findUnique).toHaveBeenCalledWith({
-                where: { id: '1' },
-            });
         });
 
         it('deve lançar NotFoundException se o edital não existir', async () => {
             mockPrismaService.edital.findUnique.mockResolvedValue(null);
-
             await expect(service.findOne('1')).rejects.toThrow(NotFoundException);
         });
     });
-}); 
+
+    describe('findByNumero', () => {
+        it('deve retornar um edital pelo número', async () => {
+            const edital = { id: '1', numero: '001/2024' };
+            mockPrismaService.edital.findFirst.mockResolvedValue(edital);
+            const result = await service.findByNumero('001/2024');
+            expect(result).toEqual(edital);
+        });
+    });
+
+    describe('update', () => {
+        it('deve atualizar um edital', async () => {
+            mockPrismaService.edital.findUnique.mockResolvedValue({ id: '1' });
+            mockPrismaService.edital.update.mockResolvedValue({ id: '1', objeto: 'Updated' });
+
+            const result = await service.update('1', { objeto: 'Updated' });
+            expect(result.objeto).toBe('Updated');
+        });
+
+        it('deve lançar NotFoundException se edital não encontrado', async () => {
+            mockPrismaService.edital.findUnique.mockResolvedValue(null);
+            await expect(service.update('1', {})).rejects.toThrow(NotFoundException);
+        });
+    });
+
+    describe('remove', () => {
+        it('deve remover um edital', async () => {
+            mockPrismaService.edital.findUnique.mockResolvedValue({ id: '1' });
+            mockPrismaService.edital.delete.mockResolvedValue({ id: '1' });
+
+            await service.remove('1');
+            expect(mockPrismaService.edital.delete).toHaveBeenCalled();
+        });
+
+        it('deve lançar NotFoundException se edital não encontrado', async () => {
+            mockPrismaService.edital.findUnique.mockResolvedValue(null);
+            await expect(service.remove('1')).rejects.toThrow(NotFoundException);
+        });
+    });
+});

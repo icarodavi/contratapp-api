@@ -1,8 +1,8 @@
 import { WebSocketGateway, WebSocketServer, SubscribeMessage, OnGatewayConnection, OnGatewayDisconnect, ConnectedSocket, MessageBody } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { WsJwtAuthGuard } from '../auth/guards/ws-jwt-auth.guard';
-import { UseGuards } from '@nestjs/common';
-import { Logger } from '@nestjs/common';
+import { UseGuards, Logger } from '@nestjs/common';
+import { DisputaService } from '../disputa/disputa.service';
 
 interface Contador {
     inicio: number;
@@ -34,6 +34,8 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     // Armazena os clientes conectados por edital
     private clientesPorEdital: Map<string, Set<string>> = new Map();
+
+    constructor(private readonly disputaService: DisputaService) {}
 
     handleConnection(client: Socket) {
         try {
@@ -118,11 +120,7 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
             return { error: 'Apenas o pregoeiro pode iniciar a contagem' };
         }
 
-        if (!data?.tempoInicial || isNaN(data.tempoInicial) || data.tempoInicial <= 0) {
-            return { error: 'Tempo inicial inválido' };
-        }
 
-        // Limpa contador anterior se existir
         const contadorAnterior = this.contadores.get(editalId);
         if (contadorAnterior?.intervalo) {
             clearInterval(contadorAnterior.intervalo);
@@ -161,6 +159,9 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
                     }
                     this.contadores.delete(editalId);
                     this.server.to(editalId).emit('contagemFinalizada');
+
+                    // Encerra a disputa no banco de dados
+                    this.encerrarDisputaDb(editalId);
                 }
             }
         }, 100);
@@ -227,6 +228,19 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         return { success: true };
     }
 
+    private async encerrarDisputaDb(editalId: string) {
+        try {
+            const disputas = await this.disputaService.findByEdital(editalId);
+            const disputaAberta = disputas.find(d => d.status === 'ABERTA');
+            if (disputaAberta) {
+                await this.disputaService.encerrarDisputa(disputaAberta.id);
+                this.logger.log(`Disputa ${disputaAberta.id} encerrada automaticamente pelo temporizador.`);
+            }
+        } catch (e) {
+            this.logger.error(`Erro ao encerrar disputa do edital ${editalId}:`, e);
+        }
+    }
+
     private limparContador(editalId: string) {
         try {
             const contador = this.contadores.get(editalId);
@@ -239,4 +253,4 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
             this.logger.error('Erro ao limpar contador:', error);
         }
     }
-} 
+}

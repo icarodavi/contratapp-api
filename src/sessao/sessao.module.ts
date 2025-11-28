@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { SessaoService } from './sessao.service';
 import { SessaoController } from './sessao.controller';
-import { PrismaModule } from '@/database/database.module';
+import { DatabaseModule } from '@/database/database.module';
 
 @Module({
-    imports: [PrismaModule],
+    imports: [DatabaseModule],
     controllers: [SessaoController],
     providers: [SessaoService],
     exports: [SessaoService]

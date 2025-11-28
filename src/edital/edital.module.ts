@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { EditalService } from './edital.service';
 import { EditalController } from './edital.controller';
-import { PrismaModule } from '@/database/database.module';
+import { DatabaseModule } from '@/database/database.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ModalidadeLicitaçãoPipe } from './pipes/modalidade-licitacao.pipe';
 import { CritérioJulgamentoPipe } from './pipes/criterio-julgamento.pipe';
 
 @Module({
-    imports: [PrismaModule],
+    imports: [DatabaseModule],
     controllers: [EditalController],
     providers: [
         EditalService,
