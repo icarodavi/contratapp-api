@@ -77,6 +77,30 @@ describe('DisputaService', () => {
         });
     });
 
+    describe('findAll', () => {
+        it('should return all disputes', async () => {
+            const disputes = [{ id: 'disputa-1' }];
+            prisma.disputa.findMany.mockResolvedValue(disputes);
+            const result = await service.findAll();
+            expect(result).toEqual(disputes);
+            expect(prisma.disputa.findMany).toHaveBeenCalled();
+        });
+    });
+
+    describe('findOne', () => {
+        it('should return a dispute if found', async () => {
+            const dispute = { id: 'disputa-1' };
+            prisma.disputa.findUnique.mockResolvedValue(dispute);
+            const result = await service.findOne('disputa-1');
+            expect(result).toEqual(dispute);
+        });
+
+        it('should throw NotFoundException if not found', async () => {
+            prisma.disputa.findUnique.mockResolvedValue(null);
+            await expect(service.findOne('disputa-1')).rejects.toThrow(NotFoundException);
+        });
+    });
+
     describe('findByEdital', () => {
         it('should return disputes for a given edital', async () => {
             const disputes = [{ id: 'disputa-1', editalId: 'edital-1' }];

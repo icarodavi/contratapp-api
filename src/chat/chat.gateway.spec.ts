@@ -97,4 +97,13 @@ describe('ChatGateway', () => {
             }));
         });
     });
+
+    describe('handleDisconnect', () => {
+        it('should log disconnection', () => {
+            const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+            gateway.handleDisconnect(mockSocket);
+            expect(consoleSpy).toHaveBeenCalledWith('Cliente desconectado');
+            consoleSpy.mockRestore();
+        });
+    });
 });

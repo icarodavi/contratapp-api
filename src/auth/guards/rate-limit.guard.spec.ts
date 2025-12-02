@@ -35,4 +35,14 @@ describe('RateLimitGuard', () => {
         const result = await guard['getTracker'](mockRequest);
         expect(result).toBe('192.168.1.1');
     });
-}); 
+
+    it('deve retornar req.ip se ips estiver vazio', async () => {
+        const mockRequest = {
+            ip: '127.0.0.1',
+            ips: [],
+        };
+
+        const result = await guard['getTracker'](mockRequest);
+        expect(result).toBe('127.0.0.1');
+    });
+});

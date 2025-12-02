@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { LoginDto } from './dto/auth.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { UpdateSenhaDto } from './dto/update-senha.dto';
@@ -28,23 +28,28 @@ export class UsuarioController {
     }
 
     @Get()
-    // @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({ summary: 'Listar todos os usuários' })
     @ApiResponse({ status: 200, description: 'Lista de usuários retornada com sucesso' })
+    @ApiResponse({ status: 401, description: 'Não autorizado' })
     findAll() {
         return this.usuarioService.findAll();
     }
 
     @Get(':id')
+    @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     @ApiOperation({ summary: 'Buscar usuário por ID' })
     @ApiResponse({ status: 200, description: 'Usuário encontrado' })
+    @ApiResponse({ status: 401, description: 'Não autorizado' })
     @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
     findOne(@Param('id') id: string) {
         return this.usuarioService.findOne(id);
     }
 
     @Put(':id/senha')
+    @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     @ApiOperation({ summary: 'Atualizar senha do usuário' })
     @ApiResponse({ status: 200, description: 'Senha atualizada com sucesso' })
@@ -53,4 +58,4 @@ export class UsuarioController {
     updateSenha(@Param('id') id: string, @Body() updateSenhaDto: UpdateSenhaDto) {
         return this.usuarioService.updateSenha(id, updateSenhaDto);
     }
-} 
+}

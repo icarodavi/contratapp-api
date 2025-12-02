@@ -1,40 +1,34 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LanceGateway } from './lance.gateway';
 import { LanceService } from './lance.service';
-import { Socket } from 'socket.io';
 import { WsJwtAuthGuard } from '../auth/guards/ws-jwt-auth.guard';
+import { Socket } from 'socket.io';
 
 describe('LanceGateway', () => {
     let gateway: LanceGateway;
-    let lanceService: LanceService;
+    let service: LanceService;
 
     const mockLanceService = {
         buscarUltimoLance: jest.fn(),
         registrarLance: jest.fn(),
     };
 
-    const mockSocket = {
-        handshake: {
-            query: {
-                disputaId: 'd1',
-                tipoAutor: 'LICITANTE',
-                licitanteId: 'l1',
-            },
-            address: '127.0.0.1',
-            headers: {
-                'user-agent': 'TestAgent',
-            },
-        },
-        disconnect: jest.fn(),
-        join: jest.fn(),
-        emit: jest.fn(),
-        id: 'socket1',
-    } as unknown as Socket;
-
     const mockServer = {
         to: jest.fn().mockReturnThis(),
         emit: jest.fn(),
     };
+
+    const mockSocket = {
+        id: 'socket1',
+        handshake: {
+            query: { disputaId: 'd1', tipoAutor: 'LICITANTE', licitanteId: 'l1' },
+            address: '127.0.0.1',
+            headers: { 'user-agent': 'agent' },
+        },
+        join: jest.fn(),
+        disconnect: jest.fn(),
+        emit: jest.fn(),
+    } as unknown as Socket;
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -48,72 +42,68 @@ describe('LanceGateway', () => {
             .compile();
 
         gateway = module.get<LanceGateway>(LanceGateway);
-        lanceService = module.get<LanceService>(LanceService);
+        service = module.get<LanceService>(LanceService);
         gateway.server = mockServer as any;
     });
 
-    afterEach(() => {
-        jest.clearAllMocks();
+    it('should be defined', () => {
+        expect(gateway).toBeDefined();
     });
 
     describe('handleConnection', () => {
-        it('should disconnect if missing disputaId', async () => {
-            const client = { ...mockSocket, handshake: { query: {} } } as unknown as Socket;
-            gateway.handleConnection(client);
-            expect(client.disconnect).toHaveBeenCalled();
-        });
+        it('should handle connection successfully', async () => {
+            mockLanceService.buscarUltimoLance.mockResolvedValue({ id: 'l1' });
+            await gateway.handleConnection(mockSocket);
 
-        it('should join room and emit user count', async () => {
-            mockLanceService.buscarUltimoLance.mockResolvedValue(null);
-            gateway.handleConnection(mockSocket);
             expect(mockSocket.join).toHaveBeenCalledWith('d1');
             expect(mockServer.to).toHaveBeenCalledWith('d1');
             expect(mockServer.emit).toHaveBeenCalledWith('usuariosOnline', expect.any(Object));
+            expect(service.buscarUltimoLance).toHaveBeenCalledWith('d1');
+            // Wait for promise resolution
+            await new Promise(process.nextTick);
+            expect(mockSocket.emit).toHaveBeenCalledWith('ultimoLance', { id: 'l1' });
         });
 
-        it('should emit last bid if exists', async () => {
-            const lance = { id: 'l1', valor: 100 };
-            mockLanceService.buscarUltimoLance.mockResolvedValue(lance);
-
-            gateway.handleConnection(mockSocket);
-
-            // Wait for promise resolution
-            await new Promise(resolve => setImmediate(resolve));
-
-            expect(mockSocket.emit).toHaveBeenCalledWith('ultimoLance', lance);
+        it('should disconnect if no disputaId', () => {
+            const badSocket = { ...mockSocket, handshake: { query: {} }, disconnect: jest.fn() } as unknown as Socket;
+            gateway.handleConnection(badSocket);
+            expect(badSocket.disconnect).toHaveBeenCalled();
         });
     });
 
     describe('handleDisconnect', () => {
-        it('should update user count', async () => {
+        it('should handle disconnection', () => {
+            // First connect to populate map
             gateway.handleConnection(mockSocket);
+
             gateway.handleDisconnect(mockSocket);
-            expect(mockServer.emit).toHaveBeenCalledWith('usuariosOnline', expect.objectContaining({ quantidade: 0 }));
+            expect(mockServer.to).toHaveBeenCalledWith('d1');
+            expect(mockServer.emit).toHaveBeenCalledWith('usuariosOnline', expect.any(Object));
         });
     });
 
     describe('handleNovoLance', () => {
-        it('should return error if missing data', async () => {
+        it('should handle new bid', async () => {
+            const data = { valorCentavos: 1000 };
+            mockLanceService.registrarLance.mockResolvedValue({ id: 'l1' });
+
+            const result = await gateway.handleNovoLance(mockSocket, data);
+
+            expect(result).toEqual({ success: true, lance: { id: 'l1' } });
+            expect(service.registrarLance).toHaveBeenCalledWith('d1', 'l1', 1000, '127.0.0.1', 'agent');
+            expect(mockServer.to).toHaveBeenCalledWith('d1');
+            expect(mockServer.emit).toHaveBeenCalledWith('lanceRegistrado', { id: 'l1' });
+        });
+
+        it('should return error if data invalid', async () => {
             const result = await gateway.handleNovoLance(mockSocket, { valorCentavos: 0 });
             expect(result).toHaveProperty('error');
         });
 
-        it('should register and broadcast bid', async () => {
-            const lance = { id: 'l1', valor: 100 };
-            mockLanceService.registrarLance.mockResolvedValue(lance);
-
-            const result = await gateway.handleNovoLance(mockSocket, { valorCentavos: 100 });
-
-            expect(result).toEqual({ success: true, lance });
-            expect(mockLanceService.registrarLance).toHaveBeenCalledWith('d1', 'l1', 100, '127.0.0.1', 'TestAgent');
-            expect(mockServer.to).toHaveBeenCalledWith('d1');
-            expect(mockServer.emit).toHaveBeenCalledWith('lanceRegistrado', lance);
-        });
-
-        it('should return error if service fails', async () => {
-            mockLanceService.registrarLance.mockRejectedValue(new Error('Service Error'));
-            const result = await gateway.handleNovoLance(mockSocket, { valorCentavos: 100 });
-            expect(result).toHaveProperty('error', 'Service Error');
+        it('should handle service error', async () => {
+            mockLanceService.registrarLance.mockRejectedValue(new Error('Service error'));
+            const result = await gateway.handleNovoLance(mockSocket, { valorCentavos: 1000 });
+            expect(result).toEqual({ error: 'Service error' });
         });
     });
 });

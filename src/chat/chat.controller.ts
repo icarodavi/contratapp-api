@@ -3,6 +3,7 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagg
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { ChatService } from './chat.service';
 import { MensagemChatDto } from './dto/mensagem-chat.dto';
+import { EnviarMensagemDto } from './dto/enviar-mensagem.dto';
 
 @ApiTags('Chat')
 @Controller('chat')
@@ -38,11 +39,12 @@ export class ChatController {
         description: 'Mensagem enviada com sucesso',
         type: MensagemChatDto
     })
+    @ApiResponse({ status: 400, description: 'Dados inválidos' })
     @ApiResponse({ status: 401, description: 'Não autorizado' })
     @ApiResponse({ status: 404, description: 'Edital não encontrado' })
     async enviarMensagem(
         @Param('editalId') editalId: string,
-        @Body() data: { conteudo: string },
+        @Body() enviarMensagemDto: EnviarMensagemDto,
         @Req() req: any
     ) {
         const usuarioId = req.user?.id;
@@ -56,7 +58,7 @@ export class ChatController {
             editalId,
             usuarioId,
             perfil,
-            data.conteudo
+            enviarMensagemDto.conteudo
         );
     }
-} 
+}

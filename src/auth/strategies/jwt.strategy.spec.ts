@@ -30,3 +30,26 @@ describe('JwtStrategy', () => {
         expect(result).toEqual({ id: 'u1', email: 'test@example.com', perfil: 'ADMIN' });
     });
 });
+
+describe('JwtStrategy with default secret', () => {
+    let strategy: JwtStrategy;
+
+    const mockConfigService = {
+        get: jest.fn().mockReturnValue(null),
+    };
+
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            providers: [
+                JwtStrategy,
+                { provide: ConfigService, useValue: mockConfigService },
+            ],
+        }).compile();
+
+        strategy = module.get<JwtStrategy>(JwtStrategy);
+    });
+
+    it('should be defined', () => {
+        expect(strategy).toBeDefined();
+    });
+});

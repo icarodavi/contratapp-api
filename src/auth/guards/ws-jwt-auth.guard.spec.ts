@@ -68,4 +68,23 @@ describe('WsJwtAuthGuard', () => {
 
         await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
     });
+
+    it('should return true if token is in handshake.auth', async () => {
+        const context = {
+            switchToWs: jest.fn().mockReturnValue({
+                getClient: jest.fn().mockReturnValue({
+                    handshake: {
+                        headers: {},
+                        auth: { token: 'valid_token' }
+                    },
+                    data: {},
+                }),
+            }),
+        } as unknown as ExecutionContext;
+
+        mockAuthService.verifyToken.mockResolvedValue({ id: 'u1' });
+
+        expect(await guard.canActivate(context)).toBe(true);
+        expect(authService.verifyToken).toHaveBeenCalledWith('valid_token');
+    });
 });

@@ -26,48 +26,58 @@ describe('RecursoController', () => {
         service = module.get<RecursoService>(RecursoService);
     });
 
-    afterEach(() => {
-        jest.clearAllMocks();
+    it('should be defined', () => {
+        expect(controller).toBeDefined();
     });
 
     describe('create', () => {
-        it('should create a resource', async () => {
+        it('should create a recurso', async () => {
             const dto: any = { motivo: 'Motivo' };
-            mockRecursoService.create.mockResolvedValue(dto);
-            expect(await controller.create(dto)).toEqual(dto);
+            const result = { id: 'r1', ...dto };
+            mockRecursoService.create.mockResolvedValue(result);
+
+            expect(await controller.create(dto)).toEqual(result);
             expect(service.create).toHaveBeenCalledWith(dto);
         });
     });
 
     describe('findAll', () => {
-        it('should return all resources', async () => {
-            mockRecursoService.findAll.mockResolvedValue([]);
-            expect(await controller.findAll()).toEqual([]);
+        it('should return all recursos', async () => {
+            const result = [{ id: 'r1' }];
+            mockRecursoService.findAll.mockResolvedValue(result);
+
+            expect(await controller.findAll()).toEqual(result);
             expect(service.findAll).toHaveBeenCalled();
         });
     });
 
     describe('findOne', () => {
-        it('should return a resource', async () => {
-            mockRecursoService.findOne.mockResolvedValue({ id: 'r1' });
-            expect(await controller.findOne('r1')).toEqual({ id: 'r1' });
+        it('should return a recurso', async () => {
+            const result = { id: 'r1' };
+            mockRecursoService.findOne.mockResolvedValue(result);
+
+            expect(await controller.findOne('r1')).toEqual(result);
             expect(service.findOne).toHaveBeenCalledWith('r1');
         });
     });
 
     describe('update', () => {
-        it('should update a resource', async () => {
-            const dto: any = { status: 'DEFERIDO' };
-            mockRecursoService.update.mockResolvedValue(dto);
-            expect(await controller.update('r1', dto)).toEqual(dto);
+        it('should update a recurso', async () => {
+            const dto: any = { resposta: 'Resposta' };
+            const result = { id: 'r1', ...dto };
+            mockRecursoService.update.mockResolvedValue(result);
+
+            expect(await controller.update('r1', dto)).toEqual(result);
             expect(service.update).toHaveBeenCalledWith('r1', dto);
         });
     });
 
     describe('remove', () => {
-        it('should remove a resource', async () => {
-            mockRecursoService.remove.mockResolvedValue({ id: 'r1' });
-            expect(await controller.remove('r1')).toEqual({ id: 'r1' });
+        it('should remove a recurso', async () => {
+            const result = { id: 'r1' };
+            mockRecursoService.remove.mockResolvedValue(result);
+
+            expect(await controller.remove('r1')).toEqual(result);
             expect(service.remove).toHaveBeenCalledWith('r1');
         });
     });
