@@ -11,13 +11,13 @@ import { Roles } from '../auth/decorators/roles.decorator';
 import { PerfilUsuario } from '@prisma/client';
 
 @ApiTags('Editais')
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('editais')
 export class EditalController {
     constructor(private readonly editalService: EditalService) {}
 
     @Post()
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
     @UsePipes(ModalidadeLicitaçãoPipe, CritérioJulgamentoPipe)
     @ApiOperation({ summary: 'Criar um novo edital' })
@@ -31,7 +31,6 @@ export class EditalController {
     @Get()
     @ApiOperation({ summary: 'Listar todos os editais' })
     @ApiResponse({ status: 200, description: 'Lista de editais retornada com sucesso' })
-    @ApiResponse({ status: 401, description: 'Não autorizado' })
     findAll() {
         return this.editalService.findAll();
     }
@@ -39,7 +38,6 @@ export class EditalController {
     @Get(':id')
     @ApiOperation({ summary: 'Buscar edital por ID' })
     @ApiResponse({ status: 200, description: 'Edital encontrado' })
-    @ApiResponse({ status: 401, description: 'Não autorizado' })
     @ApiResponse({ status: 404, description: 'Edital não encontrado' })
     findOne(@Param('id') id: string) {
         return this.editalService.findOne(id);
@@ -48,13 +46,14 @@ export class EditalController {
     @Get('numero/:numero')
     @ApiOperation({ summary: 'Buscar edital por número' })
     @ApiResponse({ status: 200, description: 'Edital encontrado' })
-    @ApiResponse({ status: 401, description: 'Não autorizado' })
     @ApiResponse({ status: 404, description: 'Edital não encontrado' })
     findByNumero(@Param('numero') numero: string) {
         return this.editalService.findByNumero(numero);
     }
 
     @Patch(':id')
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
     @UsePipes(ModalidadeLicitaçãoPipe, CritérioJulgamentoPipe)
     @ApiOperation({ summary: 'Atualizar edital' })
@@ -66,6 +65,8 @@ export class EditalController {
     }
 
     @Delete(':id')
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
     @ApiOperation({ summary: 'Remover edital' })
     @ApiResponse({ status: 200, description: 'Edital removido com sucesso' })
