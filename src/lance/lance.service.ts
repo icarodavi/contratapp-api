@@ -59,31 +59,98 @@ export class LanceService {
                 const diferencaPercentual = ((ultimoLance.valorCentavos - valorCentavos) / ultimoLance.valorCentavos) * 100;
                 if (diferencaPercentual > 5) {
                     throw new BadRequestException(
-                        include: {
-                        licitante: {
-                            select: {
-                                id: true,
-                                razaoSocial: true,
-                                tipoEmpresa: true,
-                            },
-                        },
-                    },
-        });
+                        'Para ME/EPP, a diferença entre lances não pode ser superior a 5%',
+                    );
+                }
             }
+        }
+
+        // Registra o lance
+        const lance = await this.prisma.lance.create({
+            data: {
+                disputaId,
+                licitanteId,
+                valorCentavos,
+                horario: new Date(),
+                ip,
+                userAgent,
+            },
+        });
+
+        // Verifica prorrogação automática
+        await this.verificarProrrogacao(disputa);
+
+        // Registra a atividade
+        await this.logAtividadeService.criarLog({
+            tipo: TipoAtividade.LANCE_REALIZADO,
+            acao: `Lance de ${valorCentavos / 100} reais registrado`,
+            detalhes: `Lance registrado pelo licitante ${licitante.razaoSocial}`,
+            ip,
+            userAgent,
+            modulo: 'LANCE',
+            entidadeId: licitanteId,
+            entidadeTipo: 'LICITANTE',
+            disputaId,
+            metadata: {
+                valorCentavos,
+                ip,
+                userAgent,
+            },
+        });
+
+        return lance;
+    }
+
+    private async verificarProrrogacao(disputa: any) {
+        // Regra: Se lance nos últimos 2 minutos, prorroga por mais 2 minutos
+        if (!disputa.fimPrevisto) {
+            return;
+        }
+
+        const agora = new Date();
+        const dataFechamento = new Date(disputa.fimPrevisto);
+        const tempoRestanteMs = dataFechamento.getTime() - agora.getTime();
+        const doisMinutosMs = 2 * 60 * 1000;
+
+        if (tempoRestanteMs > 0 && tempoRestanteMs < doisMinutosMs) {
+            const novaDataFechamento = new Date(agora.getTime() + doisMinutosMs);
+
+            await this.prisma.disputa.update({
+                where: { id: disputa.id },
+                data: { fimPrevisto: novaDataFechamento }
+            });
+        }
+    }
+
+    async buscarLancesPorDisputa(disputaId: string) {
+        return this.prisma.lance.findMany({
+            where: { disputaId },
+            orderBy: { horario: 'desc' },
+            include: {
+                licitante: {
+                    select: {
+                        id: true,
+                        razaoSocial: true,
+                        tipoEmpresa: true,
+                    },
+                },
+            },
+        });
+    }
 
     async buscarUltimoLance(disputaId: string) {
-                return this.prisma.lance.findFirst({
-                    where: { disputaId },
-                    orderBy: { horario: 'desc' },
-                    include: {
-                        licitante: {
-                            select: {
-                                id: true,
-                                razaoSocial: true,
-                                tipoEmpresa: true,
-                            },
-                        },
+        return this.prisma.lance.findFirst({
+            where: { disputaId },
+            orderBy: { horario: 'desc' },
+            include: {
+                licitante: {
+                    select: {
+                        id: true,
+                        razaoSocial: true,
+                        tipoEmpresa: true,
                     },
-                });
-            }
-        } 
+                },
+            },
+        });
+    }
+}
