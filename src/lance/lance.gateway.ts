@@ -4,6 +4,7 @@ import { WsJwtAuthGuard } from '../auth/guards/ws-jwt-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { Logger } from '@nestjs/common';
 import { LanceService } from './lance.service';
+import { DisputaService } from '../disputa/disputa.service';
 
 @WebSocketGateway({
     cors: {
@@ -22,7 +23,10 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
     private readonly logger = new Logger(LanceGateway.name);
     private clientesPorDisputa: Map<string, Set<string>> = new Map();
 
-    constructor(private readonly lanceService: LanceService) {}
+    constructor(
+        private readonly lanceService: LanceService,
+        private readonly disputaService: DisputaService
+    ) {}
 
     handleConnection(client: Socket) {
         try {
@@ -107,23 +111,10 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
             this.server.to(disputaId).emit('lanceRegistrado', lance);
 
             // Calcula e emite o novo tempo restante
-            // Nota: Acessando disputaService via lanceService de forma "unsafe" ou assumindo que lanceService tem o método ou acesso.
-            // O ideal seria o LanceService retornar o tempo restante ou a disputa atualizada.
-            // Vou ajustar para buscar a disputa via lanceService se possível, ou apenas emitir se tivermos a info.
-            // Como não tenho acesso direto ao DisputaService aqui, e o LanceService tem, vou assumir que o LanceService
-            // poderia retornar essa info, mas para manter simples e corrigir o erro, vou usar a lógica anterior
-            // mas com type safety ou try/catch.
-            // Para evitar erro de TS (property 'disputaService' does not exist on type 'LanceService'), vou usar 'any' cast temporário
-            // ou melhor, adicionar um método no LanceService para pegar a disputa.
-            // Mas para consertar AGORA, vou usar o cast.
-
-            const serviceAny = this.lanceService as any;
-            if (serviceAny.disputaService) {
-                const disputaAtualizada = await serviceAny.disputaService.findOne(disputaId);
-                if (disputaAtualizada && disputaAtualizada.dataFechamento) {
-                    const tempoRestanteMs = new Date(disputaAtualizada.dataFechamento).getTime() - new Date().getTime();
-                    this.server.to(disputaId).emit('tempoRestante', { tempoRestanteMs });
-                }
+            const disputaAtualizada = await this.disputaService.findOne(disputaId);
+            if (disputaAtualizada && disputaAtualizada.fimPrevisto) {
+                const tempoRestanteMs = new Date(disputaAtualizada.fimPrevisto).getTime() - new Date().getTime();
+                this.server.to(disputaId).emit('tempoRestante', { tempoRestanteMs });
             }
 
             return { success: true, lance };
