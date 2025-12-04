@@ -112,4 +112,25 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
             return { error: error.message };
         }
     }
+    @SubscribeMessage('novaMensagem')
+    handleNovaMensagem(
+        @ConnectedSocket() client: Socket,
+        @MessageBody() data: { mensagem: string },
+    ) {
+        const disputaId = client.handshake.query.disputaId as string;
+        const nomeUsuario = client.handshake.query.nomeUsuario as string;
+        const tipoAutor = client.handshake.query.tipoAutor as string;
+
+        if (!disputaId || !data?.mensagem) return;
+
+        const payload = {
+            id: `msg-${Date.now()}`,
+            autor: nomeUsuario || 'Anônimo',
+            texto: data.mensagem,
+            timestamp: new Date(),
+            tipoAutor: tipoAutor
+        };
+
+        this.server.to(disputaId).emit('novaMensagem', payload);
+    }
 } 
