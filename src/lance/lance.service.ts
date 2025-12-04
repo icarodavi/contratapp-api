@@ -59,74 +59,31 @@ export class LanceService {
                 const diferencaPercentual = ((ultimoLance.valorCentavos - valorCentavos) / ultimoLance.valorCentavos) * 100;
                 if (diferencaPercentual > 5) {
                     throw new BadRequestException(
-                        'Para ME/EPP, a diferença entre lances não pode ser superior a 5%',
-                    );
-                }
-            }
-        }
-
-        // Registra o lance
-        const lance = await this.prisma.lance.create({
-            data: {
-                disputaId,
-                licitanteId,
-                valorCentavos,
-                horario: new Date(),
-                ip,
-                userAgent,
-            },
-        });
-
-        // Registra a atividade
-        await this.logAtividadeService.criarLog({
-            tipo: TipoAtividade.LANCE_REALIZADO,
-            acao: `Lance de ${valorCentavos / 100} reais registrado`,
-            detalhes: `Lance registrado pelo licitante ${licitante.razaoSocial}`,
-            ip,
-            userAgent,
-            modulo: 'LANCE',
-            entidadeId: licitanteId,
-            entidadeTipo: 'LICITANTE',
-            disputaId,
-            metadata: {
-                valorCentavos,
-                ip,
-                userAgent,
-            },
-        });
-
-        return lance;
-    }
-
-    async buscarLancesPorDisputa(disputaId: string) {
-        return this.prisma.lance.findMany({
-            where: { disputaId },
-            orderBy: { horario: 'desc' },
-            include: {
-                licitante: {
-                    select: {
-                        id: true,
-                        razaoSocial: true,
-                        tipoEmpresa: true,
+                        include: {
+                        licitante: {
+                            select: {
+                                id: true,
+                                razaoSocial: true,
+                                tipoEmpresa: true,
+                            },
+                        },
                     },
-                },
-            },
         });
-    }
+            }
 
     async buscarUltimoLance(disputaId: string) {
-        return this.prisma.lance.findFirst({
-            where: { disputaId },
-            orderBy: { horario: 'desc' },
-            include: {
-                licitante: {
-                    select: {
-                        id: true,
-                        razaoSocial: true,
-                        tipoEmpresa: true,
+                return this.prisma.lance.findFirst({
+                    where: { disputaId },
+                    orderBy: { horario: 'desc' },
+                    include: {
+                        licitante: {
+                            select: {
+                                id: true,
+                                razaoSocial: true,
+                                tipoEmpresa: true,
+                            },
+                        },
                     },
-                },
-            },
-        });
-    }
-} 
+                });
+            }
+        } 
