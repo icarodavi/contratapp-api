@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LanceGateway } from './lance.gateway';
 import { LanceService } from './lance.service';
+import { DisputaService } from '../disputa/disputa.service';
 import { WsJwtAuthGuard } from '../auth/guards/ws-jwt-auth.guard';
 import { Socket } from 'socket.io';
 
@@ -11,6 +12,10 @@ describe('LanceGateway', () => {
     const mockLanceService = {
         buscarUltimoLance: jest.fn(),
         registrarLance: jest.fn(),
+    };
+
+    const mockDisputaService = {
+        findOne: jest.fn(),
     };
 
     const mockServer = {
@@ -35,6 +40,7 @@ describe('LanceGateway', () => {
             providers: [
                 LanceGateway,
                 { provide: LanceService, useValue: mockLanceService },
+                { provide: DisputaService, useValue: mockDisputaService },
             ],
         })
             .overrideGuard(WsJwtAuthGuard)
