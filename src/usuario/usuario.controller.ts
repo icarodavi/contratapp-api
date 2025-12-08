@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put, Patch } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiOperation, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { LoginDto } from './dto/auth.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -57,5 +58,15 @@ export class UsuarioController {
     @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
     updateSenha(@Param('id') id: string, @Body() updateSenhaDto: UpdateSenhaDto) {
         return this.usuarioService.updateSenha(id, updateSenhaDto);
+    }
+
+    @Patch(':id')
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
+    @ApiOperation({ summary: 'Atualizar dados do usuário' })
+    @ApiResponse({ status: 200, description: 'Usuário atualizado com sucesso' })
+    @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
+    update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+        return this.usuarioService.update(id, updateUsuarioDto);
     }
 }

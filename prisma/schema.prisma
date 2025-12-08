@@ -279,6 +279,8 @@ model Usuario {
   ativo               Boolean        @default(true)
   ultimoAcesso        DateTime?
   refreshToken        String?
+  foto                String?
+  preferencias        Json?          // { theme: "blue", mode: "light" }
   LogAtividade        LogAtividade[]
   MensagemChat        MensagemChat[]
   licitante           Licitante?     @relation(fields: [licitanteId], references: [id])

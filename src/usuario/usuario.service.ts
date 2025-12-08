@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { PrismaService } from '../database/database.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
@@ -87,6 +88,33 @@ export class UsuarioService {
             access_token: this.jwtService.sign(payload),
             usuario,
         };
+    }
+
+    async update(id: string, updateUsuarioDto: UpdateUsuarioDto) {
+        const usuario = await this.prisma.usuario.findUnique({
+            where: { id },
+        });
+
+        if (!usuario) {
+            throw new NotFoundException('Usuário não encontrado');
+        }
+
+        if (updateUsuarioDto.email && updateUsuarioDto.email !== usuario.email) {
+            const emailExists = await this.prisma.usuario.findUnique({
+                where: { email: updateUsuarioDto.email },
+            });
+            if (emailExists) {
+                throw new ConflictException('Email já está em uso');
+            }
+        }
+
+        const updatedUser = await this.prisma.usuario.update({
+            where: { id },
+            data: updateUsuarioDto,
+        });
+
+        const { senha: _, ...result } = updatedUser;
+        return result;
     }
 
     async updateSenha(id: string, updateSenhaDto: UpdateSenhaDto) {
