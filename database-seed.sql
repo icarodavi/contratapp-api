@@ -4,14 +4,14 @@
 
 -- BLOCO 1: Usuários (Perfis variados)
 -- =====================================================
-INSERT INTO "usuarios" ("id", "nome", "email", "senha", "perfil", "ativo", "ultimoAcesso", "refreshToken") VALUES
-('550e8400-e29b-41d4-a716-446655440001', 'Administrador Sistema', 'admin@contratapp.com', '$2b$10$rQZ8K9mN2pL3vX7yJ1hG4t', 'ADMIN', true, NOW(), NULL),
-('550e8400-e29b-41d4-a716-446655440002', 'João Silva Pregoeiro', 'joao.pregoeiro@prefeitura.gov.br', '$2b$10$rQZ8K9mN2pL3vX7yJ1hG4t', 'PREGOEIRO', true, NOW(), NULL),
-('550e8400-e29b-41d4-a716-446655440003', 'Maria Santos Pregoeira', 'maria.pregoeira@prefeitura.gov.br', '$2b$10$rQZ8K9mN2pL3vX7yJ1hG4t', 'PREGOEIRO', true, NOW(), NULL),
-('550e8400-e29b-41d4-a716-446655440004', 'Carlos Oliveira', 'carlos@empresa1.com.br', '$2b$10$rQZ8K9mN2pL3vX7yJ1hG4t', 'LICITANTE', true, NOW(), NULL),
-('550e8400-e29b-41d4-a716-446655440005', 'Ana Costa', 'ana@empresa2.com.br', '$2b$10$rQZ8K9mN2pL3vX7yJ1hG4t', 'LICITANTE', true, NOW(), NULL),
-('550e8400-e29b-41d4-a716-446655440006', 'Pedro Santos', 'pedro@empresa3.com.br', '$2b$10$rQZ8K9mN2pL3vX7yJ1hG4t', 'LICITANTE', true, NOW(), NULL),
-('550e8400-e29b-41d4-a716-446655440007', 'Visualizador Público', 'publico@cidadao.com', '$2b$10$rQZ8K9mN2pL3vX7yJ1hG4t', 'VISUALIZADOR', true, NOW(), NULL);
+INSERT INTO "usuarios" ("id", "nome", "email", "senha", "perfil", "ativo", "ultimoAcesso", "refreshToken", "foto", "preferencias") VALUES
+('550e8400-e29b-41d4-a716-446655440001', 'Administrador Sistema', 'admin@contratapp.com', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'ADMIN', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440002', 'João Silva Pregoeiro', 'joao.pregoeiro@prefeitura.gov.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440003', 'Maria Santos Pregoeira', 'maria.pregoeira@prefeitura.gov.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440004', 'Carlos Oliveira', 'carlos@empresa1.com.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440005', 'Ana Costa', 'ana@empresa2.com.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440006', 'Pedro Santos', 'pedro@empresa3.com.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440007', 'Visualizador Público', 'publico@cidadao.com', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'VISUALIZADOR', true, NOW(), NULL, NULL, NULL);
 
 -- BLOCO 2: Licitantes (Empresas)
 -- =====================================================
