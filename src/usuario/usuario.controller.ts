@@ -1,10 +1,13 @@
-import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put, Patch, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiOperation, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { LoginDto } from './dto/auth.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 import { UpdateSenhaDto } from './dto/update-senha.dto';
 
 @ApiTags('Usuários')
@@ -68,5 +71,28 @@ export class UsuarioController {
     @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
     update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
         return this.usuarioService.update(id, updateUsuarioDto);
+    }
+
+    @Post(':id/foto')
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
+    @UseInterceptors(FileInterceptor('file', {
+        storage: diskStorage({
+            destination: './uploads/profiles',
+            filename: (req, file, cb) => {
+                const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+                const ext = extname(file.originalname);
+                cb(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+            },
+        }),
+    }))
+    @ApiOperation({ summary: 'Upload de foto de perfil' })
+    @ApiResponse({ status: 200, description: 'Foto atualizada com sucesso' })
+    async uploadFoto(@Param('id') id: string, @UploadedFile() file: Express.Multer.File) {
+        // Return the path that can be accessed via static serve
+        // file.path would be "uploads/profiles/filename.jpg"
+        // We want to store "/uploads/profiles/filename.jpg" or the full URL
+        const fotoUrl = `/uploads/profiles/${file.filename}`;
+        return this.usuarioService.update(id, { foto: fotoUrl });
     }
 }

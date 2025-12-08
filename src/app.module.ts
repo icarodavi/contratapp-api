@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaService } from './database/database.service';
@@ -39,6 +41,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
         limit: 10,
       },
     ]),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+    }),
     DatabaseModule,
     AuthModule,
     UsuarioModule,
