@@ -23,7 +23,11 @@ enum DisputaStatus {
 enum TipoEmpresa {
   ME
   EPP
-  OUTRA
+  MEI
+  EIRELI
+  LTDA
+  SA
+  OUTROS
 }
 
 enum TipoDocumento {

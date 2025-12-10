@@ -37,14 +37,15 @@ export class AllExceptionsFilter implements ExceptionFilter {
         };
 
         // Log the detailed error
+        const exceptionResponse = exception instanceof HttpException ? exception.getResponse() : null;
         this.logger.error(
             `Exception caught at ${responseBody.path}`,
             exception instanceof Error ? exception.stack : JSON.stringify(exception),
         );
 
-        // If it's a validation error (400) or business error, often responseBody.message is an object.
-        // For logging clarity, we might want to log that specifically if needed, 
-        // but the stack trace above usually covers the "what happened".
+        if (exceptionResponse && typeof exceptionResponse === 'object') {
+            this.logger.error('Exception Details:', JSON.stringify(exceptionResponse, null, 2));
+        }
 
         httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
     }
