@@ -7,6 +7,8 @@ import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import { rateLimit } from 'express-rate-limit';
 import { Logger, LogLevel } from '@nestjs/common';
+import { HttpAdapterHost } from '@nestjs/core';
+import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 async function bootstrap() {
   const logLevels: LogLevel[] = ['log', 'error', 'warn', 'debug', 'verbose'];
@@ -70,6 +72,10 @@ async function bootstrap() {
 
   // Validação global de DTOs
   app.useGlobalPipes(new ValidationPipe());
+
+  // Global Exception Filter
+  const httpAdapter = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
 
   // Configuração do Swagger
   const config = new DocumentBuilder()
