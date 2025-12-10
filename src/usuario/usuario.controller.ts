@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put, Patch, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put, Patch, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
@@ -37,8 +37,8 @@ export class UsuarioController {
     @ApiOperation({ summary: 'Listar todos os usuários' })
     @ApiResponse({ status: 200, description: 'Lista de usuários retornada com sucesso' })
     @ApiResponse({ status: 401, description: 'Não autorizado' })
-    findAll() {
-        return this.usuarioService.findAll();
+    findAll(@Query('search') search?: string) {
+        return this.usuarioService.findAll(search);
     }
 
     @Get(':id')

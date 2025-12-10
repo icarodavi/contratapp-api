@@ -36,8 +36,19 @@ export class UsuarioService {
         });
     }
 
-    async findAll() {
-        return this.prisma.usuario.findMany();
+    async findAll(search?: string) {
+        if (!search) {
+            return this.prisma.usuario.findMany();
+        }
+
+        return this.prisma.usuario.findMany({
+            where: {
+                OR: [
+                    { nome: { contains: search, mode: 'insensitive' } },
+                    { email: { contains: search, mode: 'insensitive' } },
+                ],
+            },
+        });
     }
 
     async findOne(id: string) {
