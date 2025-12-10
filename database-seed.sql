@@ -5,21 +5,21 @@
 -- BLOCO 1: Usuários (Perfis variados)
 -- =====================================================
 INSERT INTO "usuarios" ("id", "nome", "email", "senha", "perfil", "ativo", "ultimoAcesso", "refreshToken", "foto", "preferencias") VALUES
-('550e8400-e29b-41d4-a716-446655440001', 'Administrador Sistema', 'admin@contratapp.com', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'ADMIN', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440002', 'João Silva Pregoeiro', 'joao.pregoeiro@prefeitura.gov.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440003', 'Maria Santos Pregoeira', 'maria.pregoeira@prefeitura.gov.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440004', 'Carlos Oliveira', 'carlos@empresa1.com.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440005', 'Ana Costa', 'ana@empresa2.com.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440006', 'Pedro Santos', 'pedro@empresa3.com.br', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440007', 'Visualizador Público', 'publico@cidadao.com', '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e', 'VISUALIZADOR', true, NOW(), NULL, NULL, NULL);
+('550e8400-e29b-41d4-a716-446655440001', 'Administrador Sistema', 'admin@contratapp.com', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'ADMIN', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440002', 'João Silva Pregoeiro', 'joao.pregoeiro@prefeitura.gov.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440003', 'Maria Santos Pregoeira', 'maria.pregoeira@prefeitura.gov.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440004', 'Carlos Oliveira', 'carlos@empresa1.com.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440005', 'Ana Costa', 'ana@empresa2.com.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440006', 'Pedro Santos', 'pedro@empresa3.com.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440007', 'Visualizador Público', 'publico@cidadao.com', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'VISUALIZADOR', true, NOW(), NULL, NULL, NULL);
 
 -- BLOCO 2: Licitantes (Empresas)
 -- =====================================================
-INSERT INTO "Licitante" ("id", "razaoSocial", "cnpj", "tipoEmpresa") VALUES
-('880e8400-e29b-41d4-a716-446655440001', 'Empresa Comercial Ltda', '12.345.678/0001-90', 'OUTRA'),
-('880e8400-e29b-41d4-a716-446655440002', 'Micro Empresa Silva ME', '98.765.432/0001-10', 'ME'),
-('880e8400-e29b-41d4-a716-446655440003', 'Pequena Empresa Costa EPP', '11.222.333/0001-44', 'EPP'),
-('880e8400-e29b-41d4-a716-446655440004', 'Empresa Santos Ltda', '55.666.777/0001-88', 'OUTRA');
+INSERT INTO "Licitante" ("id", "razaoSocial", "cnpj", "tipoEmpresa", "email", "telefone", "endereco", "isMeEpp", "observacoes") VALUES
+('880e8400-e29b-41d4-a716-446655440001', 'Empresa Comercial Ltda', '12.345.678/0001-90', 'OUTRA', 'contato@comercial.com', '11999990001', 'Rua Comercial, 123', false, 'Empresa de grande porte'),
+('880e8400-e29b-41d4-a716-446655440002', 'Micro Empresa Silva ME', '98.765.432/0001-10', 'ME', 'silva@me.com', '11999990002', 'Av Micro, 321', true, 'Optante pelo Simples'),
+('880e8400-e29b-41d4-a716-446655440003', 'Pequena Empresa Costa EPP', '11.222.333/0001-44', 'EPP', 'contato@costa-epp.com', '11999990003', 'Travessa Pequena, 45', true, NULL),
+('880e8400-e29b-41d4-a716-446655440004', 'Empresa Santos Ltda', '55.666.777/0001-88', 'OUTRA', 'santos@ltda.com', '11999990004', 'Rodovia Santos, KM 10', false, NULL);
 
 -- Vincular usuários aos licitantes
 UPDATE "usuarios" SET "licitanteId" = '880e8400-e29b-41d4-a716-446655440001' WHERE "email" = 'carlos@empresa1.com.br';

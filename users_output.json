@@ -1,0 +1,51 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "nome": "Administrador Sistema",
+    "email": "admin@contratapp.com",
+    "perfil": "ADMIN",
+    "ativo": true
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440002",
+    "nome": "João Silva Pregoeiro",
+    "email": "joao.pregoeiro@prefeitura.gov.br",
+    "perfil": "PREGOEIRO",
+    "ativo": true
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440003",
+    "nome": "Maria Santos Pregoeira",
+    "email": "maria.pregoeira@prefeitura.gov.br",
+    "perfil": "PREGOEIRO",
+    "ativo": true
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440007",
+    "nome": "Visualizador Público",
+    "email": "publico@cidadao.com",
+    "perfil": "VISUALIZADOR",
+    "ativo": true
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440004",
+    "nome": "Carlos Oliveira",
+    "email": "carlos@empresa1.com.br",
+    "perfil": "LICITANTE",
+    "ativo": true
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440005",
+    "nome": "Ana Costa",
+    "email": "ana@empresa2.com.br",
+    "perfil": "LICITANTE",
+    "ativo": true
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440006",
+    "nome": "Pedro Santos",
+    "email": "pedro@empresa3.com.br",
+    "perfil": "LICITANTE",
+    "ativo": true
+  }
+]

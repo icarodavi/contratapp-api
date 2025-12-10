@@ -339,6 +339,11 @@ model Licitante {
   razaoSocial String
   cnpj        String      @unique
   tipoEmpresa TipoEmpresa
+  email       String
+  telefone    String
+  endereco    String
+  isMeEpp     Boolean     @default(false)
+  observacoes String?
   usuario     Usuario?
 
   propostas     Proposta[]
