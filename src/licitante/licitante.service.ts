@@ -11,9 +11,11 @@ export class LicitanteService {
     constructor(private prisma: PrismaService) {}
 
     async create(createLicitanteDto: CreateLicitanteDto) {
+        const { usuarioId, ...licitanteData } = createLicitanteDto;
+
         // Verifica se o usuário existe
         const usuario = await this.prisma.usuario.findUnique({
-            where: { id: createLicitanteDto.usuarioId }
+            where: { id: usuarioId }
         });
 
         if (!usuario) {
@@ -22,7 +24,7 @@ export class LicitanteService {
 
         // Verifica se já existe um licitante com este CNPJ
         const licitanteExistente = await this.prisma.licitante.findFirst({
-            where: { cnpj: createLicitanteDto.cnpj }
+            where: { cnpj: licitanteData.cnpj }
         });
 
         if (licitanteExistente) {
@@ -31,10 +33,10 @@ export class LicitanteService {
 
         return this.prisma.licitante.create({
             data: {
-                ...createLicitanteDto,
+                ...licitanteData,
                 usuario: {
                     connect: {
-                        id: createLicitanteDto.usuarioId
+                        id: usuarioId
                     }
                 }
             },
@@ -87,13 +89,14 @@ export class LicitanteService {
     }
 
     async update(id: string, updateLicitanteDto: UpdateLicitanteDto) {
+        const { usuarioId, ...updateData } = updateLicitanteDto;
         const licitante = await this.findOne(id);
 
         // Se estiver tentando atualizar o CNPJ, verifica se já existe outro com o mesmo CNPJ
-        if (updateLicitanteDto.cnpj && updateLicitanteDto.cnpj !== licitante.cnpj) {
+        if (updateData.cnpj && updateData.cnpj !== licitante.cnpj) {
             const licitanteExistente = await this.prisma.licitante.findFirst({
                 where: {
-                    cnpj: updateLicitanteDto.cnpj,
+                    cnpj: updateData.cnpj,
                     id: { not: id }
                 }
             });
@@ -105,7 +108,12 @@ export class LicitanteService {
 
         return this.prisma.licitante.update({
             where: { id },
-            data: updateLicitanteDto,
+            data: {
+                ...updateData,
+                usuario: usuarioId ? {
+                    connect: { id: usuarioId }
+                } : undefined
+            },
             include: {
                 usuario: true
             }
