@@ -22,6 +22,12 @@ export class LicitanteService {
             throw new NotFoundException('Usuário não encontrado');
         }
 
+        // Verifica se o usuário já possui um licitante vinculado
+        // Como a relação é 1:1, um usuário só pode ser dono de uma empresa licitante
+        if (usuario.licitanteId) {
+            throw new BadRequestException('Este usuário já possui uma empresa licitante vinculada');
+        }
+
         // Verifica se já existe um licitante com este CNPJ
         const licitanteExistente = await this.prisma.licitante.findFirst({
             where: { cnpj: licitanteData.cnpj }
