@@ -14,8 +14,7 @@ export class UpdateUsuarioDto {
 
     @ApiPropertyOptional()
     @IsOptional()
-    @IsString()
-    foto?: string;
+    foto?: string | null;
 
     @ApiPropertyOptional()
     @IsOptional()

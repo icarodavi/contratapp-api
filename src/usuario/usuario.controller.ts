@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put, Patch, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards, Put, Patch, UseInterceptors, UploadedFile, Query, Delete } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
@@ -94,5 +94,14 @@ export class UsuarioController {
         // We want to store "/uploads/profiles/filename.jpg" or the full URL
         const fotoUrl = `/uploads/profiles/${file.filename}`;
         return this.usuarioService.update(id, { foto: fotoUrl });
+    }
+    @Delete(':id/foto')
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
+    @ApiOperation({ summary: 'Remover foto de perfil' })
+    @ApiResponse({ status: 200, description: 'Foto removida com sucesso' })
+    @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
+    removeFoto(@Param('id') id: string) {
+        return this.usuarioService.update(id, { foto: null });
     }
 }
