@@ -65,6 +65,10 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
                 }
             });
 
+            // Join the socket room for this dispute
+            client.join(disputaId);
+            this.logger.log(`Cliente ${client.id} entrou na sala ${disputaId}`);
+
             // Envia o histórico de mensagens
             // Precisamos do editalId para buscar o histórico de mensagens
             const usuarioId = (client.handshake.query.licitanteId || client.handshake.query.usuarioId) as string;
@@ -87,6 +91,8 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
                         }
                     });
                 }
+            }).catch(error => {
+                this.logger.warn(`Erro ao buscar dados da disputa ${disputaId} na conexão: ${error.message}`);
             });
 
         } catch (error) {
@@ -158,8 +164,10 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
         @MessageBody() data: { mensagem: string },
     ) {
         const disputaId = client.handshake.query.disputaId as string;
-        // Use licitanteId as the user ID for both Licitantes and Pregoeiros (frontend sends user.id in this field)
         const usuarioId = (client.handshake.query.licitanteId || client.handshake.query.usuarioId) as string;
+
+        this.logger.log(`[NovaMensagem] Recebida de ${usuarioId} para disputa ${disputaId}: ${data?.mensagem}`);
+
         const nomeUsuario = client.handshake.query.nomeUsuario as string;
         const tipoAutorQuery = client.handshake.query.tipoAutor as string;
 
@@ -169,7 +177,10 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
         else if (tipoAutorQuery?.toUpperCase() === 'ADMIN') perfil = 'ADMIN';
         else perfil = 'LICITANTE';
 
-        if (!disputaId || !data?.mensagem) return;
+        if (!disputaId || !data?.mensagem) {
+            this.logger.warn(`[NovaMensagem] Dados inválidos: disputaId=${disputaId}, mensagem=${data?.mensagem}`);
+            return;
+        }
 
         try {
             // Get dispute to find editalId
@@ -183,7 +194,7 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
             // Check availability
             const podeEnviar = await this.chatService.podeEnviarMensagem(editalId, perfil);
             if (!podeEnviar) {
-                // Optional: emit error to client
+                this.logger.warn(`[NovaMensagem] Envio não permitido para disputa ${disputaId}`);
                 return;
             }
 
@@ -194,6 +205,8 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
                 data.mensagem
             );
 
+            this.logger.log(`[NovaMensagem] Mensagem criada ID: ${mensagemServico.id}. Emitindo para a sala.`);
+
             const payload = {
                 id: mensagemServico.id,
                 autor: mensagemServico.autor.nome,
@@ -203,8 +216,10 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
             };
 
             this.server.to(disputaId).emit('novaMensagem', payload);
+            return { success: true, messageId: mensagemServico.id };
         } catch (error) {
             this.logger.error('Erro ao enviar mensagem:', error);
+            return { error: 'Internal Server Error' };
         }
     }
 }

@@ -66,6 +66,7 @@ export class LanceService {
         }
 
         // Registra o lance
+        // Registra o lance
         const lance = await this.prisma.lance.create({
             data: {
                 disputaId,
@@ -74,6 +75,15 @@ export class LanceService {
                 horario: new Date(),
                 ip,
                 userAgent,
+            },
+            include: {
+                licitante: {
+                    select: {
+                        id: true,
+                        razaoSocial: true,
+                        tipoEmpresa: true,
+                    },
+                },
             },
         });
 
