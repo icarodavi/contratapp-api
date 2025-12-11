@@ -17,6 +17,7 @@ export class AuthService {
 
         const usuario = await this.prisma.usuario.findUnique({
             where: { email: loginDto.email },
+            include: { licitante: true },
         });
 
         if (!usuario) {
@@ -44,10 +45,13 @@ export class AuthService {
         return {
             access_token: accessToken,
             refresh_token: refreshToken,
-            usuario: {
+            user: {
                 id: usuario.id,
+                nome: usuario.nome,
                 email: usuario.email,
                 perfil: usuario.perfil,
+                foto: usuario.foto,
+                licitante: usuario.licitante,
             },
         };
     }
