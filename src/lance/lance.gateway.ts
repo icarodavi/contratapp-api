@@ -5,6 +5,8 @@ import { UseGuards } from '@nestjs/common';
 import { Logger } from '@nestjs/common';
 import { LanceService } from './lance.service';
 import { DisputaService } from '../disputa/disputa.service';
+import { ChatService } from '../chat/chat.service';
+import { PerfilUsuario } from '@prisma/client';
 
 @WebSocketGateway({
     cors: {
@@ -25,7 +27,8 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     constructor(
         private readonly lanceService: LanceService,
-        private readonly disputaService: DisputaService
+        private readonly disputaService: DisputaService,
+        private readonly chatService: ChatService
     ) {}
 
     handleConnection(client: Socket) {
@@ -61,6 +64,31 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
                     client.emit('ultimoLance', ultimoLance);
                 }
             });
+
+            // Envia o histórico de mensagens
+            // Precisamos do editalId para buscar o histórico de mensagens
+            const usuarioId = (client.handshake.query.licitanteId || client.handshake.query.usuarioId) as string;
+
+            // Otimização: buscar editalId do serviço de disputa se possível, ou buscar a disputa
+            this.disputaService.findOne(disputaId).then(disputa => {
+                if (disputa && disputa.editalId) {
+                    this.chatService.obterHistoricoMensagens(disputa.editalId, usuarioId).then(historico => {
+                        if (historico && historico.length > 0) {
+                            historico.forEach(msg => {
+                                const payload = {
+                                    id: msg.id,
+                                    autor: msg.autor.nome,
+                                    texto: msg.conteudo,
+                                    timestamp: msg.createdAt,
+                                    tipoAutor: msg.tipoAutor
+                                };
+                                client.emit('novaMensagem', payload);
+                            });
+                        }
+                    });
+                }
+            });
+
         } catch (error) {
             this.logger.error('Erro em handleConnection:', error);
         }
@@ -125,24 +153,58 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
 
     @SubscribeMessage('novaMensagem')
-    handleNovaMensagem(
+    async handleNovaMensagem(
         @ConnectedSocket() client: Socket,
         @MessageBody() data: { mensagem: string },
     ) {
         const disputaId = client.handshake.query.disputaId as string;
+        // Use licitanteId as the user ID for both Licitantes and Pregoeiros (frontend sends user.id in this field)
+        const usuarioId = (client.handshake.query.licitanteId || client.handshake.query.usuarioId) as string;
         const nomeUsuario = client.handshake.query.nomeUsuario as string;
-        const tipoAutor = client.handshake.query.tipoAutor as string;
+        const tipoAutorQuery = client.handshake.query.tipoAutor as string;
+
+        // Map tipoAutor from string to PerfilUsuario
+        let perfil: PerfilUsuario;
+        if (tipoAutorQuery?.toUpperCase() === 'PREGOEIRO') perfil = 'PREGOEIRO';
+        else if (tipoAutorQuery?.toUpperCase() === 'ADMIN') perfil = 'ADMIN';
+        else perfil = 'LICITANTE';
 
         if (!disputaId || !data?.mensagem) return;
 
-        const payload = {
-            id: `msg-${Date.now()}`,
-            autor: nomeUsuario || 'Anônimo',
-            texto: data.mensagem,
-            timestamp: new Date(),
-            tipoAutor: tipoAutor
-        };
+        try {
+            // Get dispute to find editalId
+            const disputa = await this.disputaService.findOne(disputaId);
+            if (!disputa || !disputa.editalId) {
+                this.logger.error(`Disputa ${disputaId} não encontrada ou sem editalId.`);
+                return;
+            }
+            const editalId = disputa.editalId;
 
-        this.server.to(disputaId).emit('novaMensagem', payload);
+            // Check availability
+            const podeEnviar = await this.chatService.podeEnviarMensagem(editalId, perfil);
+            if (!podeEnviar) {
+                // Optional: emit error to client
+                return;
+            }
+
+            const mensagemServico = await this.chatService.criarMensagem(
+                editalId,
+                usuarioId,
+                perfil,
+                data.mensagem
+            );
+
+            const payload = {
+                id: mensagemServico.id,
+                autor: mensagemServico.autor.nome,
+                texto: mensagemServico.conteudo,
+                timestamp: mensagemServico.createdAt,
+                tipoAutor: mensagemServico.tipoAutor
+            };
+
+            this.server.to(disputaId).emit('novaMensagem', payload);
+        } catch (error) {
+            this.logger.error('Erro ao enviar mensagem:', error);
+        }
     }
 }

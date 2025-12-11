@@ -7,9 +7,10 @@ import { LogAtividadeService } from '../log-atividade/log-atividade.service';
 import { DisputaService } from '../disputa/disputa.service';
 import { LicitanteService } from '../licitante/licitante.service';
 import { AuthModule } from '../auth/auth.module';
+import { ChatModule } from '../chat/chat.module';
 
 @Module({
-    imports: [AuthModule],
+    imports: [AuthModule, ChatModule],
     controllers: [LanceController],
     providers: [
         LanceService,
