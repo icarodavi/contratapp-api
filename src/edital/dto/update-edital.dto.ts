@@ -1,4 +1,5 @@
 import { IsOptional, IsString, IsDate, IsEnum } from 'class-validator';
+import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
 
@@ -41,6 +42,7 @@ export class UpdateEditalDto {
     @ApiProperty({ description: 'Data de abertura do edital', required: false })
     @IsOptional()
     @IsDate()
+    @Type(() => Date)
     dataAbertura?: Date;
 
     @ApiProperty({ description: 'Caminho do arquivo PDF do edital', required: false })

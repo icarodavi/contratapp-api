@@ -71,7 +71,11 @@ async function bootstrap() {
   app.use(cookieParser());
 
   // Validação global de DTOs
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+    whitelist: true,
+    forbidNonWhitelisted: true,
+  }));
 
   // Global Exception Filter
   const httpAdapter = app.get(HttpAdapterHost);

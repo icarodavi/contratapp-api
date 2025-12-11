@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsNotEmpty, IsOptional, IsString, IsEnum } from 'class-validator';
+import { Type } from 'class-transformer';
 import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
 
 export class CreateEditalDto {
@@ -50,6 +51,7 @@ export class CreateEditalDto {
         example: '2024-04-10T10:00:00Z',
     })
     @IsDate()
+    @Type(() => Date)
     @IsNotEmpty()
     dataAbertura: Date;
 

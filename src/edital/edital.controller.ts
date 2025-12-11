@@ -2,8 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, UseGuards 
 import { EditalService } from './edital.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
-import { ModalidadeLicitaçãoPipe } from './pipes/modalidade-licitacao.pipe';
-import { CritérioJulgamentoPipe } from './pipes/criterio-julgamento.pipe';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
@@ -19,7 +17,6 @@ export class EditalController {
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
-    @UsePipes(ModalidadeLicitaçãoPipe, CritérioJulgamentoPipe)
     @ApiOperation({ summary: 'Criar um novo edital' })
     @ApiResponse({ status: 201, description: 'Edital criado com sucesso' })
     @ApiResponse({ status: 400, description: 'Dados inválidos' })
@@ -55,7 +52,6 @@ export class EditalController {
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
-    @UsePipes(ModalidadeLicitaçãoPipe, CritérioJulgamentoPipe)
     @ApiOperation({ summary: 'Atualizar edital' })
     @ApiResponse({ status: 200, description: 'Edital atualizado com sucesso' })
     @ApiResponse({ status: 401, description: 'Não autorizado' })
