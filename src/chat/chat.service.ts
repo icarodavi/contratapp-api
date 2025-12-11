@@ -6,6 +6,27 @@ import { PerfilUsuario } from '@prisma/client';
 export class ChatService {
     constructor(private prisma: PrismaService) {}
 
+    async podeEnviarMensagem(editalId: string, perfil: PerfilUsuario): Promise<boolean> {
+        if (perfil === 'PREGOEIRO' || perfil === 'ADMIN') return true;
+
+        // Find active dispute for this edital
+        const disputa = await this.prisma.disputa.findFirst({
+            where: {
+                editalId,
+                status: {
+                    in: ['AGUARDANDO', 'ABERTA', 'SUSPENSA'] // Assuming these are valid statuses to look for
+                }
+            },
+            orderBy: {
+                inicio: 'desc'
+            }
+        });
+
+        if (!disputa) return true;
+
+        return (disputa as any).chatAtivo;
+    }
+
     async verificarAcessoEdital(editalId: string, usuarioId: string, perfil: PerfilUsuario): Promise<boolean> {
         return true;
         // if (perfil === 'PREGOEIRO') {

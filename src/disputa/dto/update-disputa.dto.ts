@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateDisputaDto } from './create-disputa.dto';
-import { IsString, IsDate, IsEnum, IsOptional } from 'class-validator';
+import { IsString, IsDate, IsEnum, IsOptional, IsBoolean } from 'class-validator';
 import { DisputaStatus } from '@prisma/client';
 
 export class UpdateDisputaDto extends PartialType(CreateDisputaDto) {
@@ -23,8 +23,12 @@ export class UpdateDisputaDto extends PartialType(CreateDisputaDto) {
     @IsOptional()
     status?: DisputaStatus;
 
-    @ApiProperty({ description: 'Observações sobre a disputa', required: false })
     @IsString()
     @IsOptional()
     observacoes?: string;
+
+    @ApiProperty({ description: 'Indica se o chat está ativo', required: false })
+    @IsBoolean()
+    @IsOptional()
+    chatAtivo?: boolean;
 } 

@@ -74,6 +74,13 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
         if (!data?.conteudo?.trim()) return;
 
+        // Check if chat is active for the dispute
+        const podeEnviar = await this.chatService.podeEnviarMensagem(editalId, perfil);
+        if (!podeEnviar) {
+            client.emit('error', 'O chat está desativado para licitantes no momento.');
+            return;
+        }
+
         const mensagem = await this.chatService.criarMensagem(
             editalId,
             usuarioId,

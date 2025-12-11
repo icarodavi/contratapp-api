@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards, Patch } from '@nestjs/common';
 import { DisputaService } from './disputa.service';
 import { CreateDisputaDto } from './dto/create-disputa.dto';
 import { UpdateDisputaDto } from './dto/update-disputa.dto';
@@ -71,5 +71,13 @@ export class DisputaController {
     @ApiResponse({ status: 404, description: 'Disputa não encontrada' })
     remove(@Param('id') id: string) {
         return this.disputaService.remove(id);
+    }
+
+    @Patch(':id/chat')
+    @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
+    @ApiOperation({ summary: 'Ativar/Desativar chat da disputa' })
+    @ApiResponse({ status: 200, description: 'Status do chat atualizado' })
+    updateChatStatus(@Param('id') id: string, @Body('ativo') ativo: boolean) {
+        return this.disputaService.update(id, { chatAtivo: ativo });
     }
 }
