@@ -32,6 +32,7 @@ export class UsuarioService {
             data: {
                 ...createUsuarioDto,
                 senha: senhaHash,
+                preferencias: { theme: "blue", mode: "light" },
             },
         });
     }

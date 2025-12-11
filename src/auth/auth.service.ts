@@ -52,6 +52,7 @@ export class AuthService {
                 perfil: usuario.perfil,
                 foto: usuario.foto,
                 licitante: usuario.licitante,
+                preferencias: usuario.preferencias || { theme: "blue", mode: "light" },
             },
         };
     }
