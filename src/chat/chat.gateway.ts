@@ -99,4 +99,19 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         // Envia para todos na sala (inclusive o remetente)
         this.server.to(editalId).emit('message', payload);
     }
+
+    @SubscribeMessage('solicitarHistorico')
+    async handleSolicitarHistorico(client: Socket) {
+        const editalId = client.handshake.query.editalId as string;
+        const usuarioId = client.handshake.query.usuarioId as string;
+
+        if (editalId && usuarioId) {
+            const historico = await this.chatService.obterHistoricoMensagens(editalId, usuarioId);
+            client.emit('message', {
+                type: 'historicoMensagens',
+                data: historico,
+                messageId: `historico-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+            });
+        }
+    }
 }
