@@ -38,9 +38,12 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
     constructor(private readonly disputaService: DisputaService) {}
 
     handleConnection(client: Socket) {
+        this.logger.log(`[TimeGateway] Nova conexão: ${client.id}`);
         try {
             const editalId = client.handshake.query.editalId as string;
             const tipoAutor = client.handshake.query.tipoAutor as string;
+
+            this.logger.log(`[TimeGateway] Params: Edital=${editalId}, Tipo=${tipoAutor}`);
 
             if (!editalId) {
                 this.logger.warn(`Tentativa de conexão sem editalId: ${client.id}`);

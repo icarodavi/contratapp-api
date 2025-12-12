@@ -12,15 +12,15 @@ import { PerfilUsuario } from '@prisma/client';
 
 @WebSocketGateway({
     cors: {
-        origin: '*',
+        origin: true,
         methods: ['GET', 'POST'],
         credentials: true,
         allowedHeaders: ['Authorization', 'Content-Type'],
     },
     transports: ['websocket', 'polling'],
-    namespace: '/',
+    namespace: 'chat',
 })
-// @UseGuards(WsJwtAuthGuard) // pode ser reativado se desejar proteger com JWT
+@UseGuards(WsJwtAuthGuard)
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer()
     server: Server;
@@ -67,37 +67,52 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     @SubscribeMessage('enviarMensagem')
     async handleMessage(client: Socket, data: { conteudo: string }) {
-        console.log('🔔 handleMessage chamado por:', client.id, 'conteúdo:', data?.conteudo);
+        console.log(`[ChatGateway] handleMessage - Client: ${client.id}, Data:`, data);
+
         const editalId = client.handshake.query.editalId as string;
         const usuarioId = client.handshake.query.usuarioId as string;
         const perfil = client.handshake.query.perfil as PerfilUsuario;
 
-        if (!data?.conteudo?.trim()) return;
+        console.log(`[ChatGateway] Context - Edital: ${editalId}, User: ${usuarioId}, Perfil: ${perfil}`);
+
+        if (!data?.conteudo?.trim()) {
+            console.log('[ChatGateway] Conteúdo vazio');
+            return;
+        }
 
         // Check if chat is active for the dispute
         const podeEnviar = await this.chatService.podeEnviarMensagem(editalId, perfil);
+        console.log(`[ChatGateway] podeEnviar: ${podeEnviar}`);
+
         if (!podeEnviar) {
             client.emit('error', 'O chat está desativado para licitantes no momento.');
             return;
         }
 
-        const mensagem = await this.chatService.criarMensagem(
-            editalId,
-            usuarioId,
-            perfil,
-            data.conteudo.trim(),
-        );
+        try {
+            const mensagem = await this.chatService.criarMensagem(
+                editalId,
+                usuarioId,
+                perfil,
+                data.conteudo.trim(),
+            );
+            console.log('[ChatGateway] Mensagem criada:', mensagem.id);
 
-        const messageId = `mensagem-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            const messageId = `mensagem-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-        const payload = {
-            type: 'novaMensagem',
-            data: mensagem,
-            messageId,
-        };
+            const payload = {
+                type: 'novaMensagem',
+                data: mensagem,
+                messageId,
+            };
 
-        // Envia para todos na sala (inclusive o remetente)
-        this.server.to(editalId).emit('message', payload);
+            // Envia para todos na sala (inclusive o remetente)
+            console.log(`[ChatGateway] Broadcasting to room: ${editalId}`);
+            this.server.to(editalId).emit('message', payload);
+        } catch (error) {
+            console.error('[ChatGateway] Erro ao criar/enviar mensagem:', error);
+            client.emit('error', 'Erro ao processar mensagem.');
+        }
     }
 
     @SubscribeMessage('solicitarHistorico')

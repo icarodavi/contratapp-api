@@ -32,9 +32,12 @@ export class LanceGateway implements OnGatewayConnection, OnGatewayDisconnect {
     ) {}
 
     handleConnection(client: Socket) {
+        this.logger.log(`[LanceGateway] Nova conexão: ${client.id}`);
         try {
             const disputaId = client.handshake.query.disputaId as string;
             const tipoAutor = client.handshake.query.tipoAutor as string;
+
+            this.logger.log(`[LanceGateway] Params: Disputa=${disputaId}, Tipo=${tipoAutor}`);
 
             if (!disputaId) {
                 this.logger.warn(`Tentativa de conexão sem disputaId: ${client.id}`);

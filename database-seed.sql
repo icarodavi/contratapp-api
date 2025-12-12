@@ -65,9 +65,9 @@ INSERT INTO "Proposta" ("id", "disputaId", "licitanteId", "itemId", "valorCentav
 ('990e8400-e29b-41d4-a716-446655440003', '770e8400-e29b-41d4-a716-446655440004', '880e8400-e29b-41d4-a716-446655440004', 'ii0e8400-e29b-41d4-a716-446655440004', 480000, NOW() - INTERVAL '30 days', '/uploads/propostas/p4.pdf', 'ACEITA', 'Disputa encerrada', 1, 'system', NULL, NOW(), NOW());
 
 INSERT INTO "Lance" ("id", "disputaId", "licitanteId", "valorCentavos", "horario", "ip", "userAgent") VALUES
-('aa0e8400-e29b-41d4-a716-446655440001', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440001', 1450000, NOW() - INTERVAL '30 minutes', '192.168.1.100', 'Mozilla/5.0'),
+('aa0e8400-e29b-41d4-a716-446655440001', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440001', 1450000, NOW() - INTERVAL '30 minutes', 'localhost', 'Mozilla/5.0'),
 ('aa0e8400-e29b-41d4-a716-446655440002', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440002', 1400000, NOW() - INTERVAL '25 minutes', '192.168.1.101', 'Mozilla/5.0'),
-('aa0e8400-e29b-41d4-a716-446655440003', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440001', 1380000, NOW() - INTERVAL '20 minutes', '192.168.1.100', 'Mozilla/5.0');
+('aa0e8400-e29b-41d4-a716-446655440003', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440001', 1380000, NOW() - INTERVAL '20 minutes', 'localhost', 'Mozilla/5.0');
 
 -- BLOCO 7: Documentos e Documentos Obrigatórios
 -- =====================================================
