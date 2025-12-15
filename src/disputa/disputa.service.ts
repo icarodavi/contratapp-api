@@ -4,11 +4,15 @@ import { CreateDisputaDto } from './dto/create-disputa.dto';
 import { UpdateDisputaDto } from './dto/update-disputa.dto';
 import { DisputaStatus } from '@prisma/client';
 import { ApiTags } from '@nestjs/swagger';
+import { ChatGateway } from '../chat/chat.gateway';
 
 @ApiTags('Disputas')
 @Injectable()
 export class DisputaService {
-    constructor(private prisma: PrismaService) {}
+    constructor(
+        private prisma: PrismaService,
+        private chatGateway: ChatGateway
+    ) {}
 
     async create(createDisputaDto: CreateDisputaDto) {
         // Verifica se o edital existe
@@ -79,7 +83,7 @@ export class DisputaService {
             this.validarTransicaoStatus(disputa.status, updateDisputaDto.status);
         }
 
-        return this.prisma.disputa.update({
+        const updatedDisputa = await this.prisma.disputa.update({
             where: { id },
             data: updateDisputaDto,
             include: {
@@ -88,6 +92,12 @@ export class DisputaService {
                 documentos: true
             }
         });
+
+        if (updateDisputaDto.chatAtivo !== undefined) {
+            await this.chatGateway.broadcastStatus(disputa.editalId, updateDisputaDto.chatAtivo);
+        }
+
+        return updatedDisputa;
     }
 
     async remove(id: string) {

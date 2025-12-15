@@ -40,7 +40,7 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
     handleConnection(client: Socket) {
         this.logger.log(`[TimeGateway] Nova conexão: ${client.id}`);
         try {
-            const editalId = client.handshake.query.editalId as string;
+            const editalId = (client.handshake.query.editalId as string)?.trim();
             const tipoAutor = client.handshake.query.tipoAutor as string;
 
             this.logger.log(`[TimeGateway] Params: Edital=${editalId}, Tipo=${tipoAutor}`);
@@ -93,7 +93,7 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
 
     handleDisconnect(client: Socket) {
-        const editalId = client.handshake.query.editalId as string;
+        const editalId = (client.handshake.query.editalId as string)?.trim();
 
         if (editalId) {
             // Remove o cliente do conjunto
@@ -116,8 +116,10 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         @MessageBody() data: { tempoInicial: number },
     ) {
 
-        const editalId = client.handshake.query.editalId as string;
+        const editalId = (client.handshake.query.editalId as string)?.trim();
         const tipoAutor = client.handshake.query.tipoAutor as string;
+
+        this.logger.log(`[TimeGateway] Iniciar Contagem - Edital: ${editalId}, Tipo: ${tipoAutor}, Tempo: ${data?.tempoInicial}`);
 
         if (tipoAutor !== 'PREGOEIRO') {
             return { error: 'Apenas o pregoeiro pode iniciar a contagem' };

@@ -328,7 +328,7 @@ model Disputa {
   fimPrevisto   DateTime?
   encerramento  DateTime?
   tempoRestante Int?
-  chatAtivo     Boolean      @default(false)
+  chatAtivo     Boolean      @default(true)
   edital        Edital               @relation(fields: [editalId], references: [id], onDelete: Cascade)
   propostas     Proposta[]
   lances        Lance[]
