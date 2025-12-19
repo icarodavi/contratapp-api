@@ -75,14 +75,30 @@ export class LogAtividadeService {
         });
     }
 
-    async buscarPorPeriodo(dataInicio: Date, dataFim: Date) {
+    async buscarPorPeriodo(
+        dataInicio: Date,
+        dataFim: Date,
+        filters?: {
+            modulo?: string;
+            acao?: string;
+            ip?: string;
+            usuarioId?: string;
+        }
+    ) {
+        const where: any = {
+            data: {
+                gte: dataInicio,
+                lte: dataFim
+            }
+        };
+
+        if (filters?.modulo) where.modulo = { contains: filters.modulo, mode: 'insensitive' };
+        if (filters?.acao) where.acao = { contains: filters.acao, mode: 'insensitive' };
+        if (filters?.ip) where.ip = { contains: filters.ip };
+        if (filters?.usuarioId) where.usuarioId = filters.usuarioId;
+
         return this.prisma.logAtividade.findMany({
-            where: {
-                data: {
-                    gte: dataInicio,
-                    lte: dataFim
-                }
-            },
+            where,
             orderBy: { data: 'desc' },
             include: {
                 usuario: true,

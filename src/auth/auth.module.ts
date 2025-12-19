@@ -24,7 +24,7 @@ import { LogAtividadeModule } from '../log-atividade/log-atividade.module';
             imports: [ConfigModule],
             useFactory: async (configService: ConfigService) => ({
                 secret: configService.get<string>('JWT_SECRET') || 'contratapp-super-secret-jwt-key-2024-development',
-                signOptions: { expiresIn: '15m' },
+                signOptions: { expiresIn: '7d' },
             }),
             inject: [ConfigService],
         }),

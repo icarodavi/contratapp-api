@@ -58,11 +58,16 @@ export class LogAtividadeController {
     @ApiResponse({ status: 401, description: 'Não autorizado' })
     async buscarPorPeriodo(
         @Query('dataInicio') dataInicio: string,
-        @Query('dataFim') dataFim: string
+        @Query('dataFim') dataFim: string,
+        @Query('modulo') modulo?: string,
+        @Query('acao') acao?: string,
+        @Query('ip') ip?: string,
+        @Query('usuarioId') usuarioId?: string,
     ) {
         return this.logAtividadeService.buscarPorPeriodo(
             new Date(dataInicio),
-            new Date(dataFim)
+            new Date(dataFim),
+            { modulo, acao, ip, usuarioId }
         );
     }
 
