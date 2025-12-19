@@ -3,7 +3,8 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../database/database.service';
 import * as bcrypt from 'bcryptjs';
 import { ConfigService } from '@nestjs/config';
-import { Usuario } from '@prisma/client';
+import { Usuario, TipoAtividade } from '@prisma/client';
+import { LogAtividadeService } from '../log-atividade/log-atividade.service';
 
 @Injectable()
 export class AuthService {
@@ -11,9 +12,10 @@ export class AuthService {
         private prisma: PrismaService,
         private jwtService: JwtService,
         private configService: ConfigService,
+        private logAtividadeService: LogAtividadeService,
     ) {}
 
-    async login(loginDto: { email: string; senha: string }) {
+    async login(loginDto: { email: string; senha: string }, ip: string, userAgent: string) {
 
         const usuario = await this.prisma.usuario.findUnique({
             where: { email: loginDto.email },
@@ -40,6 +42,18 @@ export class AuthService {
         await this.prisma.usuario.update({
             where: { id: usuario.id },
             data: { refreshToken },
+        });
+
+        // Registrar log de login
+        await this.logAtividadeService.criarLog({
+            tipo: TipoAtividade.USUARIO_LOGIN,
+            acao: 'Login realizado com sucesso',
+            modulo: 'AUTH',
+            usuarioId: usuario.id,
+            ip,
+            userAgent,
+            detalhes: `Login via email ${usuario.email}`,
+            status: 'SUCESSO'
         });
 
         return {
@@ -78,10 +92,20 @@ export class AuthService {
         }
     }
 
-    async logout(usuarioId: string) {
+    async logout(usuarioId: string, ip: string, userAgent: string) {
         await this.prisma.usuario.update({
             where: { id: usuarioId },
             data: { refreshToken: null },
+        });
+
+        await this.logAtividadeService.criarLog({
+            tipo: TipoAtividade.USUARIO_LOGOUT,
+            acao: 'Logout realizado',
+            modulo: 'AUTH',
+            usuarioId,
+            ip,
+            userAgent,
+            status: 'SUCESSO'
         });
     }
 

@@ -8,10 +8,12 @@ import { DatabaseModule } from '../database/database.module';
 import { WsJwtAuthGuard } from './guards/ws-jwt-auth.guard';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { LogAtividadeModule } from '../log-atividade/log-atividade.module';
 
 @Module({
     imports: [
         DatabaseModule,
+        LogAtividadeModule,
         PassportModule,
         ConfigModule,
         ThrottlerModule.forRoot([{

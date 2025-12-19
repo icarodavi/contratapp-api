@@ -16,8 +16,8 @@ export class AuthController {
     @ApiOperation({ summary: 'Login de usuário' })
     @ApiResponse({ status: 200, description: 'Login realizado com sucesso' })
     @ApiResponse({ status: 401, description: 'Credenciais inválidas' })
-    async login(@Body() loginDto: LoginDto) {
-        return this.authService.login(loginDto);
+    async login(@Body() loginDto: LoginDto, @Req() req: any) {
+        return this.authService.login(loginDto, req.ip, req.headers['user-agent']);
     }
 
     @Post('refresh')
@@ -35,6 +35,6 @@ export class AuthController {
     @ApiResponse({ status: 200, description: 'Logout realizado com sucesso' })
     @ApiResponse({ status: 401, description: 'Não autorizado' })
     async logout(@Req() req: any) {
-        return this.authService.logout(req.user.id);
+        return this.authService.logout(req.user.id, req.ip, req.headers['user-agent']);
     }
 }
