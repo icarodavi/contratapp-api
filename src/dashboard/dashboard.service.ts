@@ -64,8 +64,15 @@ export class DashboardService {
         return revenueByMonth;
     }
 
-    async getActivity() {
+    async getActivity(user: any) {
+        const where: any = {};
+
+        if (user.perfil !== 'ADMIN' && user.perfil !== 'PREGOEIRO') {
+            where.usuarioId = user.id;
+        }
+
         return this.prisma.logAtividade.findMany({
+            where,
             take: 5,
             orderBy: { data: 'desc' },
             include: {

@@ -121,8 +121,8 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
         this.logger.log(`[TimeGateway] Iniciar Contagem - Edital: ${editalId}, Tipo: ${tipoAutor}, Tempo: ${data?.tempoInicial}`);
 
-        if (tipoAutor !== 'PREGOEIRO') {
-            return { error: 'Apenas o pregoeiro pode iniciar a contagem' };
+        if (tipoAutor !== 'PREGOEIRO' && tipoAutor !== 'ADMIN') {
+            return { error: 'Apenas o pregoeiro ou admin pode iniciar a contagem' };
         }
 
 
@@ -186,8 +186,8 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         const editalId = client.handshake.query.editalId as string;
         const tipoAutor = client.handshake.query.tipoAutor as string;
 
-        if (tipoAutor !== 'PREGOEIRO') {
-            return { error: 'Apenas o pregoeiro pode pausar a contagem' };
+        if (tipoAutor !== 'PREGOEIRO' && tipoAutor !== 'ADMIN') {
+            return { error: 'Apenas o pregoeiro ou admin pode pausar a contagem' };
         }
 
         const contador = this.contadores.get(editalId);
@@ -214,8 +214,8 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         const editalId = client.handshake.query.editalId as string;
         const tipoAutor = client.handshake.query.tipoAutor as string;
 
-        if (tipoAutor !== 'PREGOEIRO') {
-            return { error: 'Apenas o pregoeiro pode retomar a contagem' };
+        if (tipoAutor !== 'PREGOEIRO' && tipoAutor !== 'ADMIN') {
+            return { error: 'Apenas o pregoeiro ou admin pode retomar a contagem' };
         }
 
         const contador = this.contadores.get(editalId);

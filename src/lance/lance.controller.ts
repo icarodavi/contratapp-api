@@ -36,7 +36,7 @@ export class LanceController {
     }
 
     @Get(':disputaId')
-    @Roles(PerfilUsuario.LICITANTE, PerfilUsuario.PREGOEIRO, PerfilUsuario.VISUALIZADOR)
+    @Roles(PerfilUsuario.LICITANTE, PerfilUsuario.PREGOEIRO, PerfilUsuario.VISUALIZADOR, PerfilUsuario.ADMIN)
     @ApiOperation({ summary: 'Listar lances de uma disputa' })
     @ApiResponse({ status: 200, description: 'Lista de lances retornada com sucesso' })
     @ApiResponse({ status: 401, description: 'Não autorizado' })
@@ -45,7 +45,7 @@ export class LanceController {
     }
 
     @Get(':disputaId/ultimo')
-    @Roles(PerfilUsuario.LICITANTE, PerfilUsuario.PREGOEIRO, PerfilUsuario.VISUALIZADOR)
+    @Roles(PerfilUsuario.LICITANTE, PerfilUsuario.PREGOEIRO, PerfilUsuario.VISUALIZADOR, PerfilUsuario.ADMIN)
     @ApiOperation({ summary: 'Buscar o último lance de uma disputa' })
     @ApiResponse({ status: 200, description: 'Último lance retornado com sucesso' })
     @ApiResponse({ status: 401, description: 'Não autorizado' })

@@ -101,6 +101,7 @@ export class LanceService {
             entidadeId: licitanteId,
             entidadeTipo: 'LICITANTE',
             disputaId,
+            usuarioId: licitante.usuario?.id, // Associa o log ao usuário
             metadata: {
                 valorCentavos,
                 ip,
