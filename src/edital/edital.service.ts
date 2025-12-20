@@ -12,11 +12,30 @@ export class EditalService {
 
     async create(createEditalDto: CreateEditalDto) {
         try {
+            const { lotes, ...editalData } = createEditalDto;
+
             return await this.prisma.edital.create({
                 data: {
-                    ...createEditalDto,
+                    ...editalData,
                     modalidade: createEditalDto.modalidade as ModalidadeLicitação,
                     criterioJulgamento: createEditalDto.criterioJulgamento as CritérioJulgamento,
+                    lotes: lotes ? {
+                        create: lotes.map(lote => ({
+                            numero: lote.numero,
+                            descricao: lote.descricao,
+                            dotacaoOrcamentaria: lote.dotacaoOrcamentaria,
+                            itens: {
+                                create: lote.itens?.map(item => ({
+                                    numero: item.numero,
+                                    descricao: item.descricao,
+                                    quantidade: item.quantidade,
+                                    unidade: item.unidade,
+                                    valorEstimado: item.valorEstimado,
+                                    catalogoItemId: item.catalogoItemId
+                                }))
+                            }
+                        }))
+                    } : undefined
                 },
             });
         } catch (error) {

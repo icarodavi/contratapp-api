@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID, IsOptional } from 'class-validator';
 
 export class CreateLoteDto {
     @ApiProperty({
@@ -25,4 +25,12 @@ export class CreateLoteDto {
     @IsNotEmpty()
     @IsUUID()
     editalId: string;
+
+    @ApiProperty({
+        description: 'Dotação Orçamentária',
+        example: '10.301.0001.2001'
+    })
+    @IsOptional()
+    @IsString()
+    dotacaoOrcamentaria?: string;
 } 

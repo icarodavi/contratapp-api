@@ -28,6 +28,7 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { DatabaseModule } from './database/database.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { SecretariaModule } from './secretaria/secretaria.module';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     LanceModule,
     RelatorioModule,
     DashboardModule,
+    SecretariaModule,
   ],
   controllers: [AppController],
   providers: [

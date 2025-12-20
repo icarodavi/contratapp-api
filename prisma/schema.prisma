@@ -318,6 +318,11 @@ model Edital {
   updatedAt              DateTime               @updatedAt
   Sancao                 Sancao[]
   Prazo                  Prazo[]
+  
+  secretaria             Secretaria?            @relation(fields: [secretariaId], references: [id])
+  secretariaId           String?
+  
+  @@index([secretariaId])
 }
 
 model Disputa {
@@ -540,6 +545,8 @@ model Lote {
   edital    Edital   @relation(fields: [editalId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  
+  dotacaoOrcamentaria String? // Código/Descrição da dotação
 
   @@unique([numero, editalId])
   @@index([editalId, status])
@@ -560,8 +567,12 @@ model Item {
   updatedAt     DateTime   @updatedAt
   Prazo         Prazo[]
 
+  catalogoItem  CatalogoItem? @relation(fields: [catalogoItemId], references: [id])
+  catalogoItemId String?
+
   @@unique([numero, loteId])
   @@index([loteId, status])
+  @@index([catalogoItemId])
 }
 
 model Recurso {
@@ -654,4 +665,39 @@ model Prazo {
   @@index([tipo])
   @@index([status])
   @@index([dataFim])
+}
+
+model Secretaria {
+  id             String   @id @default(uuid())
+  nome           String
+  sigla          String   @unique // Ex: SMA, SMS, SME
+  codigoContabil String?  // Código para integração contábil
+  responsavel    String?
+  email          String?
+  telefone       String?
+  ativo          Boolean  @default(true)
+  
+  editais        Edital[]
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("secretarias")
+}
+
+model CatalogoItem {
+  id              String   @id @default(uuid())
+  codigo          String   @unique // Código do material/serviço no sistema legado ou padrão
+  descricao       String
+  unidade         String   // UN, KG, M, L
+  tipo            String   // MATERIAL, SERVICO
+  valorReferencia Int?     // em centavos
+  ativo           Boolean  @default(true)
+
+  itens           Item[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("catalogo_itens")
 }
