@@ -52,7 +52,8 @@ export class EditalService {
                 disputas: true,
                 documentosObrigatorios: true,
                 documentos: true,
-                lotes: true,
+                lotes: { include: { itens: true } },
+                secretaria: true,
             },
         });
     }
@@ -64,7 +65,8 @@ export class EditalService {
                 disputas: true,
                 documentosObrigatorios: true,
                 documentos: true,
-                lotes: true,
+                lotes: { include: { itens: true } },
+                secretaria: true,
             },
         });
 
@@ -94,12 +96,32 @@ export class EditalService {
             throw new NotFoundException(`Edital com ID ${id} não encontrado`);
         }
 
+        const { lotes, ...editalData } = updateEditalDto;
+
         return this.prisma.edital.update({
             where: { id },
             data: {
-                ...updateEditalDto,
-                modalidade: updateEditalDto.modalidade as ModalidadeLicitação,
-                criterioJulgamento: updateEditalDto.criterioJulgamento as CritérioJulgamento,
+                ...editalData,
+                modalidade: editalData.modalidade ? editalData.modalidade as ModalidadeLicitação : undefined,
+                criterioJulgamento: editalData.criterioJulgamento ? editalData.criterioJulgamento as CritérioJulgamento : undefined,
+                lotes: lotes ? {
+                    deleteMany: {},
+                    create: lotes.map(lote => ({
+                        numero: lote.numero,
+                        descricao: lote.descricao,
+                        dotacaoOrcamentaria: lote.dotacaoOrcamentaria,
+                        itens: {
+                            create: lote.itens?.map(item => ({
+                                numero: item.numero,
+                                descricao: item.descricao,
+                                quantidade: item.quantidade,
+                                unidade: item.unidade,
+                                valorEstimado: item.valorEstimado,
+                                catalogoItemId: item.catalogoItemId
+                            }))
+                        }
+                    }))
+                } : undefined
             },
         });
     }

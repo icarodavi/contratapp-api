@@ -26,14 +26,27 @@ UPDATE "usuarios" SET "licitanteId" = '880e8400-e29b-41d4-a716-446655440001' WHE
 UPDATE "usuarios" SET "licitanteId" = '880e8400-e29b-41d4-a716-446655440002' WHERE "email" = 'ana@empresa2.com.br';
 UPDATE "usuarios" SET "licitanteId" = '880e8400-e29b-41d4-a716-446655440003' WHERE "email" = 'pedro@empresa3.com.br';
 
+-- BLOCO 2.5: Secretarias e Catálogo (Novos)
+-- =====================================================
+INSERT INTO "secretarias" ("id", "nome", "sigla", "codigoContabil", "responsavel", "email", "telefone", "ativo", "createdAt", "updatedAt") VALUES
+('110e8400-e29b-41d4-a716-446655440001', 'Secretaria Municipal de Saúde', 'SMS', '10.301', 'Dr. Saúde', 'saude@pref.gov.br', '1133334444', true, NOW(), NOW()),
+('110e8400-e29b-41d4-a716-446655440002', 'Secretaria Municipal de Educação', 'SME', '12.361', 'Prof. Educação', 'educacao@pref.gov.br', '1133335555', true, NOW(), NOW()),
+('110e8400-e29b-41d4-a716-446655440003', 'Secretaria de Administração', 'SMA', '04.122', 'Adm. Geral', 'admin@pref.gov.br', '1133336666', true, NOW(), NOW());
+
+INSERT INTO "catalogo_itens" ("id", "codigo", "descricao", "unidade", "tipo", "valorReferencia", "ativo", "createdAt", "updatedAt") VALUES
+('220e8400-e29b-41d4-a716-446655440001', 'MAT-001', 'Papel A4 75g Alcalino', 'RESMA', 'MATERIAL', 25000, true, NOW(), NOW()),
+('220e8400-e29b-41d4-a716-446655440002', 'MAT-002', 'Caneta Esferográfica Azul 1.0mm', 'UN', 'MATERIAL', 15000, true, NOW(), NOW()),
+('220e8400-e29b-41d4-a716-446655440003', 'MAT-003', 'Mouse Óptico USB', 'UN', 'MATERIAL', 250000, true, NOW(), NOW()),
+('220e8400-e29b-41d4-a716-446655440004', 'MAT-004', 'Paracetamol 500mg (Generico)', 'CPR', 'MATERIAL', 50000, true, NOW(), NOW());
+
 -- BLOCO 3: Editais (Diversas modalidades)
 -- =====================================================
-INSERT INTO "Edital" ("id", "numero", "objeto", "modalidade", "criterioJulgamento", "status", "dataAbertura", "arquivoPdf", "createdAt", "updatedAt") VALUES
-('660e8400-e29b-41d4-a716-446655440001', '001/2024', 'Aquisição de Material de Escritório', 'PREGÃO_ELETRÔNICO', 'MENOR_PRECO', 'ABERTO', '2024-01-15 10:00:00', '/uploads/editais/001-2024.pdf', NOW(), NOW()),
-('660e8400-e29b-41d4-a716-446655440002', '002/2024', 'Contratação de Serviços de Limpeza', 'PREGÃO_ELETRÔNICO', 'MENOR_PRECO', 'ABERTO', '2024-01-20 14:00:00', '/uploads/editais/002-2024.pdf', NOW(), NOW()),
-('660e8400-e29b-41d4-a716-446655440003', '003/2024', 'Aquisição de Equipamentos de Informática', 'CONCORRÊNCIA', 'TÉCNICA_E_PRECO', 'ABERTO', '2024-01-25 09:00:00', '/uploads/editais/003-2024.pdf', NOW(), NOW()),
-('660e8400-e29b-41d4-a716-446655440004', '004/2024', 'Contratação Emergencial de Medicamentos', 'DISPENSA', 'MENOR_PRECO', 'ENCERRADO', '2023-12-01 08:00:00', '/uploads/editais/004-2024.pdf', NOW(), NOW()),
-('660e8400-e29b-41d4-a716-446655440005', '005/2024', 'Contratação de Artista Consagrado', 'INEXIGIBILIDADE', 'MELHOR_TÉCNICA', 'ABERTO', '2024-02-10 10:00:00', '/uploads/editais/005-2024.pdf', NOW(), NOW());
+INSERT INTO "Edital" ("id", "numero", "objeto", "modalidade", "criterioJulgamento", "status", "dataAbertura", "arquivoPdf", "secretariaId", "createdAt", "updatedAt") VALUES
+('660e8400-e29b-41d4-a716-446655440001', '001/2024', 'Aquisição de Material de Escritório', 'PREGÃO_ELETRÔNICO', 'MENOR_PRECO', 'ABERTO', '2024-01-15 10:00:00', '/uploads/editais/001-2024.pdf', '110e8400-e29b-41d4-a716-446655440003', NOW(), NOW()),
+('660e8400-e29b-41d4-a716-446655440002', '002/2024', 'Contratação de Serviços de Limpeza', 'PREGÃO_ELETRÔNICO', 'MENOR_PRECO', 'ABERTO', '2024-01-20 14:00:00', '/uploads/editais/002-2024.pdf', '110e8400-e29b-41d4-a716-446655440003', NOW(), NOW()),
+('660e8400-e29b-41d4-a716-446655440003', '003/2024', 'Aquisição de Equipamentos de Informática', 'CONCORRÊNCIA', 'TÉCNICA_E_PRECO', 'ABERTO', '2024-01-25 09:00:00', '/uploads/editais/003-2024.pdf', '110e8400-e29b-41d4-a716-446655440002', NOW(), NOW()),
+('660e8400-e29b-41d4-a716-446655440004', '004/2024', 'Contratação Emergencial de Medicamentos', 'DISPENSA', 'MENOR_PRECO', 'ENCERRADO', '2023-12-01 08:00:00', '/uploads/editais/004-2024.pdf', '110e8400-e29b-41d4-a716-446655440001', NOW(), NOW()),
+('660e8400-e29b-41d4-a716-446655440005', '005/2024', 'Contratação de Artista Consagrado', 'INEXIGIBILIDADE', 'MELHOR_TÉCNICA', 'ABERTO', '2024-02-10 10:00:00', '/uploads/editais/005-2024.pdf', '110e8400-e29b-41d4-a716-446655440002', NOW(), NOW());
 
 -- BLOCO 4: Disputas (Vários status)
 -- =====================================================
@@ -45,17 +58,18 @@ INSERT INTO "Disputa" ("id", "editalId", "status", "inicio", "fimPrevisto", "enc
 
 -- BLOCO 5: Lotes e Itens
 -- =====================================================
-INSERT INTO "Lote" ("id", "numero", "descricao", "editalId", "status", "createdAt", "updatedAt") VALUES
-('hh0e8400-e29b-41d4-a716-446655440001', 'LOTE 1', 'Material de Escritório - Papelaria', '660e8400-e29b-41d4-a716-446655440001', 'ATIVO', NOW(), NOW()),
-('hh0e8400-e29b-41d4-a716-446655440002', 'LOTE 2', 'Material de Escritório - Informática', '660e8400-e29b-41d4-a716-446655440001', 'ATIVO', NOW(), NOW()),
-('hh0e8400-e29b-41d4-a716-446655440003', 'LOTE 1', 'Serviços de Limpeza', '660e8400-e29b-41d4-a716-446655440002', 'ATIVO', NOW(), NOW()),
-('hh0e8400-e29b-41d4-a716-446655440004', 'LOTE 1', 'Medicamentos Básicos', '660e8400-e29b-41d4-a716-446655440004', 'ATIVO', NOW(), NOW());
+INSERT INTO "Lote" ("id", "numero", "descricao", "editalId", "status", "dotacaoOrcamentaria", "createdAt", "updatedAt") VALUES
+('hh0e8400-e29b-41d4-a716-446655440001', 'LOTE 1', 'Material de Escritório - Papelaria', '660e8400-e29b-41d4-a716-446655440001', 'ATIVO', '04.122.0001.2005', NOW(), NOW()),
+('hh0e8400-e29b-41d4-a716-446655440002', 'LOTE 2', 'Material de Escritório - Informática', '660e8400-e29b-41d4-a716-446655440001', 'ATIVO', '04.122.0001.2005', NOW(), NOW()),
+('hh0e8400-e29b-41d4-a716-446655440003', 'LOTE 1', 'Serviços de Limpeza', '660e8400-e29b-41d4-a716-446655440002', 'ATIVO', '04.122.0001.2006', NOW(), NOW()),
+('hh0e8400-e29b-41d4-a716-446655440004', 'LOTE 1', 'Medicamentos Básicos', '660e8400-e29b-41d4-a716-446655440004', 'ATIVO', '10.301.0001.2007', NOW(), NOW());
 
-INSERT INTO "Item" ("id", "numero", "descricao", "quantidade", "unidade", "valorEstimado", "loteId", "status", "createdAt", "updatedAt") VALUES
-('ii0e8400-e29b-41d4-a716-446655440001', '001', 'Papel A4 75g', 1000, 'RESMA', 250000, 'hh0e8400-e29b-41d4-a716-446655440001', 'ATIVO', NOW(), NOW()),
-('ii0e8400-e29b-41d4-a716-446655440002', '002', 'Caneta Esferográfica Azul', 500, 'UNIDADE', 150000, 'hh0e8400-e29b-41d4-a716-446655440001', 'ATIVO', NOW(), NOW()),
-('ii0e8400-e29b-41d4-a716-446655440003', '003', 'Mouse Óptico', 50, 'UNIDADE', 250000, 'hh0e8400-e29b-41d4-a716-446655440002', 'ATIVO', NOW(), NOW()),
-('ii0e8400-e29b-41d4-a716-446655440004', '001', 'Paracetamol 500mg', 10000, 'COMPRIMIDO', 500000, 'hh0e8400-e29b-41d4-a716-446655440004', 'ATIVO', NOW(), NOW());
+INSERT INTO "Item" ("id", "numero", "descricao", "quantidade", "unidade", "valorEstimado", "loteId", "status", "catalogoItemId", "createdAt", "updatedAt") VALUES
+('ii0e8400-e29b-41d4-a716-446655440001', '001', 'Papel A4 75g', 1000, 'RESMA', 250000, 'hh0e8400-e29b-41d4-a716-446655440001', 'ATIVO', '220e8400-e29b-41d4-a716-446655440001', NOW(), NOW()),
+('ii0e8400-e29b-41d4-a716-446655440002', '002', 'Caneta Esferográfica Azul', 500, 'UNIDADE', 150000, 'hh0e8400-e29b-41d4-a716-446655440001', 'ATIVO', '220e8400-e29b-41d4-a716-446655440002', NOW(), NOW()),
+('ii0e8400-e29b-41d4-a716-446655440003', '003', 'Mouse Óptico', 50, 'UNIDADE', 250000, 'hh0e8400-e29b-41d4-a716-446655440002', 'ATIVO', '220e8400-e29b-41d4-a716-446655440003', NOW(), NOW()),
+('ii0e8400-e29b-41d4-a716-446655440004', '001', 'Paracetamol 500mg', 10000, 'COMPRIMIDO', 500000, 'hh0e8400-e29b-41d4-a716-446655440004', 'ATIVO', '220e8400-e29b-41d4-a716-446655440004', NOW(), NOW());
+
 
 -- BLOCO 6: Propostas e Lances
 -- =====================================================

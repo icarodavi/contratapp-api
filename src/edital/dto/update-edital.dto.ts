@@ -1,7 +1,8 @@
-import { IsOptional, IsString, IsDate, IsEnum } from 'class-validator';
+import { IsOptional, IsString, IsDate, IsEnum, IsArray } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
+import { CreateLoteWithItemsDto } from './create-edital.dto';
 
 export class UpdateEditalDto {
     @ApiProperty({ description: 'Número do edital', required: false })
@@ -49,4 +50,14 @@ export class UpdateEditalDto {
     @IsOptional()
     @IsString()
     arquivoPdf?: string;
-} 
+
+    @ApiProperty({ description: 'ID da Secretaria responsável', required: false })
+    @IsOptional()
+    @IsString()
+    secretariaId?: string;
+
+    @ApiProperty({ description: 'Lista de Lotes com Itens', required: false, type: [Object] })
+    @IsOptional()
+    @IsArray()
+    lotes?: CreateLoteWithItemsDto[];
+}
