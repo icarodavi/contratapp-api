@@ -63,11 +63,12 @@ export class LogAtividadeController {
         @Query('acao') acao?: string,
         @Query('ip') ip?: string,
         @Query('usuarioId') usuarioId?: string,
+        @Query('email') email?: string,
     ) {
         return this.logAtividadeService.buscarPorPeriodo(
             new Date(dataInicio),
             new Date(dataFim),
-            { modulo, acao, ip, usuarioId }
+            { modulo, acao, ip, usuarioId, email }
         );
     }
 

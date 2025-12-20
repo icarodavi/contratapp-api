@@ -83,6 +83,7 @@ export class LogAtividadeService {
             acao?: string;
             ip?: string;
             usuarioId?: string;
+            email?: string;
         }
     ) {
         const where: any = {
@@ -96,6 +97,11 @@ export class LogAtividadeService {
         if (filters?.acao) where.acao = { contains: filters.acao, mode: 'insensitive' };
         if (filters?.ip) where.ip = { contains: filters.ip };
         if (filters?.usuarioId) where.usuarioId = filters.usuarioId;
+        if (filters?.email) {
+            where.usuario = {
+                email: { contains: filters.email, mode: 'insensitive' }
+            };
+        }
 
         return this.prisma.logAtividade.findMany({
             where,
