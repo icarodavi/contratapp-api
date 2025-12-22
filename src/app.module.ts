@@ -29,6 +29,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { DatabaseModule } from './database/database.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SecretariaModule } from './secretaria/secretaria.module';
+import { CatalogoModule } from './catalogo/catalogo.module';
+
 
 @Module({
   imports: [
@@ -68,6 +70,7 @@ import { SecretariaModule } from './secretaria/secretaria.module';
     RelatorioModule,
     DashboardModule,
     SecretariaModule,
+    CatalogoModule,
   ],
   controllers: [AppController],
   providers: [
