@@ -105,6 +105,7 @@ export class EditalService {
                 where: { id },
                 data: {
                     ...editalData,
+                    secretariaId: editalData.secretariaId === "" ? null : editalData.secretariaId,
                     modalidade: editalData.modalidade ? editalData.modalidade as ModalidadeLicitação : undefined,
                     criterioJulgamento: editalData.criterioJulgamento ? editalData.criterioJulgamento as CritérioJulgamento : undefined,
                 },
