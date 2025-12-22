@@ -90,6 +90,7 @@ export class EditalService {
     async update(id: string, updateEditalDto: UpdateEditalDto) {
         const edital = await this.prisma.edital.findUnique({
             where: { id },
+            include: { lotes: { include: { itens: true } } }
         });
 
         if (!edital) {
@@ -98,31 +99,111 @@ export class EditalService {
 
         const { lotes, ...editalData } = updateEditalDto;
 
-        return this.prisma.edital.update({
-            where: { id },
-            data: {
-                ...editalData,
-                modalidade: editalData.modalidade ? editalData.modalidade as ModalidadeLicitação : undefined,
-                criterioJulgamento: editalData.criterioJulgamento ? editalData.criterioJulgamento as CritérioJulgamento : undefined,
-                lotes: lotes ? {
-                    deleteMany: {},
-                    create: lotes.map(lote => ({
-                        numero: lote.numero,
-                        descricao: lote.descricao,
-                        dotacaoOrcamentaria: lote.dotacaoOrcamentaria,
-                        itens: {
-                            create: lote.itens?.map(item => ({
-                                numero: item.numero,
-                                descricao: item.descricao,
-                                quantidade: item.quantidade,
-                                unidade: item.unidade,
-                                valorEstimado: item.valorEstimado,
-                                catalogoItemId: item.catalogoItemId
-                            }))
+        return this.prisma.$transaction(async (prisma) => {
+            // 1. Update basic Edital data
+            const updatedEdital = await prisma.edital.update({
+                where: { id },
+                data: {
+                    ...editalData,
+                    modalidade: editalData.modalidade ? editalData.modalidade as ModalidadeLicitação : undefined,
+                    criterioJulgamento: editalData.criterioJulgamento ? editalData.criterioJulgamento as CritérioJulgamento : undefined,
+                },
+            });
+
+            // 2. Handle Lotes Upsert/Delete if provided
+            if (lotes) {
+                const existingLotes = edital.lotes;
+                const incomingLotesNumeros = lotes.map(l => l.numero);
+
+                // A. Delete Lotes not in incoming list
+                const lotesToDelete = existingLotes.filter(l => !incomingLotesNumeros.includes(l.numero));
+                if (lotesToDelete.length > 0) {
+                    await prisma.lote.deleteMany({
+                        where: { id: { in: lotesToDelete.map(l => l.id) } }
+                    });
+                }
+
+                // B. Upsert incoming Lotes
+                for (const loteDto of lotes) {
+                    const existingLote = existingLotes.find(l => l.numero === loteDto.numero);
+
+                    if (existingLote) {
+                        // Update existing Lote
+                        await prisma.lote.update({
+                            where: { id: existingLote.id },
+                            data: {
+                                descricao: loteDto.descricao,
+                                dotacaoOrcamentaria: loteDto.dotacaoOrcamentaria,
+                            }
+                        });
+
+                        // Handle Itens for this Lote
+                        if (loteDto.itens) {
+                            const existingItens = existingLote.itens;
+                            const incomingItensNumeros = loteDto.itens.map(i => i.numero);
+
+                            // Delete Itens
+                            const itensToDelete = existingItens.filter(i => !incomingItensNumeros.includes(i.numero));
+                            if (itensToDelete.length > 0) {
+                                await prisma.item.deleteMany({
+                                    where: { id: { in: itensToDelete.map(i => i.id) } }
+                                });
+                            }
+
+                            // Upsert Itens
+                            for (const itemDto of loteDto.itens) {
+                                const existingItem = existingItens.find(i => i.numero === itemDto.numero);
+                                if (existingItem) {
+                                    await prisma.item.update({
+                                        where: { id: existingItem.id },
+                                        data: {
+                                            descricao: itemDto.descricao,
+                                            quantidade: itemDto.quantidade,
+                                            unidade: itemDto.unidade,
+                                            valorEstimado: itemDto.valorEstimado,
+                                            catalogoItemId: itemDto.catalogoItemId
+                                        }
+                                    });
+                                } else {
+                                    await prisma.item.create({
+                                        data: {
+                                            numero: itemDto.numero,
+                                            descricao: itemDto.descricao,
+                                            quantidade: itemDto.quantidade,
+                                            unidade: itemDto.unidade,
+                                            valorEstimado: itemDto.valorEstimado,
+                                            catalogoItemId: itemDto.catalogoItemId,
+                                            loteId: existingLote.id
+                                        }
+                                    });
+                                }
+                            }
                         }
-                    }))
-                } : undefined
-            },
+                    } else {
+                        // Create new Lote (with Items)
+                        await prisma.lote.create({
+                            data: {
+                                numero: loteDto.numero,
+                                descricao: loteDto.descricao,
+                                dotacaoOrcamentaria: loteDto.dotacaoOrcamentaria,
+                                editalId: id,
+                                itens: {
+                                    create: loteDto.itens?.map(item => ({
+                                        numero: item.numero,
+                                        descricao: item.descricao,
+                                        quantidade: item.quantidade,
+                                        unidade: item.unidade,
+                                        valorEstimado: item.valorEstimado,
+                                        catalogoItemId: item.catalogoItemId
+                                    }))
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+
+            return updatedEdital;
         });
     }
 
