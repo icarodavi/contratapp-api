@@ -7,33 +7,37 @@ export class DashboardService {
     constructor(private prisma: PrismaService) {}
 
     async getStats() {
-        // Vendas Totais: Soma de propostas ACEITAS
-        const vendas = await this.prisma.proposta.aggregate({
-            where: { status: StatusProposta.ACEITA },
-            _sum: { valorCentavos: true },
-        });
+        const now = new Date();
+        const thirtyDaysFromNow = new Date();
+        thirtyDaysFromNow.setDate(now.getDate() + 30);
 
-        // Projetos Ativos: Disputas em ABERTA ou AGUARDANDO
-        const projetosAtivos = await this.prisma.disputa.count({
+        // Editais Cadastrados
+        const editaisCadastrados = await this.prisma.edital.count();
+
+        // Disputas Ativas (ABERTA ou EM_DISPUTA)
+        const disputasAtivas = await this.prisma.disputa.count({
             where: {
                 status: {
-                    in: [DisputaStatus.ABERTA, DisputaStatus.AGUARDANDO],
+                    in: [DisputaStatus.ABERTA, DisputaStatus.SUSPENSA],
                 },
             },
         });
 
-        // Pedidos Totais: Total de propostas enviadas
-        const pedidosTotais = await this.prisma.proposta.count();
-
-        // Pagamentos Totais: (Simulado por enquanto, ou usar outra métrica)
-        // Vamos usar 30% das vendas como "Pagamentos Realizados" para exemplo
-        const pagamentosTotais = Math.round((vendas._sum.valorCentavos || 0) * 0.3);
+        // Disputas Previstas (Próximos 30 dias)
+        // Baseado na data de abertura do Edital
+        const disputasPrevistas = await this.prisma.edital.count({
+            where: {
+                dataAbertura: {
+                    gte: now,
+                    lte: thirtyDaysFromNow,
+                },
+            },
+        });
 
         return {
-            vendasTotais: (vendas._sum.valorCentavos || 0) / 100,
-            projetosAtivos,
-            pedidosTotais,
-            pagamentosTotais: pagamentosTotais / 100,
+            editaisCadastrados,
+            disputasAtivas,
+            disputasPrevistas,
         };
     }
 
