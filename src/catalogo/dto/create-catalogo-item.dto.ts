@@ -2,10 +2,10 @@ import { IsString, IsNotEmpty, IsOptional, IsInt, IsBoolean, IsEnum } from 'clas
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCatalogoItemDto {
-    @ApiProperty({ description: 'Código do item', example: 'MAT-001' })
+    @ApiProperty({ description: 'Código do item', example: 'MAT-001', required: false })
     @IsString()
-    @IsNotEmpty()
-    codigo: string;
+    @IsOptional()
+    codigo?: string;
 
     @ApiProperty({ description: 'Descrição detalhada do item', example: 'Caneta Esferográfica Azul' })
     @IsString()

@@ -8,8 +8,19 @@ export class CatalogoService {
     constructor(private prisma: PrismaService) {}
 
     async create(createCatalogoItemDto: CreateCatalogoItemDto) {
+        if (!createCatalogoItemDto.codigo) {
+            // Generate a simple unique SKU if not provided
+            // For production, maybe use a sequence or UUID chunk
+            const timestamp = Date.now().toString(36).toUpperCase();
+            const randomPart = Math.random().toString(36).substring(2, 5).toUpperCase();
+            createCatalogoItemDto.codigo = `CAT-${timestamp}-${randomPart}`;
+        }
+
         return this.prisma.catalogoItem.create({
-            data: createCatalogoItemDto,
+            data: {
+                ...createCatalogoItemDto,
+                codigo: createCatalogoItemDto.codigo! // Ensure it's string (TS might complain about optional)
+            },
         });
     }
 
