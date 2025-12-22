@@ -1,4 +1,4 @@
-import { IsOptional, IsString, IsDate, IsEnum, IsArray } from 'class-validator';
+import { IsOptional, IsString, IsDate, IsEnum, IsArray, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
@@ -56,8 +56,10 @@ export class UpdateEditalDto {
     @IsString()
     secretariaId?: string;
 
-    @ApiProperty({ description: 'Lista de Lotes com Itens', required: false, type: [Object] })
+    @ApiProperty({ description: 'Lista de Lotes com Itens', required: false, type: [CreateLoteWithItemsDto] })
     @IsOptional()
     @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => CreateLoteWithItemsDto)
     lotes?: CreateLoteWithItemsDto[];
 }

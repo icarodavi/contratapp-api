@@ -1,7 +1,53 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsNotEmpty, IsOptional, IsString, IsEnum, IsArray, IsNumber } from 'class-validator';
+import { IsDate, IsNotEmpty, IsOptional, IsString, IsEnum, IsArray, IsNumber, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
+
+export class CreateItemSimpleDto {
+    @IsString()
+    @IsNotEmpty()
+    numero: string;
+
+    @IsString()
+    @IsNotEmpty()
+    descricao: string;
+
+    @IsNumber()
+    @IsNotEmpty()
+    quantidade: number;
+
+    @IsString()
+    @IsNotEmpty()
+    unidade: string;
+
+    @IsNumber()
+    @IsOptional()
+    valorEstimado?: number;
+
+    @IsString()
+    @IsOptional()
+    catalogoItemId?: string;
+}
+
+export class CreateLoteWithItemsDto {
+    @IsString()
+    @IsNotEmpty()
+    numero: string;
+
+    @IsString()
+    @IsNotEmpty()
+    descricao: string;
+
+    @IsString()
+    @IsOptional()
+    dotacaoOrcamentaria?: string;
+
+    @IsArray()
+    @IsOptional()
+    @ValidateNested({ each: true })
+    @Type(() => CreateItemSimpleDto)
+    itens?: CreateItemSimpleDto[];
+}
 
 export class CreateEditalDto {
     @ApiProperty({
@@ -74,53 +120,11 @@ export class CreateEditalDto {
 
     @ApiProperty({
         description: 'Lista de Lotes com Itens',
-        type: [Object],
+        type: [CreateLoteWithItemsDto],
     })
     @IsOptional()
     @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => CreateLoteWithItemsDto)
     lotes?: CreateLoteWithItemsDto[];
-}
-
-export class CreateItemSimpleDto {
-    @IsString()
-    @IsNotEmpty()
-    numero: string;
-
-    @IsString()
-    @IsNotEmpty()
-    descricao: string;
-
-    @IsNumber()
-    @IsNotEmpty()
-    quantidade: number;
-
-    @IsString()
-    @IsNotEmpty()
-    unidade: string;
-
-    @IsNumber()
-    @IsOptional()
-    valorEstimado?: number;
-
-    @IsString()
-    @IsOptional()
-    catalogoItemId?: string;
-}
-
-export class CreateLoteWithItemsDto {
-    @IsString()
-    @IsNotEmpty()
-    numero: string;
-
-    @IsString()
-    @IsNotEmpty()
-    descricao: string;
-
-    @IsString()
-    @IsOptional()
-    dotacaoOrcamentaria?: string;
-
-    @IsArray()
-    @IsOptional()
-    itens?: CreateItemSimpleDto[];
 } 
