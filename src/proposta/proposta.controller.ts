@@ -60,4 +60,17 @@ export class PropostaController {
   findByDisputa(@Param('disputaId') disputaId: string) {
     return this.propostaService.findByDisputa(disputaId);
   }
+
+  @Get('edital/:editalId/licitante/:licitanteId')
+  @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
+  @ApiOperation({ summary: 'Listar propostas por edital e licitante' })
+  @ApiResponse({ status: 200, description: 'Lista de propostas do licitante no edital retornada com sucesso' })
+  @ApiResponse({ status: 401, description: 'Não autorizado' })
+  findByEditalAndLicitante(
+    @Param('editalId') editalId: string,
+    @Param('licitanteId') licitanteId: string,
+  ) {
+    return this.propostaService.findByEditalAndLicitante(editalId, licitanteId);
+  }
 }
+

@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../database/database.service';
+import { PrismaService } from '@/database/database.service';
 import { CreatePropostaDto } from './dto/create-proposta.dto';
 import { StatusProposta, DisputaStatus } from '@prisma/client';
 
@@ -102,6 +102,26 @@ export class PropostaService {
             },
             orderBy: {
                 valorCentavos: 'asc',
+            },
+        });
+    }
+    async findByEditalAndLicitante(editalId: string, licitanteId: string) {
+        const disputa = await this.prisma.disputa.findFirst({
+            where: { editalId },
+            orderBy: { inicio: 'desc' }, // Pega a disputa mais recente
+        });
+
+        if (!disputa) {
+            return [];
+        }
+
+        return this.prisma.proposta.findMany({
+            where: {
+                disputaId: disputa.id,
+                licitanteId,
+            },
+            include: {
+                item: true,
             },
         });
     }
