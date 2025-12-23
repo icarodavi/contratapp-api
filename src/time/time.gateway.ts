@@ -251,11 +251,8 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         }
         this.contadores.delete(editalId);
 
-        // Notifica que a contagem foi finalizada (zerada)
-        this.server.to(editalId).emit('contagemFinalizada');
-
-        // Encerra a disputa no banco
-        this.encerrarDisputaDb(editalId);
+        // Notifica que a contagem foi cancelada
+        this.server.to(editalId).emit('contagemCancelada');
 
         return { success: true };
     }
