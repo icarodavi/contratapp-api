@@ -79,6 +79,7 @@ export class AuthService {
 
             const usuario = await this.prisma.usuario.findUnique({
                 where: { id: payload.sub },
+                include: { licitante: true },
             });
 
             if (!usuario || usuario.refreshToken !== refreshToken) {
@@ -109,11 +110,12 @@ export class AuthService {
         });
     }
 
-    private async generateAccessToken(usuario: Usuario) {
+    private async generateAccessToken(usuario: Usuario & { licitante?: any }) {
         const payload = {
             sub: usuario.id,
             email: usuario.email,
             perfil: usuario.perfil,
+            licitanteId: usuario.licitante?.id, // Adiciona licitanteId se existir
         };
         return this.jwtService.signAsync(payload, {
             secret: this.configService.get<string>('JWT_SECRET') || 'contratapp-super-secret-jwt-key-2024-development',

@@ -78,4 +78,5 @@ export class InscricaoService {
             data: { status: updateDto.status },
         });
     }
+
 }

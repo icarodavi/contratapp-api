@@ -16,9 +16,11 @@ export class InscricaoController {
     @Roles(PerfilUsuario.LICITANTE)
     async create(@Request() req, @Body() createInscricaoDto: CreateInscricaoDto) {
         const user = req.user;
+        console.log('InscricaoController.create - User:', JSON.stringify(user, null, 2));
 
         // Se o usuário é licitante, usamos o licitanteId dele
         if (!user.licitanteId) {
+            console.error('Erro: Usuário sem licitanteId');
             throw new ForbiddenException('Usuário não vinculado a um licitante');
         }
 

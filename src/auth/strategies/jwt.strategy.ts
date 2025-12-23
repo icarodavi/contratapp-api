@@ -14,10 +14,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(payload: any) {
+        console.log('JwtStrategy.validate - Payload:', JSON.stringify(payload, null, 2));
         return {
             id: payload.sub,
             email: payload.email,
             perfil: payload.perfil,
+            licitanteId: payload.licitanteId, // Retorna licitanteId do payload
         };
     }
 } 
