@@ -7,7 +7,8 @@ import { ApiOperation, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagg
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { PerfilUsuario } from '@prisma/client';
+import { PerfilUsuario, TipoAtividade } from '@prisma/client';
+import { LogActivity } from '../common/decorators/log-activity.decorator';
 
 @ApiTags('Disputas')
 @ApiBearerAuth()
@@ -18,6 +19,12 @@ export class DisputaController {
 
     @Post()
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
+    @LogActivity({
+        acao: 'Criar Disputa',
+        tipo: TipoAtividade.DISPUTA_ABERTA, // Initial status logic might differ, but this marks creation
+        modulo: 'Disputa',
+        detalhes: 'Criação de nova sala de disputa'
+    })
     @ApiOperation({ summary: 'Criar uma nova disputa' })
     @ApiResponse({ status: 201, description: 'Disputa criada com sucesso' })
     @ApiResponse({ status: 400, description: 'Dados inválidos' })
@@ -54,6 +61,12 @@ export class DisputaController {
 
     @Put(':id')
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
+    @LogActivity({
+        acao: 'Atualizar Disputa',
+        tipo: TipoAtividade.DISPUTA_RETOMADA, // General update, could be suspended/retumed
+        modulo: 'Disputa',
+        detalhes: 'Atualização de status ou dados da disputa'
+    })
     @ApiOperation({ summary: 'Atualizar disputa' })
     @ApiResponse({ status: 200, description: 'Disputa atualizada com sucesso' })
     @ApiResponse({ status: 400, description: 'Dados inválidos ou transição de status inválida' })
@@ -65,6 +78,12 @@ export class DisputaController {
 
     @Delete(':id')
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
+    @LogActivity({
+        acao: 'Remover Disputa',
+        tipo: TipoAtividade.DISPUTA_CANCELADA,
+        modulo: 'Disputa',
+        detalhes: 'Remoção de sala de disputa'
+    })
     @ApiOperation({ summary: 'Remover disputa' })
     @ApiResponse({ status: 200, description: 'Disputa removida com sucesso' })
     @ApiResponse({ status: 400, description: 'Não é possível remover disputa em andamento' })
@@ -76,6 +95,12 @@ export class DisputaController {
 
     @Patch(':id/chat')
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
+    @LogActivity({
+        acao: 'Alterar Status Chat',
+        tipo: TipoAtividade.SISTEMA_ATUALIZACAO,
+        modulo: 'Disputa',
+        detalhes: 'Alteração de status do chat (ativo/inativo)'
+    })
     @ApiOperation({ summary: 'Ativar/Desativar chat da disputa' })
     @ApiResponse({ status: 200, description: 'Status do chat atualizado' })
     updateChatStatus(@Param('id') id: string, @Body('ativo') ativo: boolean) {

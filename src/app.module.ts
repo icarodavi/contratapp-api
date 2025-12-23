@@ -25,11 +25,13 @@ import { LanceModule } from './lance/lance.module';
 import { ConfigModule } from '@nestjs/config';
 import { RelatorioModule } from './relatorio/relatorio.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'; // Import APP_INTERCEPTOR
 import { DatabaseModule } from './database/database.module';
+import { ActivityLogInterceptor } from './common/interceptors/activity-log.interceptor'; // Import Interceptor
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SecretariaModule } from './secretaria/secretaria.module';
 import { CatalogoModule } from './catalogo/catalogo.module';
+import { LogModule } from './log/log.module';
 
 
 @Module({
@@ -68,9 +70,9 @@ import { CatalogoModule } from './catalogo/catalogo.module';
     ChatModule,
     LanceModule,
     RelatorioModule,
-    DashboardModule,
     SecretariaModule,
     CatalogoModule,
+    LogModule,
   ],
   controllers: [AppController],
   providers: [
@@ -79,6 +81,10 @@ import { CatalogoModule } from './catalogo/catalogo.module';
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR, // Register global interceptor
+      useClass: ActivityLogInterceptor,
     },
   ],
 })
