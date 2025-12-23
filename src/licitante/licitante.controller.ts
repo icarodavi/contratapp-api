@@ -56,6 +56,15 @@ export class LicitanteController {
         return this.licitanteService.findByUsuario(usuarioId);
     }
 
+    @Get('edital/:editalId')
+    @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
+    @ApiOperation({ summary: 'Listar licitantes que participaram de um edital' })
+    @ApiResponse({ status: 200, description: 'Lista de licitantes retornada com sucesso' })
+    @ApiResponse({ status: 401, description: 'Não autorizado' })
+    findByEdital(@Param('editalId') editalId: string) {
+        return this.licitanteService.findByEdital(editalId);
+    }
+
     @Put(':id')
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO, PerfilUsuario.LICITANTE)
     @ApiOperation({ summary: 'Atualizar licitante' })

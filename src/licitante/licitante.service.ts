@@ -128,6 +128,24 @@ export class LicitanteService {
         return licitante;
     }
 
+    async findByEdital(editalId: string) {
+        return this.prisma.licitante.findMany({
+            where: {
+                disputas: {
+                    some: {
+                        editalId: editalId
+                    }
+                }
+            },
+            include: {
+                usuario: true
+            },
+            orderBy: {
+                razaoSocial: 'asc'
+            }
+        });
+    }
+
     async update(id: string, updateLicitanteDto: UpdateLicitanteDto) {
         const { usuarioId, ...updateData } = updateLicitanteDto;
         const licitante = await this.findOne(id);
