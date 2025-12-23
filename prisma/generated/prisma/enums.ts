@@ -287,3 +287,13 @@ export const TipoAtividade = {
 } as const
 
 export type TipoAtividade = (typeof TipoAtividade)[keyof typeof TipoAtividade]
+
+
+export const StatusContrato = {
+  ATIVO: 'ATIVO',
+  ENCERRADO: 'ENCERRADO',
+  CANCELADO: 'CANCELADO',
+  SUSPENSO: 'SUSPENSO'
+} as const
+
+export type StatusContrato = (typeof StatusContrato)[keyof typeof StatusContrato]

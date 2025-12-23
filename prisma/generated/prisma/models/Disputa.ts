@@ -476,14 +476,14 @@ export type DisputaSumOrderByAggregateInput = {
   tempoRestante?: Prisma.SortOrder
 }
 
-export type DisputaScalarRelationFilter = {
-  is?: Prisma.DisputaWhereInput
-  isNot?: Prisma.DisputaWhereInput
-}
-
 export type DisputaNullableScalarRelationFilter = {
   is?: Prisma.DisputaWhereInput | null
   isNot?: Prisma.DisputaWhereInput | null
+}
+
+export type DisputaScalarRelationFilter = {
+  is?: Prisma.DisputaWhereInput
+  isNot?: Prisma.DisputaWhereInput
 }
 
 export type DisputaCreateNestedManyWithoutEditalInput = {
@@ -540,6 +540,36 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type DisputaCreateNestedOneWithoutMensagensChatInput = {
+  create?: Prisma.XOR<Prisma.DisputaCreateWithoutMensagensChatInput, Prisma.DisputaUncheckedCreateWithoutMensagensChatInput>
+  connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutMensagensChatInput
+  connect?: Prisma.DisputaWhereUniqueInput
+}
+
+export type DisputaUpdateOneWithoutMensagensChatNestedInput = {
+  create?: Prisma.XOR<Prisma.DisputaCreateWithoutMensagensChatInput, Prisma.DisputaUncheckedCreateWithoutMensagensChatInput>
+  connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutMensagensChatInput
+  upsert?: Prisma.DisputaUpsertWithoutMensagensChatInput
+  disconnect?: Prisma.DisputaWhereInput | boolean
+  delete?: Prisma.DisputaWhereInput | boolean
+  connect?: Prisma.DisputaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DisputaUpdateToOneWithWhereWithoutMensagensChatInput, Prisma.DisputaUpdateWithoutMensagensChatInput>, Prisma.DisputaUncheckedUpdateWithoutMensagensChatInput>
+}
+
+export type DisputaCreateNestedOneWithoutLancesInput = {
+  create?: Prisma.XOR<Prisma.DisputaCreateWithoutLancesInput, Prisma.DisputaUncheckedCreateWithoutLancesInput>
+  connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutLancesInput
+  connect?: Prisma.DisputaWhereUniqueInput
+}
+
+export type DisputaUpdateOneRequiredWithoutLancesNestedInput = {
+  create?: Prisma.XOR<Prisma.DisputaCreateWithoutLancesInput, Prisma.DisputaUncheckedCreateWithoutLancesInput>
+  connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutLancesInput
+  upsert?: Prisma.DisputaUpsertWithoutLancesInput
+  connect?: Prisma.DisputaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DisputaUpdateToOneWithWhereWithoutLancesInput, Prisma.DisputaUpdateWithoutLancesInput>, Prisma.DisputaUncheckedUpdateWithoutLancesInput>
+}
+
 export type DisputaCreateNestedManyWithoutLicitantesInput = {
   create?: Prisma.XOR<Prisma.DisputaCreateWithoutLicitantesInput, Prisma.DisputaUncheckedCreateWithoutLicitantesInput> | Prisma.DisputaCreateWithoutLicitantesInput[] | Prisma.DisputaUncheckedCreateWithoutLicitantesInput[]
   connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutLicitantesInput | Prisma.DisputaCreateOrConnectWithoutLicitantesInput[]
@@ -592,20 +622,6 @@ export type DisputaUpdateOneRequiredWithoutPropostasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DisputaUpdateToOneWithWhereWithoutPropostasInput, Prisma.DisputaUpdateWithoutPropostasInput>, Prisma.DisputaUncheckedUpdateWithoutPropostasInput>
 }
 
-export type DisputaCreateNestedOneWithoutLancesInput = {
-  create?: Prisma.XOR<Prisma.DisputaCreateWithoutLancesInput, Prisma.DisputaUncheckedCreateWithoutLancesInput>
-  connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutLancesInput
-  connect?: Prisma.DisputaWhereUniqueInput
-}
-
-export type DisputaUpdateOneRequiredWithoutLancesNestedInput = {
-  create?: Prisma.XOR<Prisma.DisputaCreateWithoutLancesInput, Prisma.DisputaUncheckedCreateWithoutLancesInput>
-  connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutLancesInput
-  upsert?: Prisma.DisputaUpsertWithoutLancesInput
-  connect?: Prisma.DisputaWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.DisputaUpdateToOneWithWhereWithoutLancesInput, Prisma.DisputaUpdateWithoutLancesInput>, Prisma.DisputaUncheckedUpdateWithoutLancesInput>
-}
-
 export type DisputaCreateNestedOneWithoutDocumentosInput = {
   create?: Prisma.XOR<Prisma.DisputaCreateWithoutDocumentosInput, Prisma.DisputaUncheckedCreateWithoutDocumentosInput>
   connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutDocumentosInput
@@ -618,22 +634,6 @@ export type DisputaUpdateOneRequiredWithoutDocumentosNestedInput = {
   upsert?: Prisma.DisputaUpsertWithoutDocumentosInput
   connect?: Prisma.DisputaWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.DisputaUpdateToOneWithWhereWithoutDocumentosInput, Prisma.DisputaUpdateWithoutDocumentosInput>, Prisma.DisputaUncheckedUpdateWithoutDocumentosInput>
-}
-
-export type DisputaCreateNestedOneWithoutMensagensChatInput = {
-  create?: Prisma.XOR<Prisma.DisputaCreateWithoutMensagensChatInput, Prisma.DisputaUncheckedCreateWithoutMensagensChatInput>
-  connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutMensagensChatInput
-  connect?: Prisma.DisputaWhereUniqueInput
-}
-
-export type DisputaUpdateOneWithoutMensagensChatNestedInput = {
-  create?: Prisma.XOR<Prisma.DisputaCreateWithoutMensagensChatInput, Prisma.DisputaUncheckedCreateWithoutMensagensChatInput>
-  connectOrCreate?: Prisma.DisputaCreateOrConnectWithoutMensagensChatInput
-  upsert?: Prisma.DisputaUpsertWithoutMensagensChatInput
-  disconnect?: Prisma.DisputaWhereInput | boolean
-  delete?: Prisma.DisputaWhereInput | boolean
-  connect?: Prisma.DisputaWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.DisputaUpdateToOneWithWhereWithoutMensagensChatInput, Prisma.DisputaUpdateWithoutMensagensChatInput>, Prisma.DisputaUncheckedUpdateWithoutMensagensChatInput>
 }
 
 export type DisputaCreateNestedOneWithoutSessoesInput = {
@@ -738,6 +738,174 @@ export type DisputaScalarWhereInput = {
   encerramento?: Prisma.DateTimeNullableFilter<"Disputa"> | Date | string | null
   tempoRestante?: Prisma.IntNullableFilter<"Disputa"> | number | null
   chatAtivo?: Prisma.BoolFilter<"Disputa"> | boolean
+}
+
+export type DisputaCreateWithoutMensagensChatInput = {
+  id?: string
+  status: $Enums.DisputaStatus
+  inicio?: Date | string | null
+  fimPrevisto?: Date | string | null
+  encerramento?: Date | string | null
+  tempoRestante?: number | null
+  chatAtivo?: boolean
+  edital: Prisma.EditalCreateNestedOneWithoutDisputasInput
+  propostas?: Prisma.PropostaCreateNestedManyWithoutDisputaInput
+  lances?: Prisma.LanceCreateNestedManyWithoutDisputaInput
+  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutDisputaInput
+  logs?: Prisma.LogAtividadeCreateNestedManyWithoutDisputaInput
+  sessoes?: Prisma.SessaoCreateNestedManyWithoutDisputaInput
+  licitantes?: Prisma.LicitanteCreateNestedManyWithoutDisputasInput
+}
+
+export type DisputaUncheckedCreateWithoutMensagensChatInput = {
+  id?: string
+  editalId: string
+  status: $Enums.DisputaStatus
+  inicio?: Date | string | null
+  fimPrevisto?: Date | string | null
+  encerramento?: Date | string | null
+  tempoRestante?: number | null
+  chatAtivo?: boolean
+  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutDisputaInput
+  lances?: Prisma.LanceUncheckedCreateNestedManyWithoutDisputaInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
+  logs?: Prisma.LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
+  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutDisputaInput
+  licitantes?: Prisma.LicitanteUncheckedCreateNestedManyWithoutDisputasInput
+}
+
+export type DisputaCreateOrConnectWithoutMensagensChatInput = {
+  where: Prisma.DisputaWhereUniqueInput
+  create: Prisma.XOR<Prisma.DisputaCreateWithoutMensagensChatInput, Prisma.DisputaUncheckedCreateWithoutMensagensChatInput>
+}
+
+export type DisputaUpsertWithoutMensagensChatInput = {
+  update: Prisma.XOR<Prisma.DisputaUpdateWithoutMensagensChatInput, Prisma.DisputaUncheckedUpdateWithoutMensagensChatInput>
+  create: Prisma.XOR<Prisma.DisputaCreateWithoutMensagensChatInput, Prisma.DisputaUncheckedCreateWithoutMensagensChatInput>
+  where?: Prisma.DisputaWhereInput
+}
+
+export type DisputaUpdateToOneWithWhereWithoutMensagensChatInput = {
+  where?: Prisma.DisputaWhereInput
+  data: Prisma.XOR<Prisma.DisputaUpdateWithoutMensagensChatInput, Prisma.DisputaUncheckedUpdateWithoutMensagensChatInput>
+}
+
+export type DisputaUpdateWithoutMensagensChatInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
+  inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fimPrevisto?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  encerramento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tempoRestante?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chatAtivo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  edital?: Prisma.EditalUpdateOneRequiredWithoutDisputasNestedInput
+  propostas?: Prisma.PropostaUpdateManyWithoutDisputaNestedInput
+  lances?: Prisma.LanceUpdateManyWithoutDisputaNestedInput
+  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
+  logs?: Prisma.LogAtividadeUpdateManyWithoutDisputaNestedInput
+  sessoes?: Prisma.SessaoUpdateManyWithoutDisputaNestedInput
+  licitantes?: Prisma.LicitanteUpdateManyWithoutDisputasNestedInput
+}
+
+export type DisputaUncheckedUpdateWithoutMensagensChatInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  editalId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
+  inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fimPrevisto?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  encerramento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tempoRestante?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chatAtivo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutDisputaNestedInput
+  lances?: Prisma.LanceUncheckedUpdateManyWithoutDisputaNestedInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
+  logs?: Prisma.LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
+  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+  licitantes?: Prisma.LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
+}
+
+export type DisputaCreateWithoutLancesInput = {
+  id?: string
+  status: $Enums.DisputaStatus
+  inicio?: Date | string | null
+  fimPrevisto?: Date | string | null
+  encerramento?: Date | string | null
+  tempoRestante?: number | null
+  chatAtivo?: boolean
+  edital: Prisma.EditalCreateNestedOneWithoutDisputasInput
+  propostas?: Prisma.PropostaCreateNestedManyWithoutDisputaInput
+  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutDisputaInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutDisputaInput
+  logs?: Prisma.LogAtividadeCreateNestedManyWithoutDisputaInput
+  sessoes?: Prisma.SessaoCreateNestedManyWithoutDisputaInput
+  licitantes?: Prisma.LicitanteCreateNestedManyWithoutDisputasInput
+}
+
+export type DisputaUncheckedCreateWithoutLancesInput = {
+  id?: string
+  editalId: string
+  status: $Enums.DisputaStatus
+  inicio?: Date | string | null
+  fimPrevisto?: Date | string | null
+  encerramento?: Date | string | null
+  tempoRestante?: number | null
+  chatAtivo?: boolean
+  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutDisputaInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
+  logs?: Prisma.LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
+  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutDisputaInput
+  licitantes?: Prisma.LicitanteUncheckedCreateNestedManyWithoutDisputasInput
+}
+
+export type DisputaCreateOrConnectWithoutLancesInput = {
+  where: Prisma.DisputaWhereUniqueInput
+  create: Prisma.XOR<Prisma.DisputaCreateWithoutLancesInput, Prisma.DisputaUncheckedCreateWithoutLancesInput>
+}
+
+export type DisputaUpsertWithoutLancesInput = {
+  update: Prisma.XOR<Prisma.DisputaUpdateWithoutLancesInput, Prisma.DisputaUncheckedUpdateWithoutLancesInput>
+  create: Prisma.XOR<Prisma.DisputaCreateWithoutLancesInput, Prisma.DisputaUncheckedCreateWithoutLancesInput>
+  where?: Prisma.DisputaWhereInput
+}
+
+export type DisputaUpdateToOneWithWhereWithoutLancesInput = {
+  where?: Prisma.DisputaWhereInput
+  data: Prisma.XOR<Prisma.DisputaUpdateWithoutLancesInput, Prisma.DisputaUncheckedUpdateWithoutLancesInput>
+}
+
+export type DisputaUpdateWithoutLancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
+  inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fimPrevisto?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  encerramento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tempoRestante?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chatAtivo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  edital?: Prisma.EditalUpdateOneRequiredWithoutDisputasNestedInput
+  propostas?: Prisma.PropostaUpdateManyWithoutDisputaNestedInput
+  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutDisputaNestedInput
+  logs?: Prisma.LogAtividadeUpdateManyWithoutDisputaNestedInput
+  sessoes?: Prisma.SessaoUpdateManyWithoutDisputaNestedInput
+  licitantes?: Prisma.LicitanteUpdateManyWithoutDisputasNestedInput
+}
+
+export type DisputaUncheckedUpdateWithoutLancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  editalId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
+  inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fimPrevisto?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  encerramento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tempoRestante?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chatAtivo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutDisputaNestedInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
+  logs?: Prisma.LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
+  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutDisputaNestedInput
+  licitantes?: Prisma.LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
 }
 
 export type DisputaCreateWithoutLicitantesInput = {
@@ -879,90 +1047,6 @@ export type DisputaUncheckedUpdateWithoutPropostasInput = {
   licitantes?: Prisma.LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
 }
 
-export type DisputaCreateWithoutLancesInput = {
-  id?: string
-  status: $Enums.DisputaStatus
-  inicio?: Date | string | null
-  fimPrevisto?: Date | string | null
-  encerramento?: Date | string | null
-  tempoRestante?: number | null
-  chatAtivo?: boolean
-  edital: Prisma.EditalCreateNestedOneWithoutDisputasInput
-  propostas?: Prisma.PropostaCreateNestedManyWithoutDisputaInput
-  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutDisputaInput
-  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutDisputaInput
-  logs?: Prisma.LogAtividadeCreateNestedManyWithoutDisputaInput
-  sessoes?: Prisma.SessaoCreateNestedManyWithoutDisputaInput
-  licitantes?: Prisma.LicitanteCreateNestedManyWithoutDisputasInput
-}
-
-export type DisputaUncheckedCreateWithoutLancesInput = {
-  id?: string
-  editalId: string
-  status: $Enums.DisputaStatus
-  inicio?: Date | string | null
-  fimPrevisto?: Date | string | null
-  encerramento?: Date | string | null
-  tempoRestante?: number | null
-  chatAtivo?: boolean
-  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutDisputaInput
-  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
-  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutDisputaInput
-  logs?: Prisma.LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
-  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutDisputaInput
-  licitantes?: Prisma.LicitanteUncheckedCreateNestedManyWithoutDisputasInput
-}
-
-export type DisputaCreateOrConnectWithoutLancesInput = {
-  where: Prisma.DisputaWhereUniqueInput
-  create: Prisma.XOR<Prisma.DisputaCreateWithoutLancesInput, Prisma.DisputaUncheckedCreateWithoutLancesInput>
-}
-
-export type DisputaUpsertWithoutLancesInput = {
-  update: Prisma.XOR<Prisma.DisputaUpdateWithoutLancesInput, Prisma.DisputaUncheckedUpdateWithoutLancesInput>
-  create: Prisma.XOR<Prisma.DisputaCreateWithoutLancesInput, Prisma.DisputaUncheckedCreateWithoutLancesInput>
-  where?: Prisma.DisputaWhereInput
-}
-
-export type DisputaUpdateToOneWithWhereWithoutLancesInput = {
-  where?: Prisma.DisputaWhereInput
-  data: Prisma.XOR<Prisma.DisputaUpdateWithoutLancesInput, Prisma.DisputaUncheckedUpdateWithoutLancesInput>
-}
-
-export type DisputaUpdateWithoutLancesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
-  inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  fimPrevisto?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  encerramento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tempoRestante?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  chatAtivo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  edital?: Prisma.EditalUpdateOneRequiredWithoutDisputasNestedInput
-  propostas?: Prisma.PropostaUpdateManyWithoutDisputaNestedInput
-  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
-  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutDisputaNestedInput
-  logs?: Prisma.LogAtividadeUpdateManyWithoutDisputaNestedInput
-  sessoes?: Prisma.SessaoUpdateManyWithoutDisputaNestedInput
-  licitantes?: Prisma.LicitanteUpdateManyWithoutDisputasNestedInput
-}
-
-export type DisputaUncheckedUpdateWithoutLancesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  editalId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
-  inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  fimPrevisto?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  encerramento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tempoRestante?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  chatAtivo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutDisputaNestedInput
-  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
-  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
-  logs?: Prisma.LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
-  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutDisputaNestedInput
-  licitantes?: Prisma.LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
-}
-
 export type DisputaCreateWithoutDocumentosInput = {
   id?: string
   status: $Enums.DisputaStatus
@@ -1042,90 +1126,6 @@ export type DisputaUncheckedUpdateWithoutDocumentosInput = {
   propostas?: Prisma.PropostaUncheckedUpdateManyWithoutDisputaNestedInput
   lances?: Prisma.LanceUncheckedUpdateManyWithoutDisputaNestedInput
   mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput
-  logs?: Prisma.LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
-  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutDisputaNestedInput
-  licitantes?: Prisma.LicitanteUncheckedUpdateManyWithoutDisputasNestedInput
-}
-
-export type DisputaCreateWithoutMensagensChatInput = {
-  id?: string
-  status: $Enums.DisputaStatus
-  inicio?: Date | string | null
-  fimPrevisto?: Date | string | null
-  encerramento?: Date | string | null
-  tempoRestante?: number | null
-  chatAtivo?: boolean
-  edital: Prisma.EditalCreateNestedOneWithoutDisputasInput
-  propostas?: Prisma.PropostaCreateNestedManyWithoutDisputaInput
-  lances?: Prisma.LanceCreateNestedManyWithoutDisputaInput
-  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutDisputaInput
-  logs?: Prisma.LogAtividadeCreateNestedManyWithoutDisputaInput
-  sessoes?: Prisma.SessaoCreateNestedManyWithoutDisputaInput
-  licitantes?: Prisma.LicitanteCreateNestedManyWithoutDisputasInput
-}
-
-export type DisputaUncheckedCreateWithoutMensagensChatInput = {
-  id?: string
-  editalId: string
-  status: $Enums.DisputaStatus
-  inicio?: Date | string | null
-  fimPrevisto?: Date | string | null
-  encerramento?: Date | string | null
-  tempoRestante?: number | null
-  chatAtivo?: boolean
-  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutDisputaInput
-  lances?: Prisma.LanceUncheckedCreateNestedManyWithoutDisputaInput
-  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutDisputaInput
-  logs?: Prisma.LogAtividadeUncheckedCreateNestedManyWithoutDisputaInput
-  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutDisputaInput
-  licitantes?: Prisma.LicitanteUncheckedCreateNestedManyWithoutDisputasInput
-}
-
-export type DisputaCreateOrConnectWithoutMensagensChatInput = {
-  where: Prisma.DisputaWhereUniqueInput
-  create: Prisma.XOR<Prisma.DisputaCreateWithoutMensagensChatInput, Prisma.DisputaUncheckedCreateWithoutMensagensChatInput>
-}
-
-export type DisputaUpsertWithoutMensagensChatInput = {
-  update: Prisma.XOR<Prisma.DisputaUpdateWithoutMensagensChatInput, Prisma.DisputaUncheckedUpdateWithoutMensagensChatInput>
-  create: Prisma.XOR<Prisma.DisputaCreateWithoutMensagensChatInput, Prisma.DisputaUncheckedCreateWithoutMensagensChatInput>
-  where?: Prisma.DisputaWhereInput
-}
-
-export type DisputaUpdateToOneWithWhereWithoutMensagensChatInput = {
-  where?: Prisma.DisputaWhereInput
-  data: Prisma.XOR<Prisma.DisputaUpdateWithoutMensagensChatInput, Prisma.DisputaUncheckedUpdateWithoutMensagensChatInput>
-}
-
-export type DisputaUpdateWithoutMensagensChatInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
-  inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  fimPrevisto?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  encerramento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tempoRestante?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  chatAtivo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  edital?: Prisma.EditalUpdateOneRequiredWithoutDisputasNestedInput
-  propostas?: Prisma.PropostaUpdateManyWithoutDisputaNestedInput
-  lances?: Prisma.LanceUpdateManyWithoutDisputaNestedInput
-  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutDisputaNestedInput
-  logs?: Prisma.LogAtividadeUpdateManyWithoutDisputaNestedInput
-  sessoes?: Prisma.SessaoUpdateManyWithoutDisputaNestedInput
-  licitantes?: Prisma.LicitanteUpdateManyWithoutDisputasNestedInput
-}
-
-export type DisputaUncheckedUpdateWithoutMensagensChatInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  editalId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumDisputaStatusFieldUpdateOperationsInput | $Enums.DisputaStatus
-  inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  fimPrevisto?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  encerramento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tempoRestante?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  chatAtivo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutDisputaNestedInput
-  lances?: Prisma.LanceUncheckedUpdateManyWithoutDisputaNestedInput
-  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutDisputaNestedInput
   logs?: Prisma.LogAtividadeUncheckedUpdateManyWithoutDisputaNestedInput
   sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutDisputaNestedInput
   licitantes?: Prisma.LicitanteUncheckedUpdateManyWithoutDisputasNestedInput

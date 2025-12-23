@@ -32,6 +32,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { SecretariaModule } from './secretaria/secretaria.module';
 import { CatalogoModule } from './catalogo/catalogo.module';
 import { LogModule } from './log/log.module';
+import { ContratoModule } from './contrato/contrato.module';
 import { CacheModule } from '@nestjs/cache-manager';
 
 
@@ -80,6 +81,7 @@ import { CacheModule } from '@nestjs/cache-manager';
     SecretariaModule,
     CatalogoModule,
     LogModule,
+    ContratoModule,
   ],
   controllers: [AppController],
   providers: [

@@ -54,13 +54,13 @@ export const ModelName = {
   Usuario: 'Usuario',
   Edital: 'Edital',
   Disputa: 'Disputa',
+  MensagemChat: 'MensagemChat',
+  Lance: 'Lance',
   Licitante: 'Licitante',
   Proposta: 'Proposta',
-  Lance: 'Lance',
   Documento: 'Documento',
   DocumentoObrigatorio: 'DocumentoObrigatorio',
   DocumentoLicitante: 'DocumentoLicitante',
-  MensagemChat: 'MensagemChat',
   Sessao: 'Sessao',
   LogAtividade: 'LogAtividade',
   Lote: 'Lote',
@@ -69,7 +69,9 @@ export const ModelName = {
   Sancao: 'Sancao',
   Prazo: 'Prazo',
   Secretaria: 'Secretaria',
-  CatalogoItem: 'CatalogoItem'
+  CatalogoItem: 'CatalogoItem',
+  Contrato: 'Contrato',
+  ContratoItem: 'ContratoItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -136,6 +138,34 @@ export const DisputaScalarFieldEnum = {
 export type DisputaScalarFieldEnum = (typeof DisputaScalarFieldEnum)[keyof typeof DisputaScalarFieldEnum]
 
 
+export const MensagemChatScalarFieldEnum = {
+  id: 'id',
+  editalId: 'editalId',
+  autorId: 'autorId',
+  tipoAutor: 'tipoAutor',
+  conteudo: 'conteudo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  disputaId: 'disputaId',
+  licitanteId: 'licitanteId'
+} as const
+
+export type MensagemChatScalarFieldEnum = (typeof MensagemChatScalarFieldEnum)[keyof typeof MensagemChatScalarFieldEnum]
+
+
+export const LanceScalarFieldEnum = {
+  id: 'id',
+  disputaId: 'disputaId',
+  licitanteId: 'licitanteId',
+  valorCentavos: 'valorCentavos',
+  horario: 'horario',
+  ip: 'ip',
+  userAgent: 'userAgent'
+} as const
+
+export type LanceScalarFieldEnum = (typeof LanceScalarFieldEnum)[keyof typeof LanceScalarFieldEnum]
+
+
 export const LicitanteScalarFieldEnum = {
   id: 'id',
   razaoSocial: 'razaoSocial',
@@ -170,19 +200,6 @@ export const PropostaScalarFieldEnum = {
 } as const
 
 export type PropostaScalarFieldEnum = (typeof PropostaScalarFieldEnum)[keyof typeof PropostaScalarFieldEnum]
-
-
-export const LanceScalarFieldEnum = {
-  id: 'id',
-  disputaId: 'disputaId',
-  licitanteId: 'licitanteId',
-  valorCentavos: 'valorCentavos',
-  horario: 'horario',
-  ip: 'ip',
-  userAgent: 'userAgent'
-} as const
-
-export type LanceScalarFieldEnum = (typeof LanceScalarFieldEnum)[keyof typeof LanceScalarFieldEnum]
 
 
 export const DocumentoScalarFieldEnum = {
@@ -237,21 +254,6 @@ export const DocumentoLicitanteScalarFieldEnum = {
 } as const
 
 export type DocumentoLicitanteScalarFieldEnum = (typeof DocumentoLicitanteScalarFieldEnum)[keyof typeof DocumentoLicitanteScalarFieldEnum]
-
-
-export const MensagemChatScalarFieldEnum = {
-  id: 'id',
-  editalId: 'editalId',
-  autorId: 'autorId',
-  tipoAutor: 'tipoAutor',
-  conteudo: 'conteudo',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  disputaId: 'disputaId',
-  licitanteId: 'licitanteId'
-} as const
-
-export type MensagemChatScalarFieldEnum = (typeof MensagemChatScalarFieldEnum)[keyof typeof MensagemChatScalarFieldEnum]
 
 
 export const SessaoScalarFieldEnum = {
@@ -413,6 +415,41 @@ export const CatalogoItemScalarFieldEnum = {
 } as const
 
 export type CatalogoItemScalarFieldEnum = (typeof CatalogoItemScalarFieldEnum)[keyof typeof CatalogoItemScalarFieldEnum]
+
+
+export const ContratoScalarFieldEnum = {
+  id: 'id',
+  numero: 'numero',
+  editalId: 'editalId',
+  licitanteId: 'licitanteId',
+  valorTotal: 'valorTotal',
+  dataInicio: 'dataInicio',
+  dataFim: 'dataFim',
+  dotacaoOrcamentaria: 'dotacaoOrcamentaria',
+  objeto: 'objeto',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContratoScalarFieldEnum = (typeof ContratoScalarFieldEnum)[keyof typeof ContratoScalarFieldEnum]
+
+
+export const ContratoItemScalarFieldEnum = {
+  id: 'id',
+  contratoId: 'contratoId',
+  tipo: 'tipo',
+  loteId: 'loteId',
+  itemId: 'itemId',
+  descricao: 'descricao',
+  quantidade: 'quantidade',
+  valorUnitario: 'valorUnitario',
+  valorTotal: 'valorTotal',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContratoItemScalarFieldEnum = (typeof ContratoItemScalarFieldEnum)[keyof typeof ContratoItemScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -33,6 +33,16 @@ export type Edital = Prisma.EditalModel
  */
 export type Disputa = Prisma.DisputaModel
 /**
+ * Model MensagemChat
+ * 
+ */
+export type MensagemChat = Prisma.MensagemChatModel
+/**
+ * Model Lance
+ * 
+ */
+export type Lance = Prisma.LanceModel
+/**
  * Model Licitante
  * 
  */
@@ -42,11 +52,6 @@ export type Licitante = Prisma.LicitanteModel
  * 
  */
 export type Proposta = Prisma.PropostaModel
-/**
- * Model Lance
- * 
- */
-export type Lance = Prisma.LanceModel
 /**
  * Model Documento
  * 
@@ -62,11 +67,6 @@ export type DocumentoObrigatorio = Prisma.DocumentoObrigatorioModel
  * 
  */
 export type DocumentoLicitante = Prisma.DocumentoLicitanteModel
-/**
- * Model MensagemChat
- * 
- */
-export type MensagemChat = Prisma.MensagemChatModel
 /**
  * Model Sessao
  * 
@@ -112,3 +112,13 @@ export type Secretaria = Prisma.SecretariaModel
  * 
  */
 export type CatalogoItem = Prisma.CatalogoItemModel
+/**
+ * Model Contrato
+ * 
+ */
+export type Contrato = Prisma.ContratoModel
+/**
+ * Model ContratoItem
+ * 
+ */
+export type ContratoItem = Prisma.ContratoItemModel

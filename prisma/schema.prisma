@@ -318,6 +318,7 @@ model Edital {
   updatedAt              DateTime               @updatedAt
   Sancao                 Sancao[]
   Prazo                  Prazo[]
+  Contrato               Contrato[]
   
   secretaria             Secretaria?            @relation(fields: [secretariaId], references: [id])
   secretariaId           String?
@@ -405,6 +406,7 @@ model Licitante {
   recursos      Recurso[]
   Sancao        Sancao[]
   Prazo         Prazo[]
+  Contrato      Contrato[]
 }
 
 model Proposta {
@@ -554,6 +556,7 @@ model Lote {
   editalId  String
   status    String   @default("ATIVO") // ATIVO, CANCELADO
   itens     Item[]
+  contratoItens ContratoItem[]
   edital    Edital   @relation(fields: [editalId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -578,6 +581,7 @@ model Item {
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
   Prazo         Prazo[]
+  contratoItens ContratoItem[]
 
   catalogoItem  CatalogoItem? @relation(fields: [catalogoItemId], references: [id])
   catalogoItemId String?
@@ -712,4 +716,62 @@ model CatalogoItem {
   updatedAt       DateTime @updatedAt
 
   @@map("catalogo_itens")
+}
+
+model Contrato {
+  id                  String        @id @default(uuid())
+  numero              String        // Número do contrato
+  editalId            String
+  licitanteId         String
+  valorTotal          Int           // Valor total em centavos
+  dataInicio          DateTime
+  dataFim             DateTime
+  dotacaoOrcamentaria String?
+  objeto              String?
+  status              StatusContrato @default(ATIVO)
+  
+  // Relacionamentos
+  edital              Edital        @relation(fields: [editalId], references: [id])
+  licitante           Licitante     @relation(fields: [licitanteId], references: [id])
+  itens               ContratoItem[]
+  
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  @@index([editalId])
+  @@index([licitanteId])
+  @@index([status])
+  @@map("contratos")
+}
+
+model ContratoItem {
+  id            String    @id @default(uuid())
+  contratoId    String
+  tipo          String    @default("ITEM") // LOTE ou ITEM
+  loteId        String?   // Referência ao Lote (se aplicável)
+  itemId        String?   // Referência ao Item (se aplicável)
+  descricao     String
+  quantidade    Int
+  valorUnitario Int       // Em centavos
+  valorTotal    Int       // Em centavos
+  
+  // Relacionamentos
+  contrato      Contrato  @relation(fields: [contratoId], references: [id], onDelete: Cascade)
+  lote          Lote?     @relation(fields: [loteId], references: [id])
+  item          Item?     @relation(fields: [itemId], references: [id])
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([contratoId])
+  @@index([loteId])
+  @@index([itemId])
+  @@map("contrato_itens")
+}
+
+enum StatusContrato {
+  ATIVO
+  ENCERRADO
+  CANCELADO
+  SUSPENSO
 }

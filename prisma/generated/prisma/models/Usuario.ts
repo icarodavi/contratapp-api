@@ -489,14 +489,14 @@ export type UsuarioMinOrderByAggregateInput = {
   licitanteId?: Prisma.SortOrder
 }
 
-export type UsuarioNullableScalarRelationFilter = {
-  is?: Prisma.UsuarioWhereInput | null
-  isNot?: Prisma.UsuarioWhereInput | null
-}
-
 export type UsuarioScalarRelationFilter = {
   is?: Prisma.UsuarioWhereInput
   isNot?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioNullableScalarRelationFilter = {
+  is?: Prisma.UsuarioWhereInput | null
+  isNot?: Prisma.UsuarioWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -517,6 +517,20 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type UsuarioCreateNestedOneWithoutMensagemChatInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutMensagemChatInput, Prisma.UsuarioUncheckedCreateWithoutMensagemChatInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutMensagemChatInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutMensagemChatNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutMensagemChatInput, Prisma.UsuarioUncheckedCreateWithoutMensagemChatInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutMensagemChatInput
+  upsert?: Prisma.UsuarioUpsertWithoutMensagemChatInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutMensagemChatInput, Prisma.UsuarioUpdateWithoutMensagemChatInput>, Prisma.UsuarioUncheckedUpdateWithoutMensagemChatInput>
 }
 
 export type UsuarioCreateNestedOneWithoutLicitanteInput = {
@@ -549,20 +563,6 @@ export type UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput = {
   delete?: Prisma.UsuarioWhereInput | boolean
   connect?: Prisma.UsuarioWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutLicitanteInput, Prisma.UsuarioUpdateWithoutLicitanteInput>, Prisma.UsuarioUncheckedUpdateWithoutLicitanteInput>
-}
-
-export type UsuarioCreateNestedOneWithoutMensagemChatInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutMensagemChatInput, Prisma.UsuarioUncheckedCreateWithoutMensagemChatInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutMensagemChatInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-}
-
-export type UsuarioUpdateOneRequiredWithoutMensagemChatNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutMensagemChatInput, Prisma.UsuarioUncheckedCreateWithoutMensagemChatInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutMensagemChatInput
-  upsert?: Prisma.UsuarioUpsertWithoutMensagemChatInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutMensagemChatInput, Prisma.UsuarioUpdateWithoutMensagemChatInput>, Prisma.UsuarioUncheckedUpdateWithoutMensagemChatInput>
 }
 
 export type UsuarioCreateNestedOneWithoutLogAtividadeInput = {
@@ -671,106 +671,6 @@ export type UsuarioUpdateOneWithoutPrazosConcluidosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutPrazosConcluidosInput, Prisma.UsuarioUpdateWithoutPrazosConcluidosInput>, Prisma.UsuarioUncheckedUpdateWithoutPrazosConcluidosInput>
 }
 
-export type UsuarioCreateWithoutLicitanteInput = {
-  id?: string
-  nome: string
-  email: string
-  senha: string
-  perfil: $Enums.PerfilUsuario
-  ativo?: boolean
-  ultimoAcesso?: Date | string | null
-  refreshToken?: string | null
-  foto?: string | null
-  preferencias?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  LogAtividade?: Prisma.LogAtividadeCreateNestedManyWithoutUsuarioInput
-  MensagemChat?: Prisma.MensagemChatCreateNestedManyWithoutAutorInput
-  recursosEnviados?: Prisma.RecursoCreateNestedManyWithoutEnviadoPorInput
-  recursosRespondidos?: Prisma.RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
-  sancaoAplicada?: Prisma.SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
-  sancaoRevogada?: Prisma.SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
-  prazosCriados?: Prisma.PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
-  prazosConcluidos?: Prisma.PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
-}
-
-export type UsuarioUncheckedCreateWithoutLicitanteInput = {
-  id?: string
-  nome: string
-  email: string
-  senha: string
-  perfil: $Enums.PerfilUsuario
-  ativo?: boolean
-  ultimoAcesso?: Date | string | null
-  refreshToken?: string | null
-  foto?: string | null
-  preferencias?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  LogAtividade?: Prisma.LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
-  MensagemChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutAutorInput
-  recursosEnviados?: Prisma.RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
-  recursosRespondidos?: Prisma.RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
-  sancaoAplicada?: Prisma.SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
-  sancaoRevogada?: Prisma.SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
-  prazosCriados?: Prisma.PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
-  prazosConcluidos?: Prisma.PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
-}
-
-export type UsuarioCreateOrConnectWithoutLicitanteInput = {
-  where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutLicitanteInput, Prisma.UsuarioUncheckedCreateWithoutLicitanteInput>
-}
-
-export type UsuarioUpsertWithoutLicitanteInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutLicitanteInput, Prisma.UsuarioUncheckedUpdateWithoutLicitanteInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutLicitanteInput, Prisma.UsuarioUncheckedCreateWithoutLicitanteInput>
-  where?: Prisma.UsuarioWhereInput
-}
-
-export type UsuarioUpdateToOneWithWhereWithoutLicitanteInput = {
-  where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutLicitanteInput, Prisma.UsuarioUncheckedUpdateWithoutLicitanteInput>
-}
-
-export type UsuarioUpdateWithoutLicitanteInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  perfil?: Prisma.EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
-  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ultimoAcesso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  preferencias?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  LogAtividade?: Prisma.LogAtividadeUpdateManyWithoutUsuarioNestedInput
-  MensagemChat?: Prisma.MensagemChatUpdateManyWithoutAutorNestedInput
-  recursosEnviados?: Prisma.RecursoUpdateManyWithoutEnviadoPorNestedInput
-  recursosRespondidos?: Prisma.RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
-  sancaoAplicada?: Prisma.SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
-  sancaoRevogada?: Prisma.SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
-  prazosCriados?: Prisma.PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
-  prazosConcluidos?: Prisma.PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
-}
-
-export type UsuarioUncheckedUpdateWithoutLicitanteInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  perfil?: Prisma.EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
-  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ultimoAcesso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  preferencias?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  LogAtividade?: Prisma.LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
-  MensagemChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
-  recursosEnviados?: Prisma.RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
-  recursosRespondidos?: Prisma.RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
-  sancaoAplicada?: Prisma.SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
-  sancaoRevogada?: Prisma.SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
-  prazosCriados?: Prisma.PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
-  prazosConcluidos?: Prisma.PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
-}
-
 export type UsuarioCreateWithoutMensagemChatInput = {
   id?: string
   nome: string
@@ -863,6 +763,106 @@ export type UsuarioUncheckedUpdateWithoutMensagemChatInput = {
   preferencias?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   licitanteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   LogAtividade?: Prisma.LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+  recursosEnviados?: Prisma.RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
+  recursosRespondidos?: Prisma.RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
+  sancaoAplicada?: Prisma.SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput
+  sancaoRevogada?: Prisma.SancaoUncheckedUpdateManyWithoutRevogadoPorUsuarioNestedInput
+  prazosCriados?: Prisma.PrazoUncheckedUpdateManyWithoutCriadoPorUsuarioNestedInput
+  prazosConcluidos?: Prisma.PrazoUncheckedUpdateManyWithoutConcluidoPorUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutLicitanteInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  perfil: $Enums.PerfilUsuario
+  ativo?: boolean
+  ultimoAcesso?: Date | string | null
+  refreshToken?: string | null
+  foto?: string | null
+  preferencias?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  LogAtividade?: Prisma.LogAtividadeCreateNestedManyWithoutUsuarioInput
+  MensagemChat?: Prisma.MensagemChatCreateNestedManyWithoutAutorInput
+  recursosEnviados?: Prisma.RecursoCreateNestedManyWithoutEnviadoPorInput
+  recursosRespondidos?: Prisma.RecursoCreateNestedManyWithoutRespondidoPorUsuarioInput
+  sancaoAplicada?: Prisma.SancaoCreateNestedManyWithoutAplicadoPorUsuarioInput
+  sancaoRevogada?: Prisma.SancaoCreateNestedManyWithoutRevogadoPorUsuarioInput
+  prazosCriados?: Prisma.PrazoCreateNestedManyWithoutCriadoPorUsuarioInput
+  prazosConcluidos?: Prisma.PrazoCreateNestedManyWithoutConcluidoPorUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutLicitanteInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  perfil: $Enums.PerfilUsuario
+  ativo?: boolean
+  ultimoAcesso?: Date | string | null
+  refreshToken?: string | null
+  foto?: string | null
+  preferencias?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  LogAtividade?: Prisma.LogAtividadeUncheckedCreateNestedManyWithoutUsuarioInput
+  MensagemChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutAutorInput
+  recursosEnviados?: Prisma.RecursoUncheckedCreateNestedManyWithoutEnviadoPorInput
+  recursosRespondidos?: Prisma.RecursoUncheckedCreateNestedManyWithoutRespondidoPorUsuarioInput
+  sancaoAplicada?: Prisma.SancaoUncheckedCreateNestedManyWithoutAplicadoPorUsuarioInput
+  sancaoRevogada?: Prisma.SancaoUncheckedCreateNestedManyWithoutRevogadoPorUsuarioInput
+  prazosCriados?: Prisma.PrazoUncheckedCreateNestedManyWithoutCriadoPorUsuarioInput
+  prazosConcluidos?: Prisma.PrazoUncheckedCreateNestedManyWithoutConcluidoPorUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutLicitanteInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutLicitanteInput, Prisma.UsuarioUncheckedCreateWithoutLicitanteInput>
+}
+
+export type UsuarioUpsertWithoutLicitanteInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutLicitanteInput, Prisma.UsuarioUncheckedUpdateWithoutLicitanteInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutLicitanteInput, Prisma.UsuarioUncheckedCreateWithoutLicitanteInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutLicitanteInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutLicitanteInput, Prisma.UsuarioUncheckedUpdateWithoutLicitanteInput>
+}
+
+export type UsuarioUpdateWithoutLicitanteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  perfil?: Prisma.EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ultimoAcesso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferencias?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  LogAtividade?: Prisma.LogAtividadeUpdateManyWithoutUsuarioNestedInput
+  MensagemChat?: Prisma.MensagemChatUpdateManyWithoutAutorNestedInput
+  recursosEnviados?: Prisma.RecursoUpdateManyWithoutEnviadoPorNestedInput
+  recursosRespondidos?: Prisma.RecursoUpdateManyWithoutRespondidoPorUsuarioNestedInput
+  sancaoAplicada?: Prisma.SancaoUpdateManyWithoutAplicadoPorUsuarioNestedInput
+  sancaoRevogada?: Prisma.SancaoUpdateManyWithoutRevogadoPorUsuarioNestedInput
+  prazosCriados?: Prisma.PrazoUpdateManyWithoutCriadoPorUsuarioNestedInput
+  prazosConcluidos?: Prisma.PrazoUpdateManyWithoutConcluidoPorUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutLicitanteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  perfil?: Prisma.EnumPerfilUsuarioFieldUpdateOperationsInput | $Enums.PerfilUsuario
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ultimoAcesso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferencias?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  LogAtividade?: Prisma.LogAtividadeUncheckedUpdateManyWithoutUsuarioNestedInput
+  MensagemChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutAutorNestedInput
   recursosEnviados?: Prisma.RecursoUncheckedUpdateManyWithoutEnviadoPorNestedInput
   recursosRespondidos?: Prisma.RecursoUncheckedUpdateManyWithoutRespondidoPorUsuarioNestedInput
   sancaoAplicada?: Prisma.SancaoUncheckedUpdateManyWithoutAplicadoPorUsuarioNestedInput

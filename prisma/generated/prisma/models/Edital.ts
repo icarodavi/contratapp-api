@@ -238,6 +238,7 @@ export type EditalWhereInput = {
   recursos?: Prisma.RecursoListRelationFilter
   Sancao?: Prisma.SancaoListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
+  Contrato?: Prisma.ContratoListRelationFilter
   secretaria?: Prisma.XOR<Prisma.SecretariaNullableScalarRelationFilter, Prisma.SecretariaWhereInput> | null
 }
 
@@ -261,6 +262,7 @@ export type EditalOrderByWithRelationInput = {
   recursos?: Prisma.RecursoOrderByRelationAggregateInput
   Sancao?: Prisma.SancaoOrderByRelationAggregateInput
   Prazo?: Prisma.PrazoOrderByRelationAggregateInput
+  Contrato?: Prisma.ContratoOrderByRelationAggregateInput
   secretaria?: Prisma.SecretariaOrderByWithRelationInput
 }
 
@@ -287,6 +289,7 @@ export type EditalWhereUniqueInput = Prisma.AtLeast<{
   recursos?: Prisma.RecursoListRelationFilter
   Sancao?: Prisma.SancaoListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
+  Contrato?: Prisma.ContratoListRelationFilter
   secretaria?: Prisma.XOR<Prisma.SecretariaNullableScalarRelationFilter, Prisma.SecretariaWhereInput> | null
 }, "id" | "numero">
 
@@ -343,6 +346,7 @@ export type EditalCreateInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -366,6 +370,7 @@ export type EditalUncheckedCreateInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalUpdateInput = {
@@ -387,6 +392,7 @@ export type EditalUpdateInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -410,6 +416,7 @@ export type EditalUncheckedUpdateInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateManyInput = {
@@ -536,6 +543,20 @@ export type EditalUpdateOneRequiredWithoutDisputasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EditalUpdateToOneWithWhereWithoutDisputasInput, Prisma.EditalUpdateWithoutDisputasInput>, Prisma.EditalUncheckedUpdateWithoutDisputasInput>
 }
 
+export type EditalCreateNestedOneWithoutMensagensChatInput = {
+  create?: Prisma.XOR<Prisma.EditalCreateWithoutMensagensChatInput, Prisma.EditalUncheckedCreateWithoutMensagensChatInput>
+  connectOrCreate?: Prisma.EditalCreateOrConnectWithoutMensagensChatInput
+  connect?: Prisma.EditalWhereUniqueInput
+}
+
+export type EditalUpdateOneRequiredWithoutMensagensChatNestedInput = {
+  create?: Prisma.XOR<Prisma.EditalCreateWithoutMensagensChatInput, Prisma.EditalUncheckedCreateWithoutMensagensChatInput>
+  connectOrCreate?: Prisma.EditalCreateOrConnectWithoutMensagensChatInput
+  upsert?: Prisma.EditalUpsertWithoutMensagensChatInput
+  connect?: Prisma.EditalWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EditalUpdateToOneWithWhereWithoutMensagensChatInput, Prisma.EditalUpdateWithoutMensagensChatInput>, Prisma.EditalUncheckedUpdateWithoutMensagensChatInput>
+}
+
 export type EditalCreateNestedOneWithoutDocumentosInput = {
   create?: Prisma.XOR<Prisma.EditalCreateWithoutDocumentosInput, Prisma.EditalUncheckedCreateWithoutDocumentosInput>
   connectOrCreate?: Prisma.EditalCreateOrConnectWithoutDocumentosInput
@@ -562,20 +583,6 @@ export type EditalUpdateOneRequiredWithoutDocumentosObrigatoriosNestedInput = {
   upsert?: Prisma.EditalUpsertWithoutDocumentosObrigatoriosInput
   connect?: Prisma.EditalWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.EditalUpdateToOneWithWhereWithoutDocumentosObrigatoriosInput, Prisma.EditalUpdateWithoutDocumentosObrigatoriosInput>, Prisma.EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput>
-}
-
-export type EditalCreateNestedOneWithoutMensagensChatInput = {
-  create?: Prisma.XOR<Prisma.EditalCreateWithoutMensagensChatInput, Prisma.EditalUncheckedCreateWithoutMensagensChatInput>
-  connectOrCreate?: Prisma.EditalCreateOrConnectWithoutMensagensChatInput
-  connect?: Prisma.EditalWhereUniqueInput
-}
-
-export type EditalUpdateOneRequiredWithoutMensagensChatNestedInput = {
-  create?: Prisma.XOR<Prisma.EditalCreateWithoutMensagensChatInput, Prisma.EditalUncheckedCreateWithoutMensagensChatInput>
-  connectOrCreate?: Prisma.EditalCreateOrConnectWithoutMensagensChatInput
-  upsert?: Prisma.EditalUpsertWithoutMensagensChatInput
-  connect?: Prisma.EditalWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EditalUpdateToOneWithWhereWithoutMensagensChatInput, Prisma.EditalUpdateWithoutMensagensChatInput>, Prisma.EditalUncheckedUpdateWithoutMensagensChatInput>
 }
 
 export type EditalCreateNestedOneWithoutLotesInput = {
@@ -676,6 +683,20 @@ export type EditalUncheckedUpdateManyWithoutSecretariaNestedInput = {
   deleteMany?: Prisma.EditalScalarWhereInput | Prisma.EditalScalarWhereInput[]
 }
 
+export type EditalCreateNestedOneWithoutContratoInput = {
+  create?: Prisma.XOR<Prisma.EditalCreateWithoutContratoInput, Prisma.EditalUncheckedCreateWithoutContratoInput>
+  connectOrCreate?: Prisma.EditalCreateOrConnectWithoutContratoInput
+  connect?: Prisma.EditalWhereUniqueInput
+}
+
+export type EditalUpdateOneRequiredWithoutContratoNestedInput = {
+  create?: Prisma.XOR<Prisma.EditalCreateWithoutContratoInput, Prisma.EditalUncheckedCreateWithoutContratoInput>
+  connectOrCreate?: Prisma.EditalCreateOrConnectWithoutContratoInput
+  upsert?: Prisma.EditalUpsertWithoutContratoInput
+  connect?: Prisma.EditalWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EditalUpdateToOneWithWhereWithoutContratoInput, Prisma.EditalUpdateWithoutContratoInput>, Prisma.EditalUncheckedUpdateWithoutContratoInput>
+}
+
 export type EditalCreateWithoutDisputasInput = {
   id?: string
   numero: string
@@ -694,6 +715,7 @@ export type EditalCreateWithoutDisputasInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -716,6 +738,7 @@ export type EditalUncheckedCreateWithoutDisputasInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutDisputasInput = {
@@ -752,6 +775,7 @@ export type EditalUpdateWithoutDisputasInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -774,206 +798,7 @@ export type EditalUncheckedUpdateWithoutDisputasInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
-}
-
-export type EditalCreateWithoutDocumentosInput = {
-  id?: string
-  numero: string
-  objeto: string
-  modalidade?: $Enums.ModalidadeLicitação
-  criterioJulgamento?: $Enums.CritérioJulgamento
-  status: string
-  dataAbertura: Date | string
-  arquivoPdf?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  disputas?: Prisma.DisputaCreateNestedManyWithoutEditalInput
-  documentosObrigatorios?: Prisma.DocumentoObrigatorioCreateNestedManyWithoutEditalInput
-  lotes?: Prisma.LoteCreateNestedManyWithoutEditalInput
-  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutEditalInput
-  recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
-  Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
-  Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
-  secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
-}
-
-export type EditalUncheckedCreateWithoutDocumentosInput = {
-  id?: string
-  numero: string
-  objeto: string
-  modalidade?: $Enums.ModalidadeLicitação
-  criterioJulgamento?: $Enums.CritérioJulgamento
-  status: string
-  dataAbertura: Date | string
-  arquivoPdf?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  secretariaId?: string | null
-  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutEditalInput
-  documentosObrigatorios?: Prisma.DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
-  lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutEditalInput
-  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutEditalInput
-  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
-  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
-  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
-}
-
-export type EditalCreateOrConnectWithoutDocumentosInput = {
-  where: Prisma.EditalWhereUniqueInput
-  create: Prisma.XOR<Prisma.EditalCreateWithoutDocumentosInput, Prisma.EditalUncheckedCreateWithoutDocumentosInput>
-}
-
-export type EditalUpsertWithoutDocumentosInput = {
-  update: Prisma.XOR<Prisma.EditalUpdateWithoutDocumentosInput, Prisma.EditalUncheckedUpdateWithoutDocumentosInput>
-  create: Prisma.XOR<Prisma.EditalCreateWithoutDocumentosInput, Prisma.EditalUncheckedCreateWithoutDocumentosInput>
-  where?: Prisma.EditalWhereInput
-}
-
-export type EditalUpdateToOneWithWhereWithoutDocumentosInput = {
-  where?: Prisma.EditalWhereInput
-  data: Prisma.XOR<Prisma.EditalUpdateWithoutDocumentosInput, Prisma.EditalUncheckedUpdateWithoutDocumentosInput>
-}
-
-export type EditalUpdateWithoutDocumentosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  numero?: Prisma.StringFieldUpdateOperationsInput | string
-  objeto?: Prisma.StringFieldUpdateOperationsInput | string
-  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
-  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  disputas?: Prisma.DisputaUpdateManyWithoutEditalNestedInput
-  documentosObrigatorios?: Prisma.DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
-  lotes?: Prisma.LoteUpdateManyWithoutEditalNestedInput
-  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutEditalNestedInput
-  recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
-  Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
-  Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
-  secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
-}
-
-export type EditalUncheckedUpdateWithoutDocumentosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  numero?: Prisma.StringFieldUpdateOperationsInput | string
-  objeto?: Prisma.StringFieldUpdateOperationsInput | string
-  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
-  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  secretariaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutEditalNestedInput
-  documentosObrigatorios?: Prisma.DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
-  lotes?: Prisma.LoteUncheckedUpdateManyWithoutEditalNestedInput
-  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
-  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
-  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
-  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
-}
-
-export type EditalCreateWithoutDocumentosObrigatoriosInput = {
-  id?: string
-  numero: string
-  objeto: string
-  modalidade?: $Enums.ModalidadeLicitação
-  criterioJulgamento?: $Enums.CritérioJulgamento
-  status: string
-  dataAbertura: Date | string
-  arquivoPdf?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  disputas?: Prisma.DisputaCreateNestedManyWithoutEditalInput
-  documentos?: Prisma.DocumentoCreateNestedManyWithoutEditalInput
-  lotes?: Prisma.LoteCreateNestedManyWithoutEditalInput
-  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutEditalInput
-  recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
-  Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
-  Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
-  secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
-}
-
-export type EditalUncheckedCreateWithoutDocumentosObrigatoriosInput = {
-  id?: string
-  numero: string
-  objeto: string
-  modalidade?: $Enums.ModalidadeLicitação
-  criterioJulgamento?: $Enums.CritérioJulgamento
-  status: string
-  dataAbertura: Date | string
-  arquivoPdf?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  secretariaId?: string | null
-  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutEditalInput
-  documentos?: Prisma.DocumentoUncheckedCreateNestedManyWithoutEditalInput
-  lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutEditalInput
-  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutEditalInput
-  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
-  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
-  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
-}
-
-export type EditalCreateOrConnectWithoutDocumentosObrigatoriosInput = {
-  where: Prisma.EditalWhereUniqueInput
-  create: Prisma.XOR<Prisma.EditalCreateWithoutDocumentosObrigatoriosInput, Prisma.EditalUncheckedCreateWithoutDocumentosObrigatoriosInput>
-}
-
-export type EditalUpsertWithoutDocumentosObrigatoriosInput = {
-  update: Prisma.XOR<Prisma.EditalUpdateWithoutDocumentosObrigatoriosInput, Prisma.EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput>
-  create: Prisma.XOR<Prisma.EditalCreateWithoutDocumentosObrigatoriosInput, Prisma.EditalUncheckedCreateWithoutDocumentosObrigatoriosInput>
-  where?: Prisma.EditalWhereInput
-}
-
-export type EditalUpdateToOneWithWhereWithoutDocumentosObrigatoriosInput = {
-  where?: Prisma.EditalWhereInput
-  data: Prisma.XOR<Prisma.EditalUpdateWithoutDocumentosObrigatoriosInput, Prisma.EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput>
-}
-
-export type EditalUpdateWithoutDocumentosObrigatoriosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  numero?: Prisma.StringFieldUpdateOperationsInput | string
-  objeto?: Prisma.StringFieldUpdateOperationsInput | string
-  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
-  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  disputas?: Prisma.DisputaUpdateManyWithoutEditalNestedInput
-  documentos?: Prisma.DocumentoUpdateManyWithoutEditalNestedInput
-  lotes?: Prisma.LoteUpdateManyWithoutEditalNestedInput
-  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutEditalNestedInput
-  recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
-  Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
-  Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
-  secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
-}
-
-export type EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  numero?: Prisma.StringFieldUpdateOperationsInput | string
-  objeto?: Prisma.StringFieldUpdateOperationsInput | string
-  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
-  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  secretariaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutEditalNestedInput
-  documentos?: Prisma.DocumentoUncheckedUpdateManyWithoutEditalNestedInput
-  lotes?: Prisma.LoteUncheckedUpdateManyWithoutEditalNestedInput
-  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
-  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
-  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
-  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutMensagensChatInput = {
@@ -994,6 +819,7 @@ export type EditalCreateWithoutMensagensChatInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1016,6 +842,7 @@ export type EditalUncheckedCreateWithoutMensagensChatInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutMensagensChatInput = {
@@ -1052,6 +879,7 @@ export type EditalUpdateWithoutMensagensChatInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1074,6 +902,215 @@ export type EditalUncheckedUpdateWithoutMensagensChatInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+}
+
+export type EditalCreateWithoutDocumentosInput = {
+  id?: string
+  numero: string
+  objeto: string
+  modalidade?: $Enums.ModalidadeLicitação
+  criterioJulgamento?: $Enums.CritérioJulgamento
+  status: string
+  dataAbertura: Date | string
+  arquivoPdf?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  disputas?: Prisma.DisputaCreateNestedManyWithoutEditalInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+  lotes?: Prisma.LoteCreateNestedManyWithoutEditalInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutEditalInput
+  recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
+  Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
+}
+
+export type EditalUncheckedCreateWithoutDocumentosInput = {
+  id?: string
+  numero: string
+  objeto: string
+  modalidade?: $Enums.ModalidadeLicitação
+  criterioJulgamento?: $Enums.CritérioJulgamento
+  status: string
+  dataAbertura: Date | string
+  arquivoPdf?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  secretariaId?: string | null
+  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutEditalInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+  lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutEditalInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
+  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+}
+
+export type EditalCreateOrConnectWithoutDocumentosInput = {
+  where: Prisma.EditalWhereUniqueInput
+  create: Prisma.XOR<Prisma.EditalCreateWithoutDocumentosInput, Prisma.EditalUncheckedCreateWithoutDocumentosInput>
+}
+
+export type EditalUpsertWithoutDocumentosInput = {
+  update: Prisma.XOR<Prisma.EditalUpdateWithoutDocumentosInput, Prisma.EditalUncheckedUpdateWithoutDocumentosInput>
+  create: Prisma.XOR<Prisma.EditalCreateWithoutDocumentosInput, Prisma.EditalUncheckedCreateWithoutDocumentosInput>
+  where?: Prisma.EditalWhereInput
+}
+
+export type EditalUpdateToOneWithWhereWithoutDocumentosInput = {
+  where?: Prisma.EditalWhereInput
+  data: Prisma.XOR<Prisma.EditalUpdateWithoutDocumentosInput, Prisma.EditalUncheckedUpdateWithoutDocumentosInput>
+}
+
+export type EditalUpdateWithoutDocumentosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  objeto?: Prisma.StringFieldUpdateOperationsInput | string
+  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  disputas?: Prisma.DisputaUpdateManyWithoutEditalNestedInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+  lotes?: Prisma.LoteUpdateManyWithoutEditalNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutEditalNestedInput
+  recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
+  Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
+}
+
+export type EditalUncheckedUpdateWithoutDocumentosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  objeto?: Prisma.StringFieldUpdateOperationsInput | string
+  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  secretariaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutEditalNestedInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+  lotes?: Prisma.LoteUncheckedUpdateManyWithoutEditalNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
+  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+}
+
+export type EditalCreateWithoutDocumentosObrigatoriosInput = {
+  id?: string
+  numero: string
+  objeto: string
+  modalidade?: $Enums.ModalidadeLicitação
+  criterioJulgamento?: $Enums.CritérioJulgamento
+  status: string
+  dataAbertura: Date | string
+  arquivoPdf?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  disputas?: Prisma.DisputaCreateNestedManyWithoutEditalInput
+  documentos?: Prisma.DocumentoCreateNestedManyWithoutEditalInput
+  lotes?: Prisma.LoteCreateNestedManyWithoutEditalInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutEditalInput
+  recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
+  Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
+}
+
+export type EditalUncheckedCreateWithoutDocumentosObrigatoriosInput = {
+  id?: string
+  numero: string
+  objeto: string
+  modalidade?: $Enums.ModalidadeLicitação
+  criterioJulgamento?: $Enums.CritérioJulgamento
+  status: string
+  dataAbertura: Date | string
+  arquivoPdf?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  secretariaId?: string | null
+  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutEditalInput
+  documentos?: Prisma.DocumentoUncheckedCreateNestedManyWithoutEditalInput
+  lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutEditalInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
+  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+}
+
+export type EditalCreateOrConnectWithoutDocumentosObrigatoriosInput = {
+  where: Prisma.EditalWhereUniqueInput
+  create: Prisma.XOR<Prisma.EditalCreateWithoutDocumentosObrigatoriosInput, Prisma.EditalUncheckedCreateWithoutDocumentosObrigatoriosInput>
+}
+
+export type EditalUpsertWithoutDocumentosObrigatoriosInput = {
+  update: Prisma.XOR<Prisma.EditalUpdateWithoutDocumentosObrigatoriosInput, Prisma.EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput>
+  create: Prisma.XOR<Prisma.EditalCreateWithoutDocumentosObrigatoriosInput, Prisma.EditalUncheckedCreateWithoutDocumentosObrigatoriosInput>
+  where?: Prisma.EditalWhereInput
+}
+
+export type EditalUpdateToOneWithWhereWithoutDocumentosObrigatoriosInput = {
+  where?: Prisma.EditalWhereInput
+  data: Prisma.XOR<Prisma.EditalUpdateWithoutDocumentosObrigatoriosInput, Prisma.EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput>
+}
+
+export type EditalUpdateWithoutDocumentosObrigatoriosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  objeto?: Prisma.StringFieldUpdateOperationsInput | string
+  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  disputas?: Prisma.DisputaUpdateManyWithoutEditalNestedInput
+  documentos?: Prisma.DocumentoUpdateManyWithoutEditalNestedInput
+  lotes?: Prisma.LoteUpdateManyWithoutEditalNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutEditalNestedInput
+  recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
+  Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
+}
+
+export type EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  objeto?: Prisma.StringFieldUpdateOperationsInput | string
+  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  secretariaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutEditalNestedInput
+  documentos?: Prisma.DocumentoUncheckedUpdateManyWithoutEditalNestedInput
+  lotes?: Prisma.LoteUncheckedUpdateManyWithoutEditalNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
+  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutLotesInput = {
@@ -1094,6 +1131,7 @@ export type EditalCreateWithoutLotesInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1116,6 +1154,7 @@ export type EditalUncheckedCreateWithoutLotesInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutLotesInput = {
@@ -1152,6 +1191,7 @@ export type EditalUpdateWithoutLotesInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1174,6 +1214,7 @@ export type EditalUncheckedUpdateWithoutLotesInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutRecursosInput = {
@@ -1194,6 +1235,7 @@ export type EditalCreateWithoutRecursosInput = {
   mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1216,6 +1258,7 @@ export type EditalUncheckedCreateWithoutRecursosInput = {
   mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutRecursosInput = {
@@ -1252,6 +1295,7 @@ export type EditalUpdateWithoutRecursosInput = {
   mensagensChat?: Prisma.MensagemChatUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1274,6 +1318,7 @@ export type EditalUncheckedUpdateWithoutRecursosInput = {
   mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutSancaoInput = {
@@ -1294,6 +1339,7 @@ export type EditalCreateWithoutSancaoInput = {
   mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutEditalInput
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1316,6 +1362,7 @@ export type EditalUncheckedCreateWithoutSancaoInput = {
   mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutSancaoInput = {
@@ -1352,6 +1399,7 @@ export type EditalUpdateWithoutSancaoInput = {
   mensagensChat?: Prisma.MensagemChatUpdateManyWithoutEditalNestedInput
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1374,6 +1422,7 @@ export type EditalUncheckedUpdateWithoutSancaoInput = {
   mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutPrazoInput = {
@@ -1394,6 +1443,7 @@ export type EditalCreateWithoutPrazoInput = {
   mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutEditalInput
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1416,6 +1466,7 @@ export type EditalUncheckedCreateWithoutPrazoInput = {
   mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutEditalInput
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutPrazoInput = {
@@ -1452,6 +1503,7 @@ export type EditalUpdateWithoutPrazoInput = {
   mensagensChat?: Prisma.MensagemChatUpdateManyWithoutEditalNestedInput
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1474,6 +1526,7 @@ export type EditalUncheckedUpdateWithoutPrazoInput = {
   mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutSecretariaInput = {
@@ -1495,6 +1548,7 @@ export type EditalCreateWithoutSecretariaInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
 }
 
 export type EditalUncheckedCreateWithoutSecretariaInput = {
@@ -1516,6 +1570,7 @@ export type EditalUncheckedCreateWithoutSecretariaInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutSecretariaInput = {
@@ -1561,6 +1616,110 @@ export type EditalScalarWhereInput = {
   secretariaId?: Prisma.StringNullableFilter<"Edital"> | string | null
 }
 
+export type EditalCreateWithoutContratoInput = {
+  id?: string
+  numero: string
+  objeto: string
+  modalidade?: $Enums.ModalidadeLicitação
+  criterioJulgamento?: $Enums.CritérioJulgamento
+  status: string
+  dataAbertura: Date | string
+  arquivoPdf?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  disputas?: Prisma.DisputaCreateNestedManyWithoutEditalInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+  documentos?: Prisma.DocumentoCreateNestedManyWithoutEditalInput
+  lotes?: Prisma.LoteCreateNestedManyWithoutEditalInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutEditalInput
+  recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
+  Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
+}
+
+export type EditalUncheckedCreateWithoutContratoInput = {
+  id?: string
+  numero: string
+  objeto: string
+  modalidade?: $Enums.ModalidadeLicitação
+  criterioJulgamento?: $Enums.CritérioJulgamento
+  status: string
+  dataAbertura: Date | string
+  arquivoPdf?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  secretariaId?: string | null
+  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutEditalInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+  documentos?: Prisma.DocumentoUncheckedCreateNestedManyWithoutEditalInput
+  lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutEditalInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
+  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+}
+
+export type EditalCreateOrConnectWithoutContratoInput = {
+  where: Prisma.EditalWhereUniqueInput
+  create: Prisma.XOR<Prisma.EditalCreateWithoutContratoInput, Prisma.EditalUncheckedCreateWithoutContratoInput>
+}
+
+export type EditalUpsertWithoutContratoInput = {
+  update: Prisma.XOR<Prisma.EditalUpdateWithoutContratoInput, Prisma.EditalUncheckedUpdateWithoutContratoInput>
+  create: Prisma.XOR<Prisma.EditalCreateWithoutContratoInput, Prisma.EditalUncheckedCreateWithoutContratoInput>
+  where?: Prisma.EditalWhereInput
+}
+
+export type EditalUpdateToOneWithWhereWithoutContratoInput = {
+  where?: Prisma.EditalWhereInput
+  data: Prisma.XOR<Prisma.EditalUpdateWithoutContratoInput, Prisma.EditalUncheckedUpdateWithoutContratoInput>
+}
+
+export type EditalUpdateWithoutContratoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  objeto?: Prisma.StringFieldUpdateOperationsInput | string
+  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  disputas?: Prisma.DisputaUpdateManyWithoutEditalNestedInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+  documentos?: Prisma.DocumentoUpdateManyWithoutEditalNestedInput
+  lotes?: Prisma.LoteUpdateManyWithoutEditalNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutEditalNestedInput
+  recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
+  Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
+}
+
+export type EditalUncheckedUpdateWithoutContratoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  objeto?: Prisma.StringFieldUpdateOperationsInput | string
+  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  secretariaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutEditalNestedInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+  documentos?: Prisma.DocumentoUncheckedUpdateManyWithoutEditalNestedInput
+  lotes?: Prisma.LoteUncheckedUpdateManyWithoutEditalNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
+  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+}
+
 export type EditalCreateManySecretariaInput = {
   id?: string
   numero: string
@@ -1593,6 +1752,7 @@ export type EditalUpdateWithoutSecretariaInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalUncheckedUpdateWithoutSecretariaInput = {
@@ -1614,6 +1774,7 @@ export type EditalUncheckedUpdateWithoutSecretariaInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalUncheckedUpdateManyWithoutSecretariaInput = {
@@ -1643,6 +1804,7 @@ export type EditalCountOutputType = {
   recursos: number
   Sancao: number
   Prazo: number
+  Contrato: number
 }
 
 export type EditalCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1654,6 +1816,7 @@ export type EditalCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   recursos?: boolean | EditalCountOutputTypeCountRecursosArgs
   Sancao?: boolean | EditalCountOutputTypeCountSancaoArgs
   Prazo?: boolean | EditalCountOutputTypeCountPrazoArgs
+  Contrato?: boolean | EditalCountOutputTypeCountContratoArgs
 }
 
 /**
@@ -1722,6 +1885,13 @@ export type EditalCountOutputTypeCountPrazoArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.PrazoWhereInput
 }
 
+/**
+ * EditalCountOutputType without action
+ */
+export type EditalCountOutputTypeCountContratoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContratoWhereInput
+}
+
 
 export type EditalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1743,6 +1913,7 @@ export type EditalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   recursos?: boolean | Prisma.Edital$recursosArgs<ExtArgs>
   Sancao?: boolean | Prisma.Edital$SancaoArgs<ExtArgs>
   Prazo?: boolean | Prisma.Edital$PrazoArgs<ExtArgs>
+  Contrato?: boolean | Prisma.Edital$ContratoArgs<ExtArgs>
   secretaria?: boolean | Prisma.Edital$secretariaArgs<ExtArgs>
   _count?: boolean | Prisma.EditalCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["edital"]>
@@ -1801,6 +1972,7 @@ export type EditalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   recursos?: boolean | Prisma.Edital$recursosArgs<ExtArgs>
   Sancao?: boolean | Prisma.Edital$SancaoArgs<ExtArgs>
   Prazo?: boolean | Prisma.Edital$PrazoArgs<ExtArgs>
+  Contrato?: boolean | Prisma.Edital$ContratoArgs<ExtArgs>
   secretaria?: boolean | Prisma.Edital$secretariaArgs<ExtArgs>
   _count?: boolean | Prisma.EditalCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1822,6 +1994,7 @@ export type $EditalPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     recursos: Prisma.$RecursoPayload<ExtArgs>[]
     Sancao: Prisma.$SancaoPayload<ExtArgs>[]
     Prazo: Prisma.$PrazoPayload<ExtArgs>[]
+    Contrato: Prisma.$ContratoPayload<ExtArgs>[]
     secretaria: Prisma.$SecretariaPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2238,6 +2411,7 @@ export interface Prisma__EditalClient<T, Null = never, ExtArgs extends runtime.T
   recursos<T extends Prisma.Edital$recursosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$recursosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Sancao<T extends Prisma.Edital$SancaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$SancaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Prazo<T extends Prisma.Edital$PrazoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$PrazoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Contrato<T extends Prisma.Edital$ContratoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$ContratoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContratoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   secretaria<T extends Prisma.Edital$secretariaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$secretariaArgs<ExtArgs>>): Prisma.Prisma__SecretariaClient<runtime.Types.Result.GetResult<Prisma.$SecretariaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2864,6 +3038,30 @@ export type Edital$PrazoArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.PrazoScalarFieldEnum | Prisma.PrazoScalarFieldEnum[]
+}
+
+/**
+ * Edital.Contrato
+ */
+export type Edital$ContratoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Contrato
+   */
+  select?: Prisma.ContratoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Contrato
+   */
+  omit?: Prisma.ContratoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContratoInclude<ExtArgs> | null
+  where?: Prisma.ContratoWhereInput
+  orderBy?: Prisma.ContratoOrderByWithRelationInput | Prisma.ContratoOrderByWithRelationInput[]
+  cursor?: Prisma.ContratoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContratoScalarFieldEnum | Prisma.ContratoScalarFieldEnum[]
 }
 
 /**

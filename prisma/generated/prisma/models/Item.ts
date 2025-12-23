@@ -271,6 +271,7 @@ export type ItemWhereInput = {
   lote?: Prisma.XOR<Prisma.LoteScalarRelationFilter, Prisma.LoteWhereInput>
   propostas?: Prisma.PropostaListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
+  contratoItens?: Prisma.ContratoItemListRelationFilter
   catalogoItem?: Prisma.XOR<Prisma.CatalogoItemNullableScalarRelationFilter, Prisma.CatalogoItemWhereInput> | null
 }
 
@@ -289,6 +290,7 @@ export type ItemOrderByWithRelationInput = {
   lote?: Prisma.LoteOrderByWithRelationInput
   propostas?: Prisma.PropostaOrderByRelationAggregateInput
   Prazo?: Prisma.PrazoOrderByRelationAggregateInput
+  contratoItens?: Prisma.ContratoItemOrderByRelationAggregateInput
   catalogoItem?: Prisma.CatalogoItemOrderByWithRelationInput
 }
 
@@ -311,6 +313,7 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   lote?: Prisma.XOR<Prisma.LoteScalarRelationFilter, Prisma.LoteWhereInput>
   propostas?: Prisma.PropostaListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
+  contratoItens?: Prisma.ContratoItemListRelationFilter
   catalogoItem?: Prisma.XOR<Prisma.CatalogoItemNullableScalarRelationFilter, Prisma.CatalogoItemWhereInput> | null
 }, "id" | "numero_loteId">
 
@@ -363,6 +366,7 @@ export type ItemCreateInput = {
   lote: Prisma.LoteCreateNestedOneWithoutItensInput
   propostas?: Prisma.PropostaCreateNestedManyWithoutItemInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemCreateNestedManyWithoutItemInput
   catalogoItem?: Prisma.CatalogoItemCreateNestedOneWithoutItensInput
 }
 
@@ -380,6 +384,7 @@ export type ItemUncheckedCreateInput = {
   catalogoItemId?: string | null
   propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutItemInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemUpdateInput = {
@@ -395,6 +400,7 @@ export type ItemUpdateInput = {
   lote?: Prisma.LoteUpdateOneRequiredWithoutItensNestedInput
   propostas?: Prisma.PropostaUpdateManyWithoutItemNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUpdateManyWithoutItemNestedInput
   catalogoItem?: Prisma.CatalogoItemUpdateOneWithoutItensNestedInput
 }
 
@@ -412,6 +418,7 @@ export type ItemUncheckedUpdateInput = {
   catalogoItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propostas?: Prisma.PropostaUncheckedUpdateManyWithoutItemNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateManyInput = {
@@ -645,6 +652,22 @@ export type ItemUncheckedUpdateManyWithoutCatalogoItemNestedInput = {
   deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
 }
 
+export type ItemCreateNestedOneWithoutContratoItensInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutContratoItensInput, Prisma.ItemUncheckedCreateWithoutContratoItensInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutContratoItensInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemUpdateOneWithoutContratoItensNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutContratoItensInput, Prisma.ItemUncheckedCreateWithoutContratoItensInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutContratoItensInput
+  upsert?: Prisma.ItemUpsertWithoutContratoItensInput
+  disconnect?: Prisma.ItemWhereInput | boolean
+  delete?: Prisma.ItemWhereInput | boolean
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutContratoItensInput, Prisma.ItemUpdateWithoutContratoItensInput>, Prisma.ItemUncheckedUpdateWithoutContratoItensInput>
+}
+
 export type ItemCreateWithoutPropostasInput = {
   id?: string
   numero: string
@@ -657,6 +680,7 @@ export type ItemCreateWithoutPropostasInput = {
   updatedAt?: Date | string
   lote: Prisma.LoteCreateNestedOneWithoutItensInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemCreateNestedManyWithoutItemInput
   catalogoItem?: Prisma.CatalogoItemCreateNestedOneWithoutItensInput
 }
 
@@ -673,6 +697,7 @@ export type ItemUncheckedCreateWithoutPropostasInput = {
   updatedAt?: Date | string
   catalogoItemId?: string | null
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutPropostasInput = {
@@ -703,6 +728,7 @@ export type ItemUpdateWithoutPropostasInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lote?: Prisma.LoteUpdateOneRequiredWithoutItensNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUpdateManyWithoutItemNestedInput
   catalogoItem?: Prisma.CatalogoItemUpdateOneWithoutItensNestedInput
 }
 
@@ -719,6 +745,7 @@ export type ItemUncheckedUpdateWithoutPropostasInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   catalogoItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutLoteInput = {
@@ -733,6 +760,7 @@ export type ItemCreateWithoutLoteInput = {
   updatedAt?: Date | string
   propostas?: Prisma.PropostaCreateNestedManyWithoutItemInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemCreateNestedManyWithoutItemInput
   catalogoItem?: Prisma.CatalogoItemCreateNestedOneWithoutItensInput
 }
 
@@ -749,6 +777,7 @@ export type ItemUncheckedCreateWithoutLoteInput = {
   catalogoItemId?: string | null
   propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutItemInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutLoteInput = {
@@ -806,6 +835,7 @@ export type ItemCreateWithoutPrazoInput = {
   updatedAt?: Date | string
   lote: Prisma.LoteCreateNestedOneWithoutItensInput
   propostas?: Prisma.PropostaCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemCreateNestedManyWithoutItemInput
   catalogoItem?: Prisma.CatalogoItemCreateNestedOneWithoutItensInput
 }
 
@@ -822,6 +852,7 @@ export type ItemUncheckedCreateWithoutPrazoInput = {
   updatedAt?: Date | string
   catalogoItemId?: string | null
   propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutPrazoInput = {
@@ -852,6 +883,7 @@ export type ItemUpdateWithoutPrazoInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lote?: Prisma.LoteUpdateOneRequiredWithoutItensNestedInput
   propostas?: Prisma.PropostaUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUpdateManyWithoutItemNestedInput
   catalogoItem?: Prisma.CatalogoItemUpdateOneWithoutItensNestedInput
 }
 
@@ -868,6 +900,7 @@ export type ItemUncheckedUpdateWithoutPrazoInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   catalogoItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propostas?: Prisma.PropostaUncheckedUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutCatalogoItemInput = {
@@ -883,6 +916,7 @@ export type ItemCreateWithoutCatalogoItemInput = {
   lote: Prisma.LoteCreateNestedOneWithoutItensInput
   propostas?: Prisma.PropostaCreateNestedManyWithoutItemInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutCatalogoItemInput = {
@@ -898,6 +932,7 @@ export type ItemUncheckedCreateWithoutCatalogoItemInput = {
   updatedAt?: Date | string
   propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutItemInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutItemInput
+  contratoItens?: Prisma.ContratoItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutCatalogoItemInput = {
@@ -926,6 +961,86 @@ export type ItemUpdateManyWithWhereWithoutCatalogoItemInput = {
   data: Prisma.XOR<Prisma.ItemUpdateManyMutationInput, Prisma.ItemUncheckedUpdateManyWithoutCatalogoItemInput>
 }
 
+export type ItemCreateWithoutContratoItensInput = {
+  id?: string
+  numero: string
+  descricao: string
+  quantidade: number
+  unidade: string
+  valorEstimado?: number | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lote: Prisma.LoteCreateNestedOneWithoutItensInput
+  propostas?: Prisma.PropostaCreateNestedManyWithoutItemInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutItemInput
+  catalogoItem?: Prisma.CatalogoItemCreateNestedOneWithoutItensInput
+}
+
+export type ItemUncheckedCreateWithoutContratoItensInput = {
+  id?: string
+  numero: string
+  descricao: string
+  quantidade: number
+  unidade: string
+  valorEstimado?: number | null
+  loteId: string
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  catalogoItemId?: string | null
+  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutItemInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutContratoItensInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutContratoItensInput, Prisma.ItemUncheckedCreateWithoutContratoItensInput>
+}
+
+export type ItemUpsertWithoutContratoItensInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutContratoItensInput, Prisma.ItemUncheckedUpdateWithoutContratoItensInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutContratoItensInput, Prisma.ItemUncheckedCreateWithoutContratoItensInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutContratoItensInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutContratoItensInput, Prisma.ItemUncheckedUpdateWithoutContratoItensInput>
+}
+
+export type ItemUpdateWithoutContratoItensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  unidade?: Prisma.StringFieldUpdateOperationsInput | string
+  valorEstimado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lote?: Prisma.LoteUpdateOneRequiredWithoutItensNestedInput
+  propostas?: Prisma.PropostaUpdateManyWithoutItemNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutItemNestedInput
+  catalogoItem?: Prisma.CatalogoItemUpdateOneWithoutItensNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutContratoItensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  unidade?: Prisma.StringFieldUpdateOperationsInput | string
+  valorEstimado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  loteId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  catalogoItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutItemNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutItemNestedInput
+}
+
 export type ItemCreateManyLoteInput = {
   id?: string
   numero: string
@@ -951,6 +1066,7 @@ export type ItemUpdateWithoutLoteInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   propostas?: Prisma.PropostaUpdateManyWithoutItemNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUpdateManyWithoutItemNestedInput
   catalogoItem?: Prisma.CatalogoItemUpdateOneWithoutItensNestedInput
 }
 
@@ -967,6 +1083,7 @@ export type ItemUncheckedUpdateWithoutLoteInput = {
   catalogoItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propostas?: Prisma.PropostaUncheckedUpdateManyWithoutItemNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateManyWithoutLoteInput = {
@@ -1008,6 +1125,7 @@ export type ItemUpdateWithoutCatalogoItemInput = {
   lote?: Prisma.LoteUpdateOneRequiredWithoutItensNestedInput
   propostas?: Prisma.PropostaUpdateManyWithoutItemNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutCatalogoItemInput = {
@@ -1023,6 +1141,7 @@ export type ItemUncheckedUpdateWithoutCatalogoItemInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   propostas?: Prisma.PropostaUncheckedUpdateManyWithoutItemNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutItemNestedInput
+  contratoItens?: Prisma.ContratoItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateManyWithoutCatalogoItemInput = {
@@ -1046,11 +1165,13 @@ export type ItemUncheckedUpdateManyWithoutCatalogoItemInput = {
 export type ItemCountOutputType = {
   propostas: number
   Prazo: number
+  contratoItens: number
 }
 
 export type ItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   propostas?: boolean | ItemCountOutputTypeCountPropostasArgs
   Prazo?: boolean | ItemCountOutputTypeCountPrazoArgs
+  contratoItens?: boolean | ItemCountOutputTypeCountContratoItensArgs
 }
 
 /**
@@ -1077,6 +1198,13 @@ export type ItemCountOutputTypeCountPrazoArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.PrazoWhereInput
 }
 
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountContratoItensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContratoItemWhereInput
+}
+
 
 export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1093,6 +1221,7 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>
   propostas?: boolean | Prisma.Item$propostasArgs<ExtArgs>
   Prazo?: boolean | Prisma.Item$PrazoArgs<ExtArgs>
+  contratoItens?: boolean | Prisma.Item$contratoItensArgs<ExtArgs>
   catalogoItem?: boolean | Prisma.Item$catalogoItemArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["item"]>
@@ -1148,6 +1277,7 @@ export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>
   propostas?: boolean | Prisma.Item$propostasArgs<ExtArgs>
   Prazo?: boolean | Prisma.Item$PrazoArgs<ExtArgs>
+  contratoItens?: boolean | Prisma.Item$contratoItensArgs<ExtArgs>
   catalogoItem?: boolean | Prisma.Item$catalogoItemArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1166,6 +1296,7 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     lote: Prisma.$LotePayload<ExtArgs>
     propostas: Prisma.$PropostaPayload<ExtArgs>[]
     Prazo: Prisma.$PrazoPayload<ExtArgs>[]
+    contratoItens: Prisma.$ContratoItemPayload<ExtArgs>[]
     catalogoItem: Prisma.$CatalogoItemPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1577,6 +1708,7 @@ export interface Prisma__ItemClient<T, Null = never, ExtArgs extends runtime.Typ
   lote<T extends Prisma.LoteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LoteDefaultArgs<ExtArgs>>): Prisma.Prisma__LoteClient<runtime.Types.Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   propostas<T extends Prisma.Item$propostasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$propostasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropostaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Prazo<T extends Prisma.Item$PrazoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$PrazoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  contratoItens<T extends Prisma.Item$contratoItensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$contratoItensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContratoItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   catalogoItem<T extends Prisma.Item$catalogoItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$catalogoItemArgs<ExtArgs>>): Prisma.Prisma__CatalogoItemClient<runtime.Types.Result.GetResult<Prisma.$CatalogoItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2059,6 +2191,30 @@ export type Item$PrazoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.PrazoScalarFieldEnum | Prisma.PrazoScalarFieldEnum[]
+}
+
+/**
+ * Item.contratoItens
+ */
+export type Item$contratoItensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ContratoItem
+   */
+  select?: Prisma.ContratoItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ContratoItem
+   */
+  omit?: Prisma.ContratoItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContratoItemInclude<ExtArgs> | null
+  where?: Prisma.ContratoItemWhereInput
+  orderBy?: Prisma.ContratoItemOrderByWithRelationInput | Prisma.ContratoItemOrderByWithRelationInput[]
+  cursor?: Prisma.ContratoItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContratoItemScalarFieldEnum | Prisma.ContratoItemScalarFieldEnum[]
 }
 
 /**

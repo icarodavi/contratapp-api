@@ -224,6 +224,7 @@ export type LicitanteWhereInput = {
   recursos?: Prisma.RecursoListRelationFilter
   Sancao?: Prisma.SancaoListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
+  Contrato?: Prisma.ContratoListRelationFilter
 }
 
 export type LicitanteOrderByWithRelationInput = {
@@ -246,6 +247,7 @@ export type LicitanteOrderByWithRelationInput = {
   recursos?: Prisma.RecursoOrderByRelationAggregateInput
   Sancao?: Prisma.SancaoOrderByRelationAggregateInput
   Prazo?: Prisma.PrazoOrderByRelationAggregateInput
+  Contrato?: Prisma.ContratoOrderByRelationAggregateInput
 }
 
 export type LicitanteWhereUniqueInput = Prisma.AtLeast<{
@@ -271,6 +273,7 @@ export type LicitanteWhereUniqueInput = Prisma.AtLeast<{
   recursos?: Prisma.RecursoListRelationFilter
   Sancao?: Prisma.SancaoListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
+  Contrato?: Prisma.ContratoListRelationFilter
 }, "id" | "cnpj">
 
 export type LicitanteOrderByWithAggregationInput = {
@@ -323,6 +326,7 @@ export type LicitanteCreateInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateInput = {
@@ -345,6 +349,7 @@ export type LicitanteUncheckedCreateInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUpdateInput = {
@@ -367,6 +372,7 @@ export type LicitanteUpdateInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateInput = {
@@ -389,6 +395,7 @@ export type LicitanteUncheckedUpdateInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateManyInput = {
@@ -442,6 +449,11 @@ export type LicitanteOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type LicitanteScalarRelationFilter = {
+  is?: Prisma.LicitanteWhereInput
+  isNot?: Prisma.LicitanteWhereInput
+}
+
 export type LicitanteCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   razaoSocial?: Prisma.SortOrder
@@ -476,11 +488,6 @@ export type LicitanteMinOrderByAggregateInput = {
   endereco?: Prisma.SortOrder
   isMeEpp?: Prisma.SortOrder
   observacoes?: Prisma.SortOrder
-}
-
-export type LicitanteScalarRelationFilter = {
-  is?: Prisma.LicitanteWhereInput
-  isNot?: Prisma.LicitanteWhereInput
 }
 
 export type LicitanteCreateNestedOneWithoutUsuarioInput = {
@@ -537,6 +544,36 @@ export type LicitanteUncheckedUpdateManyWithoutDisputasNestedInput = {
   deleteMany?: Prisma.LicitanteScalarWhereInput | Prisma.LicitanteScalarWhereInput[]
 }
 
+export type LicitanteCreateNestedOneWithoutMensagensChatInput = {
+  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutMensagensChatInput, Prisma.LicitanteUncheckedCreateWithoutMensagensChatInput>
+  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutMensagensChatInput
+  connect?: Prisma.LicitanteWhereUniqueInput
+}
+
+export type LicitanteUpdateOneWithoutMensagensChatNestedInput = {
+  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutMensagensChatInput, Prisma.LicitanteUncheckedCreateWithoutMensagensChatInput>
+  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutMensagensChatInput
+  upsert?: Prisma.LicitanteUpsertWithoutMensagensChatInput
+  disconnect?: Prisma.LicitanteWhereInput | boolean
+  delete?: Prisma.LicitanteWhereInput | boolean
+  connect?: Prisma.LicitanteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutMensagensChatInput, Prisma.LicitanteUpdateWithoutMensagensChatInput>, Prisma.LicitanteUncheckedUpdateWithoutMensagensChatInput>
+}
+
+export type LicitanteCreateNestedOneWithoutLancesInput = {
+  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutLancesInput, Prisma.LicitanteUncheckedCreateWithoutLancesInput>
+  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutLancesInput
+  connect?: Prisma.LicitanteWhereUniqueInput
+}
+
+export type LicitanteUpdateOneRequiredWithoutLancesNestedInput = {
+  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutLancesInput, Prisma.LicitanteUncheckedCreateWithoutLancesInput>
+  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutLancesInput
+  upsert?: Prisma.LicitanteUpsertWithoutLancesInput
+  connect?: Prisma.LicitanteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutLancesInput, Prisma.LicitanteUpdateWithoutLancesInput>, Prisma.LicitanteUncheckedUpdateWithoutLancesInput>
+}
+
 export type EnumTipoEmpresaFieldUpdateOperationsInput = {
   set?: $Enums.TipoEmpresa
 }
@@ -555,20 +592,6 @@ export type LicitanteUpdateOneRequiredWithoutPropostasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutPropostasInput, Prisma.LicitanteUpdateWithoutPropostasInput>, Prisma.LicitanteUncheckedUpdateWithoutPropostasInput>
 }
 
-export type LicitanteCreateNestedOneWithoutLancesInput = {
-  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutLancesInput, Prisma.LicitanteUncheckedCreateWithoutLancesInput>
-  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutLancesInput
-  connect?: Prisma.LicitanteWhereUniqueInput
-}
-
-export type LicitanteUpdateOneRequiredWithoutLancesNestedInput = {
-  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutLancesInput, Prisma.LicitanteUncheckedCreateWithoutLancesInput>
-  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutLancesInput
-  upsert?: Prisma.LicitanteUpsertWithoutLancesInput
-  connect?: Prisma.LicitanteWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutLancesInput, Prisma.LicitanteUpdateWithoutLancesInput>, Prisma.LicitanteUncheckedUpdateWithoutLancesInput>
-}
-
 export type LicitanteCreateNestedOneWithoutDocumentosInput = {
   create?: Prisma.XOR<Prisma.LicitanteCreateWithoutDocumentosInput, Prisma.LicitanteUncheckedCreateWithoutDocumentosInput>
   connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutDocumentosInput
@@ -581,22 +604,6 @@ export type LicitanteUpdateOneRequiredWithoutDocumentosNestedInput = {
   upsert?: Prisma.LicitanteUpsertWithoutDocumentosInput
   connect?: Prisma.LicitanteWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutDocumentosInput, Prisma.LicitanteUpdateWithoutDocumentosInput>, Prisma.LicitanteUncheckedUpdateWithoutDocumentosInput>
-}
-
-export type LicitanteCreateNestedOneWithoutMensagensChatInput = {
-  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutMensagensChatInput, Prisma.LicitanteUncheckedCreateWithoutMensagensChatInput>
-  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutMensagensChatInput
-  connect?: Prisma.LicitanteWhereUniqueInput
-}
-
-export type LicitanteUpdateOneWithoutMensagensChatNestedInput = {
-  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutMensagensChatInput, Prisma.LicitanteUncheckedCreateWithoutMensagensChatInput>
-  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutMensagensChatInput
-  upsert?: Prisma.LicitanteUpsertWithoutMensagensChatInput
-  disconnect?: Prisma.LicitanteWhereInput | boolean
-  delete?: Prisma.LicitanteWhereInput | boolean
-  connect?: Prisma.LicitanteWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutMensagensChatInput, Prisma.LicitanteUpdateWithoutMensagensChatInput>, Prisma.LicitanteUncheckedUpdateWithoutMensagensChatInput>
 }
 
 export type LicitanteCreateNestedOneWithoutSessoesInput = {
@@ -657,6 +664,20 @@ export type LicitanteUpdateOneWithoutPrazoNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutPrazoInput, Prisma.LicitanteUpdateWithoutPrazoInput>, Prisma.LicitanteUncheckedUpdateWithoutPrazoInput>
 }
 
+export type LicitanteCreateNestedOneWithoutContratoInput = {
+  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutContratoInput, Prisma.LicitanteUncheckedCreateWithoutContratoInput>
+  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutContratoInput
+  connect?: Prisma.LicitanteWhereUniqueInput
+}
+
+export type LicitanteUpdateOneRequiredWithoutContratoNestedInput = {
+  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutContratoInput, Prisma.LicitanteUncheckedCreateWithoutContratoInput>
+  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutContratoInput
+  upsert?: Prisma.LicitanteUpsertWithoutContratoInput
+  connect?: Prisma.LicitanteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutContratoInput, Prisma.LicitanteUpdateWithoutContratoInput>, Prisma.LicitanteUncheckedUpdateWithoutContratoInput>
+}
+
 export type LicitanteCreateWithoutUsuarioInput = {
   id?: string
   razaoSocial: string
@@ -676,6 +697,7 @@ export type LicitanteCreateWithoutUsuarioInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutUsuarioInput = {
@@ -697,6 +719,7 @@ export type LicitanteUncheckedCreateWithoutUsuarioInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutUsuarioInput = {
@@ -734,6 +757,7 @@ export type LicitanteUpdateWithoutUsuarioInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutUsuarioInput = {
@@ -755,6 +779,7 @@ export type LicitanteUncheckedUpdateWithoutUsuarioInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutDisputasInput = {
@@ -776,6 +801,7 @@ export type LicitanteCreateWithoutDisputasInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutDisputasInput = {
@@ -797,6 +823,7 @@ export type LicitanteUncheckedCreateWithoutDisputasInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutDisputasInput = {
@@ -835,306 +862,6 @@ export type LicitanteScalarWhereInput = {
   observacoes?: Prisma.StringNullableFilter<"Licitante"> | string | null
 }
 
-export type LicitanteCreateWithoutPropostasInput = {
-  id?: string
-  razaoSocial: string
-  cnpj: string
-  tipoEmpresa: $Enums.TipoEmpresa
-  email: string
-  telefone: string
-  endereco: string
-  isMeEpp?: boolean
-  observacoes?: string | null
-  usuario?: Prisma.UsuarioCreateNestedOneWithoutLicitanteInput
-  lances?: Prisma.LanceCreateNestedManyWithoutLicitanteInput
-  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
-  sessoes?: Prisma.SessaoCreateNestedManyWithoutLicitanteInput
-  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutLicitanteInput
-  disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
-  recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
-  Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
-  Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
-}
-
-export type LicitanteUncheckedCreateWithoutPropostasInput = {
-  id?: string
-  razaoSocial: string
-  cnpj: string
-  tipoEmpresa: $Enums.TipoEmpresa
-  email: string
-  telefone: string
-  endereco: string
-  isMeEpp?: boolean
-  observacoes?: string | null
-  usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
-  lances?: Prisma.LanceUncheckedCreateNestedManyWithoutLicitanteInput
-  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
-  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutLicitanteInput
-  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
-  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
-  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
-  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
-  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
-}
-
-export type LicitanteCreateOrConnectWithoutPropostasInput = {
-  where: Prisma.LicitanteWhereUniqueInput
-  create: Prisma.XOR<Prisma.LicitanteCreateWithoutPropostasInput, Prisma.LicitanteUncheckedCreateWithoutPropostasInput>
-}
-
-export type LicitanteUpsertWithoutPropostasInput = {
-  update: Prisma.XOR<Prisma.LicitanteUpdateWithoutPropostasInput, Prisma.LicitanteUncheckedUpdateWithoutPropostasInput>
-  create: Prisma.XOR<Prisma.LicitanteCreateWithoutPropostasInput, Prisma.LicitanteUncheckedCreateWithoutPropostasInput>
-  where?: Prisma.LicitanteWhereInput
-}
-
-export type LicitanteUpdateToOneWithWhereWithoutPropostasInput = {
-  where?: Prisma.LicitanteWhereInput
-  data: Prisma.XOR<Prisma.LicitanteUpdateWithoutPropostasInput, Prisma.LicitanteUncheckedUpdateWithoutPropostasInput>
-}
-
-export type LicitanteUpdateWithoutPropostasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
-  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  telefone?: Prisma.StringFieldUpdateOperationsInput | string
-  endereco?: Prisma.StringFieldUpdateOperationsInput | string
-  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  usuario?: Prisma.UsuarioUpdateOneWithoutLicitanteNestedInput
-  lances?: Prisma.LanceUpdateManyWithoutLicitanteNestedInput
-  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
-  sessoes?: Prisma.SessaoUpdateManyWithoutLicitanteNestedInput
-  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutLicitanteNestedInput
-  disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
-  recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
-  Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
-  Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
-}
-
-export type LicitanteUncheckedUpdateWithoutPropostasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
-  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  telefone?: Prisma.StringFieldUpdateOperationsInput | string
-  endereco?: Prisma.StringFieldUpdateOperationsInput | string
-  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
-  lances?: Prisma.LanceUncheckedUpdateManyWithoutLicitanteNestedInput
-  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
-  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
-  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
-  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
-  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
-  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
-  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
-}
-
-export type LicitanteCreateWithoutLancesInput = {
-  id?: string
-  razaoSocial: string
-  cnpj: string
-  tipoEmpresa: $Enums.TipoEmpresa
-  email: string
-  telefone: string
-  endereco: string
-  isMeEpp?: boolean
-  observacoes?: string | null
-  usuario?: Prisma.UsuarioCreateNestedOneWithoutLicitanteInput
-  propostas?: Prisma.PropostaCreateNestedManyWithoutLicitanteInput
-  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
-  sessoes?: Prisma.SessaoCreateNestedManyWithoutLicitanteInput
-  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutLicitanteInput
-  disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
-  recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
-  Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
-  Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
-}
-
-export type LicitanteUncheckedCreateWithoutLancesInput = {
-  id?: string
-  razaoSocial: string
-  cnpj: string
-  tipoEmpresa: $Enums.TipoEmpresa
-  email: string
-  telefone: string
-  endereco: string
-  isMeEpp?: boolean
-  observacoes?: string | null
-  usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
-  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutLicitanteInput
-  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
-  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutLicitanteInput
-  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
-  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
-  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
-  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
-  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
-}
-
-export type LicitanteCreateOrConnectWithoutLancesInput = {
-  where: Prisma.LicitanteWhereUniqueInput
-  create: Prisma.XOR<Prisma.LicitanteCreateWithoutLancesInput, Prisma.LicitanteUncheckedCreateWithoutLancesInput>
-}
-
-export type LicitanteUpsertWithoutLancesInput = {
-  update: Prisma.XOR<Prisma.LicitanteUpdateWithoutLancesInput, Prisma.LicitanteUncheckedUpdateWithoutLancesInput>
-  create: Prisma.XOR<Prisma.LicitanteCreateWithoutLancesInput, Prisma.LicitanteUncheckedCreateWithoutLancesInput>
-  where?: Prisma.LicitanteWhereInput
-}
-
-export type LicitanteUpdateToOneWithWhereWithoutLancesInput = {
-  where?: Prisma.LicitanteWhereInput
-  data: Prisma.XOR<Prisma.LicitanteUpdateWithoutLancesInput, Prisma.LicitanteUncheckedUpdateWithoutLancesInput>
-}
-
-export type LicitanteUpdateWithoutLancesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
-  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  telefone?: Prisma.StringFieldUpdateOperationsInput | string
-  endereco?: Prisma.StringFieldUpdateOperationsInput | string
-  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  usuario?: Prisma.UsuarioUpdateOneWithoutLicitanteNestedInput
-  propostas?: Prisma.PropostaUpdateManyWithoutLicitanteNestedInput
-  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
-  sessoes?: Prisma.SessaoUpdateManyWithoutLicitanteNestedInput
-  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutLicitanteNestedInput
-  disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
-  recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
-  Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
-  Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
-}
-
-export type LicitanteUncheckedUpdateWithoutLancesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
-  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  telefone?: Prisma.StringFieldUpdateOperationsInput | string
-  endereco?: Prisma.StringFieldUpdateOperationsInput | string
-  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
-  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
-  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
-  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
-  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
-  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
-  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
-  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
-  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
-}
-
-export type LicitanteCreateWithoutDocumentosInput = {
-  id?: string
-  razaoSocial: string
-  cnpj: string
-  tipoEmpresa: $Enums.TipoEmpresa
-  email: string
-  telefone: string
-  endereco: string
-  isMeEpp?: boolean
-  observacoes?: string | null
-  usuario?: Prisma.UsuarioCreateNestedOneWithoutLicitanteInput
-  propostas?: Prisma.PropostaCreateNestedManyWithoutLicitanteInput
-  lances?: Prisma.LanceCreateNestedManyWithoutLicitanteInput
-  sessoes?: Prisma.SessaoCreateNestedManyWithoutLicitanteInput
-  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutLicitanteInput
-  disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
-  recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
-  Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
-  Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
-}
-
-export type LicitanteUncheckedCreateWithoutDocumentosInput = {
-  id?: string
-  razaoSocial: string
-  cnpj: string
-  tipoEmpresa: $Enums.TipoEmpresa
-  email: string
-  telefone: string
-  endereco: string
-  isMeEpp?: boolean
-  observacoes?: string | null
-  usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
-  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutLicitanteInput
-  lances?: Prisma.LanceUncheckedCreateNestedManyWithoutLicitanteInput
-  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutLicitanteInput
-  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
-  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
-  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
-  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
-  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
-}
-
-export type LicitanteCreateOrConnectWithoutDocumentosInput = {
-  where: Prisma.LicitanteWhereUniqueInput
-  create: Prisma.XOR<Prisma.LicitanteCreateWithoutDocumentosInput, Prisma.LicitanteUncheckedCreateWithoutDocumentosInput>
-}
-
-export type LicitanteUpsertWithoutDocumentosInput = {
-  update: Prisma.XOR<Prisma.LicitanteUpdateWithoutDocumentosInput, Prisma.LicitanteUncheckedUpdateWithoutDocumentosInput>
-  create: Prisma.XOR<Prisma.LicitanteCreateWithoutDocumentosInput, Prisma.LicitanteUncheckedCreateWithoutDocumentosInput>
-  where?: Prisma.LicitanteWhereInput
-}
-
-export type LicitanteUpdateToOneWithWhereWithoutDocumentosInput = {
-  where?: Prisma.LicitanteWhereInput
-  data: Prisma.XOR<Prisma.LicitanteUpdateWithoutDocumentosInput, Prisma.LicitanteUncheckedUpdateWithoutDocumentosInput>
-}
-
-export type LicitanteUpdateWithoutDocumentosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
-  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  telefone?: Prisma.StringFieldUpdateOperationsInput | string
-  endereco?: Prisma.StringFieldUpdateOperationsInput | string
-  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  usuario?: Prisma.UsuarioUpdateOneWithoutLicitanteNestedInput
-  propostas?: Prisma.PropostaUpdateManyWithoutLicitanteNestedInput
-  lances?: Prisma.LanceUpdateManyWithoutLicitanteNestedInput
-  sessoes?: Prisma.SessaoUpdateManyWithoutLicitanteNestedInput
-  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutLicitanteNestedInput
-  disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
-  recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
-  Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
-  Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
-}
-
-export type LicitanteUncheckedUpdateWithoutDocumentosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
-  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  telefone?: Prisma.StringFieldUpdateOperationsInput | string
-  endereco?: Prisma.StringFieldUpdateOperationsInput | string
-  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
-  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
-  lances?: Prisma.LanceUncheckedUpdateManyWithoutLicitanteNestedInput
-  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
-  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
-  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
-  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
-  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
-  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
-}
-
 export type LicitanteCreateWithoutMensagensChatInput = {
   id?: string
   razaoSocial: string
@@ -1154,6 +881,7 @@ export type LicitanteCreateWithoutMensagensChatInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutMensagensChatInput = {
@@ -1175,6 +903,7 @@ export type LicitanteUncheckedCreateWithoutMensagensChatInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutMensagensChatInput = {
@@ -1212,6 +941,7 @@ export type LicitanteUpdateWithoutMensagensChatInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutMensagensChatInput = {
@@ -1233,6 +963,319 @@ export type LicitanteUncheckedUpdateWithoutMensagensChatInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteCreateWithoutLancesInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioCreateNestedOneWithoutLicitanteInput
+  propostas?: Prisma.PropostaCreateNestedManyWithoutLicitanteInput
+  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteUncheckedCreateWithoutLancesInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
+  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutLicitanteInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteCreateOrConnectWithoutLancesInput = {
+  where: Prisma.LicitanteWhereUniqueInput
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutLancesInput, Prisma.LicitanteUncheckedCreateWithoutLancesInput>
+}
+
+export type LicitanteUpsertWithoutLancesInput = {
+  update: Prisma.XOR<Prisma.LicitanteUpdateWithoutLancesInput, Prisma.LicitanteUncheckedUpdateWithoutLancesInput>
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutLancesInput, Prisma.LicitanteUncheckedCreateWithoutLancesInput>
+  where?: Prisma.LicitanteWhereInput
+}
+
+export type LicitanteUpdateToOneWithWhereWithoutLancesInput = {
+  where?: Prisma.LicitanteWhereInput
+  data: Prisma.XOR<Prisma.LicitanteUpdateWithoutLancesInput, Prisma.LicitanteUncheckedUpdateWithoutLancesInput>
+}
+
+export type LicitanteUpdateWithoutLancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUpdateOneWithoutLicitanteNestedInput
+  propostas?: Prisma.PropostaUpdateManyWithoutLicitanteNestedInput
+  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteUncheckedUpdateWithoutLancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
+  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteCreateWithoutPropostasInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioCreateNestedOneWithoutLicitanteInput
+  lances?: Prisma.LanceCreateNestedManyWithoutLicitanteInput
+  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteUncheckedCreateWithoutPropostasInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
+  lances?: Prisma.LanceUncheckedCreateNestedManyWithoutLicitanteInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteCreateOrConnectWithoutPropostasInput = {
+  where: Prisma.LicitanteWhereUniqueInput
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutPropostasInput, Prisma.LicitanteUncheckedCreateWithoutPropostasInput>
+}
+
+export type LicitanteUpsertWithoutPropostasInput = {
+  update: Prisma.XOR<Prisma.LicitanteUpdateWithoutPropostasInput, Prisma.LicitanteUncheckedUpdateWithoutPropostasInput>
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutPropostasInput, Prisma.LicitanteUncheckedCreateWithoutPropostasInput>
+  where?: Prisma.LicitanteWhereInput
+}
+
+export type LicitanteUpdateToOneWithWhereWithoutPropostasInput = {
+  where?: Prisma.LicitanteWhereInput
+  data: Prisma.XOR<Prisma.LicitanteUpdateWithoutPropostasInput, Prisma.LicitanteUncheckedUpdateWithoutPropostasInput>
+}
+
+export type LicitanteUpdateWithoutPropostasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUpdateOneWithoutLicitanteNestedInput
+  lances?: Prisma.LanceUpdateManyWithoutLicitanteNestedInput
+  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteUncheckedUpdateWithoutPropostasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
+  lances?: Prisma.LanceUncheckedUpdateManyWithoutLicitanteNestedInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteCreateWithoutDocumentosInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioCreateNestedOneWithoutLicitanteInput
+  propostas?: Prisma.PropostaCreateNestedManyWithoutLicitanteInput
+  lances?: Prisma.LanceCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteUncheckedCreateWithoutDocumentosInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
+  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutLicitanteInput
+  lances?: Prisma.LanceUncheckedCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteCreateOrConnectWithoutDocumentosInput = {
+  where: Prisma.LicitanteWhereUniqueInput
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutDocumentosInput, Prisma.LicitanteUncheckedCreateWithoutDocumentosInput>
+}
+
+export type LicitanteUpsertWithoutDocumentosInput = {
+  update: Prisma.XOR<Prisma.LicitanteUpdateWithoutDocumentosInput, Prisma.LicitanteUncheckedUpdateWithoutDocumentosInput>
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutDocumentosInput, Prisma.LicitanteUncheckedCreateWithoutDocumentosInput>
+  where?: Prisma.LicitanteWhereInput
+}
+
+export type LicitanteUpdateToOneWithWhereWithoutDocumentosInput = {
+  where?: Prisma.LicitanteWhereInput
+  data: Prisma.XOR<Prisma.LicitanteUpdateWithoutDocumentosInput, Prisma.LicitanteUncheckedUpdateWithoutDocumentosInput>
+}
+
+export type LicitanteUpdateWithoutDocumentosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUpdateOneWithoutLicitanteNestedInput
+  propostas?: Prisma.PropostaUpdateManyWithoutLicitanteNestedInput
+  lances?: Prisma.LanceUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteUncheckedUpdateWithoutDocumentosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
+  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
+  lances?: Prisma.LanceUncheckedUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutSessoesInput = {
@@ -1254,6 +1297,7 @@ export type LicitanteCreateWithoutSessoesInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutSessoesInput = {
@@ -1275,6 +1319,7 @@ export type LicitanteUncheckedCreateWithoutSessoesInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutSessoesInput = {
@@ -1312,6 +1357,7 @@ export type LicitanteUpdateWithoutSessoesInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutSessoesInput = {
@@ -1333,6 +1379,7 @@ export type LicitanteUncheckedUpdateWithoutSessoesInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutRecursosInput = {
@@ -1354,6 +1401,7 @@ export type LicitanteCreateWithoutRecursosInput = {
   disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutRecursosInput = {
@@ -1375,6 +1423,7 @@ export type LicitanteUncheckedCreateWithoutRecursosInput = {
   disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutRecursosInput = {
@@ -1412,6 +1461,7 @@ export type LicitanteUpdateWithoutRecursosInput = {
   disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutRecursosInput = {
@@ -1433,6 +1483,7 @@ export type LicitanteUncheckedUpdateWithoutRecursosInput = {
   disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutSancaoInput = {
@@ -1454,6 +1505,7 @@ export type LicitanteCreateWithoutSancaoInput = {
   disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutSancaoInput = {
@@ -1475,6 +1527,7 @@ export type LicitanteUncheckedCreateWithoutSancaoInput = {
   disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutSancaoInput = {
@@ -1512,6 +1565,7 @@ export type LicitanteUpdateWithoutSancaoInput = {
   disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutSancaoInput = {
@@ -1533,6 +1587,7 @@ export type LicitanteUncheckedUpdateWithoutSancaoInput = {
   disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutPrazoInput = {
@@ -1554,6 +1609,7 @@ export type LicitanteCreateWithoutPrazoInput = {
   disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutPrazoInput = {
@@ -1575,6 +1631,7 @@ export type LicitanteUncheckedCreateWithoutPrazoInput = {
   disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutPrazoInput = {
@@ -1612,6 +1669,7 @@ export type LicitanteUpdateWithoutPrazoInput = {
   disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutPrazoInput = {
@@ -1633,6 +1691,111 @@ export type LicitanteUncheckedUpdateWithoutPrazoInput = {
   disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteCreateWithoutContratoInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioCreateNestedOneWithoutLicitanteInput
+  propostas?: Prisma.PropostaCreateNestedManyWithoutLicitanteInput
+  lances?: Prisma.LanceCreateNestedManyWithoutLicitanteInput
+  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteUncheckedCreateWithoutContratoInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
+  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutLicitanteInput
+  lances?: Prisma.LanceUncheckedCreateNestedManyWithoutLicitanteInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteCreateOrConnectWithoutContratoInput = {
+  where: Prisma.LicitanteWhereUniqueInput
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutContratoInput, Prisma.LicitanteUncheckedCreateWithoutContratoInput>
+}
+
+export type LicitanteUpsertWithoutContratoInput = {
+  update: Prisma.XOR<Prisma.LicitanteUpdateWithoutContratoInput, Prisma.LicitanteUncheckedUpdateWithoutContratoInput>
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutContratoInput, Prisma.LicitanteUncheckedCreateWithoutContratoInput>
+  where?: Prisma.LicitanteWhereInput
+}
+
+export type LicitanteUpdateToOneWithWhereWithoutContratoInput = {
+  where?: Prisma.LicitanteWhereInput
+  data: Prisma.XOR<Prisma.LicitanteUpdateWithoutContratoInput, Prisma.LicitanteUncheckedUpdateWithoutContratoInput>
+}
+
+export type LicitanteUpdateWithoutContratoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUpdateOneWithoutLicitanteNestedInput
+  propostas?: Prisma.PropostaUpdateManyWithoutLicitanteNestedInput
+  lances?: Prisma.LanceUpdateManyWithoutLicitanteNestedInput
+  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteUncheckedUpdateWithoutContratoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
+  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
+  lances?: Prisma.LanceUncheckedUpdateManyWithoutLicitanteNestedInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUpdateWithoutDisputasInput = {
@@ -1654,6 +1817,7 @@ export type LicitanteUpdateWithoutDisputasInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutDisputasInput = {
@@ -1675,6 +1839,7 @@ export type LicitanteUncheckedUpdateWithoutDisputasInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateManyWithoutDisputasInput = {
@@ -1704,6 +1869,7 @@ export type LicitanteCountOutputType = {
   recursos: number
   Sancao: number
   Prazo: number
+  Contrato: number
 }
 
 export type LicitanteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1716,6 +1882,7 @@ export type LicitanteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensi
   recursos?: boolean | LicitanteCountOutputTypeCountRecursosArgs
   Sancao?: boolean | LicitanteCountOutputTypeCountSancaoArgs
   Prazo?: boolean | LicitanteCountOutputTypeCountPrazoArgs
+  Contrato?: boolean | LicitanteCountOutputTypeCountContratoArgs
 }
 
 /**
@@ -1791,6 +1958,13 @@ export type LicitanteCountOutputTypeCountPrazoArgs<ExtArgs extends runtime.Types
   where?: Prisma.PrazoWhereInput
 }
 
+/**
+ * LicitanteCountOutputType without action
+ */
+export type LicitanteCountOutputTypeCountContratoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContratoWhereInput
+}
+
 
 export type LicitanteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1812,6 +1986,7 @@ export type LicitanteSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   recursos?: boolean | Prisma.Licitante$recursosArgs<ExtArgs>
   Sancao?: boolean | Prisma.Licitante$SancaoArgs<ExtArgs>
   Prazo?: boolean | Prisma.Licitante$PrazoArgs<ExtArgs>
+  Contrato?: boolean | Prisma.Licitante$ContratoArgs<ExtArgs>
   _count?: boolean | Prisma.LicitanteCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["licitante"]>
 
@@ -1863,6 +2038,7 @@ export type LicitanteInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   recursos?: boolean | Prisma.Licitante$recursosArgs<ExtArgs>
   Sancao?: boolean | Prisma.Licitante$SancaoArgs<ExtArgs>
   Prazo?: boolean | Prisma.Licitante$PrazoArgs<ExtArgs>
+  Contrato?: boolean | Prisma.Licitante$ContratoArgs<ExtArgs>
   _count?: boolean | Prisma.LicitanteCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LicitanteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1881,6 +2057,7 @@ export type $LicitantePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     recursos: Prisma.$RecursoPayload<ExtArgs>[]
     Sancao: Prisma.$SancaoPayload<ExtArgs>[]
     Prazo: Prisma.$PrazoPayload<ExtArgs>[]
+    Contrato: Prisma.$ContratoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2296,6 +2473,7 @@ export interface Prisma__LicitanteClient<T, Null = never, ExtArgs extends runtim
   recursos<T extends Prisma.Licitante$recursosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Licitante$recursosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Sancao<T extends Prisma.Licitante$SancaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Licitante$SancaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Prazo<T extends Prisma.Licitante$PrazoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Licitante$PrazoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Contrato<T extends Prisma.Licitante$ContratoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Licitante$ContratoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContratoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2954,6 +3132,30 @@ export type Licitante$PrazoArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.PrazoScalarFieldEnum | Prisma.PrazoScalarFieldEnum[]
+}
+
+/**
+ * Licitante.Contrato
+ */
+export type Licitante$ContratoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Contrato
+   */
+  select?: Prisma.ContratoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Contrato
+   */
+  omit?: Prisma.ContratoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContratoInclude<ExtArgs> | null
+  where?: Prisma.ContratoWhereInput
+  orderBy?: Prisma.ContratoOrderByWithRelationInput | Prisma.ContratoOrderByWithRelationInput[]
+  cursor?: Prisma.ContratoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContratoScalarFieldEnum | Prisma.ContratoScalarFieldEnum[]
 }
 
 /**

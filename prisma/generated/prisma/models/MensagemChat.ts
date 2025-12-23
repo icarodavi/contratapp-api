@@ -537,6 +537,10 @@ export type MensagemChatUncheckedUpdateManyWithoutDisputaNestedInput = {
   deleteMany?: Prisma.MensagemChatScalarWhereInput | Prisma.MensagemChatScalarWhereInput[]
 }
 
+export type EnumTipoAutorMensagemFieldUpdateOperationsInput = {
+  set?: $Enums.TipoAutorMensagem
+}
+
 export type MensagemChatCreateNestedManyWithoutLicitanteInput = {
   create?: Prisma.XOR<Prisma.MensagemChatCreateWithoutLicitanteInput, Prisma.MensagemChatUncheckedCreateWithoutLicitanteInput> | Prisma.MensagemChatCreateWithoutLicitanteInput[] | Prisma.MensagemChatUncheckedCreateWithoutLicitanteInput[]
   connectOrCreate?: Prisma.MensagemChatCreateOrConnectWithoutLicitanteInput | Prisma.MensagemChatCreateOrConnectWithoutLicitanteInput[]
@@ -577,10 +581,6 @@ export type MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput = {
   update?: Prisma.MensagemChatUpdateWithWhereUniqueWithoutLicitanteInput | Prisma.MensagemChatUpdateWithWhereUniqueWithoutLicitanteInput[]
   updateMany?: Prisma.MensagemChatUpdateManyWithWhereWithoutLicitanteInput | Prisma.MensagemChatUpdateManyWithWhereWithoutLicitanteInput[]
   deleteMany?: Prisma.MensagemChatScalarWhereInput | Prisma.MensagemChatScalarWhereInput[]
-}
-
-export type EnumTipoAutorMensagemFieldUpdateOperationsInput = {
-  set?: $Enums.TipoAutorMensagem
 }
 
 export type MensagemChatCreateWithoutAutorInput = {

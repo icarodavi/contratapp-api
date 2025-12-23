@@ -449,6 +449,14 @@ export type LanceUncheckedUpdateManyWithoutDisputaNestedInput = {
   deleteMany?: Prisma.LanceScalarWhereInput | Prisma.LanceScalarWhereInput[]
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type LanceCreateNestedManyWithoutLicitanteInput = {
   create?: Prisma.XOR<Prisma.LanceCreateWithoutLicitanteInput, Prisma.LanceUncheckedCreateWithoutLicitanteInput> | Prisma.LanceCreateWithoutLicitanteInput[] | Prisma.LanceUncheckedCreateWithoutLicitanteInput[]
   connectOrCreate?: Prisma.LanceCreateOrConnectWithoutLicitanteInput | Prisma.LanceCreateOrConnectWithoutLicitanteInput[]
