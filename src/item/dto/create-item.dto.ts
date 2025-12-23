@@ -54,9 +54,9 @@ export class CreateItemDto {
     @ApiProperty({
         description: 'ID do item de catálogo vinculado',
         example: '123e4567-e89b-12d3-a456-426614174000',
-        required: false
+        required: true
     })
-    @IsOptional()
+    @IsNotEmpty()
     @IsUUID()
-    catalogoItemId?: string;
+    catalogoItemId: string;
 } 

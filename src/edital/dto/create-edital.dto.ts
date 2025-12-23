@@ -25,8 +25,8 @@ export class CreateItemSimpleDto {
     valorEstimado?: number;
 
     @IsString()
-    @IsOptional()
-    catalogoItemId?: string;
+    @IsNotEmpty()
+    catalogoItemId: string;
 }
 
 export class CreateLoteWithItemsDto {

@@ -14,25 +14,50 @@ export class EditalService {
         try {
             const { lotes, ...editalData } = createEditalDto;
 
+            // Pre-process lotes to enforce catalog data integrity
+            const processedLotes = lotes ? await Promise.all(lotes.map(async lote => {
+                const processedItens = lote.itens ? await Promise.all(lote.itens.map(async item => {
+                    let itemDescricao = item.descricao;
+                    let itemUnidade = item.unidade;
+
+                    if (item.catalogoItemId) {
+                        const catalogItem = await this.prisma.catalogoItem.findUnique({
+                            where: { id: item.catalogoItemId }
+                        });
+                        if (catalogItem) {
+                            itemDescricao = catalogItem.descricao;
+                            itemUnidade = catalogItem.unidade;
+                        }
+                    }
+
+                    return {
+                        numero: item.numero,
+                        descricao: itemDescricao,
+                        quantidade: item.quantidade,
+                        unidade: itemUnidade,
+                        valorEstimado: item.valorEstimado,
+                        catalogoItemId: item.catalogoItemId
+                    };
+                })) : [];
+
+                return {
+                    ...lote,
+                    itens: processedItens
+                };
+            })) : undefined;
+
             return await this.prisma.edital.create({
                 data: {
                     ...editalData,
                     modalidade: createEditalDto.modalidade as ModalidadeLicitação,
                     criterioJulgamento: createEditalDto.criterioJulgamento as CritérioJulgamento,
-                    lotes: lotes ? {
-                        create: lotes.map(lote => ({
+                    lotes: processedLotes ? {
+                        create: processedLotes.map(lote => ({
                             numero: lote.numero,
                             descricao: lote.descricao,
                             dotacaoOrcamentaria: lote.dotacaoOrcamentaria,
                             itens: {
-                                create: lote.itens?.map(item => ({
-                                    numero: item.numero,
-                                    descricao: item.descricao,
-                                    quantidade: item.quantidade,
-                                    unidade: item.unidade,
-                                    valorEstimado: item.valorEstimado,
-                                    catalogoItemId: item.catalogoItemId
-                                }))
+                                create: lote.itens // processedItens is already the array of objects
                             }
                         }))
                     } : undefined
@@ -153,14 +178,28 @@ export class EditalService {
 
                             // Upsert Itens
                             for (const itemDto of loteDto.itens) {
+                                let itemDescricao = itemDto.descricao;
+                                let itemUnidade = itemDto.unidade;
+
+                                // Enforce Catalog Data Integrity
+                                if (itemDto.catalogoItemId) {
+                                    const catalogItem = await prisma.catalogoItem.findUnique({
+                                        where: { id: itemDto.catalogoItemId }
+                                    });
+                                    if (catalogItem) {
+                                        itemDescricao = catalogItem.descricao;
+                                        itemUnidade = catalogItem.unidade;
+                                    }
+                                }
+
                                 const existingItem = existingItens.find(i => i.numero === itemDto.numero);
                                 if (existingItem) {
                                     await prisma.item.update({
                                         where: { id: existingItem.id },
                                         data: {
-                                            descricao: itemDto.descricao,
+                                            descricao: itemDescricao,
                                             quantidade: itemDto.quantidade,
-                                            unidade: itemDto.unidade,
+                                            unidade: itemUnidade,
                                             valorEstimado: itemDto.valorEstimado,
                                             catalogoItemId: itemDto.catalogoItemId
                                         }
@@ -169,9 +208,9 @@ export class EditalService {
                                     await prisma.item.create({
                                         data: {
                                             numero: itemDto.numero,
-                                            descricao: itemDto.descricao,
+                                            descricao: itemDescricao,
                                             quantidade: itemDto.quantidade,
-                                            unidade: itemDto.unidade,
+                                            unidade: itemUnidade,
                                             valorEstimado: itemDto.valorEstimado,
                                             catalogoItemId: itemDto.catalogoItemId,
                                             loteId: existingLote.id
@@ -189,14 +228,25 @@ export class EditalService {
                                 dotacaoOrcamentaria: loteDto.dotacaoOrcamentaria,
                                 editalId: id,
                                 itens: {
-                                    create: loteDto.itens?.map(item => ({
-                                        numero: item.numero,
-                                        descricao: item.descricao,
-                                        quantidade: item.quantidade,
-                                        unidade: item.unidade,
-                                        valorEstimado: item.valorEstimado,
-                                        catalogoItemId: item.catalogoItemId
-                                    }))
+                                    create: await Promise.all(loteDto.itens?.map(async item => {
+                                        // Strict Catalog Enforcement
+                                        const catalogItem = await prisma.catalogoItem.findUnique({
+                                            where: { id: item.catalogoItemId }
+                                        });
+
+                                        if (!catalogItem) {
+                                            throw new BadRequestException(`Item de catálogo não encontrado: ${item.catalogoItemId}`);
+                                        }
+
+                                        return {
+                                            numero: item.numero,
+                                            descricao: catalogItem.descricao, // Force catalog usage
+                                            quantidade: item.quantidade,
+                                            unidade: catalogItem.unidade, // Force catalog usage
+                                            valorEstimado: item.valorEstimado,
+                                            catalogoItemId: item.catalogoItemId
+                                        };
+                                    }) || [])
                                 }
                             }
                         });
