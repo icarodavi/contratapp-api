@@ -2,18 +2,18 @@
 -- SCRIPT DE INSERÇÃO DE DADOS PARA O BANCO CONTRATAPP
 -- =====================================================
 
--- BLOCO 1: Usuários (Perfis variados)
+-- BLOCO 1: Usuários
 -- =====================================================
 INSERT INTO "usuarios" ("id", "nome", "email", "senha", "perfil", "ativo", "ultimoAcesso", "refreshToken", "foto", "preferencias") VALUES
-('550e8400-e29b-41d4-a716-446655440001', 'Administrador Sistema', 'admin@contratapp.com', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'ADMIN', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440002', 'João Silva Pregoeiro', 'joao.pregoeiro@prefeitura.gov.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440003', 'Maria Santos Pregoeira', 'maria.pregoeira@prefeitura.gov.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440004', 'Carlos Oliveira', 'carlos@empresa1.com.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440005', 'Ana Costa', 'ana@empresa2.com.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440006', 'Pedro Santos', 'pedro@empresa3.com.br', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
-('550e8400-e29b-41d4-a716-446655440007', 'Visualizador Público', 'publico@cidadao.com', '$2b$10$RUzXyHSWGtryyk9/EiFyNuQpbzx6ieZBCWi/pFveHi', 'VISUALIZADOR', true, NOW(), NULL, NULL, NULL);
+('550e8400-e29b-41d4-a716-446655440001', 'Administrador Sistema', 'admin@contratapp.com', '$2b$10$ND69/rELqYEN8nFF85XGbeuEJY/yQx9Pfyeht2CKoPEkDbScheLUC', 'ADMIN', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440002', 'João Silva Pregoeiro', 'joao.pregoeiro@prefeitura.gov.br', '$2b$10$ND69/rELqYEN8nFF85XGbeuEJY/yQx9Pfyeht2CKoPEkDbScheLUC', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440003', 'Maria Santos Pregoeira', 'maria.pregoeira@prefeitura.gov.br', '$2b$10$ND69/rELqYEN8nFF85XGbeuEJY/yQx9Pfyeht2CKoPEkDbScheLUC', 'PREGOEIRO', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440004', 'Carlos Oliveira', 'carlos@empresa1.com.br', '$2b$10$ND69/rELqYEN8nFF85XGbeuEJY/yQx9Pfyeht2CKoPEkDbScheLUC', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440005', 'Ana Costa', 'ana@empresa2.com.br', '$2b$10$ND69/rELqYEN8nFF85XGbeuEJY/yQx9Pfyeht2CKoPEkDbScheLUC', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440006', 'Pedro Santos', 'pedro@empresa3.com.br', '$2b$10$ND69/rELqYEN8nFF85XGbeuEJY/yQx9Pfyeht2CKoPEkDbScheLUC', 'LICITANTE', true, NOW(), NULL, NULL, NULL),
+('550e8400-e29b-41d4-a716-446655440007', 'Visualizador Público', 'publico@cidadao.com', '$2b$10$ND69/rELqYEN8nFF85XGbeuEJY/yQx9Pfyeht2CKoPEkDbScheLUC', 'VISUALIZADOR', true, NOW(), NULL, NULL, NULL);
 
--- BLOCO 2: Licitantes (Empresas)
+-- BLOCO 2: Licitantes
 -- =====================================================
 INSERT INTO "Licitante" ("id", "razaoSocial", "cnpj", "tipoEmpresa", "email", "telefone", "endereco", "isMeEpp", "observacoes") VALUES
 ('880e8400-e29b-41d4-a716-446655440001', 'Empresa Comercial Ltda', '12.345.678/0001-90', 'LTDA', 'contato@comercial.com', '11999990001', 'Rua Comercial, 123', false, 'Empresa de grande porte'),
@@ -26,7 +26,7 @@ UPDATE "usuarios" SET "licitanteId" = '880e8400-e29b-41d4-a716-446655440001' WHE
 UPDATE "usuarios" SET "licitanteId" = '880e8400-e29b-41d4-a716-446655440002' WHERE "email" = 'ana@empresa2.com.br';
 UPDATE "usuarios" SET "licitanteId" = '880e8400-e29b-41d4-a716-446655440003' WHERE "email" = 'pedro@empresa3.com.br';
 
--- BLOCO 2.5: Secretarias e Catálogo (Novos)
+-- BLOCO 3: Secretarias e Catálogo
 -- =====================================================
 INSERT INTO "secretarias" ("id", "nome", "sigla", "codigoContabil", "responsavel", "email", "telefone", "ativo", "createdAt", "updatedAt") VALUES
 ('110e8400-e29b-41d4-a716-446655440001', 'Secretaria Municipal de Saúde', 'SMS', '10.301', 'Dr. Saúde', 'saude@pref.gov.br', '1133334444', true, NOW(), NOW()),
@@ -39,7 +39,7 @@ INSERT INTO "catalogo_itens" ("id", "codigo", "descricao", "unidade", "tipo", "v
 ('220e8400-e29b-41d4-a716-446655440003', 'MAT-003', 'Mouse Óptico USB', 'UN', 'MATERIAL', 250000, true, NOW(), NOW()),
 ('220e8400-e29b-41d4-a716-446655440004', 'MAT-004', 'Paracetamol 500mg (Generico)', 'CPR', 'MATERIAL', 50000, true, NOW(), NOW());
 
--- BLOCO 3: Editais (Diversas modalidades)
+-- BLOCO 4: Editais
 -- =====================================================
 INSERT INTO "Edital" ("id", "numero", "objeto", "modalidade", "criterioJulgamento", "status", "dataAbertura", "arquivoPdf", "secretariaId", "createdAt", "updatedAt") VALUES
 ('660e8400-e29b-41d4-a716-446655440001', '001/2024', 'Aquisição de Material de Escritório', 'PREGÃO_ELETRÔNICO', 'MENOR_PRECO', 'ABERTO', '2024-01-15 10:00:00', '/uploads/editais/001-2024.pdf', '110e8400-e29b-41d4-a716-446655440003', NOW(), NOW()),
@@ -48,15 +48,18 @@ INSERT INTO "Edital" ("id", "numero", "objeto", "modalidade", "criterioJulgament
 ('660e8400-e29b-41d4-a716-446655440004', '004/2024', 'Contratação Emergencial de Medicamentos', 'DISPENSA', 'MENOR_PRECO', 'ENCERRADO', '2023-12-01 08:00:00', '/uploads/editais/004-2024.pdf', '110e8400-e29b-41d4-a716-446655440001', NOW(), NOW()),
 ('660e8400-e29b-41d4-a716-446655440005', '005/2024', 'Contratação de Artista Consagrado', 'INEXIGIBILIDADE', 'MELHOR_TÉCNICA', 'ABERTO', '2024-02-10 10:00:00', '/uploads/editais/005-2024.pdf', '110e8400-e29b-41d4-a716-446655440002', NOW(), NOW());
 
--- BLOCO 4: Disputas (Vários status)
+-- BLOCO 5: Documentos do Edital (Geral e Obrigatórios)
 -- =====================================================
-INSERT INTO "Disputa" ("id", "editalId", "status", "inicio", "fimPrevisto", "encerramento", "tempoRestante") VALUES
-('770e8400-e29b-41d4-a716-446655440001', '660e8400-e29b-41d4-a716-446655440001', 'ABERTA', '2024-01-15 10:00:00', '2024-01-15 12:00:00', NULL, 7200),
-('770e8400-e29b-41d4-a716-446655440002', '660e8400-e29b-41d4-a716-446655440002', 'AGUARDANDO', '2024-01-20 14:00:00', '2024-01-20 16:00:00', NULL, 7200),
-('770e8400-e29b-41d4-a716-446655440003', '660e8400-e29b-41d4-a716-446655440003', 'SUSPENSA', '2024-01-25 09:00:00', '2024-01-25 11:00:00', NULL, 3600),
-('770e8400-e29b-41d4-a716-446655440004', '660e8400-e29b-41d4-a716-446655440004', 'ENCERRADA', '2023-12-01 08:00:00', '2023-12-01 10:00:00', '2023-12-01 10:05:00', 0);
+INSERT INTO "Documento" ("id", "nome", "tipo", "caminho", "descricao", "ativo", "editalId", "createdAt", "updatedAt") VALUES
+('doc1-edital1', 'Edital Completo.pdf', 'EDITAL', '/docs/edital_001_2024.pdf', 'Edital principal e anexos', true, '660e8400-e29b-41d4-a716-446655440001', NOW(), NOW()),
+('doc2-edital1', 'Termo de Referencia.pdf', 'ANEXO', '/docs/tr_001_2024.pdf', 'Especificações técnicas detalhadas', true, '660e8400-e29b-41d4-a716-446655440001', NOW(), NOW()),
+('doc3-edital2', 'Estudo Tecnico.pdf', 'ANEXO', '/docs/etp_002_2024.pdf', 'Estudo preliminar', true, '660e8400-e29b-41d4-a716-446655440002', NOW(), NOW());
 
--- BLOCO 5: Lotes e Itens
+INSERT INTO "DocumentoObrigatorio" ("id", "editalId", "tipoDocumento", "descricao", "prazoValidade", "observacoes", "createdAt", "updatedAt") VALUES
+('cc0e8400-e29b-41d4-a716-446655440001', '660e8400-e29b-41d4-a716-446655440001', 'HABILITACAO_JURIDICA', 'Contrato Social', 365, NULL, NOW(), NOW()),
+('cc0e8400-e29b-41d4-a716-446655440002', '660e8400-e29b-41d4-a716-446655440001', 'CERTIDAO_NEGATIVA_DEBITOS', 'CND Federal', 180, NULL, NOW(), NOW());
+
+-- BLOCO 6: Lotes e Itens
 -- =====================================================
 INSERT INTO "Lote" ("id", "numero", "descricao", "editalId", "status", "dotacaoOrcamentaria", "createdAt", "updatedAt") VALUES
 ('hh0e8400-e29b-41d4-a716-446655440001', 'LOTE 1', 'Material de Escritório - Papelaria', '660e8400-e29b-41d4-a716-446655440001', 'ATIVO', '04.122.0001.2005', NOW(), NOW()),
@@ -71,7 +74,15 @@ INSERT INTO "Item" ("id", "numero", "descricao", "quantidade", "unidade", "valor
 ('ii0e8400-e29b-41d4-a716-446655440004', '001', 'Paracetamol 500mg', 10000, 'COMPRIMIDO', 500000, 'hh0e8400-e29b-41d4-a716-446655440004', 'ATIVO', '220e8400-e29b-41d4-a716-446655440004', NOW(), NOW());
 
 
--- BLOCO 6: Propostas e Lances
+-- BLOCO 7: Disputas
+-- =====================================================
+INSERT INTO "Disputa" ("id", "editalId", "status", "inicio", "fimPrevisto", "encerramento", "tempoRestante") VALUES
+('770e8400-e29b-41d4-a716-446655440001', '660e8400-e29b-41d4-a716-446655440001', 'ABERTA', '2024-01-15 10:00:00', '2024-01-15 12:00:00', NULL, 7200),
+('770e8400-e29b-41d4-a716-446655440002', '660e8400-e29b-41d4-a716-446655440002', 'AGUARDANDO', '2024-01-20 14:00:00', '2024-01-20 16:00:00', NULL, 7200),
+('770e8400-e29b-41d4-a716-446655440003', '660e8400-e29b-41d4-a716-446655440003', 'SUSPENSA', '2024-01-25 09:00:00', '2024-01-25 11:00:00', NULL, 3600),
+('770e8400-e29b-41d4-a716-446655440004', '660e8400-e29b-41d4-a716-446655440004', 'ENCERRADA', '2023-12-01 08:00:00', '2023-12-01 10:00:00', '2023-12-01 10:05:00', 0);
+
+-- BLOCO 8: Propostas e Lances
 -- =====================================================
 INSERT INTO "Proposta" ("id", "disputaId", "licitanteId", "itemId", "valorCentavos", "dataEnvio", "arquivo", "status", "observacao", "versao", "createdBy", "updatedBy", "createdAt", "updatedAt") VALUES
 ('990e8400-e29b-41d4-a716-446655440001', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440001', 'ii0e8400-e29b-41d4-a716-446655440001', 1500000, NOW() - INTERVAL '1 day', '/uploads/propostas/p1.pdf', 'ACEITA', 'Proposta inicial', 1, 'system', NULL, NOW(), NOW()),
@@ -83,17 +94,18 @@ INSERT INTO "Lance" ("id", "disputaId", "licitanteId", "valorCentavos", "horario
 ('aa0e8400-e29b-41d4-a716-446655440002', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440002', 1400000, NOW() - INTERVAL '25 minutes', '192.168.1.101', 'Mozilla/5.0'),
 ('aa0e8400-e29b-41d4-a716-446655440003', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440001', 1380000, NOW() - INTERVAL '20 minutes', 'localhost', 'Mozilla/5.0');
 
--- BLOCO 7: Documentos e Documentos Obrigatórios
+-- BLOCO 9: Documentos do Licitante
 -- =====================================================
-INSERT INTO "DocumentoObrigatorio" ("id", "editalId", "tipoDocumento", "descricao", "prazoValidade", "observacoes", "createdAt", "updatedAt") VALUES
-('cc0e8400-e29b-41d4-a716-446655440001', '660e8400-e29b-41d4-a716-446655440001', 'HABILITACAO_JURIDICA', 'Contrato Social', 365, NULL, NOW(), NOW()),
-('cc0e8400-e29b-41d4-a716-446655440002', '660e8400-e29b-41d4-a716-446655440001', 'CERTIDAO_NEGATIVA_DEBITOS', 'CND Federal', 180, NULL, NOW(), NOW());
-
 INSERT INTO "DocumentoLicitante" ("id", "disputaId", "licitanteId", "tipoDocumento", "nomeOriginal", "descricao", "arquivoPath", "dataEnvio", "versao", "status", "valido", "hashDocumento", "assinaturaBase64", "assinadoPor", "observacoes", "dataValidade", "dataValidacao", "validadoPor") VALUES
 ('dd0e8400-e29b-41d4-a716-446655440001', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440001', 'HABILITACAO_JURIDICA', 'contrato.pdf', 'Contrato Social', '/docs/c1.pdf', NOW(), 1, 'VALIDADO', true, 'hash1', 'sig1', 'user1', 'OK', '2025-01-01', NOW(), 'admin'),
 ('dd0e8400-e29b-41d4-a716-446655440002', '770e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440002', 'CERTIDAO_NEGATIVA_DEBITOS', 'cnd.pdf', 'CND', '/docs/c2.pdf', NOW(), 1, 'PENDENTE', false, 'hash2', NULL, NULL, NULL, NULL, NULL, NULL);
 
--- BLOCO 8: Recursos, Sanções e Prazos
+-- BLOCO 10: Sessões
+-- =====================================================
+INSERT INTO "Sessao" ("id", "licitanteId", "disputaId", "inicio", "fim", "ip", "hash") VALUES
+('sess1-lic1-disp1', '880e8400-e29b-41d4-a716-446655440001', '770e8400-e29b-41d4-a716-446655440001', NOW() - INTERVAL '1 hour', NULL, '10.0.0.1', 'sessionhash1');
+
+-- BLOCO 11: Recursos, Sanções e Prazos
 -- =====================================================
 INSERT INTO "Recurso" ("id", "tipo", "status", "motivo", "fundamentacao", "resposta", "dataEnvio", "dataResposta", "prazoResposta", "editalId", "licitanteId", "usuarioId", "respondidoPor", "createdAt", "updatedAt") VALUES
 ('jj0e8400-e29b-41d4-a716-446655440001', 'IMPUGNACAO', 'DEFERIDO', 'Erro no edital', 'Item 1 descritivo errado', 'Corrigido', NOW() - INTERVAL '5 days', NOW() - INTERVAL '4 days', 3, '660e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440001', '550e8400-e29b-41d4-a716-446655440004', '550e8400-e29b-41d4-a716-446655440002', NOW(), NOW()),
@@ -106,7 +118,15 @@ INSERT INTO "Sancao" ("id", "tipo", "status", "motivo", "fundamentacao", "dataIn
 INSERT INTO "Prazo" ("id", "tipo", "status", "descricao", "dataInicio", "dataFim", "dataConclusao", "observacoes", "editalId", "licitanteId", "itemId", "criadoPor", "concluidoPor", "createdAt", "updatedAt") VALUES
 ('ll0e8400-e29b-41d4-a716-446655440001', 'ENTREGA_DOCUMENTOS', 'CONCLUIDO', 'Entrega Docs Habilitação', NOW() - INTERVAL '10 days', NOW() - INTERVAL '5 days', NOW() - INTERVAL '6 days', 'Todos entregaram', '660e8400-e29b-41d4-a716-446655440001', NULL, NULL, '550e8400-e29b-41d4-a716-446655440002', '550e8400-e29b-41d4-a716-446655440002', NOW(), NOW());
 
--- BLOCO 9: Chat e Logs
+-- BLOCO 12: Contratos (New)
+-- =====================================================
+INSERT INTO "contratos" ("id", "numero", "editalId", "licitanteId", "valorTotal", "dataInicio", "dataFim", "status", "createdAt", "updatedAt") VALUES
+('contrato1-id', '001/2024 - CTR', '660e8400-e29b-41d4-a716-446655440004', '880e8400-e29b-41d4-a716-446655440004', 500000, '2023-12-05', '2024-12-05', 'ATIVO', NOW(), NOW());
+
+INSERT INTO "contrato_itens" ("id", "contratoId", "tipo", "loteId", "itemId", "descricao", "quantidade", "valorUnitario", "valorTotal", "createdAt", "updatedAt") VALUES
+('citem1-id', 'contrato1-id', 'ITEM', 'hh0e8400-e29b-41d4-a716-446655440004', 'ii0e8400-e29b-41d4-a716-446655440004', 'Paracetamol 500mg', 10000, 50, 500000, NOW(), NOW());
+
+-- BLOCO 13: Chat e Logs
 -- =====================================================
 INSERT INTO "MensagemChat" ("id", "editalId", "autorId", "tipoAutor", "conteudo", "createdAt", "updatedAt", "disputaId", "licitanteId") VALUES
 ('ee0e8400-e29b-41d4-a716-446655440001', '660e8400-e29b-41d4-a716-446655440001', '550e8400-e29b-41d4-a716-446655440002', 'PREGOEIRO', 'Sessão aberta', NOW(), NOW(), '770e8400-e29b-41d4-a716-446655440001', NULL);
