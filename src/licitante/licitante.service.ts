@@ -6,6 +6,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { DisputaStatus } from '@prisma/client';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { PaginatedResult } from '../common/interfaces/paginated-result.interface';
+import { buildOrderBy } from '../common/utils/prisma-utils';
 
 @ApiTags('Licitantes')
 @Injectable()
@@ -73,7 +74,9 @@ export class LicitanteService {
                 where,
                 skip,
                 take: limit,
-                orderBy: orderBy ? { [orderBy]: orderDirection } : { razaoSocial: 'asc' },
+                orderBy: (orderBy && orderDirection)
+                    ? buildOrderBy(orderBy, orderDirection)
+                    : { razaoSocial: 'asc' },
                 include: {
                     usuario: true
                 }

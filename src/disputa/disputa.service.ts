@@ -7,6 +7,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { ChatGateway } from '../chat/chat.gateway';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { PaginatedResult } from '../common/interfaces/paginated-result.interface';
+import { buildOrderBy } from '../common/utils/prisma-utils';
 
 @ApiTags('Disputas')
 @Injectable()
@@ -57,7 +58,9 @@ export class DisputaService {
                 where,
                 skip,
                 take: limit,
-                orderBy: orderBy ? { [orderBy]: orderDirection } : { edital: { createdAt: 'desc' } },
+                orderBy: (orderBy && orderDirection)
+                    ? buildOrderBy(orderBy, orderDirection)
+                    : { edital: { createdAt: 'desc' } },
                 include: {
                     edital: true,
                     propostas: true,
