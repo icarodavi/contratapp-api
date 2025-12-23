@@ -233,6 +233,33 @@ export class TimeGateway implements OnGatewayConnection, OnGatewayDisconnect {
         return { success: true };
     }
 
+    @SubscribeMessage('zerarContagem')
+    async handleZerarContagem(client: Socket) {
+        const editalId = client.handshake.query.editalId as string;
+        const tipoAutor = client.handshake.query.tipoAutor as string;
+
+        if (tipoAutor !== 'PREGOEIRO' && tipoAutor !== 'ADMIN') {
+            return { error: 'Apenas o pregoeiro ou admin pode zerar a contagem' };
+        }
+
+        const contador = this.contadores.get(editalId);
+        if (!contador) return;
+
+        // Limpa o intervalo e remove o contador
+        if (contador.intervalo) {
+            clearInterval(contador.intervalo);
+        }
+        this.contadores.delete(editalId);
+
+        // Notifica que a contagem foi finalizada (zerada)
+        this.server.to(editalId).emit('contagemFinalizada');
+
+        // Encerra a disputa no banco
+        this.encerrarDisputaDb(editalId);
+
+        return { success: true };
+    }
+
     private async encerrarDisputaDb(editalId: string) {
         try {
             const disputas = await this.disputaService.findByEdital(editalId);
