@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, UseGuards, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, UseGuards, Query, UseInterceptors } from '@nestjs/common';
 import { EditalService } from './edital.service';
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
 import { PaginationDto } from '../common/dto/pagination.dto';
@@ -27,6 +28,8 @@ export class EditalController {
     }
 
     @Get()
+    @UseInterceptors(CacheInterceptor)
+    @CacheTTL(60000) // 1 minute cache
     @ApiOperation({ summary: 'Listar todos os editais' })
     @ApiResponse({ status: 200, description: 'Lista de editais retornada com sucesso' })
     findAll(@Query() query: PaginationDto) {

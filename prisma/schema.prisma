@@ -342,6 +342,46 @@ model Disputa {
   logs          LogAtividade[]
   sessoes       Sessao[]
   licitantes    Licitante[]
+
+  @@index([editalId])
+  @@index([status])
+  @@index([inicio])
+}
+
+model MensagemChat {
+  id        String            @id @default(uuid())
+  editalId  String
+  autorId   String
+  tipoAutor TipoAutorMensagem
+  conteudo  String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  edital      Edital     @relation(fields: [editalId], references: [id], onDelete: Cascade)
+  autor       Usuario    @relation(fields: [autorId], references: [id], onDelete: Cascade)
+  Disputa     Disputa?   @relation(fields: [disputaId], references: [id])
+  disputaId   String?
+  Licitante   Licitante? @relation(fields: [licitanteId], references: [id])
+  licitanteId String?
+
+  @@index([editalId, createdAt])
+  @@index([disputaId])
+}
+
+model Lance {
+  id            String   @id @default(uuid())
+  disputaId     String
+  licitanteId   String
+  valorCentavos Int // valor em centavos
+  horario       DateTime
+  ip            String?
+  userAgent     String?
+
+  disputa   Disputa   @relation(fields: [disputaId], references: [id], onDelete: Cascade)
+  licitante Licitante @relation(fields: [licitanteId], references: [id], onDelete: Cascade)
+
+  @@index([disputaId, valorCentavos])
+  @@index([licitanteId])
 }
 
 model Licitante {

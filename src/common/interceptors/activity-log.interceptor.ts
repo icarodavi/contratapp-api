@@ -42,7 +42,8 @@ export class ActivityLogInterceptor implements NestInterceptor {
                         // Isso pode precisar de ajuste dependendo do endpoint
                         const disputaId = request.body?.disputaId || request.params?.disputaId || request.query?.disputaId || undefined;
 
-                        await this.logService.create({
+                        // Fire-and-forget logging
+                        this.logService.create({
                             tipo: options.tipo,
                             acao: options.acao,
                             detalhes: options.detalhes,
@@ -59,16 +60,17 @@ export class ActivityLogInterceptor implements NestInterceptor {
                                 method: request.method,
                                 url: request.url,
                             }
-                        });
+                        }).catch(error => console.error('Erro ao salvar log de atividade:', error));
                     } catch (error) {
-                        console.error('Erro ao salvar log de atividade:', error);
+                        console.error('Erro ao processar log de atividade:', error);
                     }
                 },
-                error: async (error) => {
+                error: (error) => { // Removed async
                     try {
                         const disputaId = request.body?.disputaId || request.params?.disputaId || request.query?.disputaId || undefined;
 
-                        await this.logService.create({
+                        // Fire-and-forget logging for error
+                        this.logService.create({
                             tipo: options.tipo,
                             acao: options.acao,
                             detalhes: `Erro: ${error.message}`,
@@ -84,9 +86,9 @@ export class ActivityLogInterceptor implements NestInterceptor {
                                 url: request.url,
                                 error: error.stack
                             }
-                        });
+                        }).catch(logError => console.error('Erro ao salvar log de erro:', logError));
                     } catch (logError) {
-                        console.error('Erro ao salvar log de erro:', logError);
+                        console.error('Erro ao processar log de erro:', logError);
                     }
                 }
             })

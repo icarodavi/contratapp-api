@@ -32,6 +32,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { SecretariaModule } from './secretaria/secretaria.module';
 import { CatalogoModule } from './catalogo/catalogo.module';
 import { LogModule } from './log/log.module';
+import { CacheModule } from '@nestjs/cache-manager';
 
 
 @Module({
@@ -39,6 +40,11 @@ import { LogModule } from './log/log.module';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
+    }),
+    CacheModule.register({
+      isGlobal: true, // Make cache available globally
+      ttl: 30000, // 30 seconds default TTL
+      max: 100, // max items in cache
     }),
     ThrottlerModule.forRoot([
       {

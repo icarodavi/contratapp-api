@@ -62,9 +62,7 @@ export class DisputaService {
                     ? buildOrderBy(orderBy, orderDirection)
                     : { edital: { createdAt: 'desc' } },
                 include: {
-                    edital: true,
-                    propostas: true,
-                    documentos: true
+                    edital: true
                 }
             }),
         ]);

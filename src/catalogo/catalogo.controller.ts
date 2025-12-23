@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import { CatalogoService } from './catalogo.service';
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 import { CreateCatalogoItemDto } from './dto/create-catalogo-item.dto';
 import { UpdateCatalogoItemDto } from './dto/update-catalogo-item.dto';
 import { PaginationDto } from '../common/dto/pagination.dto';
@@ -21,6 +22,8 @@ export class CatalogoController {
     }
 
     @Get()
+    @UseInterceptors(CacheInterceptor)
+    @CacheTTL(60000) // 1 minute cache
     @ApiOperation({ summary: 'Listar itens do catálogo' })
     findAll(@Query() query: PaginationDto) {
         return this.catalogoService.findAll(query);
