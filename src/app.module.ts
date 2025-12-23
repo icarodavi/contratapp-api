@@ -76,6 +76,7 @@ import { CacheModule } from '@nestjs/cache-manager';
     ChatModule,
     LanceModule,
     RelatorioModule,
+    DashboardModule,
     SecretariaModule,
     CatalogoModule,
     LogModule,
