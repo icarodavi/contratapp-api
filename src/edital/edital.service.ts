@@ -229,7 +229,7 @@ export class EditalService {
                                 editalId: id,
                                 itens: {
                                     create: await Promise.all(loteDto.itens?.map(async item => {
-                                        // Strict Catalog Enforcement
+                                        // Aplicação estrita de regras do catálogo
                                         const catalogItem = await prisma.catalogoItem.findUnique({
                                             where: { id: item.catalogoItemId }
                                         });
@@ -240,9 +240,9 @@ export class EditalService {
 
                                         return {
                                             numero: item.numero,
-                                            descricao: catalogItem.descricao, // Force catalog usage
+                                            descricao: catalogItem.descricao, // Forçar uso do catálogo
                                             quantidade: item.quantidade,
-                                            unidade: catalogItem.unidade, // Force catalog usage
+                                            unidade: catalogItem.unidade, // Forçar uso do catálogo
                                             valorEstimado: item.valorEstimado,
                                             catalogoItemId: item.catalogoItemId
                                         };

@@ -9,8 +9,8 @@ export class CatalogoService {
 
     async create(createCatalogoItemDto: CreateCatalogoItemDto) {
         if (!createCatalogoItemDto.codigo) {
-            // Generate a simple unique SKU if not provided
-            // For production, maybe use a sequence or UUID chunk
+            // Gera um SKU único simples se não fornecido
+            // Para produção, talvez use uma sequência ou chunk UUID
             const timestamp = Date.now().toString(36).toUpperCase();
             const randomPart = Math.random().toString(36).substring(2, 5).toUpperCase();
             createCatalogoItemDto.codigo = `CAT-${timestamp}-${randomPart}`;
@@ -19,7 +19,7 @@ export class CatalogoService {
         return this.prisma.catalogoItem.create({
             data: {
                 ...createCatalogoItemDto,
-                codigo: createCatalogoItemDto.codigo! // Ensure it's string (TS might complain about optional)
+                codigo: createCatalogoItemDto.codigo! // Garantir que é string (TS pode reclamar sobre opcional)
             },
         });
     }
@@ -53,11 +53,11 @@ export class CatalogoService {
     }
 
     async remove(id: string) {
-        // Soft delete (inactivate) or hard delete depending on requirements.
-        // Given relationships, hard delete might fail if used.
-        // Let's assume hard delete for now, user can see error if used.
-        // Or better, check usage.
-        // For simplicity:
+        // Soft delete (inativar) ou hard delete dependendo dos requisitos.
+        // Dadas as relações, hard delete pode falhar se usado.
+        // Vamos assumir hard delete por enquanto, usuário pode ver erro se usado.
+        // Ou melhor, verifique o uso.
+        // Por simplicidade:
         return this.prisma.catalogoItem.delete({
             where: { id },
         });

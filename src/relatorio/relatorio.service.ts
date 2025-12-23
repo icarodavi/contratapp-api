@@ -8,7 +8,7 @@ export class RelatorioService {
     private printer: any;
 
     constructor(private prisma: PrismaService) {
-        // Lazy load pdfmake to avoid issues in test environment
+        // Carregamento tardio (lazy load) do pdfmake para evitar problemas em ambiente de teste
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const PdfPrinter = require('pdfmake');
 
@@ -101,7 +101,7 @@ export class RelatorioService {
             throw new NotFoundException('Disputa não encontrada');
         }
 
-        // Generate QR Code
+        // Gerar QR Code
         const validationUrl = `https://contratapp.com.br/validar/${disputa.id}`;
         const qrCodeDataUrl = await QRCode.toDataURL(validationUrl);
 

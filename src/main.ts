@@ -77,7 +77,7 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
   }));
 
-  // Global Exception Filter
+  // Filtro de Exceção Global
   const httpAdapter = app.get(HttpAdapterHost);
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
 

@@ -89,9 +89,9 @@ export class UsuarioController {
     @ApiOperation({ summary: 'Upload de foto de perfil' })
     @ApiResponse({ status: 200, description: 'Foto atualizada com sucesso' })
     async uploadFoto(@Param('id') id: string, @UploadedFile() file: Express.Multer.File) {
-        // Return the path that can be accessed via static serve
-        // file.path would be "uploads/profiles/filename.jpg"
-        // We want to store "/uploads/profiles/filename.jpg" or the full URL
+        // Retorna o caminho que pode ser acessado via static serve
+        // file.path seria "uploads/profiles/filename.jpg"
+        // Queremos armazenar "/uploads/profiles/filename.jpg" ou a URL completa
         const fotoUrl = `/uploads/profiles/${file.filename}`;
         return this.usuarioService.update(id, { foto: fotoUrl });
     }
