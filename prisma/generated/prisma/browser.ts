@@ -122,3 +122,8 @@ export type Contrato = Prisma.ContratoModel
  * 
  */
 export type ContratoItem = Prisma.ContratoItemModel
+/**
+ * Model Inscricao
+ * 
+ */
+export type Inscricao = Prisma.InscricaoModel

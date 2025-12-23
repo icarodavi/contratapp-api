@@ -239,6 +239,7 @@ export type EditalWhereInput = {
   Sancao?: Prisma.SancaoListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
   Contrato?: Prisma.ContratoListRelationFilter
+  inscricoes?: Prisma.InscricaoListRelationFilter
   secretaria?: Prisma.XOR<Prisma.SecretariaNullableScalarRelationFilter, Prisma.SecretariaWhereInput> | null
 }
 
@@ -263,6 +264,7 @@ export type EditalOrderByWithRelationInput = {
   Sancao?: Prisma.SancaoOrderByRelationAggregateInput
   Prazo?: Prisma.PrazoOrderByRelationAggregateInput
   Contrato?: Prisma.ContratoOrderByRelationAggregateInput
+  inscricoes?: Prisma.InscricaoOrderByRelationAggregateInput
   secretaria?: Prisma.SecretariaOrderByWithRelationInput
 }
 
@@ -290,6 +292,7 @@ export type EditalWhereUniqueInput = Prisma.AtLeast<{
   Sancao?: Prisma.SancaoListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
   Contrato?: Prisma.ContratoListRelationFilter
+  inscricoes?: Prisma.InscricaoListRelationFilter
   secretaria?: Prisma.XOR<Prisma.SecretariaNullableScalarRelationFilter, Prisma.SecretariaWhereInput> | null
 }, "id" | "numero">
 
@@ -347,6 +350,7 @@ export type EditalCreateInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -371,6 +375,7 @@ export type EditalUncheckedCreateInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalUpdateInput = {
@@ -393,6 +398,7 @@ export type EditalUpdateInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -417,6 +423,7 @@ export type EditalUncheckedUpdateInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateManyInput = {
@@ -697,6 +704,20 @@ export type EditalUpdateOneRequiredWithoutContratoNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EditalUpdateToOneWithWhereWithoutContratoInput, Prisma.EditalUpdateWithoutContratoInput>, Prisma.EditalUncheckedUpdateWithoutContratoInput>
 }
 
+export type EditalCreateNestedOneWithoutInscricoesInput = {
+  create?: Prisma.XOR<Prisma.EditalCreateWithoutInscricoesInput, Prisma.EditalUncheckedCreateWithoutInscricoesInput>
+  connectOrCreate?: Prisma.EditalCreateOrConnectWithoutInscricoesInput
+  connect?: Prisma.EditalWhereUniqueInput
+}
+
+export type EditalUpdateOneRequiredWithoutInscricoesNestedInput = {
+  create?: Prisma.XOR<Prisma.EditalCreateWithoutInscricoesInput, Prisma.EditalUncheckedCreateWithoutInscricoesInput>
+  connectOrCreate?: Prisma.EditalCreateOrConnectWithoutInscricoesInput
+  upsert?: Prisma.EditalUpsertWithoutInscricoesInput
+  connect?: Prisma.EditalWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EditalUpdateToOneWithWhereWithoutInscricoesInput, Prisma.EditalUpdateWithoutInscricoesInput>, Prisma.EditalUncheckedUpdateWithoutInscricoesInput>
+}
+
 export type EditalCreateWithoutDisputasInput = {
   id?: string
   numero: string
@@ -716,6 +737,7 @@ export type EditalCreateWithoutDisputasInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -739,6 +761,7 @@ export type EditalUncheckedCreateWithoutDisputasInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutDisputasInput = {
@@ -776,6 +799,7 @@ export type EditalUpdateWithoutDisputasInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -799,6 +823,7 @@ export type EditalUncheckedUpdateWithoutDisputasInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutMensagensChatInput = {
@@ -820,6 +845,7 @@ export type EditalCreateWithoutMensagensChatInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -843,6 +869,7 @@ export type EditalUncheckedCreateWithoutMensagensChatInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutMensagensChatInput = {
@@ -880,6 +907,7 @@ export type EditalUpdateWithoutMensagensChatInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -903,6 +931,7 @@ export type EditalUncheckedUpdateWithoutMensagensChatInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutDocumentosInput = {
@@ -924,6 +953,7 @@ export type EditalCreateWithoutDocumentosInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -947,6 +977,7 @@ export type EditalUncheckedCreateWithoutDocumentosInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutDocumentosInput = {
@@ -984,6 +1015,7 @@ export type EditalUpdateWithoutDocumentosInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1007,6 +1039,7 @@ export type EditalUncheckedUpdateWithoutDocumentosInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutDocumentosObrigatoriosInput = {
@@ -1028,6 +1061,7 @@ export type EditalCreateWithoutDocumentosObrigatoriosInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1051,6 +1085,7 @@ export type EditalUncheckedCreateWithoutDocumentosObrigatoriosInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutDocumentosObrigatoriosInput = {
@@ -1088,6 +1123,7 @@ export type EditalUpdateWithoutDocumentosObrigatoriosInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1111,6 +1147,7 @@ export type EditalUncheckedUpdateWithoutDocumentosObrigatoriosInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutLotesInput = {
@@ -1132,6 +1169,7 @@ export type EditalCreateWithoutLotesInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1155,6 +1193,7 @@ export type EditalUncheckedCreateWithoutLotesInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutLotesInput = {
@@ -1192,6 +1231,7 @@ export type EditalUpdateWithoutLotesInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1215,6 +1255,7 @@ export type EditalUncheckedUpdateWithoutLotesInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutRecursosInput = {
@@ -1236,6 +1277,7 @@ export type EditalCreateWithoutRecursosInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1259,6 +1301,7 @@ export type EditalUncheckedCreateWithoutRecursosInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutRecursosInput = {
@@ -1296,6 +1339,7 @@ export type EditalUpdateWithoutRecursosInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1319,6 +1363,7 @@ export type EditalUncheckedUpdateWithoutRecursosInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutSancaoInput = {
@@ -1340,6 +1385,7 @@ export type EditalCreateWithoutSancaoInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1363,6 +1409,7 @@ export type EditalUncheckedCreateWithoutSancaoInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutSancaoInput = {
@@ -1400,6 +1447,7 @@ export type EditalUpdateWithoutSancaoInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1423,6 +1471,7 @@ export type EditalUncheckedUpdateWithoutSancaoInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutPrazoInput = {
@@ -1444,6 +1493,7 @@ export type EditalCreateWithoutPrazoInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1467,6 +1517,7 @@ export type EditalUncheckedCreateWithoutPrazoInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutPrazoInput = {
@@ -1504,6 +1555,7 @@ export type EditalUpdateWithoutPrazoInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1527,6 +1579,7 @@ export type EditalUncheckedUpdateWithoutPrazoInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateWithoutSecretariaInput = {
@@ -1549,6 +1602,7 @@ export type EditalCreateWithoutSecretariaInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
 }
 
 export type EditalUncheckedCreateWithoutSecretariaInput = {
@@ -1571,6 +1625,7 @@ export type EditalUncheckedCreateWithoutSecretariaInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutSecretariaInput = {
@@ -1635,6 +1690,7 @@ export type EditalCreateWithoutContratoInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutEditalInput
   secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
 }
 
@@ -1658,6 +1714,7 @@ export type EditalUncheckedCreateWithoutContratoInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutEditalInput
 }
 
 export type EditalCreateOrConnectWithoutContratoInput = {
@@ -1695,6 +1752,7 @@ export type EditalUpdateWithoutContratoInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
   secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
 }
 
@@ -1718,6 +1776,115 @@ export type EditalUncheckedUpdateWithoutContratoInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
+}
+
+export type EditalCreateWithoutInscricoesInput = {
+  id?: string
+  numero: string
+  objeto: string
+  modalidade?: $Enums.ModalidadeLicitação
+  criterioJulgamento?: $Enums.CritérioJulgamento
+  status: string
+  dataAbertura: Date | string
+  arquivoPdf?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  disputas?: Prisma.DisputaCreateNestedManyWithoutEditalInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioCreateNestedManyWithoutEditalInput
+  documentos?: Prisma.DocumentoCreateNestedManyWithoutEditalInput
+  lotes?: Prisma.LoteCreateNestedManyWithoutEditalInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutEditalInput
+  recursos?: Prisma.RecursoCreateNestedManyWithoutEditalInput
+  Sancao?: Prisma.SancaoCreateNestedManyWithoutEditalInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutEditalInput
+  secretaria?: Prisma.SecretariaCreateNestedOneWithoutEditaisInput
+}
+
+export type EditalUncheckedCreateWithoutInscricoesInput = {
+  id?: string
+  numero: string
+  objeto: string
+  modalidade?: $Enums.ModalidadeLicitação
+  criterioJulgamento?: $Enums.CritérioJulgamento
+  status: string
+  dataAbertura: Date | string
+  arquivoPdf?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  secretariaId?: string | null
+  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutEditalInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioUncheckedCreateNestedManyWithoutEditalInput
+  documentos?: Prisma.DocumentoUncheckedCreateNestedManyWithoutEditalInput
+  lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutEditalInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutEditalInput
+  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutEditalInput
+  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutEditalInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutEditalInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutEditalInput
+}
+
+export type EditalCreateOrConnectWithoutInscricoesInput = {
+  where: Prisma.EditalWhereUniqueInput
+  create: Prisma.XOR<Prisma.EditalCreateWithoutInscricoesInput, Prisma.EditalUncheckedCreateWithoutInscricoesInput>
+}
+
+export type EditalUpsertWithoutInscricoesInput = {
+  update: Prisma.XOR<Prisma.EditalUpdateWithoutInscricoesInput, Prisma.EditalUncheckedUpdateWithoutInscricoesInput>
+  create: Prisma.XOR<Prisma.EditalCreateWithoutInscricoesInput, Prisma.EditalUncheckedCreateWithoutInscricoesInput>
+  where?: Prisma.EditalWhereInput
+}
+
+export type EditalUpdateToOneWithWhereWithoutInscricoesInput = {
+  where?: Prisma.EditalWhereInput
+  data: Prisma.XOR<Prisma.EditalUpdateWithoutInscricoesInput, Prisma.EditalUncheckedUpdateWithoutInscricoesInput>
+}
+
+export type EditalUpdateWithoutInscricoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  objeto?: Prisma.StringFieldUpdateOperationsInput | string
+  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  disputas?: Prisma.DisputaUpdateManyWithoutEditalNestedInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioUpdateManyWithoutEditalNestedInput
+  documentos?: Prisma.DocumentoUpdateManyWithoutEditalNestedInput
+  lotes?: Prisma.LoteUpdateManyWithoutEditalNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutEditalNestedInput
+  recursos?: Prisma.RecursoUpdateManyWithoutEditalNestedInput
+  Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  secretaria?: Prisma.SecretariaUpdateOneWithoutEditaisNestedInput
+}
+
+export type EditalUncheckedUpdateWithoutInscricoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  numero?: Prisma.StringFieldUpdateOperationsInput | string
+  objeto?: Prisma.StringFieldUpdateOperationsInput | string
+  modalidade?: Prisma.EnumModalidadeLicitaçãoFieldUpdateOperationsInput | $Enums.ModalidadeLicitação
+  criterioJulgamento?: Prisma.EnumCritérioJulgamentoFieldUpdateOperationsInput | $Enums.CritérioJulgamento
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbertura?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arquivoPdf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  secretariaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutEditalNestedInput
+  documentosObrigatorios?: Prisma.DocumentoObrigatorioUncheckedUpdateManyWithoutEditalNestedInput
+  documentos?: Prisma.DocumentoUncheckedUpdateManyWithoutEditalNestedInput
+  lotes?: Prisma.LoteUncheckedUpdateManyWithoutEditalNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutEditalNestedInput
+  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutEditalNestedInput
+  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalCreateManySecretariaInput = {
@@ -1753,6 +1920,7 @@ export type EditalUpdateWithoutSecretariaInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalUncheckedUpdateWithoutSecretariaInput = {
@@ -1775,6 +1943,7 @@ export type EditalUncheckedUpdateWithoutSecretariaInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutEditalNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutEditalNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutEditalNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutEditalNestedInput
 }
 
 export type EditalUncheckedUpdateManyWithoutSecretariaInput = {
@@ -1805,6 +1974,7 @@ export type EditalCountOutputType = {
   Sancao: number
   Prazo: number
   Contrato: number
+  inscricoes: number
 }
 
 export type EditalCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1817,6 +1987,7 @@ export type EditalCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   Sancao?: boolean | EditalCountOutputTypeCountSancaoArgs
   Prazo?: boolean | EditalCountOutputTypeCountPrazoArgs
   Contrato?: boolean | EditalCountOutputTypeCountContratoArgs
+  inscricoes?: boolean | EditalCountOutputTypeCountInscricoesArgs
 }
 
 /**
@@ -1892,6 +2063,13 @@ export type EditalCountOutputTypeCountContratoArgs<ExtArgs extends runtime.Types
   where?: Prisma.ContratoWhereInput
 }
 
+/**
+ * EditalCountOutputType without action
+ */
+export type EditalCountOutputTypeCountInscricoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InscricaoWhereInput
+}
+
 
 export type EditalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1914,6 +2092,7 @@ export type EditalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   Sancao?: boolean | Prisma.Edital$SancaoArgs<ExtArgs>
   Prazo?: boolean | Prisma.Edital$PrazoArgs<ExtArgs>
   Contrato?: boolean | Prisma.Edital$ContratoArgs<ExtArgs>
+  inscricoes?: boolean | Prisma.Edital$inscricoesArgs<ExtArgs>
   secretaria?: boolean | Prisma.Edital$secretariaArgs<ExtArgs>
   _count?: boolean | Prisma.EditalCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["edital"]>
@@ -1973,6 +2152,7 @@ export type EditalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   Sancao?: boolean | Prisma.Edital$SancaoArgs<ExtArgs>
   Prazo?: boolean | Prisma.Edital$PrazoArgs<ExtArgs>
   Contrato?: boolean | Prisma.Edital$ContratoArgs<ExtArgs>
+  inscricoes?: boolean | Prisma.Edital$inscricoesArgs<ExtArgs>
   secretaria?: boolean | Prisma.Edital$secretariaArgs<ExtArgs>
   _count?: boolean | Prisma.EditalCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1995,6 +2175,7 @@ export type $EditalPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     Sancao: Prisma.$SancaoPayload<ExtArgs>[]
     Prazo: Prisma.$PrazoPayload<ExtArgs>[]
     Contrato: Prisma.$ContratoPayload<ExtArgs>[]
+    inscricoes: Prisma.$InscricaoPayload<ExtArgs>[]
     secretaria: Prisma.$SecretariaPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2412,6 +2593,7 @@ export interface Prisma__EditalClient<T, Null = never, ExtArgs extends runtime.T
   Sancao<T extends Prisma.Edital$SancaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$SancaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Prazo<T extends Prisma.Edital$PrazoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$PrazoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Contrato<T extends Prisma.Edital$ContratoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$ContratoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContratoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  inscricoes<T extends Prisma.Edital$inscricoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$inscricoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InscricaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   secretaria<T extends Prisma.Edital$secretariaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edital$secretariaArgs<ExtArgs>>): Prisma.Prisma__SecretariaClient<runtime.Types.Result.GetResult<Prisma.$SecretariaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3062,6 +3244,30 @@ export type Edital$ContratoArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.ContratoScalarFieldEnum | Prisma.ContratoScalarFieldEnum[]
+}
+
+/**
+ * Edital.inscricoes
+ */
+export type Edital$inscricoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Inscricao
+   */
+  select?: Prisma.InscricaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Inscricao
+   */
+  omit?: Prisma.InscricaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InscricaoInclude<ExtArgs> | null
+  where?: Prisma.InscricaoWhereInput
+  orderBy?: Prisma.InscricaoOrderByWithRelationInput | Prisma.InscricaoOrderByWithRelationInput[]
+  cursor?: Prisma.InscricaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InscricaoScalarFieldEnum | Prisma.InscricaoScalarFieldEnum[]
 }
 
 /**

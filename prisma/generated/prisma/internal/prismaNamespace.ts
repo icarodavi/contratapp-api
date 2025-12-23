@@ -404,7 +404,8 @@ export const ModelName = {
   Secretaria: 'Secretaria',
   CatalogoItem: 'CatalogoItem',
   Contrato: 'Contrato',
-  ContratoItem: 'ContratoItem'
+  ContratoItem: 'ContratoItem',
+  Inscricao: 'Inscricao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -420,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "edital" | "disputa" | "mensagemChat" | "lance" | "licitante" | "proposta" | "documento" | "documentoObrigatorio" | "documentoLicitante" | "sessao" | "logAtividade" | "lote" | "item" | "recurso" | "sancao" | "prazo" | "secretaria" | "catalogoItem" | "contrato" | "contratoItem"
+    modelProps: "usuario" | "edital" | "disputa" | "mensagemChat" | "lance" | "licitante" | "proposta" | "documento" | "documentoObrigatorio" | "documentoLicitante" | "sessao" | "logAtividade" | "lote" | "item" | "recurso" | "sancao" | "prazo" | "secretaria" | "catalogoItem" | "contrato" | "contratoItem" | "inscricao"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1978,6 +1979,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Inscricao: {
+      payload: Prisma.$InscricaoPayload<ExtArgs>
+      fields: Prisma.InscricaoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InscricaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InscricaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload>
+        }
+        findFirst: {
+          args: Prisma.InscricaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InscricaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload>
+        }
+        findMany: {
+          args: Prisma.InscricaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload>[]
+        }
+        create: {
+          args: Prisma.InscricaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload>
+        }
+        createMany: {
+          args: Prisma.InscricaoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InscricaoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload>[]
+        }
+        delete: {
+          args: Prisma.InscricaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload>
+        }
+        update: {
+          args: Prisma.InscricaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload>
+        }
+        deleteMany: {
+          args: Prisma.InscricaoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InscricaoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InscricaoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload>[]
+        }
+        upsert: {
+          args: Prisma.InscricaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InscricaoPayload>
+        }
+        aggregate: {
+          args: Prisma.InscricaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInscricao>
+        }
+        groupBy: {
+          args: Prisma.InscricaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InscricaoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InscricaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InscricaoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2379,6 +2454,18 @@ export const ContratoItemScalarFieldEnum = {
 export type ContratoItemScalarFieldEnum = (typeof ContratoItemScalarFieldEnum)[keyof typeof ContratoItemScalarFieldEnum]
 
 
+export const InscricaoScalarFieldEnum = {
+  id: 'id',
+  editalId: 'editalId',
+  licitanteId: 'licitanteId',
+  status: 'status',
+  dataInscricao: 'dataInscricao',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InscricaoScalarFieldEnum = (typeof InscricaoScalarFieldEnum)[keyof typeof InscricaoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2728,6 +2815,20 @@ export type ListEnumStatusContratoFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'StatusInscricao'
+ */
+export type EnumStatusInscricaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusInscricao'>
+    
+
+
+/**
+ * Reference to a field of type 'StatusInscricao[]'
+ */
+export type ListEnumStatusInscricaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusInscricao[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2856,6 +2957,7 @@ export type GlobalOmitConfig = {
   catalogoItem?: Prisma.CatalogoItemOmit
   contrato?: Prisma.ContratoOmit
   contratoItem?: Prisma.ContratoItemOmit
+  inscricao?: Prisma.InscricaoOmit
 }
 
 /* Types for Logging */

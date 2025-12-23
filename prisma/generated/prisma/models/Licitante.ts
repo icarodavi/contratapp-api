@@ -225,6 +225,7 @@ export type LicitanteWhereInput = {
   Sancao?: Prisma.SancaoListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
   Contrato?: Prisma.ContratoListRelationFilter
+  inscricoes?: Prisma.InscricaoListRelationFilter
 }
 
 export type LicitanteOrderByWithRelationInput = {
@@ -248,6 +249,7 @@ export type LicitanteOrderByWithRelationInput = {
   Sancao?: Prisma.SancaoOrderByRelationAggregateInput
   Prazo?: Prisma.PrazoOrderByRelationAggregateInput
   Contrato?: Prisma.ContratoOrderByRelationAggregateInput
+  inscricoes?: Prisma.InscricaoOrderByRelationAggregateInput
 }
 
 export type LicitanteWhereUniqueInput = Prisma.AtLeast<{
@@ -274,6 +276,7 @@ export type LicitanteWhereUniqueInput = Prisma.AtLeast<{
   Sancao?: Prisma.SancaoListRelationFilter
   Prazo?: Prisma.PrazoListRelationFilter
   Contrato?: Prisma.ContratoListRelationFilter
+  inscricoes?: Prisma.InscricaoListRelationFilter
 }, "id" | "cnpj">
 
 export type LicitanteOrderByWithAggregationInput = {
@@ -327,6 +330,7 @@ export type LicitanteCreateInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateInput = {
@@ -350,6 +354,7 @@ export type LicitanteUncheckedCreateInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUpdateInput = {
@@ -373,6 +378,7 @@ export type LicitanteUpdateInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateInput = {
@@ -396,6 +402,7 @@ export type LicitanteUncheckedUpdateInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateManyInput = {
@@ -678,6 +685,20 @@ export type LicitanteUpdateOneRequiredWithoutContratoNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutContratoInput, Prisma.LicitanteUpdateWithoutContratoInput>, Prisma.LicitanteUncheckedUpdateWithoutContratoInput>
 }
 
+export type LicitanteCreateNestedOneWithoutInscricoesInput = {
+  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutInscricoesInput, Prisma.LicitanteUncheckedCreateWithoutInscricoesInput>
+  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutInscricoesInput
+  connect?: Prisma.LicitanteWhereUniqueInput
+}
+
+export type LicitanteUpdateOneRequiredWithoutInscricoesNestedInput = {
+  create?: Prisma.XOR<Prisma.LicitanteCreateWithoutInscricoesInput, Prisma.LicitanteUncheckedCreateWithoutInscricoesInput>
+  connectOrCreate?: Prisma.LicitanteCreateOrConnectWithoutInscricoesInput
+  upsert?: Prisma.LicitanteUpsertWithoutInscricoesInput
+  connect?: Prisma.LicitanteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LicitanteUpdateToOneWithWhereWithoutInscricoesInput, Prisma.LicitanteUpdateWithoutInscricoesInput>, Prisma.LicitanteUncheckedUpdateWithoutInscricoesInput>
+}
+
 export type LicitanteCreateWithoutUsuarioInput = {
   id?: string
   razaoSocial: string
@@ -698,6 +719,7 @@ export type LicitanteCreateWithoutUsuarioInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutUsuarioInput = {
@@ -720,6 +742,7 @@ export type LicitanteUncheckedCreateWithoutUsuarioInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutUsuarioInput = {
@@ -758,6 +781,7 @@ export type LicitanteUpdateWithoutUsuarioInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutUsuarioInput = {
@@ -780,6 +804,7 @@ export type LicitanteUncheckedUpdateWithoutUsuarioInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutDisputasInput = {
@@ -802,6 +827,7 @@ export type LicitanteCreateWithoutDisputasInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutDisputasInput = {
@@ -824,6 +850,7 @@ export type LicitanteUncheckedCreateWithoutDisputasInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutDisputasInput = {
@@ -882,6 +909,7 @@ export type LicitanteCreateWithoutMensagensChatInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutMensagensChatInput = {
@@ -904,6 +932,7 @@ export type LicitanteUncheckedCreateWithoutMensagensChatInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutMensagensChatInput = {
@@ -942,6 +971,7 @@ export type LicitanteUpdateWithoutMensagensChatInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutMensagensChatInput = {
@@ -964,6 +994,7 @@ export type LicitanteUncheckedUpdateWithoutMensagensChatInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutLancesInput = {
@@ -986,6 +1017,7 @@ export type LicitanteCreateWithoutLancesInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutLancesInput = {
@@ -1008,6 +1040,7 @@ export type LicitanteUncheckedCreateWithoutLancesInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutLancesInput = {
@@ -1046,6 +1079,7 @@ export type LicitanteUpdateWithoutLancesInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutLancesInput = {
@@ -1068,6 +1102,7 @@ export type LicitanteUncheckedUpdateWithoutLancesInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutPropostasInput = {
@@ -1090,6 +1125,7 @@ export type LicitanteCreateWithoutPropostasInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutPropostasInput = {
@@ -1112,6 +1148,7 @@ export type LicitanteUncheckedCreateWithoutPropostasInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutPropostasInput = {
@@ -1150,6 +1187,7 @@ export type LicitanteUpdateWithoutPropostasInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutPropostasInput = {
@@ -1172,6 +1210,7 @@ export type LicitanteUncheckedUpdateWithoutPropostasInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutDocumentosInput = {
@@ -1194,6 +1233,7 @@ export type LicitanteCreateWithoutDocumentosInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutDocumentosInput = {
@@ -1216,6 +1256,7 @@ export type LicitanteUncheckedCreateWithoutDocumentosInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutDocumentosInput = {
@@ -1254,6 +1295,7 @@ export type LicitanteUpdateWithoutDocumentosInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutDocumentosInput = {
@@ -1276,6 +1318,7 @@ export type LicitanteUncheckedUpdateWithoutDocumentosInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutSessoesInput = {
@@ -1298,6 +1341,7 @@ export type LicitanteCreateWithoutSessoesInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutSessoesInput = {
@@ -1320,6 +1364,7 @@ export type LicitanteUncheckedCreateWithoutSessoesInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutSessoesInput = {
@@ -1358,6 +1403,7 @@ export type LicitanteUpdateWithoutSessoesInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutSessoesInput = {
@@ -1380,6 +1426,7 @@ export type LicitanteUncheckedUpdateWithoutSessoesInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutRecursosInput = {
@@ -1402,6 +1449,7 @@ export type LicitanteCreateWithoutRecursosInput = {
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutRecursosInput = {
@@ -1424,6 +1472,7 @@ export type LicitanteUncheckedCreateWithoutRecursosInput = {
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutRecursosInput = {
@@ -1462,6 +1511,7 @@ export type LicitanteUpdateWithoutRecursosInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutRecursosInput = {
@@ -1484,6 +1534,7 @@ export type LicitanteUncheckedUpdateWithoutRecursosInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutSancaoInput = {
@@ -1506,6 +1557,7 @@ export type LicitanteCreateWithoutSancaoInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutSancaoInput = {
@@ -1528,6 +1580,7 @@ export type LicitanteUncheckedCreateWithoutSancaoInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutSancaoInput = {
@@ -1566,6 +1619,7 @@ export type LicitanteUpdateWithoutSancaoInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutSancaoInput = {
@@ -1588,6 +1642,7 @@ export type LicitanteUncheckedUpdateWithoutSancaoInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutPrazoInput = {
@@ -1610,6 +1665,7 @@ export type LicitanteCreateWithoutPrazoInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutPrazoInput = {
@@ -1632,6 +1688,7 @@ export type LicitanteUncheckedCreateWithoutPrazoInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutPrazoInput = {
@@ -1670,6 +1727,7 @@ export type LicitanteUpdateWithoutPrazoInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutPrazoInput = {
@@ -1692,6 +1750,7 @@ export type LicitanteUncheckedUpdateWithoutPrazoInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteCreateWithoutContratoInput = {
@@ -1714,6 +1773,7 @@ export type LicitanteCreateWithoutContratoInput = {
   recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteUncheckedCreateWithoutContratoInput = {
@@ -1736,6 +1796,7 @@ export type LicitanteUncheckedCreateWithoutContratoInput = {
   recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
   Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
   Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutLicitanteInput
 }
 
 export type LicitanteCreateOrConnectWithoutContratoInput = {
@@ -1774,6 +1835,7 @@ export type LicitanteUpdateWithoutContratoInput = {
   recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutContratoInput = {
@@ -1796,6 +1858,115 @@ export type LicitanteUncheckedUpdateWithoutContratoInput = {
   recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteCreateWithoutInscricoesInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioCreateNestedOneWithoutLicitanteInput
+  propostas?: Prisma.PropostaCreateNestedManyWithoutLicitanteInput
+  lances?: Prisma.LanceCreateNestedManyWithoutLicitanteInput
+  documentos?: Prisma.DocumentoLicitanteCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteUncheckedCreateWithoutInscricoesInput = {
+  id?: string
+  razaoSocial: string
+  cnpj: string
+  tipoEmpresa: $Enums.TipoEmpresa
+  email: string
+  telefone: string
+  endereco: string
+  isMeEpp?: boolean
+  observacoes?: string | null
+  usuario?: Prisma.UsuarioUncheckedCreateNestedOneWithoutLicitanteInput
+  propostas?: Prisma.PropostaUncheckedCreateNestedManyWithoutLicitanteInput
+  lances?: Prisma.LanceUncheckedCreateNestedManyWithoutLicitanteInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedCreateNestedManyWithoutLicitanteInput
+  sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutLicitanteInput
+  mensagensChat?: Prisma.MensagemChatUncheckedCreateNestedManyWithoutLicitanteInput
+  disputas?: Prisma.DisputaUncheckedCreateNestedManyWithoutLicitantesInput
+  recursos?: Prisma.RecursoUncheckedCreateNestedManyWithoutLicitanteInput
+  Sancao?: Prisma.SancaoUncheckedCreateNestedManyWithoutLicitanteInput
+  Prazo?: Prisma.PrazoUncheckedCreateNestedManyWithoutLicitanteInput
+  Contrato?: Prisma.ContratoUncheckedCreateNestedManyWithoutLicitanteInput
+}
+
+export type LicitanteCreateOrConnectWithoutInscricoesInput = {
+  where: Prisma.LicitanteWhereUniqueInput
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutInscricoesInput, Prisma.LicitanteUncheckedCreateWithoutInscricoesInput>
+}
+
+export type LicitanteUpsertWithoutInscricoesInput = {
+  update: Prisma.XOR<Prisma.LicitanteUpdateWithoutInscricoesInput, Prisma.LicitanteUncheckedUpdateWithoutInscricoesInput>
+  create: Prisma.XOR<Prisma.LicitanteCreateWithoutInscricoesInput, Prisma.LicitanteUncheckedCreateWithoutInscricoesInput>
+  where?: Prisma.LicitanteWhereInput
+}
+
+export type LicitanteUpdateToOneWithWhereWithoutInscricoesInput = {
+  where?: Prisma.LicitanteWhereInput
+  data: Prisma.XOR<Prisma.LicitanteUpdateWithoutInscricoesInput, Prisma.LicitanteUncheckedUpdateWithoutInscricoesInput>
+}
+
+export type LicitanteUpdateWithoutInscricoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUpdateOneWithoutLicitanteNestedInput
+  propostas?: Prisma.PropostaUpdateManyWithoutLicitanteNestedInput
+  lances?: Prisma.LanceUpdateManyWithoutLicitanteNestedInput
+  documentos?: Prisma.DocumentoLicitanteUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+}
+
+export type LicitanteUncheckedUpdateWithoutInscricoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  razaoSocial?: Prisma.StringFieldUpdateOperationsInput | string
+  cnpj?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoEmpresa?: Prisma.EnumTipoEmpresaFieldUpdateOperationsInput | $Enums.TipoEmpresa
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  isMeEpp?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuario?: Prisma.UsuarioUncheckedUpdateOneWithoutLicitanteNestedInput
+  propostas?: Prisma.PropostaUncheckedUpdateManyWithoutLicitanteNestedInput
+  lances?: Prisma.LanceUncheckedUpdateManyWithoutLicitanteNestedInput
+  documentos?: Prisma.DocumentoLicitanteUncheckedUpdateManyWithoutLicitanteNestedInput
+  sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  mensagensChat?: Prisma.MensagemChatUncheckedUpdateManyWithoutLicitanteNestedInput
+  disputas?: Prisma.DisputaUncheckedUpdateManyWithoutLicitantesNestedInput
+  recursos?: Prisma.RecursoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
+  Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUpdateWithoutDisputasInput = {
@@ -1818,6 +1989,7 @@ export type LicitanteUpdateWithoutDisputasInput = {
   Sancao?: Prisma.SancaoUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateWithoutDisputasInput = {
@@ -1840,6 +2012,7 @@ export type LicitanteUncheckedUpdateWithoutDisputasInput = {
   Sancao?: Prisma.SancaoUncheckedUpdateManyWithoutLicitanteNestedInput
   Prazo?: Prisma.PrazoUncheckedUpdateManyWithoutLicitanteNestedInput
   Contrato?: Prisma.ContratoUncheckedUpdateManyWithoutLicitanteNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutLicitanteNestedInput
 }
 
 export type LicitanteUncheckedUpdateManyWithoutDisputasInput = {
@@ -1870,6 +2043,7 @@ export type LicitanteCountOutputType = {
   Sancao: number
   Prazo: number
   Contrato: number
+  inscricoes: number
 }
 
 export type LicitanteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1883,6 +2057,7 @@ export type LicitanteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensi
   Sancao?: boolean | LicitanteCountOutputTypeCountSancaoArgs
   Prazo?: boolean | LicitanteCountOutputTypeCountPrazoArgs
   Contrato?: boolean | LicitanteCountOutputTypeCountContratoArgs
+  inscricoes?: boolean | LicitanteCountOutputTypeCountInscricoesArgs
 }
 
 /**
@@ -1965,6 +2140,13 @@ export type LicitanteCountOutputTypeCountContratoArgs<ExtArgs extends runtime.Ty
   where?: Prisma.ContratoWhereInput
 }
 
+/**
+ * LicitanteCountOutputType without action
+ */
+export type LicitanteCountOutputTypeCountInscricoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InscricaoWhereInput
+}
+
 
 export type LicitanteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1987,6 +2169,7 @@ export type LicitanteSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   Sancao?: boolean | Prisma.Licitante$SancaoArgs<ExtArgs>
   Prazo?: boolean | Prisma.Licitante$PrazoArgs<ExtArgs>
   Contrato?: boolean | Prisma.Licitante$ContratoArgs<ExtArgs>
+  inscricoes?: boolean | Prisma.Licitante$inscricoesArgs<ExtArgs>
   _count?: boolean | Prisma.LicitanteCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["licitante"]>
 
@@ -2039,6 +2222,7 @@ export type LicitanteInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   Sancao?: boolean | Prisma.Licitante$SancaoArgs<ExtArgs>
   Prazo?: boolean | Prisma.Licitante$PrazoArgs<ExtArgs>
   Contrato?: boolean | Prisma.Licitante$ContratoArgs<ExtArgs>
+  inscricoes?: boolean | Prisma.Licitante$inscricoesArgs<ExtArgs>
   _count?: boolean | Prisma.LicitanteCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LicitanteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2058,6 +2242,7 @@ export type $LicitantePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     Sancao: Prisma.$SancaoPayload<ExtArgs>[]
     Prazo: Prisma.$PrazoPayload<ExtArgs>[]
     Contrato: Prisma.$ContratoPayload<ExtArgs>[]
+    inscricoes: Prisma.$InscricaoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2474,6 +2659,7 @@ export interface Prisma__LicitanteClient<T, Null = never, ExtArgs extends runtim
   Sancao<T extends Prisma.Licitante$SancaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Licitante$SancaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SancaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Prazo<T extends Prisma.Licitante$PrazoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Licitante$PrazoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PrazoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Contrato<T extends Prisma.Licitante$ContratoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Licitante$ContratoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContratoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  inscricoes<T extends Prisma.Licitante$inscricoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Licitante$inscricoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InscricaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3156,6 +3342,30 @@ export type Licitante$ContratoArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ContratoScalarFieldEnum | Prisma.ContratoScalarFieldEnum[]
+}
+
+/**
+ * Licitante.inscricoes
+ */
+export type Licitante$inscricoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Inscricao
+   */
+  select?: Prisma.InscricaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Inscricao
+   */
+  omit?: Prisma.InscricaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InscricaoInclude<ExtArgs> | null
+  where?: Prisma.InscricaoWhereInput
+  orderBy?: Prisma.InscricaoOrderByWithRelationInput | Prisma.InscricaoOrderByWithRelationInput[]
+  cursor?: Prisma.InscricaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InscricaoScalarFieldEnum | Prisma.InscricaoScalarFieldEnum[]
 }
 
 /**

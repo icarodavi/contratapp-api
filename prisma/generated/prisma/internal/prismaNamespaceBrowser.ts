@@ -71,7 +71,8 @@ export const ModelName = {
   Secretaria: 'Secretaria',
   CatalogoItem: 'CatalogoItem',
   Contrato: 'Contrato',
-  ContratoItem: 'ContratoItem'
+  ContratoItem: 'ContratoItem',
+  Inscricao: 'Inscricao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -450,6 +451,18 @@ export const ContratoItemScalarFieldEnum = {
 } as const
 
 export type ContratoItemScalarFieldEnum = (typeof ContratoItemScalarFieldEnum)[keyof typeof ContratoItemScalarFieldEnum]
+
+
+export const InscricaoScalarFieldEnum = {
+  id: 'id',
+  editalId: 'editalId',
+  licitanteId: 'licitanteId',
+  status: 'status',
+  dataInscricao: 'dataInscricao',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InscricaoScalarFieldEnum = (typeof InscricaoScalarFieldEnum)[keyof typeof InscricaoScalarFieldEnum]
 
 
 export const SortOrder = {

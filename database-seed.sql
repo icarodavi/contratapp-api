@@ -133,3 +133,10 @@ INSERT INTO "MensagemChat" ("id", "editalId", "autorId", "tipoAutor", "conteudo"
 
 INSERT INTO "LogAtividade" ("id", "tipo", "acao", "detalhes", "data", "ip", "userAgent", "sessaoId", "hashSessao", "status", "nivel", "modulo", "entidadeId", "entidadeTipo", "metadata") VALUES
 ('gg0e8400-e29b-41d4-a716-446655440001', 'DISPUTA_ABERTA', 'Abertura', 'Disputa iniciada', NOW(), '127.0.0.1', 'Chrome', 'sess1', 'hash1', 'SUCESSO', 'INFO', 'DISPUTA', '770e8400-e29b-41d4-a716-446655440001', 'DISPUTA', '{}');
+
+-- BLOCO 14: Inscrições
+-- =====================================================
+INSERT INTO "inscricoes" ("id", "editalId", "licitanteId", "status", "dataInscricao", "updatedAt") VALUES
+('insc1-edital1-lic1', '660e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440001', 'HABILITADO', NOW(), NOW()),
+('insc2-edital1-lic2', '660e8400-e29b-41d4-a716-446655440001', '880e8400-e29b-41d4-a716-446655440002', 'PENDENTE', NOW(), NOW());
+

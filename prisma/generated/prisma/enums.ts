@@ -19,6 +19,16 @@ export const DisputaStatus = {
 export type DisputaStatus = (typeof DisputaStatus)[keyof typeof DisputaStatus]
 
 
+export const StatusInscricao = {
+  PENDENTE: 'PENDENTE',
+  DOCUMENTACAO_OK: 'DOCUMENTACAO_OK',
+  HABILITADO: 'HABILITADO',
+  INABILITADO: 'INABILITADO'
+} as const
+
+export type StatusInscricao = (typeof StatusInscricao)[keyof typeof StatusInscricao]
+
+
 export const TipoEmpresa = {
   ME: 'ME',
   EPP: 'EPP',
