@@ -4,6 +4,8 @@ import { CreateLicitanteDto } from './dto/create-licitante.dto';
 import { UpdateLicitanteDto } from './dto/update-licitante.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { DisputaStatus } from '@prisma/client';
+import { PaginationDto } from '../common/dto/pagination.dto';
+import { PaginatedResult } from '../common/interfaces/paginated-result.interface';
 
 @ApiTags('Licitantes')
 @Injectable()
@@ -52,12 +54,41 @@ export class LicitanteService {
         });
     }
 
-    async findAll() {
-        return this.prisma.licitante.findMany({
-            include: {
-                usuario: true
-            }
-        });
+    async findAll(paginationDto: PaginationDto = new PaginationDto()): Promise<PaginatedResult<any>> {
+        const { page = 1, limit = 10, orderBy, orderDirection, search } = paginationDto;
+        const skip = (page - 1) * limit;
+
+        const where: any = {};
+        if (search) {
+            where.OR = [
+                { razaoSocial: { contains: search, mode: 'insensitive' } },
+                { cnpj: { contains: search, mode: 'insensitive' } },
+                { usuario: { nome: { contains: search, mode: 'insensitive' } } },
+            ];
+        }
+
+        const [total, data] = await Promise.all([
+            this.prisma.licitante.count({ where }),
+            this.prisma.licitante.findMany({
+                where,
+                skip,
+                take: limit,
+                orderBy: orderBy ? { [orderBy]: orderDirection } : { razaoSocial: 'asc' },
+                include: {
+                    usuario: true
+                }
+            }),
+        ]);
+
+        return {
+            data,
+            meta: {
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
     }
 
     async findOne(id: string) {

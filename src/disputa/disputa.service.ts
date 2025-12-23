@@ -5,6 +5,8 @@ import { UpdateDisputaDto } from './dto/update-disputa.dto';
 import { DisputaStatus } from '@prisma/client';
 import { ApiTags } from '@nestjs/swagger';
 import { ChatGateway } from '../chat/chat.gateway';
+import { PaginationDto } from '../common/dto/pagination.dto';
+import { PaginatedResult } from '../common/interfaces/paginated-result.interface';
 
 @ApiTags('Disputas')
 @Injectable()
@@ -37,14 +39,42 @@ export class DisputaService {
         });
     }
 
-    async findAll() {
-        return this.prisma.disputa.findMany({
-            include: {
-                edital: true,
-                propostas: true,
-                documentos: true
-            }
-        });
+    async findAll(paginationDto: PaginationDto = new PaginationDto()): Promise<PaginatedResult<any>> {
+        const { page = 1, limit = 10, orderBy, orderDirection, search } = paginationDto;
+        const skip = (page - 1) * limit;
+
+        const where: any = {};
+        if (search) {
+            where.OR = [
+                { edital: { numero: { contains: search, mode: 'insensitive' } } },
+                { edital: { objeto: { contains: search, mode: 'insensitive' } } },
+            ];
+        }
+
+        const [total, data] = await Promise.all([
+            this.prisma.disputa.count({ where }),
+            this.prisma.disputa.findMany({
+                where,
+                skip,
+                take: limit,
+                orderBy: orderBy ? { [orderBy]: orderDirection } : { edital: { createdAt: 'desc' } },
+                include: {
+                    edital: true,
+                    propostas: true,
+                    documentos: true
+                }
+            }),
+        ]);
+
+        return {
+            data,
+            meta: {
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
     }
 
     async findOne(id: string) {

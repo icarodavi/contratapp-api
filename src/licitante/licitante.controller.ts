@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards, Query } from '@nestjs/common';
 import { LicitanteService } from './licitante.service';
 import { CreateLicitanteDto } from './dto/create-licitante.dto';
 import { UpdateLicitanteDto } from './dto/update-licitante.dto';
 import { ApiOperation, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { PaginationDto } from '../common/dto/pagination.dto';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
@@ -31,8 +32,8 @@ export class LicitanteController {
     @ApiOperation({ summary: 'Listar todos os licitantes' })
     @ApiResponse({ status: 200, description: 'Lista de licitantes retornada com sucesso' })
     @ApiResponse({ status: 401, description: 'Não autorizado' })
-    findAll() {
-        return this.licitanteService.findAll();
+    findAll(@Query() query: PaginationDto) {
+        return this.licitanteService.findAll(query);
     }
 
     @Get(':id')

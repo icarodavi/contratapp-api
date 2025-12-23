@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, UseGuards, Query } from '@nestjs/common';
 import { EditalService } from './edital.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
+import { PaginationDto } from '../common/dto/pagination.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
@@ -28,8 +29,8 @@ export class EditalController {
     @Get()
     @ApiOperation({ summary: 'Listar todos os editais' })
     @ApiResponse({ status: 200, description: 'Lista de editais retornada com sucesso' })
-    findAll() {
-        return this.editalService.findAll();
+    findAll(@Query() query: PaginationDto) {
+        return this.editalService.findAll(query);
     }
 
     @Get(':id')

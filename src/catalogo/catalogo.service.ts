@@ -2,6 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../database/database.service';
 import { CreateCatalogoItemDto } from './dto/create-catalogo-item.dto';
 import { UpdateCatalogoItemDto } from './dto/update-catalogo-item.dto';
+import { PaginationDto } from '../common/dto/pagination.dto';
+import { PaginatedResult } from '../common/interfaces/paginated-result.interface';
+import { CatalogoItem } from '@prisma/client';
 
 @Injectable()
 export class CatalogoService {
@@ -24,7 +27,10 @@ export class CatalogoService {
         });
     }
 
-    async findAll(search?: string) {
+    async findAll(paginationDto: PaginationDto): Promise<PaginatedResult<CatalogoItem>> {
+        const { page = 1, limit = 10, search, orderBy, orderDirection } = paginationDto;
+        const skip = (page - 1) * limit;
+
         const where: any = {};
         if (search) {
             where.OR = [
@@ -33,10 +39,27 @@ export class CatalogoService {
             ];
         }
 
-        return this.prisma.catalogoItem.findMany({
-            where,
-            orderBy: { descricao: 'asc' },
-        });
+        const [data, total] = await Promise.all([
+            this.prisma.catalogoItem.findMany({
+                where,
+                skip,
+                take: limit,
+                orderBy: orderBy
+                    ? { [orderBy]: orderDirection }
+                    : { descricao: 'asc' },
+            }),
+            this.prisma.catalogoItem.count({ where }),
+        ]);
+
+        return {
+            data,
+            meta: {
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
     }
 
     async findOne(id: string) {

@@ -4,6 +4,8 @@ import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
+import { PaginationDto } from '../common/dto/pagination.dto';
+import { PaginatedResult } from '../common/interfaces/paginated-result.interface';
 
 @ApiTags('Editais')
 @Injectable()
@@ -71,16 +73,44 @@ export class EditalService {
         }
     }
 
-    async findAll() {
-        return this.prisma.edital.findMany({
-            include: {
-                disputas: true,
-                documentosObrigatorios: true,
-                documentos: true,
-                lotes: { include: { itens: true } },
-                secretaria: true,
+    async findAll(paginationDto: PaginationDto = new PaginationDto()): Promise<PaginatedResult<any>> {
+        const { page = 1, limit = 10, orderBy, orderDirection, search } = paginationDto;
+        const skip = (page - 1) * limit;
+
+        const where: any = {};
+        if (search) {
+            where.OR = [
+                { objeto: { contains: search, mode: 'insensitive' } },
+                { numero: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+
+        const [total, data] = await Promise.all([
+            this.prisma.edital.count({ where }),
+            this.prisma.edital.findMany({
+                where,
+                skip,
+                take: limit,
+                orderBy: orderBy ? { [orderBy]: orderDirection } : { createdAt: 'desc' },
+                include: {
+                    disputas: true,
+                    documentosObrigatorios: true,
+                    documentos: true,
+                    lotes: { include: { itens: true } },
+                    secretaria: true,
+                },
+            }),
+        ]);
+
+        return {
+            data,
+            meta: {
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
             },
-        });
+        };
     }
 
     async findOne(id: string) {

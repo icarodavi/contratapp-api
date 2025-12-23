@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } f
 import { CatalogoService } from './catalogo.service';
 import { CreateCatalogoItemDto } from './dto/create-catalogo-item.dto';
 import { UpdateCatalogoItemDto } from './dto/update-catalogo-item.dto';
+import { PaginationDto } from '../common/dto/pagination.dto';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
@@ -21,9 +22,8 @@ export class CatalogoController {
 
     @Get()
     @ApiOperation({ summary: 'Listar itens do catálogo' })
-    @ApiQuery({ name: 'search', required: false })
-    findAll(@Query('search') search?: string) {
-        return this.catalogoService.findAll(search);
+    findAll(@Query() query: PaginationDto) {
+        return this.catalogoService.findAll(query);
     }
 
     @Get(':id')

@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards, Patch, Query } from '@nestjs/common';
 import { DisputaService } from './disputa.service';
 import { CreateDisputaDto } from './dto/create-disputa.dto';
 import { UpdateDisputaDto } from './dto/update-disputa.dto';
+import { PaginationDto } from '../common/dto/pagination.dto';
 import { ApiOperation, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
@@ -30,8 +31,8 @@ export class DisputaController {
     @ApiOperation({ summary: 'Listar todas as disputas' })
     @ApiResponse({ status: 200, description: 'Lista de disputas retornada com sucesso' })
     @ApiResponse({ status: 401, description: 'Não autorizado' })
-    findAll() {
-        return this.disputaService.findAll();
+    findAll(@Query() query: PaginationDto) {
+        return this.disputaService.findAll(query);
     }
 
     @Get(':id')
