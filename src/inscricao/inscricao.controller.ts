@@ -54,6 +54,15 @@ export class InscricaoController {
         return null;
     }
 
+    @Patch('finish/:editalId')
+    @Roles(PerfilUsuario.LICITANTE)
+    async finishInscricao(@Request() req, @Param('editalId') editalId: string) {
+        if (!req.user.licitanteId) {
+            throw new ForbiddenException('Usuário não vinculado a um licitante');
+        }
+        return this.inscricaoService.finishInscricao(editalId, req.user.licitanteId);
+    }
+
     @Patch(':id/status')
     @Roles(PerfilUsuario.ADMIN, PerfilUsuario.PREGOEIRO)
     updateStatus(@Param('id') id: string, @Body() updateDto: UpdateInscricaoStatusDto) {

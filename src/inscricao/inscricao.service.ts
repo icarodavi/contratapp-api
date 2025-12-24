@@ -79,4 +79,23 @@ export class InscricaoService {
         });
     }
 
+    async finishInscricao(editalId: string, licitanteId: string) {
+        const inscricao = await this.prisma.inscricao.findUnique({
+            where: {
+                editalId_licitanteId: {
+                    editalId,
+                    licitanteId,
+                },
+            },
+        });
+
+        if (!inscricao) {
+            throw new NotFoundException('Inscrição não encontrada');
+        }
+
+        return this.prisma.inscricao.update({
+            where: { id: inscricao.id },
+            data: { status: StatusInscricao.DOCUMENTACAO_OK },
+        });
+    }
 }

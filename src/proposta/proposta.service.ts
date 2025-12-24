@@ -9,16 +9,18 @@ export class PropostaService {
 
     async create(createPropostaDto: CreatePropostaDto) {
         // Verifica se a disputa existe e está ativa
+        // Verifica se a disputa existe e se o edital está aberto
         const disputa = await this.prisma.disputa.findUnique({
             where: { id: createPropostaDto.disputaId },
+            include: { edital: true },
         });
 
         if (!disputa) {
             throw new NotFoundException('Disputa não encontrada');
         }
 
-        if (disputa.status !== DisputaStatus.ABERTA) {
-            throw new BadRequestException('Disputa não está aberta');
+        if (disputa.edital.status !== 'ABERTO') {
+            throw new BadRequestException('Edital não está aberto para recebimento de propostas');
         }
 
         // Verifica se o licitante existe
@@ -56,7 +58,16 @@ export class PropostaService {
         });
 
         if (propostaExistente) {
-            throw new BadRequestException('Já existe uma proposta para este item');
+            // Se já existe, atualizamos a proposta existente (Upsert logic for initial proposal)
+            return this.prisma.proposta.update({
+                where: { id: propostaExistente.id },
+                data: {
+                    valorCentavos: createPropostaDto.valorCentavos,
+                    updatedBy: createPropostaDto.createdBy,
+                    arquivo: createPropostaDto.arquivo,
+                    observacao: createPropostaDto.observacao
+                }
+            });
         }
 
         return this.prisma.proposta.create({
