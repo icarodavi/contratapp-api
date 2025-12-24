@@ -131,9 +131,16 @@ export class LicitanteService {
     async findByEdital(editalId: string) {
         return this.prisma.licitante.findMany({
             where: {
-                disputas: {
+                inscricoes: {
                     some: {
-                        editalId: editalId
+                        editalId: editalId,
+                        status: {
+                            in: ['DOCUMENTACAO_OK', 'HABILITADO'] // Optionally filter by status if needed, or just remove status filter to get all applicants.
+                            // User said "licitantes inscritos", usually implies valid ones. But let's be broad first or filter by "DOCUMENTACAO_OK".
+                            // The user previous request was setting status to DOCUMENTACAO_OK.
+                            // Let's include 'PENDENTE' just in case? No, usually contracts are for valid bidders.
+                            // Safe bet: just check existence of inscricao for now, or maybe DOCUMENTACAO_OK + HABILITADO.
+                        }
                     }
                 }
             },
