@@ -9,7 +9,7 @@ export class CreatePropostaDto {
     @IsNotEmpty()
     licitanteId: string;
 
-    @IsUUID()
+    @IsString()
     @IsNotEmpty()
     itemId: string;
 

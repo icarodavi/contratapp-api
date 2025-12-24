@@ -7,6 +7,7 @@ import { UpdateDocumentoDto } from './dto/update-documento.dto';
 import { DocumentoDto } from './dto/documento.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as crypto from 'crypto';
+import * as fs from 'fs';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
@@ -135,7 +136,9 @@ export class DocumentoController {
             throw new Error('Tipo de documento não exigido para este edital');
         }
         // Calcula hash do arquivo
-        const hash = crypto.createHash('sha256').update(file.buffer).digest('hex');
+        // Como estamos usando diskStorage, file.buffer é undefined. Precisamos ler o arquivo.
+        const fileBuffer = fs.readFileSync(file.path);
+        const hash = crypto.createHash('sha256').update(fileBuffer).digest('hex');
         // Monta DTO para salvar no banco
         const createDto: CreateDocumentoLicitanteDto = {
             disputaId,

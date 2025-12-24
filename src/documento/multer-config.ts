@@ -15,8 +15,9 @@ export const multerConfig = {
             }
         },
         filename: (req: Request, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
-            const { versao } = req.body;
-            cb(null, `${versao}.pdf`);
+            const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+            const originalNameSanitized = file.originalname.replace(/[^a-zA-Z0-9]/g, '_');
+            cb(null, `${uniqueSuffix}-${originalNameSanitized}.pdf`);
         }
     }),
     fileFilter: (req: Request, file: Express.Multer.File, cb: (error: Error | null, acceptFile: boolean) => void) => {

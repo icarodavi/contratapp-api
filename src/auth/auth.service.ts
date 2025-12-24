@@ -65,6 +65,7 @@ export class AuthService {
                 email: usuario.email,
                 perfil: usuario.perfil,
                 foto: usuario.foto,
+                licitanteId: usuario.licitante?.id,
                 licitante: usuario.licitante,
                 preferencias: usuario.preferencias || { theme: "blue", mode: "light" },
             },
