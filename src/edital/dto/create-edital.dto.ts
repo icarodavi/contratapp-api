@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsNotEmpty, IsOptional, IsString, IsEnum, IsArray, IsNumber, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
+import { ModalidadeLicitação, CritérioJulgamento } from '@generated/prisma/client';
 import { CreateDocumentoObrigatorioDto } from '../../documento-obrigatorio/dto/create-documento-obrigatorio.dto';
 
 export class CreateItemSimpleDto {

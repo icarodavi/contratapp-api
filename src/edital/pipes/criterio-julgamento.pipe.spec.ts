@@ -1,6 +1,6 @@
 import { CritérioJulgamentoPipe } from './criterio-julgamento.pipe';
 import { BadRequestException } from '@nestjs/common';
-import { CritérioJulgamento } from '@prisma/client';
+import { CritérioJulgamento } from '@generated/prisma/client';
 
 describe('CritérioJulgamentoPipe', () => {
     let pipe: CritérioJulgamentoPipe;

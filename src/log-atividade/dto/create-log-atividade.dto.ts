@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { TipoAtividade } from '@prisma/client';
+import { TipoAtividade } from '@generated/prisma/client';
 import { IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID, IsObject } from 'class-validator';
 
 export class CreateLogAtividadeDto {

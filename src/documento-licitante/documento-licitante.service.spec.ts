@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DocumentoLicitanteService } from './documento-licitante.service';
 import { PrismaService } from '../database/database.service';
 import { NotFoundException } from '@nestjs/common';
-import { TipoDocumento, StatusDocumento } from '@prisma/client';
+import { TipoDocumento, StatusDocumento } from '@generated/prisma/client';
 
 const mockPrismaService = {
     documentoLicitante: {

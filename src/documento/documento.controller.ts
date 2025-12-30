@@ -13,7 +13,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { LogAtividadeService } from '../log-atividade/log-atividade.service';
 import { DocumentoObrigatorioService } from '../documento-obrigatorio/documento-obrigatorio.service';
-import { TipoAtividade, PerfilUsuario } from '@prisma/client';
+import { TipoAtividade, PerfilUsuario } from '@generated/prisma/client';
 import { CreateDocumentoLicitanteDto } from '../documento-licitante/dto/create-documento-licitante.dto';
 import { multerConfig } from './multer-config';
 

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { StatusDocumento } from '@prisma/client';
+import { StatusDocumento } from '@generated/prisma/client';
 import { IsEnum, IsOptional, IsString, IsBoolean, IsDateString } from 'class-validator';
 
 export class UpdateDocumentoLicitanteDto {

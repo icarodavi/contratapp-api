@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { TipoDocumento } from '@prisma/client';
+import { TipoDocumento } from '@generated/prisma/client';
 import { IsString, IsNotEmpty, IsEnum, IsOptional, IsInt } from 'class-validator';
 
 export class CreateDocumentoLicitanteDto {

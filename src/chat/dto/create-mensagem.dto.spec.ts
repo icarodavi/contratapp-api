@@ -1,5 +1,5 @@
 import { CreateMensagemDto } from './create-mensagem.dto';
-import { TipoAutorMensagem } from '@prisma/client';
+import { TipoAutorMensagem } from '@generated/prisma/client';
 
 describe('CreateMensagemDto', () => {
     it('should be defined', () => {

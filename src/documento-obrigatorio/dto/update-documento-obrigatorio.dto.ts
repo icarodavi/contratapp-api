@@ -1,6 +1,6 @@
 import { IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { TipoDocumento } from '@prisma/client';
+import { TipoDocumento } from '@generated/prisma/client';
 
 export class UpdateDocumentoObrigatorioDto {
     @ApiPropertyOptional({

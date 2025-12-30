@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@/database/database.service';
 import { CreateDocumentoLicitanteDto } from './dto/create-documento-licitante.dto';
 import { UpdateDocumentoLicitanteDto } from './dto/update-documento-licitante.dto';
-import { StatusDocumento } from '@prisma/client';
+import { StatusDocumento } from '@generated/prisma/client';
 
 @Injectable()
 export class DocumentoLicitanteService {

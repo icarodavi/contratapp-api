@@ -5,7 +5,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 
-import { PerfilUsuario } from '@prisma/client';
+import { PerfilUsuario } from '@generated/prisma/client';
 import { RegistrarLanceDto } from './dto/registrar-lance.dto';
 
 @ApiTags('Lances')

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ChatService } from './chat.service';
 import { PrismaService } from '@/database/database.service';
-import { PerfilUsuario } from '@prisma/client';
+import { PerfilUsuario } from '@generated/prisma/client';
 
 const mockPrismaService = {
     mensagemChat: {

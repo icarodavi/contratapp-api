@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LogAtividadeService } from './log-atividade.service';
 import { PrismaService } from '../database/database.service';
-import { TipoAtividade } from '@prisma/client';
+import { TipoAtividade } from '@generated/prisma/client';
 
 const mockPrismaService = {
     logAtividade: {

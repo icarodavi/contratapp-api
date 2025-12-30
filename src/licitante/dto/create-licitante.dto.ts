@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsUUID, IsEnum, IsBoolean, IsOptional } from 'class-validator';
-import { TipoEmpresa } from '@prisma/client';
+import { TipoEmpresa } from '@generated/prisma/client';
 
 export class CreateLicitanteDto {
     @ApiProperty({ description: 'ID do usuário vinculado ao licitante' })

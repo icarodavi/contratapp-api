@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LogAtividadeController } from './log-atividade.controller';
 import { LogAtividadeService } from './log-atividade.service';
-import { TipoAtividade } from '@prisma/client';
+import { TipoAtividade } from '@generated/prisma/client';
 
 describe('LogAtividadeController', () => {
     let controller: LogAtividadeController;

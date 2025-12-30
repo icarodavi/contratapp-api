@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PropostaService } from './proposta.service';
 import { PrismaService } from '../database/database.service';
 import { NotFoundException, BadRequestException } from '@nestjs/common';
-import { DisputaStatus, StatusProposta } from '@prisma/client';
+import { DisputaStatus, StatusProposta } from '@generated/prisma/client';
 
 const mockPrismaService = {
     disputa: {

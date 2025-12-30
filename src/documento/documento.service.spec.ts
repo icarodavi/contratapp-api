@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DocumentoService } from './documento.service';
 import { PrismaService } from '../database/database.service';
 import { NotFoundException, BadRequestException } from '@nestjs/common';
-import { TipoDocumento } from '@prisma/client';
+import { TipoDocumento } from '@generated/prisma/client';
 
 const mockPrismaService = {
     edital: {

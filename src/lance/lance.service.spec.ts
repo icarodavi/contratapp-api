@@ -5,7 +5,7 @@ import { LogAtividadeService } from '../log-atividade/log-atividade.service';
 import { DisputaService } from '../disputa/disputa.service';
 import { LicitanteService } from '../licitante/licitante.service';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { DisputaStatus, TipoEmpresa, TipoAtividade } from '@prisma/client';
+import { DisputaStatus, TipoEmpresa, TipoAtividade } from '@generated/prisma/client';
 
 const mockPrismaService = {
     lance: {

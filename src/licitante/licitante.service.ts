@@ -3,7 +3,7 @@ import { PrismaService } from '../database/database.service';
 import { CreateLicitanteDto } from './dto/create-licitante.dto';
 import { UpdateLicitanteDto } from './dto/update-licitante.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { DisputaStatus } from '@prisma/client';
+import { DisputaStatus } from '@generated/prisma/client';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { PaginatedResult } from '../common/interfaces/paginated-result.interface';
 import { buildOrderBy } from '../common/utils/prisma-utils';

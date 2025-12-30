@@ -1,6 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@generated/prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({
+    url: process.env.DATABASE_URL,
+});
+const prisma = new PrismaClient({ adapter });
 
 const newHash = '$2b$10$3QuZQYlq72kS435cGp6pFeYI4CsRBcrKLcZ0BIJoggIBxryR/Ih.e'; // senha123
 

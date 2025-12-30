@@ -3,7 +3,7 @@ import { PrismaService } from '@/database/database.service';
 import { CreateEditalDto } from './dto/create-edital.dto';
 import { UpdateEditalDto } from './dto/update-edital.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
+import { ModalidadeLicitação, CritérioJulgamento } from '@generated/prisma/client';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { PaginatedResult } from '../common/interfaces/paginated-result.interface';
 

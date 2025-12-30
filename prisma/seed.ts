@@ -1,8 +1,14 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@generated/prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+
+const adapter = new PrismaPg({
+    url: process.env.DATABASE_URL,
+});
+const prisma = new PrismaClient({ adapter });
 import * as fs from 'fs';
 import * as path from 'path';
 
-const prisma = new PrismaClient();
+
 
 async function main() {
     const sqlPath = path.join(__dirname, '..', 'database-seed.sql');

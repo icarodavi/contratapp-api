@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { PrismaService } from '../database/database.service';
 import { CreateDisputaDto } from './dto/create-disputa.dto';
 import { UpdateDisputaDto } from './dto/update-disputa.dto';
-import { DisputaStatus } from '@prisma/client';
+import { DisputaStatus } from '@generated/prisma/client';
 import { ApiTags } from '@nestjs/swagger';
 import { ChatGateway } from '../chat/chat.gateway';
 import { PaginationDto } from '../common/dto/pagination.dto';

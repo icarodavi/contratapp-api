@@ -4,7 +4,7 @@ import { CreateCatalogoItemDto } from './dto/create-catalogo-item.dto';
 import { UpdateCatalogoItemDto } from './dto/update-catalogo-item.dto';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { PaginatedResult } from '../common/interfaces/paginated-result.interface';
-import { CatalogoItem } from '@prisma/client';
+import { CatalogoItem } from '@generated/prisma/client';
 
 @Injectable()
 export class CatalogoService {

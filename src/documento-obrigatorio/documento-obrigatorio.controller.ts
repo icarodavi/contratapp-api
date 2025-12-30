@@ -6,7 +6,7 @@ import { UpdateDocumentoObrigatorioDto } from './dto/update-documento-obrigatori
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { PerfilUsuario } from '@prisma/client';
+import { PerfilUsuario } from '@generated/prisma/client';
 
 @ApiTags('Documentos Obrigatórios')
 @ApiBearerAuth()

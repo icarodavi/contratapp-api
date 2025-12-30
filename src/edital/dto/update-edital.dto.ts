@@ -1,7 +1,7 @@
 import { IsOptional, IsString, IsDate, IsEnum, IsArray, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
-import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
+import { ModalidadeLicitação, CritérioJulgamento } from '@generated/prisma/client';
 import { CreateLoteWithItemsDto } from './create-edital.dto';
 import { CreateDocumentoObrigatorioDto } from '../../documento-obrigatorio/dto/create-documento-obrigatorio.dto';
 

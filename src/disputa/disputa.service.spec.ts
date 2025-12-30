@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DisputaService } from './disputa.service';
 import { PrismaService } from '../database/database.service';
 import { NotFoundException, BadRequestException } from '@nestjs/common';
-import { DisputaStatus, TipoEmpresa } from '@prisma/client';
+import { DisputaStatus, TipoEmpresa } from '@generated/prisma/client';
 
 const mockPrismaService = {
     edital: {

@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
-import { TipoAtividade } from '@prisma/client';
+import { TipoAtividade } from '@generated/prisma/client';
 
 export const LOG_ACTIVITY_KEY = 'log_activity';
 

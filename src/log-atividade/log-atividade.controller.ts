@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { LogAtividadeService } from './log-atividade.service';
-import { TipoAtividade, PerfilUsuario } from '@prisma/client';
+import { TipoAtividade, PerfilUsuario } from '@generated/prisma/client';
 import { CreateLogAtividadeDto } from './dto/create-log-atividade.dto';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';

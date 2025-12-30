@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { StatusDocumento, TipoDocumento } from '@prisma/client';
+import { StatusDocumento, TipoDocumento } from '@generated/prisma/client';
 
 export class DocumentoLicitanteDto {
   @ApiProperty()

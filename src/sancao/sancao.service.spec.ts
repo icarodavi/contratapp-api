@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SancaoService } from './sancao.service';
 import { PrismaService } from '@/database/database.service';
 import { NotFoundException } from '@nestjs/common';
-import { TipoSancao, StatusSancao } from '@prisma/client';
+import { TipoSancao, StatusSancao } from '@generated/prisma/client';
 
 const mockPrismaService = {
     edital: { findUnique: jest.fn() },

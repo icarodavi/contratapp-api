@@ -7,7 +7,7 @@ import { ApiOperation, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagg
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { PerfilUsuario, TipoAtividade } from '@prisma/client';
+import { PerfilUsuario, TipoAtividade } from '@generated/prisma/client';
 import { LogActivity } from '../common/decorators/log-activity.decorator';
 
 @ApiTags('Disputas')

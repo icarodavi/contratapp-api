@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString, IsEnum, IsUUID } from 'class-validator';
-import { StatusRecurso } from '@prisma/client';
+import { StatusRecurso } from '@generated/prisma/client';
 
 export class UpdateRecursoDto {
     @ApiProperty({

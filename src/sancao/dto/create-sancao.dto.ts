@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsEnum, IsInt, IsOptional, IsUUID, IsDate } from 'class-validator';
-import { TipoSancao } from '@prisma/client';
+import { TipoSancao } from '@generated/prisma/client';
 
 export class CreateSancaoDto {
     @ApiProperty({

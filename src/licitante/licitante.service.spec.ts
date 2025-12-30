@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { LicitanteService } from './licitante.service';
 import { PrismaService } from '../database/database.service';
 import { NotFoundException, BadRequestException } from '@nestjs/common';
-import { TipoEmpresa } from '@prisma/client';
+import { TipoEmpresa } from '@generated/prisma/client';
 
 const mockPrismaService = {
     usuario: {

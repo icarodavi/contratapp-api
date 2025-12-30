@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@/database/database.service';
 import { CreateSancaoDto } from './dto/create-sancao.dto';
 import { UpdateSancaoDto } from './dto/update-sancao.dto';
-import { TipoSancao, StatusSancao } from '@prisma/client';
+import { TipoSancao, StatusSancao } from '@generated/prisma/client';
 
 @Injectable()
 export class SancaoService {

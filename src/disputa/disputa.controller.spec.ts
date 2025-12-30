@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DisputaController } from './disputa.controller';
 import { DisputaService } from './disputa.service';
-import { DisputaStatus } from '@prisma/client';
+import { DisputaStatus } from '@generated/prisma/client';
 
 describe('DisputaController', () => {
     let controller: DisputaController;

@@ -1,5 +1,5 @@
 import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
-import { ModalidadeLicitação } from '@prisma/client';
+import { ModalidadeLicitação } from '@generated/prisma/client';
 
 @Injectable()
 export class ModalidadeLicitaçãoPipe implements PipeTransform {

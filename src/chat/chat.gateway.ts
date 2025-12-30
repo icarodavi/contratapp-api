@@ -9,7 +9,7 @@ import { Namespace, Socket } from 'socket.io';
 import { UseGuards } from '@nestjs/common';
 import { WsJwtAuthGuard } from '../auth/guards/ws-jwt-auth.guard';
 import { ChatService } from './chat.service';
-import { PerfilUsuario } from '@prisma/client';
+import { PerfilUsuario } from '@generated/prisma/client';
 
 @WebSocketGateway({
     cors: {

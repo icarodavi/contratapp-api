@@ -6,7 +6,7 @@ import { UpdateItemDto } from './dto/update-item.dto';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { PerfilUsuario } from '@prisma/client';
+import { PerfilUsuario } from '@generated/prisma/client';
 
 @ApiTags('Itens')
 @ApiBearerAuth()
