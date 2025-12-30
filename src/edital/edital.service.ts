@@ -14,7 +14,7 @@ export class EditalService {
 
     async create(createEditalDto: CreateEditalDto) {
         try {
-            const { lotes, ...editalData } = createEditalDto;
+            const { lotes, documentosObrigatorios, ...editalData } = createEditalDto;
 
             // Pre-process lotes to enforce catalog data integrity
             const processedLotes = lotes ? await Promise.all(lotes.map(async lote => {
@@ -61,6 +61,12 @@ export class EditalService {
                             itens: {
                                 create: lote.itens // processedItens is already the array of objects
                             }
+                        }))
+                    } : undefined,
+                    documentosObrigatorios: documentosObrigatorios ? {
+                        create: documentosObrigatorios.map(doc => ({
+                            tipoDocumento: doc.tipoDocumento,
+                            descricao: doc.descricao
                         }))
                     } : undefined
                 },
@@ -152,7 +158,7 @@ export class EditalService {
             throw new NotFoundException(`Edital com ID ${id} não encontrado`);
         }
 
-        const { lotes, ...editalData } = updateEditalDto;
+        const { lotes, documentosObrigatorios, ...editalData } = updateEditalDto;
 
         return this.prisma.$transaction(async (prisma) => {
             // 1. Update basic Edital data
@@ -165,6 +171,25 @@ export class EditalService {
                     criterioJulgamento: editalData.criterioJulgamento ? editalData.criterioJulgamento as CritérioJulgamento : undefined,
                 },
             });
+
+            // 1.1 Handle Documentos Obrigatorios (Replace Strategy)
+            if (documentosObrigatorios) {
+                // Delete existing ones
+                await prisma.documentoObrigatorio.deleteMany({
+                    where: { editalId: id }
+                });
+
+                // Create new ones
+                if (documentosObrigatorios.length > 0) {
+                    await prisma.documentoObrigatorio.createMany({
+                        data: documentosObrigatorios.map(doc => ({
+                            editalId: id,
+                            tipoDocumento: doc.tipoDocumento,
+                            descricao: doc.descricao
+                        }))
+                    });
+                }
+            }
 
             // 2. Handle Lotes Upsert/Delete if provided
             if (lotes) {

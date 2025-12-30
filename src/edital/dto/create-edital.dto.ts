@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsNotEmpty, IsOptional, IsString, IsEnum, IsArray, IsNumber, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
+import { CreateDocumentoObrigatorioDto } from '../../documento-obrigatorio/dto/create-documento-obrigatorio.dto';
 
 export class CreateItemSimpleDto {
     @IsString()
@@ -127,4 +128,14 @@ export class CreateEditalDto {
     @ValidateNested({ each: true })
     @Type(() => CreateLoteWithItemsDto)
     lotes?: CreateLoteWithItemsDto[];
+
+    @ApiProperty({
+        description: 'Lista de Documentos Obrigatórios',
+        type: [CreateDocumentoObrigatorioDto],
+    })
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => CreateDocumentoObrigatorioDto)
+    documentosObrigatorios?: CreateDocumentoObrigatorioDto[];
 } 

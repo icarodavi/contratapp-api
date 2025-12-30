@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { ModalidadeLicitação, CritérioJulgamento } from '@prisma/client';
 import { CreateLoteWithItemsDto } from './create-edital.dto';
+import { CreateDocumentoObrigatorioDto } from '../../documento-obrigatorio/dto/create-documento-obrigatorio.dto';
 
 export class UpdateEditalDto {
     @ApiProperty({ description: 'Número do edital', required: false })
@@ -62,4 +63,11 @@ export class UpdateEditalDto {
     @ValidateNested({ each: true })
     @Type(() => CreateLoteWithItemsDto)
     lotes?: CreateLoteWithItemsDto[];
+
+    @ApiProperty({ description: 'Lista de Documentos Obrigatórios', required: false, type: [CreateDocumentoObrigatorioDto] })
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => CreateDocumentoObrigatorioDto)
+    documentosObrigatorios?: CreateDocumentoObrigatorioDto[];
 }
