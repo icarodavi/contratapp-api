@@ -381,7 +381,7 @@ model Lance {
   id            String   @id @default(uuid())
   disputaId     String
   licitanteId   String
-  valorCentavos Int // valor em centavos
+  valorCentavos BigInt // valor em centavos
   horario       DateTime
   ip            String?
   userAgent     String?
@@ -423,7 +423,7 @@ model Proposta {
   disputaId     String
   licitanteId   String
   itemId        String
-  valorCentavos Int // valor em centavos
+  valorCentavos BigInt // valor em centavos
   dataEnvio     DateTime
   arquivo       String?
   status        StatusProposta @default(PENDENTE)
@@ -578,7 +578,7 @@ model Item {
   descricao     String
   quantidade    Int
   unidade       String
-  valorEstimado Int? // valor estimado em centavos
+  valorEstimado BigInt? // valor estimado em centavos
   loteId        String
   status        String         @default("ATIVO") // ATIVO, CANCELADO
   lote          Lote           @relation(fields: [loteId], references: [id], onDelete: Cascade)
@@ -634,7 +634,7 @@ model Sancao {
   fundamentacao String
   dataInicio    DateTime
   dataFim       DateTime?
-  valorMulta    Int? // valor em centavos
+  valorMulta    BigInt? // valor em centavos
   observacoes   String?
   editalId      String
   licitanteId   String
@@ -712,7 +712,7 @@ model CatalogoItem {
   descricao       String
   unidade         String // UN, KG, M, L
   tipo            String // MATERIAL, SERVICO
-  valorReferencia Int? // em centavos
+  valorReferencia BigInt? // em centavos
   ativo           Boolean @default(true)
 
   itens Item[]
@@ -728,7 +728,7 @@ model Contrato {
   numero              String // Número do contrato
   editalId            String
   licitanteId         String
-  valorTotal          Int // Valor total em centavos
+  valorTotal          BigInt // Valor total em centavos
   dataInicio          DateTime
   dataFim             DateTime
   dotacaoOrcamentaria String?
@@ -757,8 +757,8 @@ model ContratoItem {
   itemId        String? // Referência ao Item (se aplicável)
   descricao     String
   quantidade    Int
-  valorUnitario Int // Em centavos
-  valorTotal    Int // Em centavos
+  valorUnitario BigInt // Em centavos
+  valorTotal    BigInt // Em centavos
 
   // Relacionamentos
   contrato Contrato @relation(fields: [contratoId], references: [id], onDelete: Cascade)
