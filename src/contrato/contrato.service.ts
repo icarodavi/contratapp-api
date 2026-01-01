@@ -71,7 +71,11 @@ export class ContratoService {
         return this.prisma.contrato.findMany({
             include: {
                 licitante: true,
-                edital: true,
+                edital: {
+                    include: {
+                        secretaria: true
+                    }
+                },
             },
             orderBy: {
                 createdAt: 'desc',
